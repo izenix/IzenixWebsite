@@ -2077,7 +2077,7 @@ hr {
   }
 }
 .slingle-slider .slider-thumb {
-  width: 240px;
+  width: 250px;
   height: 120px;
   border-radius: 12px;
   background: #ffffff;
@@ -2141,7 +2141,7 @@ hr {
   }
 }
 .slingle-slider .slider-thumb .text {
-  margin-left: 15px;
+  margin-left: 18px;
   font-family: "Jost", sans-serif;
   font-size: 20px;
   font-weight: 500;
