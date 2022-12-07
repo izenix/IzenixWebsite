@@ -127,7 +127,7 @@
                                                     <li><a href="cloudsolutions.html">Cloud Solutions & Integrations</a></li>
                                                     <li><a href="dynamic.html">Dynamics 365</a></li>
                                                     <li><a href="training.html">Trainings & Enablement</a></li>
-                                                    <li><a href="integrations.html">Appian</a></li>
+                                                    <li><a href="integration.html">Appian</a></li>
                                                 </ul>
                                             </li>
                                             <li class="has-children">
@@ -210,7 +210,7 @@
                             <li><a href="cloudsolutions.html">Cloud Solutions & Integrations</a></li>
                             <li><a href="dynamic.html">Dynamics 365</a></li>
                             <li><a href="training.html">Trainings & Enablement	</a></li>
-                            <li><a href="integrations.html">Appian</a></li>
+                            <li><a href="integration.html">Appian</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children">
@@ -291,7 +291,7 @@
                         <ul class="single-blog-meta wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
                             <li>
                                 <span><i class="fas fa-folder-open"></i></span>
-                                <a href="blog-details.html">Web Development</a>
+                                <a href="blog-details.html">Power Automate</a>
                             </li>
                             <li>
                                 <span><i class="fas fa-user"></i></span>
@@ -299,7 +299,7 @@
                             </li>
                             <li>
                                 <span><i class="fas fa-clock"></i></span>
-                                <p>Mar 07,2022</p>
+                                <p>Dec 07,2022</p>
                             </li>
                             <!--li>
                                 <span><i class="fas fa-comments"></i></span>
@@ -316,22 +316,111 @@
                                 Create a blank Flow template. Choose the Dynamics 365 Connector and trigger as, “When a row is added, modified or deleted”. <br />
                                 Select your Organization Name, and the entity, in our case it is Email Messages.
                             </p>
-                            <p class="text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                            <p class="text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-1.png" alt="PowerAutomate Image">
+                            </div>
+
+                            <p class="text">
+                                Step 2:<br />
+                                Adding Initialize variable for links <br />
+                                Select Name as Links and its type is string<br />
+                                Without adding the value, we didn’t get the proper way for Links in CRM Email Body. Because we are adding value for CRM Email Body. By adding &lt;br /&gt; break tag we will get step by step links in Email Body
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-2.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 3:<br />
+                                First chose the Microsoft Data verse then add the List Rows<br />
+                                We can select Attachments for Table Name after that we can filter the row and select Email Message<br />
+                                before that we add _objectid_value eq. This is for is email message is equal for object id value.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-3.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 4:<br />
+                                In this step 4 we can have 4 steps  <br />
+                                1) Create File<br />
+                                2) Create Sharing Link for a File or Folder<br />
+                                3) Append to string Variable<br />
+                                4) Delete a Row<br />
+                                These 4 steps are involved in the Apply to Each step<br />
+                                In this step we can select the Apply to each and select Value for Output from previous steps
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-4.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 4.1:<br />
+                                In this we can Select Create File from SharePoint<br />
+                                We can add our Site Address, Folder path is Shared Documents, chose the file name and file Content<br />
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-5.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 4.2:<br />
+                                We can add Create Sharing link for a file or Folder from SharePoint<br />
+                                In this we can add Site Address, Library Name is Documents, Item Id is Itemid only we can select from SharePoint only, In Link Type we can select view only or View and Edit and Link Scope
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-6.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 4.3:<br />
+                                We can Add Append to String Variable<br />
+                                In this select Name as Links and the value for sharing links and showing file name or showing links also<br />
+                                &lt;a href=”Sharing Link”&gt;"File Name"&lt;/a&gt;&lt;br/&gt; (this show the File Name) <br />&lt;a href=”Sharing Link”&gt;"Sharing Link"&lt;/a&gt;&lt;br/&gt; (this will show the file link )
+                            </p>
+
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-7.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 4.4:<br />
+                                And the last one we can Delete the Email Attachment in CRM<br />
+                                We can Add the Delete a Row in Microsoft Dataverse<br />
+                                In this select Table name as Attachments and we can select Row ID is Activity Mime Attachments in List Rows
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-8.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Step 5:<br />
+                                We can Add a condition If the Links are not Equal to the Attachments &lt;br /&gt; then update the <br />
+                                Email Message<br />
+                                Links is != to Attachments then select If Yes and Update a Row
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-9.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                In the first we select Microsoft Data verse and select Update a Row <br />
+                                The Table name is Email Message, Row ID is same as Table name Bcz we are Updating this Table and Row ID after that we will go to Advance Option, we will get more options. In this Description we can Add Description and Links <br />
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomate\blog-1-10.png" alt="PowerAutomate Image">
+                            </div>
+
+
+
+
                             <blockquote class="blockquote mt-5 mb-5">
                                 <div class="thumb">
                                     <img src="assets/images/quote/quote-3.png" alt="quote-image">
                                 </div>
                                 <div class="content">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution.</p>
+                                    <p>Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</p>
                                     <footer class="blockquote-footer">
-                                        <span class="name">Paul Harrison,</span>
-                                        <span class="designation">Web Developer</span>
+                                        <span class="name">Ramesh Avula,</span>
+                                        <span class="designation">Cloud Solution Specialist</span>
                                     </footer>
                                 </div>
                             </blockquote>
-                            <p class="text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-                          </div>
+                            <!--<p class="text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>-->
+                        </div>
                         <!-- Blog Content End -->
 
                         <!-- Blog Share and Tags Section Start -->
