@@ -9532,7 +9532,7 @@ hr {
 }
 .header-top ul li {
     display: inline-block;
-    padding: 0;
+    padding: 0 ;
     margin: 0;
 }
 @media screen and (min-width: 1448px) and (max-width: 1600px){
@@ -9579,10 +9579,10 @@ ul.sub-menu li {
 ul.points-list li{ float:left; padding-right: 50px;}
 .colm-py{ margin:30px 0 20px;}
 .full-section-bg{background:#f2f5fb; margin-top:90px; padding-bottom:90px;}
-.full-section-bg2{background:#4a2bb6; margin-top:90px; padding-bottom:90px; color:#fff;}
+.full-section-bg2{background:#e9edf4; margin-top:90px; padding-bottom:90px; color:#fff;}
 .full-section-bg h2.title{color:#4a2bb6;}
-.full-section-bg2 h2.title{color:#fff;}
-.full-section-bg2 p.txt-white{color:#fff;}
+.full-section-bg2 h2.title{color:#1c1c1c;}
+.full-section-bg2 p.txt-white{color:#1c1c1c;}
 .img-colm{ width:70%; margin-top: -50px;}
 .title-pt .title{ margin-bottom:10px !important;}
 .sidebar-link{ color:#1c1c1c;}
@@ -9600,7 +9600,7 @@ width: 40px;}
 .top-header-left{ position:relative;}
 .top-header-left-lign{ position:absolute; top:-12px; left:21px;}
 .social-icons{ position:relative;}
-.social-icons-align{ position:absolute; top:-48px; right:50px;}
+.social-icons-align{ position:absolute; top:-63px; right:28px;}
 .header-right_call .call-meta_number{ font-size:16px;}
 
 .flex-center {
@@ -9621,9 +9621,44 @@ justify-content: right;}
     color: #54545f;
     margin-top: 30px; text-align:justify;
 max-width: 100%;}
+.full-section-bg img{ border-radius:100px;}
+img.img-curve{ border-radius:10px;}
+.service-desc-top .icon img{ width:40px; height:40px;}
 
+/*****resposive****/
+.header-top ul li {
+    margin-right: 15px;
+    margin-top: 15px;
+}
+.social-icons-align {
+  position: absolute;
+  top: -63px;
+  right: 28px;
+}
+ .top-header-left-lign {
+    position: absolute;
+    top: -28px;
+    left: 21px;
+}
+@media (max-width: 991.98px) { 
+	.social-icons-align { right: -16px;}  
+	.sticky-header.sticky{ padding:6px 0;}
+}
 
-
+@media (max-width: 769px) { 
+	.social-icons-align { top: -28px;  right: 70px;}
+	.header-top{ margin-top:-10px;}
+	.sticky-header.sticky{ padding:11px 0;}
+}
+@media (max-width: 576px) { 
+	.social-icons-align {top: -57px !important; right: -17px !important;}
+	.header-top{ margin-top:10px;}
+	.align-self-center{ margin-top:30px !important; text-align:center;}
+}
+/**@media (max-width: 576.98px) { 
+	.social-icons-align {top: -27px; right: 70px;}
+	.header-top{ margin-top:10px;}
+}**/
 
 
 
