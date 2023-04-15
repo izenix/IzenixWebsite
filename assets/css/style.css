@@ -9660,5 +9660,18 @@ img.img-curve{ border-radius:10px;}
 	.header-top{ margin-top:10px;}
 }**/
 
+/*Paragraph font changes line 283*/
+.section-head .text-two {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.6;
+color: #000;}
+.section-head .text-two.ful-width {
+    max-width:100% !important;}
 
-
+.section-head .title {
+    font-size: 52px;
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+line-height: 1.16;}
+.section-padding-decrease{ padding:50px;}
