@@ -715,7 +715,7 @@ hr {
   background-position: left center;
   transition: 0.3s;
   overflow: hidden;
-  border: 1px solid #1c1c1c;
+  border: 1px solid #e9edf4;
 }
 .scroll-top:hover {
   background-color: #1c1c1c;
@@ -846,7 +846,7 @@ hr {
 .header-right_call {
   display: flex;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 0; padding: 20px 0;
 }
 @media only screen and (max-width: 767px) {
   .header-right_call {
@@ -8814,7 +8814,7 @@ hr {
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  padding: 110px 0 70px;
+  padding: 29px 0 20px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .copyright {
@@ -9663,9 +9663,9 @@ img.img-curve{ border-radius:10px;}
 /*Paragraph font changes line 283*/
 .section-head .text-two {
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
-color: #000;}
+color: #54545f;}
 .section-head .text-two.ful-width {
     max-width:100% !important;}
 
@@ -9675,3 +9675,36 @@ color: #000;}
     font-weight: 400;
 line-height: 1.16;}
 .section-padding-decrease{ padding:50px;}
+.about-four {
+background: #fafafa;}
+
+p.txtAlign {font-size: 19px;
+    color: #54545f; padding: 10px 0;
+    line-height: 1.66;
+    padding-top: 20px;
+    text-align: justify;}
+.section-paddings {
+    padding: 5px 0;
+}
+/*style="
+    
+"*/
+.social-icons-align{ position:absolute; top:-43px; right:28px;}
+
+.top-header-left-lign {position: absolute; top: -12px; left: 21px;}
+.social-icons-align { position: absolute; top: 13px; right: 28px; }
+.section-top-bottom{ padding:100px 0;}
+.section-top{ padding-top:50px;}
+.section-top-100{ padding-top:100px;}
+.section-botom{ padding-bottom:50px;}
+
+p.text-hgt-size{font-size: 18px;  color: #54545f;  line-height: 1.66; text-align: justify;}
+
+.flud-top-colm{background: #fff; height: 63px; margin-bottom: 5px;}
+@media only screen and (max-width: 768px) {
+  .flud-top-colm { display:none;  }
+  .header-top { display:none;  }
+}
+
+.logo a img.f-logo { max-width: 70%;}
+.head-clr{ color:#1c1c1c;}

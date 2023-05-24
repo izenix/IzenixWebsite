@@ -1,6 +1,4 @@
 User-agent: *
 Disallow: /
 Disallow: /cgi-bin/
-User-agent: Siteliner
-Disallow: 
 Sitemap: https://www.izenix.com/sitemap.xml
