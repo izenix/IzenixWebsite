@@ -9708,3 +9708,11 @@ p.text-hgt-size{font-size: 18px;  color: #54545f;  line-height: 1.66; text-align
 
 .logo a img.f-logo { max-width: 70%;}
 .head-clr{ color:#1c1c1c;}
+
+.section-head .text-two.widt-normal {
+    font-size: 18px;
+    font-weight: 400;
+line-height: 1.6; max-width: 100%;}
+
+.bnr-inr{ background-image: url(../images/service/service-side.png);
+}
