@@ -144,7 +144,7 @@
                                                 <li class="has-children">
                                                     <a href="#">Company</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="#ourteam">Our Team</a></li>
+                                                    <li><a href="#ourteam">Our Team</a></li>
                                                         <!--<li><a href="our-process.html">Our Process</a></li>-->
                                                         <li><a href="blog.html">Our Blogs</a></li>
                                                         <li><a href="career.html">Career</a></li>
@@ -292,11 +292,11 @@
                             </li>
                             <li>
                                 <span><i class="fas fa-user"></i></span>
-                                <a href="blog-details.html">Admin</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Admin</a>
                             </li>
                             <li>
                                 <span><i class="fas fa-clock"></i></span>
-                                <p>Dec 07,2022</p>
+                                <p>Dec 16,2022</p>
                             </li>
                             <!--li>
                                 <span><i class="fas fa-comments"></i></span>
@@ -306,86 +306,136 @@
                         <!-- Blog Meta End -->
                         <!-- Blog Content Start -->
                         <div class="single-blog-content wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <h2 class="title" id="powerautomate"><a href="blog-details.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a> </h2>
+                            <h2 class="title" id="powerautomate"><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">How to Create a Filtered Data in Document Template using Power Automate  </a> </h2>
                             <p class="text">
                                 <b>Step 1:</b><br />
-                                Create a new project in Visual Studio 2019 with <b>Report Server Project Template</b> <br />
-                                <b>Step 2:</b><br />
-                                Add Data source in the Project file using <b>Microsoft Dynamics 365 Fetch</b>  with the Connection String <br />
-                                If the Microsoft Dynamics 365 Fetch is not available in the Type we need to Install below two Extensions<br />
-                                <b>Install Dynamics 365 Report Authoring Extension - 2019</b><br />
-                                <a href="https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/analytics/install-dynamics-365-report-authoring-extension?view=op-9-1 " target="_blank">https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/analytics/install-dynamics-365-report-authoring-extension?view=op-9-1</a><br />
-                                <b>Dynamics 365, version 9.0 Report Authoring Extension (with SQL Server Data Tools support) - 2019</b> <br />
-                                <a href="https://www.microsoft.com/en-us/download/details.aspx?id=56973" target="_blank">https://www.microsoft.com/en-us/download/details.aspx?id=56973</a>
-
+                                Create a Word Document Template in Dynamics Selecting an Entity. You can then choose which entity data we need (1:N or N:1 or N:N). Then click Download Template.</b> <br />
+                            </p>
+                            <div class="d-flex">
+                                <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                    <img src="assets\images\blog\blogs\powerautomateblog3\blog-1.1.png" alt="PowerApps Image">
+                                </div>
+                                <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                    <img src="assets\images\blog\blogs\powerautomateblog3\blog-1.1.1.png" alt="PowerApps Image">
+                                </div>
+                            </div>
+                            <p class="text">
+                                <b>Step 1.1:</b><br />
+                                Open the downloaded template and enable developer option in word Doc and Select the XML Mapping Pane by selecting the XML we get the list of fields then we can start mapping the field.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-1.1.1.1.png" alt="PowerApps Image">
+                            </div>
+                            <p class="text">
+                                In the Above Image the Highlighted part is added as Repeating Section Content Control this will display the list of records (save the file and upload it to one drive from there we extract it and update with filter conditions)<br />
+                                <b>Note: if we want only Filtered records or Data follow the below steps</b>
                             </p>
 
+                            <p class="text">
+                                <b>Step 2:</b><br />
+                                While Creating a Power Automate Flow, select the Trigger as <b>When an HTTP request is received</b> and pass the parameter in  <b>JSON</b> format as shown below Example: we’ll pass “claimId”.<br />
+                                Select the Method as <b>POST</b><br />
+                                To trigger this flow we have to create a Ribbon Button or Postman to verify (or as per our requirement).<br />
+                                Here I’m choosing ribbon button to trigger the Power automate Flow
+                            </p>
                             <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-1.png" alt="PowerApps Image">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-2.1.png" alt="PowerAutomate Image">
                             </div>
 
                             <p class="text">
                                 <b>Step 3:</b><br />
-                                Create a new File in the Reports folder selecting the option as Report <br />
+                                Select the Initialize Variable and add the Name as list and type should be an array or string as per the data requirement.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-3.1.png" alt="PowerAutomate Image">
+                            </div>
 
-                            </p>
-
-                            <p class="text">
-                                <b>Step 4:</b>:<br />
-                                Now Create a Shared Datasets with the Name Dataset1 and we need to select the <b>Data Source</b> and the Type should be text and now we need to add <b>FetchXml</b> in the Query and click on the <b>Query Designer</b> to check whether the given <b>FetchXml</b> working or not. After Clicking the Query Designer a pop-up will shown to confirm the data source user or not give your mailId and password.<br />
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-3.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                After clicking the Query Designer the below Pop-up will be shown need to give username and password<br />
+                            <p class="text" id="step4">
+                                <b>Step 4:</b><br />
+                                Select the List rows and select the table name (entity).<br />
+                                Now we can filter the record or data by using the “Filter rows” by adding the conditions<br />
+                                <b>(_phy_claim_value eq @{triggerBody()?['claimId']} and phy_clinician eq 'D57096')</b>
                             </p>
                             <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-2.png" alt="PowerAutomate Image">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-4.1.png" alt="PowerAutomate Image">
                             </div>
                             <p class="text">
-                                <b>Step 4.1:</b><br />
-                                In this step we can Create a report as we required with these options <br />
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-5.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                Here is the sample report with the Fields name and values added as expressions.
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-6.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 4.2:</b><br />
-                                Add <b>Report1.rdl</b> file in the power apps and the record type should be <b>existing file</b> and we need to choose the <b>categories</b> and select the <b>Related record Type is (entity)</b> and we can check the report by using <b>Run Report</b> Option.<br />
-                               
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-7.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 4.3:</b><br />
-                                After adding the Report1.rdl file in PowerApps now we need to write a <b>JavaScript</b> code and add the file in the PowerApps web resource to trigger the <b>ribbon button</b> report.
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-8.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                Now create a Solution for Ribbon Button and add existing entity with no components .<br />
-                            </p>
-                           <p class="text">
                                 <b>Step 5:</b><br />
-                                Use XRMToolBox to Create a Ribbon Button and add the JavaScript Command to the button .<br />
-                                
+                                Select <b>Apply to each</b> and add Value and select <b>Append to array variable</b> means we are adding value to a variable (variables are like containers for storing values). Here we have the value in <b>clinician</b> adding it to list array variable.
                             </p>
-                            
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-5.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 6:</b><br />
+                                Here we need to Select Populate a Microsoft Word Template and add Location of the file and its library and the select the file name<br />
+                                <b>NOTE:</b> Here we can see the “list” field which we have added in the document and now we must add list array variable which contains the filtered Data or Values.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-6.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 7:</b><br />
+                                Now the Document Template is ready with filtered condition.<br />
+                                We can add the document to <b>Email/CRM/Notes</b> here I choose Notes.<br />
+                                Now I’m Adding the document to the notes entity give the title name and Is Document is yes(true) <br />
+                                Add the document <b>body('Populate_a_Microsoft_Word_template')?['$content']</b> this expression will help to populate the document in notes timeline.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-7.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Regarding (claims) <b>/phy_claims/@{triggerBody()?['claimId']}</b>
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-7.2.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 8:</b><br />
+                                To trigger the Power Automate flow I’ve added  Ribbon Button,  to trigger this flow we need to use the below JavaScript code.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-8.1.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Add the <b>HTTP POST URL</b>  in the Variable flow URL  and pass the “claimId” in the input and create and Ribbon Button and add the below JavaScript code as command.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-2.1.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 8.1:</b><br />
+                                Now we will test the flow<br />
+                                Below I’ve 4 records two are D57096123 and other two are D57096 <b>I only need D57096</b> <br />
+                                I’ve Already added the condition in <a href="#step4">Step 4</a><br />
+                                (_phy_claim_value eq @{triggerBody()?['claimId']} and <b>phy_clinician eq 'D57096'</b>)
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-8.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 9:</b><br />
+                                Now click the Ribbon Button here I named as Doc Buttons after clicking the button the document will be populating in Notes timeline
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-9.1.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                After opening the Claim test Document, we can see 2 record which I want.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerautomateblog3\blog-9.1.2.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>We can write the Filter Condition using Power Automate with low Code no Code we can still modify as per our Requirements using Power Automate.</b>
+                            </p>
+
                             <blockquote class="blockquote mt-5 mb-5">
                                 <div class="thumb">
                                     <img src="assets/images/quote/quote-3.png" alt="quote-image">
                                 </div>
                                 <div class="content">
-                                    <p>Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </p>
+                                    <p>How to Create a Filtered Data in Document Template using Power Automate  </p>
                                     <footer class="blockquote-footer">
                                         <span class="name">Eekshith Pavan Kumar,</span>
                                         <span class="designation">Dynamics CRM Developer</span>
@@ -433,27 +483,35 @@
                             <h4 class="sidebar-title">recent post</h4>
                             <ul class="sidebar-blog">
                                 <li>
-                                    <a href="blog-details-2.html" class="image"><img src="assets/images/blog/blog-post-1.png" alt="Blog Post"></a>
+                                    <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html" class="image"><img src="assets/images/blog/blog-post-1.png" alt="Blog Post"></a>
                                     <div class="content">
                                         <span class="subtitle">Power Apps</span>
-                                        <a class="title" href="blog-details-2.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
+                                        <a class="title" href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
                                         <span class="date">09 Dec 2022</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="blog-details-1.html" class="image"><img src="assets/images/blog/blog-post-2.png" alt="Blog Post"></a>
+                                    <a href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html" class="image"><img src="assets/images/blog/blog-post-2.png" alt="Blog Post"></a>
                                     <div class="content">
                                         <span class="subtitle">Power Automate</span>
-                                        <a class="title" href="blog-details-1.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
+                                        <a class="title" href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
                                         <span class="date">08 Dec 2022</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="blog-details.html" class="image"><img src="assets/images/blog/blog-post-3.png" alt="Blog Post"></a>
+                                    <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image"><img src="assets/images/blog/blog-post-3.png" alt="Blog Post"></a>
                                     <div class="content">
                                         <span class="subtitle">Power Automate</span>
-                                        <a class="title" href="blog-details.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
+                                        <a class="title" href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
                                         <span class="date">07 Dec 2022</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="how-to-create-a-filtered-data-in-document-template-using-powerautomate.html" class="image"><img src="assets/images/blog/blog-post-1.png" alt="Blog Post"></a>
+                                    <div class="content">
+                                        <span class="subtitle">Power Automate</span>
+                                        <a class="title" href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">How to Create a Filtered Data in Document Template using Power Automate  </a>
+                                        <span class="date">16 Dec 2022</span>
                                     </div>
                                 </li>
                             </ul>
@@ -463,13 +521,13 @@
                         <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: none;">
                             <h4 class="sidebar-title">Categories</h4>
                             <ul class="sidebar-category">
-                                <li><a href="blog-details.html">Web Development <span>(32)</span></a></li>
-                                <li><a href="blog-details.html">Business Management <span>(07)</span></a></li>
-                                <li><a href="blog-details.html">Dynamics 365 <span>(09)</span></a></li>
-                                <li><a href="blog-details.html">Power Apps <span>(04)</span></a></li>
-                                <li><a href="blog-details.html">Report and Management <span>(10)</span></a></li>
-                                <li><a href="blog-details.html#powerautomate">Power Automate <span>(01)</span></a></li>
-                                <li><a href="blog-details.html">Software Development <span>(19)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Web Development <span>(32)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Business Management <span>(07)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Dynamics 365 <span>(09)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Power Apps <span>(04)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Report and Management <span>(10)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html#powerautomate">Power Automate <span>(01)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Software Development <span>(19)</span></a></li>
                             </ul>
                         </div>
                         <!--Sidebar Category End-->
@@ -477,15 +535,15 @@
                         <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: none;">
                             <h4 class="sidebar-title">tags</h4>
                             <div class="sidebar-tags">
-                                <a href="blog-details.html" class="active">Website</a>
-                                <a href="blog-details.html">Development</a>
-                                <a href="blog-details.html">Marketing</a>
-                                <a href="blog-details.html">Application</a>
-                                <a href="blog-details.html">Design</a>
-                                <a href="blog-details.html">Web</a>
-                                <a href="blog-details.html">Template</a>
-                                <a href="blog-details.html">WordPress</a>
-                                <a href="blog-details.html">Themeforest</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="active">Website</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Development</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Marketing</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Application</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Design</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Web</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Template</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">WordPress</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Themeforest</a>
                             </div>
                         </div-->
 
@@ -789,7 +847,7 @@
         </div>
     </div>
     <!-- Footer Style Three Start -->
-    <footer class="footer-wrapper">
+   <footer class="footer-wrapper">
         <div class="shape-one">
             <img src="assets/images/footer/shape-one.png" alt="Footer-Shape">
         </div>

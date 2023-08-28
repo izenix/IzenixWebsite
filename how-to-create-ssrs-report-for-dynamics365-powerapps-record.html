@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
@@ -292,7 +292,7 @@
                             </li>
                             <li>
                                 <span><i class="fas fa-user"></i></span>
-                                <a href="blog-details.html">Admin</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Admin</a>
                             </li>
                             <li>
                                 <span><i class="fas fa-clock"></i></span>
@@ -306,155 +306,89 @@
                         <!-- Blog Meta End -->
                         <!-- Blog Content Start -->
                         <div class="single-blog-content wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <h2 class="title" id="powerautomate"><a href="blog-details.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a> </h2>
+                            <h2 class="title" id="powerautomate"><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a> </h2>
                             <p class="text">
                                 <b>Step 1:</b><br />
-                                Create a blank Flow template. Choose the Dynamics 365 Connector and trigger as, "When a row is added, modified or deleted". <br />
-                                Select your Organization Name, and the entity, in our case it is Email Messages.<br />
-                                Select Columns is statecode and Filter rows is <br />
-                                <b>If statecode eq 6 and attachmentscount gt 0 (If statecode = 6 and attachmentscount > 0)</b>
-                            </p>
-
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-1.png" alt="PowerAutomate Image">
-                            </div>
-
-                            <p class="text">
+                                Create a new project in Visual Studio 2019 with <b>Report Server Project Template</b> <br />
                                 <b>Step 2:</b><br />
-                                Adding Initialize variable 2 email Status <br />
-                                Select Name as Links and its type is string<br />
-                                Select Name as emailstatus , Type is Integer and value is Status Reason
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-2.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 3:</b>:<br />
-                                Adding Initialize variable for links<br />
-                                Select Name as Links and its type is string <br />
-                                Without adding the value, we didn't get the proper way for Links in CRM Email Body. Because we are adding value for CRM Email Body. By adding <b>&lt;br /&gt;</b> break tag we will get step by step links in Email Body.
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-3.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 4:</b><br />
-                                First choose the Microsoft Dataverse then add the List Rows  <br />
-                                We can select Attachments for Table Name after that we can filter the row and select Email Message <br />
-                                before that we add <b>_objectid_value eq</b>. email message value.
+                                Add Data source in the Project file using <b>Microsoft Dynamics 365 Fetch</b>  with the Connection String <br />
+                                If the Microsoft Dynamics 365 Fetch is not available in the Type we need to Install below two Extensions<br />
+                                <b>Install Dynamics 365 Report Authoring Extension - 2019</b><br />
+                                <a href="https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/analytics/install-dynamics-365-report-authoring-extension?view=op-9-1 " target="_blank">https://learn.microsoft.com/en-us/dynamics365/customerengagement/on-premises/analytics/install-dynamics-365-report-authoring-extension?view=op-9-1</a><br />
+                                <b>Dynamics 365, version 9.0 Report Authoring Extension (with SQL Server Data Tools support) - 2019</b> <br />
+                                <a href="https://www.microsoft.com/en-us/download/details.aspx?id=56973" target="_blank">https://www.microsoft.com/en-us/download/details.aspx?id=56973</a>
 
                             </p>
+
                             <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-4.png" alt="PowerAutomate Image">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-1.png" alt="PowerApps Image">
+                            </div>
+
+                            <p class="text">
+                                <b>Step 3:</b><br />
+                                Create a new File in the Reports folder selecting the option as Report <br />
+
+                            </p>
+
+                            <p class="text">
+                                <b>Step 4:</b>:<br />
+                                Now Create a Shared Datasets with the Name Dataset1 and we need to select the <b>Data Source</b> and the Type should be text and now we need to add <b>FetchXml</b> in the Query and click on the <b>Query Designer</b> to check whether the given <b>FetchXml</b> working or not. After Clicking the Query Designer a pop-up will shown to confirm the data source user or not give your mailId and password.<br />
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-3.png" alt="PowerAutomate Image">
                             </div>
                             <p class="text">
+                                After clicking the Query Designer the below Pop-up will be shown need to give username and password<br />
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-2.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 4.1:</b><br />
+                                In this step we can Create a report as we required with these options <br />
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-5.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Here is the sample report with the Fields name and values added as expressions.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-6.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 4.2:</b><br />
+                                Add <b>Report1.rdl</b> file in the power apps and the record type should be <b>existing file</b> and we need to choose the <b>categories</b> and select the <b>Related record Type is (entity)</b> and we can check the report by using <b>Run Report</b> Option.<br />
+                               
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-7.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                <b>Step 4.3:</b><br />
+                                After adding the Report1.rdl file in PowerApps now we need to write a <b>JavaScript</b> code and add the file in the PowerApps web resource to trigger the <b>ribbon button</b> report.
+                            </p>
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\powerappsblog2\blog-1-8.png" alt="PowerAutomate Image">
+                            </div>
+                            <p class="text">
+                                Now create a Solution for Ribbon Button and add existing entity with no components .<br />
+                            </p>
+                           <p class="text">
                                 <b>Step 5:</b><br />
-                                1) Create Blob (V2)<br />
-                                2) Create SAS URL by path (V2)<br />
-                                3) Append to string Variable<br />
-                                4) Delete a Row<br />
-                                These 4 steps are involved in the Apply to Each step<br />
-                                In this step we can select the Apply to each and select Value for Output from previous steps<br />
-                                In Apply to each we select value for previous output steps.
+                                Use XRMToolBox to Create a Ribbon Button and add the JavaScript Command to the button .<br />
+                                
                             </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-5.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 5.1:</b><br />
-                                First, we can create Azure account with link of our Microsoft Account and Create Azure Blob Storage and create folder in Azure Storage Account.<br />
-                                Add an Action and Select Create Blob (V2)<br />
-                                Add Storage account name or blob endpoint what we create in the Azure Blob Storage Account<br />
-                                Add the folder path name , if we want the links year wise and monthly wise we can add the<br />
-                                <b>int(formatDateTime(utcNow(), 'yyyy')) for the Year</b> <br />
-                                <b>string(formatDateTime(utcNow(), 'MMM')) for the Month</b><br />
-                                If we add this on folder path, we get year wise and monthly wise links.<br />
-                                Add Blob name is File Name and Blob content is <b>@{base64ToBinary(items('Apply_to_each')?['body'])}</b>
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-6.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 5.2:</b><br />
-                                Add Action and Create SAS URI by path (V2)<br />
-                                Add Storage account name or blob endpoint and select <br />
-                                Use connection settings(emailattachments001) , Add Blob Path is Path and in Permissions is Read.
-                            </p>
-
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-7.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 5.3:</b><br />
-                                We can Add Append to String Variable<br />
-                                In this select Name as Links and the value for sharing links and showing file name or showing links also<br />
-                                <b>&lt;a href='web Url'&gt;File Name&lt;/a&gt;&lt;br /&gt; (this show the File Name)</b>
-                                <b>"@{outputs('Create_SAS_URI_by_path_(V2)')?['body/WebUrl']}) (Web Url)</b>
-                                <b>@{items('Apply_to_each')?['filename']}  (File Name)</b>
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-8.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 5.4:</b><br />
-                                And the last one we can Delete the Email Attachment in CRM<br />
-                                We can Add the Delete a Row in Microsoft Data verse<br />
-                                In this select Table name as Attachments and we can select Row ID is Activity Mime Attachments in List Rows
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-9.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 6:</b><br />
-                                We can Add a condition If the Links are containing https then update  <br />
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-10.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 6.1:</b><br />
-                                In the first we select Microsoft Data verse and select Update a Row  <br />
-                                The Table name is Email Message, Row ID is same as Table name Bcz we are Updating this Table and Row ID and Select Activity Status is Open after that we will go to Advance Option, and Select Status Reason is Draft.<br/>
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-11.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 6.2:</b><br />
-                                Add Action For Delay for Email message   <br />
-                                Add count is What ever you want for delay in Seconds or Minutes or Hour<br/>
-
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-12.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 6.3:</b><br />
-                                In the first we select Microsoft Data verse and select Update a Row  <br />
-                                The Table name is Email Message, Row ID is same as Table name Bcz we are Updating this Table and Row ID after that we will go to Advance Option, we will get more options. In this Description we can Add Description and Links<br/>
-
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-13.png" alt="PowerAutomate Image">
-                            </div>
-                            <p class="text">
-                                <b>Step 6.4:</b><br />
-                                In the first we select Microsoft Data verse and select Update a Row   <br />
-                                The Table name is Email Message, Row ID is same as Table name Bcz we are Updating this Table and Select Activity Status is Completed after that we will go to Advance Option, and Status Reason is email status.<br />
-                            </p>
-                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <img src="assets\images\blog\blogs\powerautomateblog1\blog-1-14.png" alt="PowerAutomate Image">
-                            </div>
-
+                            
                             <blockquote class="blockquote mt-5 mb-5">
                                 <div class="thumb">
                                     <img src="assets/images/quote/quote-3.png" alt="quote-image">
                                 </div>
                                 <div class="content">
-                                    <p>Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</p>
+                                    <p>Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </p>
                                     <footer class="blockquote-footer">
-                                        <span class="name">Ramesh,</span>
-                                        <span class="designation">Cloud Solution Specialist</span>
+                                        <span class="name">Eekshith Pavan Kumar,</span>
+                                        <span class="designation">Dynamics CRM Developer</span>
                                     </footer>
                                 </div>
                             </blockquote>
@@ -499,26 +433,26 @@
                             <h4 class="sidebar-title">recent post</h4>
                             <ul class="sidebar-blog">
                                 <li>
-                                    <a href="blog-details-2.html" class="image"><img src="assets/images/blog/blog-post-1.png" alt="Blog Post"></a>
+                                    <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html" class="image"><img src="assets/images/blog/blog-post-1.png" alt="Blog Post"></a>
                                     <div class="content">
                                         <span class="subtitle">Power Apps</span>
-                                        <a class="title" href="blog-details-2.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
+                                        <a class="title" href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
                                         <span class="date">09 Dec 2022</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="blog-details-1.html" class="image"><img src="assets/images/blog/blog-post-2.png" alt="Blog Post"></a>
+                                    <a href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html" class="image"><img src="assets/images/blog/blog-post-2.png" alt="Blog Post"></a>
                                     <div class="content">
                                         <span class="subtitle">Power Automate</span>
-                                        <a class="title" href="blog-details-1.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
+                                        <a class="title" href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
                                         <span class="date">08 Dec 2022</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="blog-details.html" class="image"><img src="assets/images/blog/blog-post-3.png" alt="Blog Post"></a>
+                                    <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image"><img src="assets/images/blog/blog-post-3.png" alt="Blog Post"></a>
                                     <div class="content">
                                         <span class="subtitle">Power Automate</span>
-                                        <a class="title" href="blog-details.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
+                                        <a class="title" href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
                                         <span class="date">07 Dec 2022</span>
                                     </div>
                                 </li>
@@ -529,13 +463,13 @@
                         <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: none;">
                             <h4 class="sidebar-title">Categories</h4>
                             <ul class="sidebar-category">
-                                <li><a href="blog-details.html">Web Development <span>(32)</span></a></li>
-                                <li><a href="blog-details.html">Business Management <span>(07)</span></a></li>
-                                <li><a href="blog-details.html">Dynamics 365 <span>(09)</span></a></li>
-                                <li><a href="blog-details.html">Power Apps <span>(04)</span></a></li>
-                                <li><a href="blog-details.html">Report and Management <span>(10)</span></a></li>
-                                <li><a href="blog-details.html#powerautomate">Power Automate <span>(01)</span></a></li>
-                                <li><a href="blog-details.html">Software Development <span>(19)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Web Development <span>(32)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Business Management <span>(07)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Dynamics 365 <span>(09)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Power Apps <span>(04)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Report and Management <span>(10)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html#powerautomate">Power Automate <span>(01)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Software Development <span>(19)</span></a></li>
                             </ul>
                         </div>
                         <!--Sidebar Category End-->
@@ -543,15 +477,15 @@
                         <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: none;">
                             <h4 class="sidebar-title">tags</h4>
                             <div class="sidebar-tags">
-                                <a href="blog-details.html" class="active">Website</a>
-                                <a href="blog-details.html">Development</a>
-                                <a href="blog-details.html">Marketing</a>
-                                <a href="blog-details.html">Application</a>
-                                <a href="blog-details.html">Design</a>
-                                <a href="blog-details.html">Web</a>
-                                <a href="blog-details.html">Template</a>
-                                <a href="blog-details.html">WordPress</a>
-                                <a href="blog-details.html">Themeforest</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="active">Website</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Development</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Marketing</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Application</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Design</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Web</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Template</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">WordPress</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Themeforest</a>
                             </div>
                         </div-->
 
@@ -980,7 +914,8 @@
                 </div>
             </div>
         </div>
-    </footer><!-- Scroll Top Start -->
+    </footer>
+    <!-- Scroll Top Start -->
     <a href="#" class="scroll-top show" id="scroll-top">
         <i class="arrow-top fas fa-angle-double-up"></i>
         <i class="arrow-bottom fas fa-angle-double-up"></i>
