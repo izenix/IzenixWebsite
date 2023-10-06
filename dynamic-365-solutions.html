@@ -23,160 +23,223 @@
 	.service-desc-top .icon img{ width:40px; height:40px;}
 	</style>
 </head>
+<style>
+/*background: #fff;
+    height: 53px;
+    margin-bottom: 10px;*/
 
+   /* .iframe-content {
+        display: block;
+        height: 500px;
+        width: 350px;
+    }
+    div.open 
+        .iframe-content {
+              display:none;
+              height: 0px;
+          }
+    div.closed
+    .iframe-content {
+        display: none;
+        height: 0px;
+    }*/
+    .iframe-content {
+        display: none;
+        height: 0px;
+        width: 350px;
+    }
+
+    div.open .iframe-content {
+        display: block;
+        height: 500px;
+    }
+
+    div.closed .iframe-content {
+        display: none;
+        height: 0px;
+    }
+    .bpw-floating-button {
+        float: right;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        border-radius: 60%;
+/*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+*/        overflow: hidden;
+        padding: 0;
+        border: none;
+        background-clip: padding-box;
+        transition: width 1s, height 1s;
+        background-color: transparent;
+        color: white;
+       transition: opacity 0.3s ease;
+        opacity: 1;
+        fill: inherit;
+        stroke: inherit;
+        line-height: 0;
+    }
+
+        
+
+</style>
 <body>
 
     <header class="header-wrapper">
         <div class="">
-             <div class="container-fluid flud-top-colm">
-            <div class="container">
-			<div class="header-top">
-		<div class="header-top-fluid">
-			<div class="row align-items-center">
-								<div class="col-12 top-header-left">
-								<div class="top-header-left-lign">
-									<ul>
-										
-                                        <!--<li>
-										
-                                            <span> <i class="fa fa-location-alt"></i> </span> <strong> Our Address:</strong>  7903 W 129th Ter
-                                            Overland Park, KS 66213
-                                        </li> -->
-										<li>
-										<div class="header-right_call">
-                                        <div class="icon btn btn-style-one btn-style-ones">
-                                            <span><i class="fas fa-phone-alt"></i></span>
-                                        </div>
-                                        <div class="call-meta">
-                                            <span class=""><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span>
-                                            
-                                        </div>
-                                    </div>
-										</li>
-										<li> <strong>Email us:</strong> </span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></li>
-										<!--li> 
-										<div class="icon btn btn-style-one btn-style-ones">
-                                            <span><i class="fas fa-phone-alt"></i></span>
-                                        </div> <span>Call Us: </span>
-										<a href="tel:01234567889" class="call-meta_number">+1 (425) 802 6433</a></li-->
-										
-									</ul>
-								</div>
-								</div>
-								 
-									<div class="social-icons">
-									<div class="social-icons-align">
-										<ul>
-											<li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-											<li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-										 </ul>
-									</div>
-									</div>
-								</div>
-								</div>
-			</div>
-		</div>
-	</div>
-				<!--div class="row">
-                    <div class="col-12">
-                        <div class="flex-right justify-content float-end">
-							  <ul>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-							  </ul>
-						</div>
-					</div>
-				</div-->
-			<div class="sticky-header">
-				<div class="container">
-                <div class="row">
-                    
-                        <div class="flex-center justify-content-between ">
-						<div class="col-3">
-                            <!-- Header Logo Start -->
-                            <div class="logo">
-                                <a href="index.html">
-                                    <img src="assets/images/logo7.png" alt="">
-                                </a>
-                            </div>
-                           </div>
-                           
-                            <!-- Header Logo End -->
-						<div class="col-9">
-                            <div class="flex-center header-right">
-                                <!-- Header Menu Start -->
-                                <div class="d-none d-lg-flex header-right_menu">
-                                    <nav class="main-menu">
+            <div class="container-fluid flud-top-colm">
+                <div class="container">
+                    <div class="header-top">
+                        <div class="header-top-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-12 top-header-left">
+                                    <div class="top-header-left-lign">
                                         <ul>
-                                            <li class="has-children">
-                                                <a href="index.html">Home</a>
 
-                                            </li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li class="has-children">
-                                                <a href="#">Service</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="ui-ux-design-services.html">Visual, UI & UX Design</a></li>
-                                                    <li><a href="web-development-services.html">Web Development</a></li>
-                                                    <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
-                                                    <li><a href="dynamic-365-solutions.html">Dynamics 365</a></li>
-                                                    <li><a href="training-and-enablament.html">Trainings & Enablement</a></li>
-                                                    <li><a href="appian-solutions.html">Appian</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">Solutions</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="dynamic-365-portals.html">Portals</a></li>
-                                                    <!--li><a href="referral-rogram-grid.html">Referral Program</a></li-->
-                                                    <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
-                                                    <li><a href="business-automation-solutions.html">Business Automation</a></li>
-                                                    <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
-                                                    <li><a href="dynamics-365-marketing.html">Marketing</a></li>
-                                                    <!--<li><a href="telephonic-integration.html">Telephonic Integration</a></li>-->
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">Company</a>
-                                                <ul class="sub-menu">
-                                                    <!--<li><a href="#ourteam">Our Team</a></li>-->
-                                                    <!--<li><a href="our-process.html">Our Process</a></li>-->
-                                                    <li><a href="blog.html">Our Blogs</a></li>
-                                                    <li><a href="career.html">Career</a></li>
+                                            <!--<li>
 
-                                                </ul>
+                                                <span> <i class="fa fa-location-alt"></i> </span> <strong> Our Address:</strong>  7903 W 129th Ter
+                                                Overland Park, KS 66213
+                                            </li> -->
+                                            <li>
+                                                <div class="header-right_call">
+                                                    <div class="icon btn btn-style-one btn-style-ones">
+                                                        <span><i class="fas fa-phone-alt"></i></span>
+                                                    </div>
+                                                    <div class="call-meta">
+                                                        <span class=""><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span>
+
+                                                    </div>
+                                                </div>
                                             </li>
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                            <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+                                            <li> <strong>Email us:</strong> </span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></li>
+                                            <!--li>
+                                            <div class="icon btn btn-style-one btn-style-ones">
+                                                <span><i class="fas fa-phone-alt"></i></span>
+                                            </div> <span>Call Us: </span>
+                                            <a href="tel:01234567889" class="call-meta_number">+1 (425) 802 6433</a></li-->
 
                                         </ul>
-                                    </nav>
-                                </div>
-                                <!-- Header Menu End -->
-
-                                <!-- Header Actions Start-->
-                                <div class="header-right_actions flex-center">
-                                    <div class="header-right_call">
                                     </div>
-								<div class="hamburger d-block d-lg-none">
-                                         <a class="header-action-btn header-action-btn-menu hamburger_button d-flex" href="#/" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-header">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                        </a>
-                                      </div>
-
                                 </div>
-                             </div>
+
+                                <div class="social-icons">
+                                    <div class="social-icons-align">
+                                        <ul>
+                                            <li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                            <li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-               </div>
+            </div>
+            <!--div class="row">
+                <div class="col-12">
+                    <div class="flex-right justify-content float-end">
+                          <ul>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                          </ul>
+                    </div>
+                </div>
+            </div-->
+            <div class="sticky-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="flex-center justify-content-between ">
+                            <div class="col-3">
+                                <!-- Header Logo Start -->
+                                <div class="logo">
+                                    <a href="index.html">
+                                        <img src="assets/images/logo7.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Header Logo End -->
+                            <div class="col-9">
+                                <div class="flex-center header-right">
+                                    <!-- Header Menu Start -->
+                                    <div class="d-none d-lg-flex header-right_menu">
+                                        <nav class="main-menu">
+                                            <ul>
+                                                <li class="has-children">
+                                                    <a href="index.html">Home</a>
+
+                                                </li>
+                                                <li><a href="about.html">About</a></li>
+                                                <li class="has-children">
+                                                    <a href="#">Service</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="ui-ux-design-services.html">Visual, UI & UX Design</a></li>
+                                                        <li><a href="web-development-services.html">Web Development</a></li>
+                                                        <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
+                                                        <li><a href="dynamic-365-solutions.html">Dynamics 365</a></li>
+                                                        <li><a href="training-and-enablament.html">Trainings & Enablement</a></li>
+                                                        <li><a href="appian-solutions.html">Appian</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="has-children">
+                                                    <a href="#">Solutions</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="dynamic-365-portals.html">Portals</a></li>
+                                                        <!--li><a href="referral-rogram-grid.html">Referral Program</a></li-->
+                                                        <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
+                                                        <li><a href="business-automation-solutions.html">Business Automation</a></li>
+                                                        <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
+                                                        <li><a href="dynamics-365-marketing.html">Marketing</a></li>
+                                                        <!--<li><a href="telephonic-integration.html">Telephonic Integration</a></li>-->
+                                                    </ul>
+                                                </li>
+                                                <li class="has-children">
+                                                    <a href="#">Company</a>
+                                                    <ul class="sub-menu">
+                                                        <!--<li><a href="#ourteam">Our Team</a></li>-->
+                                                        <!--<li><a href="our-process.html">Our Process</a></li>-->
+                                                        <li><a href="blog.html">Our Blogs</a></li>
+                                                        <li><a href="career.html">Career</a></li>
+
+                                                    </ul>
+                                                </li>
+                                                <li><a href="contact.html">Contact Us</a></li>
+                                                <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <!-- Header Menu End -->
+                                    <!-- Header Actions Start-->
+                                    <div class="header-right_actions flex-center">
+                                        <div class="header-right_call">
+                                        </div>
+                                        <div class="hamburger d-block d-lg-none">
+                                            <a class="header-action-btn header-action-btn-menu hamburger_button d-flex" href="#/" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-header">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -273,7 +336,6 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-
     <!-- Service Section Start -->
     <div class="">
         <div class="container mt-90">
@@ -284,36 +346,38 @@
                         <div class="single-thumb wow fadeIn " data-wow-duration="1.5s" data-wow-delay=".1s">
                             <img src="assets/images/dynamics-365.jpg" class="img-curve" alt="Dynamic-365">
                         </div>
-                        </div>
-                        </div>
-					<div class="col-lg-4">
-						<div class="sidebar-wrap">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar-wrap">
                         <!--Sidebar Service Start-->
-							<div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-								<h4 class="sidebar-title">Dynamics 365</h4>
-								<ul class="sidebar-service">
-									<li><a href="#flex" class="active">Flexibility</a></li>
-									<li><a href="#simplicity">Simplicity</a></li>
-									<li><a href="#ease">Ease of Use</a></li>
-									<li><a href="#scalability">Scalability</a></li>
-									<li><a href="#agility">Agility</a></li>
-									<li><a href="#product">Productive</a></li>
-									<li><a href="#intelligent">Intelligent</a></li>
-									<li><a href="#secure">Secure</a></li>
-								</ul>
+                        <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                            <h4 class="sidebar-title">Dynamics 365</h4>
+                            <ul class="sidebar-service">
+                                <li><a href="#flex" class="active">Flexibility</a></li>
+                                <li><a href="#simplicity">Simplicity</a></li>
+                                <li><a href="#ease">Ease of Use</a></li>
+                                <li><a href="#scalability">Scalability</a></li>
+                                <li><a href="#agility">Agility</a></li>
+                                <li><a href="#product">Productive</a></li>
+                                <li><a href="#intelligent">Intelligent</a></li>
+                                <li><a href="#secure">Secure</a></li>
+                            </ul>
 
-							</div>	
-                        </div>	
-                    </div>	
-                        <!-- Thumbnail End -->
-					<div class="col-lg-12 standard-service">
-						<div class="service-details">
+                        </div>
+                    </div>
+                </div>
+                <!-- Thumbnail End -->
+                <div class="col-lg-12 standard-service">
+                    <div class="service-details">
                         <div class="service-desc wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                             <h3 class="service-desc-title">Overview</h3>
-                            <p class="text mb-4 abt">Microsoft Dynamics 365 is the only cloud-based platform as a service that gives all that you need for CRM and ERP, 
-							at one place. It basically unifies these capabilities into applications that work seamlessly together 
-							across with different licensing subscriptions: </p>
-                          </div>
+                            <p class="text mb-4 abt">
+                                Microsoft Dynamics 365 is the only cloud-based platform as a service that gives all that you need for CRM and ERP,
+                                at one place. It basically unifies these capabilities into applications that work seamlessly together
+                                across with different licensing subscriptions:
+                            </p>
+                        </div>
 
                         <div class="service-desc wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                             <!--h3 class="service-desc-title">Key Factors</h3-->
@@ -337,7 +401,7 @@
                                             </div>
                                             <h4 class="title">Customer Service</h4>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3 mb-25">
                                     <div class="service-desc-single">
@@ -347,7 +411,7 @@
                                             </div>
                                             <h4 class="title">Field Service</h4>
                                         </div>
-                                       </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3 mb-25">
                                     <div class="service-desc-single">
@@ -357,9 +421,9 @@
                                             </div>
                                             <h4 class="title">Operations</h4>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
-								 <div class="col-md-3 mb-25">
+                                <div class="col-md-3 mb-25">
                                     <div class="service-desc-single">
                                         <div class="service-desc-top">
                                             <div class="icon">
@@ -367,9 +431,9 @@
                                             </div>
                                             <h4 class="title">Financials</h4>
                                         </div>
-                                       </div>
+                                    </div>
                                 </div>
-								 <div class="col-md-3 mb-25">
+                                <div class="col-md-3 mb-25">
                                     <div class="service-desc-single">
                                         <div class="service-desc-top">
                                             <div class="icon">
@@ -377,9 +441,9 @@
                                             </div>
                                             <h4 class="title">Marketing</h4>
                                         </div>
-                                       </div>
+                                    </div>
                                 </div>
-								 <div class="col-md-5 mb-25">
+                                <div class="col-md-5 mb-25">
                                     <div class="service-desc-single">
                                         <div class="service-desc-top">
                                             <div class="icon">
@@ -387,68 +451,74 @@
                                             </div>
                                             <h4 class="title">Project Service Automation</h4>
                                         </div>
-                                       </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-						
-					<div class="service-desc service-desc2 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                            <p class="text mb-4 abt">These applications are integrated with the tools and processes that you already use, like Call 
-							Centers, Teams, Sales, Marketing, Outlook and Excel and it brings the power of digital intelligence to every decision
-							you make through activities and various social integrations. 
-							<br><br><strong>Now, have a look at these 10 benefits for your company:</strong></p>
-                    </div>	
-						
-					<!---------------Points--->	
-					 <div class="service-desc wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+
+                        <div class="service-desc service-desc2 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                            <p class="text mb-4 abt">
+                                These applications are integrated with the tools and processes that you already use, like Call
+                                Centers, Teams, Sales, Marketing, Outlook and Excel and it brings the power of digital intelligence to every decision
+                                you make through activities and various social integrations.
+                                <br><br><strong>Now, have a look at these 10 benefits for your company:</strong>
+                            </p>
+                        </div>
+
+                        <!---------------Points--->
+                        <div class="service-desc wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                             <!--h3 class="service-desc-title">Key Factors</h3-->
                             <div class="row mb-55 mt-60">
                                 <div class="col-md-6 mb-25">
                                     <div class="service-desc-single">
                                         <div class="service-desc wow fadeIn " data-wow-duration="1.5s" data-wow-delay=".1s">
-							 <h2 class="title colm-py">Start With What You Need And Add Apps <br/> As Your Needs Change</h2>
-											 <p class="text mb-4 abt abt">Dynamics 365 is built to be simple. <strong>Use individual apps that work both on their own or together </strong> – so you can create the solution that fits your needs. 
-											When your situation changes and new needs are needed, you find the applications that help you grow. </p>
-										</div>
-                                     </div>
+                                            <h2 class="title colm-py">Start With What You Need And Add Apps <br /> As Your Needs Change</h2>
+                                            <p class="text mb-4 abt abt">
+                                                Dynamics 365 is built to be simple. <strong>Use individual apps that work both on their own or together </strong> – so you can create the solution that fits your needs.
+                                                When your situation changes and new needs are needed, you find the applications that help you grow.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-								 <div class="col-md-6 mb-55">
+                                <div class="col-md-6 mb-55">
                                     <div class="service-image service-image2 wow fadeIn float-end" data-wow-duration="1.5s" data-wow-delay=".1s">
                                         <img src="assets/images/dynamic-app2.jpg" alt="Service-Image">
                                     </div>
                                 </div>
-                               </div>
-						  
+                            </div>
+
+                        </div>
                     </div>
-					</div>
-				</div>
-			</div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Service Section End -->
-	<!-----------------------------------------------------
-	------------------------------------------------------------------
-	------------------->
-	<div class="section-padding text-center full-section-bg ">
-		<div class="container">
-			 <div class="service-desc-single">
-                                        <div class="service-desc wow fadeIn title-pt" data-wow-duration="1.5s" data-wow-delay=".1s">
-										<div class="section-title-center section-head text-center hd-points">
-                         <h2 class="title">Understand Your Customers In a <br/>Completely New Way</h2>
+    <!-----------------------------------------------------
+    ------------------------------------------------------------------
+    ------------------->
+    <div class="section-padding text-center full-section-bg ">
+        <div class="container">
+            <div class="service-desc-single">
+                <div class="service-desc wow fadeIn title-pt" data-wow-duration="1.5s" data-wow-delay=".1s">
+                    <div class="section-title-center section-head text-center hd-points">
+                        <h2 class="title">Understand Your Customers In a <br />Completely New Way</h2>
                     </div>
-											 <div class="wow fadeIn img-colm mx-auto mb-3" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                                       <img src="assets/images/services-details-1.jpg" class="" alt="New Way">
-                                    </div>
-											 
-											<p class="text abt mx-auto text-center pt-5 abt">Dynamics 365 brings together <strong>any kind of customer data</strong> so you get the complete picture of the customers. 
-											You can use pre-built KPIs to truly understand the customer journey with real-time updates. You get the ability to 
-											personalize the customer experience and to easily measure and track the health of customer relationships. </p>
-										  </div>
-                                     </div>
-		</div>
-	</div>
-	<!-------------------------------------------colom333333333333------------------------------->
-	<div class="about mt-60">
+                    <div class="wow fadeIn img-colm mx-auto mb-3" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                        <img src="assets/images/services-details-1.jpg" class="" alt="New Way">
+                    </div>
+
+                    <p class="text abt mx-auto text-center pt-5 abt">
+                        Dynamics 365 brings together <strong>any kind of customer data</strong> so you get the complete picture of the customers.
+                        You can use pre-built KPIs to truly understand the customer journey with real-time updates. You get the ability to
+                        personalize the customer experience and to easily measure and track the health of customer relationships.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------------------colom333333333333------------------------------->
+    <div class="about mt-60">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -459,100 +529,116 @@
                         </div>
                         <div class="shape-two wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
                             <img src="assets/images/about/shape-two.png" alt="Shape">
-                        </div>                       
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="about-content">
                         <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="flex" class="title">Flexibility</h2>
-                            <p class="text-two abt">Having a monthly operational cost and a subscription model is far more flexible than having capital costs. 
-							It has the potential to be much cheaper as you only buy what you need. Also, Dynamics 365 eliminates the need to manage your own data 
-							center and servers, which can lead to significant savings.</p>
-                         </div>
-						<div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="simplicity" class="title">Simplicity</h2>
-                            <p class="text-two abt">Dynamics 365 is based on purchase subscriptions by role. You only have to 
-											subscribe people to the work they <strong>actually do</strong> and not buy a single large license 
-											covering all roles.</p>
-										  
-                         </div>
+                            <h2 id="flex" class="title">Flexibility</h2>
+                            <p class="text-two abt">
+                                Having a monthly operational cost and a subscription model is far more flexible than having capital costs.
+                                It has the potential to be much cheaper as you only buy what you need. Also, Dynamics 365 eliminates the need to manage your own data
+                                center and servers, which can lead to significant savings.
+                            </p>
+                        </div>
+                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <h2 id="simplicity" class="title">Simplicity</h2>
+                            <p class="text-two abt">
+                                Dynamics 365 is based on purchase subscriptions by role. You only have to
+                                subscribe people to the work they <strong>actually do</strong> and not buy a single large license
+                                covering all roles.
+                            </p>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-	
-	<div class="about mt-60 full-section-bg2" style="margin-top:0;">
+
+    <div class="about mt-60 full-section-bg2" style="margin-top:0;">
         <div class="container">
             <div class="row align-items-center">
-               
+
                 <div class="col-lg-6">
                     <div class="about-content">
                         <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="ease" class="title">Ease of Use</h2>
-                            <p class="text-two txt-white abt">Dynamics 365 is based on Microsoft’s new app market, AppSource, where you can easily search and find the apps 
-											that you and your company need. This makes the solution easy to understand and use. 
-											When your needs change, you can <strong>easily search for an app that can help you.</strong>  <br/> <br/></p>
-                         </div>
-						<div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="scalability" class="title">Scalability</h2>
-                            <p class="text-two txt-white abt">Dynamics 365 comes with a monthly subscription, giving you the <strong>ability to scale
-											up and down when your needs change,</strong> for example in relation to Christmas or vacations. 
-											Only pay for what you need, when you need it.</p>
-										  
-                         </div>
+                            <h2 id="ease" class="title">Ease of Use</h2>
+                            <p class="text-two txt-white abt">
+                                Dynamics 365 is based on Microsoft’s new app market, AppSource, where you can easily search and find the apps
+                                that you and your company need. This makes the solution easy to understand and use.
+                                When your needs change, you can <strong>easily search for an app that can help you.</strong>  <br /> <br />
+                            </p>
+                        </div>
+                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <h2 id="scalability" class="title">Scalability</h2>
+                            <p class="text-two txt-white abt">
+                                Dynamics 365 comes with a monthly subscription, giving you the <strong>
+                                    ability to scale
+                                    up and down when your needs change,
+                                </strong> for example in relation to Christmas or vacations.
+                                Only pay for what you need, when you need it.
+                            </p>
+
+                        </div>
                     </div>
                 </div>
-				 <div class="col-lg-6">
+                <div class="col-lg-6">
                     <div class="main-image">
                         <img class="about-img js-tilt img-curve" src="assets/images/useEasy3.jpg" alt="about" style="will-change: transform; transform: perspective(3000px) rotateX(0deg) rotateY(0deg); transition: all 4000ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s;">
-                       
+
                         <div class="shape-two wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
                             <img src="assets/images/about/shape-two.png" alt="Shape">
-                        </div>                       
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-	
-	<div class="about mt-60">
+
+    <div class="about mt-60">
         <div class="container">
             <div class="row align-items-center">
-			 <div class="col-lg-6">
+                <div class="col-lg-6">
                     <div class="about-content">
                         <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="agility" class="title">Agility</h2>
-                            <p class="text-two abt"><strong>Dynamics 365 will transform the way you manage customer data and daily situations.</strong> You can dissolve barriers between
-											critical business platforms and make your data start working together. Core to this concept is the Microsoft Common Data Model that is a shared business database. 
-											It is the glue that connects all data and processes together, so you can say goodbye to silos of information. <br> <br> </p>
-                         </div>
-						<div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="product" class="title">Productive</h2>
-                            <p class="text-two abt">Dynamics 365 comes with a monthly subscription, giving you the <strong>ability to scale
-											up and down when your needs change,</strong> for example in relation to Christmas or vacations. 
-											Only pay for what you need, when you need it.</p>
-										  
-                         </div>
+                            <h2 id="agility" class="title">Agility</h2>
+                            <p class="text-two abt">
+                                <strong>Dynamics 365 will transform the way you manage customer data and daily situations.</strong> You can dissolve barriers between
+                                critical business platforms and make your data start working together. Core to this concept is the Microsoft Common Data Model that is a shared business database.
+                                It is the glue that connects all data and processes together, so you can say goodbye to silos of information. <br> <br>
+                            </p>
+                        </div>
+                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <h2 id="product" class="title">Productive</h2>
+                            <p class="text-two abt">
+                                Dynamics 365 comes with a monthly subscription, giving you the <strong>
+                                    ability to scale
+                                    up and down when your needs change,
+                                </strong> for example in relation to Christmas or vacations.
+                                Only pay for what you need, when you need it.
+                            </p>
+
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="main-image">
                         <img class="about-img js-tilt img-curve" src="assets/images/producty.jpg" alt="about" style="will-change: transform; transform: perspective(3000px) rotateX(0deg) rotateY(0deg); transition: all 4000ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s;">
                         <div class="shape-one wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                         </div>
+                        </div>
                         <div class="shape-two wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
                             <img src="assets/images/about/shape-two.png" alt="Shape">
-                        </div>                       
+                        </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>
-	
-	<div class="my-5 boost">
+
+    <div class="my-5 boost">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -574,31 +660,37 @@
                 <div class="col-lg-6">
                     <div class="boost-content">
                         <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="intelligent" class="title">Intelligent</h2>
-                            <p class="text-two abt">Dynamics 365 gives you access to <strong>Real-Time Insights</strong> with Built-In Predictive Analytics. 
-											Power BI, Cortana Intelligence and Azure Machine Learning are all natively embedded, so you have access to predictive insights, prescriptive advice, 
-											and actionable next steps. <br> <br> </p>
-						  </div>
+                            <h2 id="intelligent" class="title">Intelligent</h2>
+                            <p class="text-two abt">
+                                Dynamics 365 gives you access to <strong>Real-Time Insights</strong> with Built-In Predictive Analytics.
+                                Power BI, Cortana Intelligence and Azure Machine Learning are all natively embedded, so you have access to predictive insights, prescriptive advice,
+                                and actionable next steps. <br> <br>
+                            </p>
+                        </div>
                     </div>
-					 <div class="boost-content">
+                    <div class="boost-content">
                         <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             <h2 id="secure" class="title">Secure</h2>
-                            <p class="text-two abt">Dynamics 365 is a cloud-based solution that features robust security and access controls 
-											for apps and data that are built into the cloud services, including the physical data center, network connectivity, 
-											service hosting platform, and user and administrator access</p>
-						  </div>
+                            <h2 id="secure" class="title">Secure</h2>
+                            <p class="text-two abt">
+                                Dynamics 365 is a cloud-based solution that features robust security and access controls
+                                for apps and data that are built into the cloud services, including the physical data center, network connectivity,
+                                service hosting platform, and user and administrator access
+                            </p>
+                        </div>
                     </div>
-					 <div class="boost-content">
+                    <div class="boost-content">
                         <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <p class="text-two abt">All in all, Microsoft Dynamics 365 provides great potential to streamline line-of-business, and allow increasing agility for companies, and reducing costs.<br>
-Would you like to know more? Contact us and we would be happy to give you a demonstration to how Microsoft Dynamics 365 gives you competitive advantage.</p>
-						  </div>
+                            <p class="text-two abt">
+                                All in all, Microsoft Dynamics 365 provides great potential to streamline line-of-business, and allow increasing agility for companies, and reducing costs.<br>
+                                Would you like to know more? Contact us and we would be happy to give you a demonstration to how Microsoft Dynamics 365 gives you competitive advantage.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-	<div class="progress-section section-padding">
+    <div class="progress-section section-padding">
         <div class="container">
             <div class="row align-items-center mb-n30">
                 <div class="col-lg-6 mb-30 wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
@@ -637,7 +729,7 @@ Would you like to know more? Contact us and we would be happy to give you a demo
             </div>
         </div>
     </div>
-	 <div class="workbanner-two">
+    <div class="workbanner-two">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -689,7 +781,7 @@ Would you like to know more? Contact us and we would be happy to give you a demo
             </div-->
             <div class="row mb-n30">
 
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget negative-margin">
                         <div class="logo">
                             <a href="index.html">
@@ -698,20 +790,25 @@ Would you like to know more? Contact us and we would be happy to give you a demo
                         </div>
                         <ul class="footer-widget-list-icon">
                             <li>
-                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span></li>
-                            
+                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span>
+                            </li>
+
                             <li><i class="fas fa-phone"></i><span><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span> </li>
-                         <li style="">  
-							<i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span></li>
-                            
+                            <li style="">
+                                <i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span>
+                            </li>
+
                             <li><i class="fas fa-envelope"></i> <span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></span> </li>
-                            <li><i class="fas fa-phone"></i> 
-								<span class="text text2"><a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
-								<a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
-								 
-						 </span> </li>
-						</ul>
-						 <ul class="social-icon d-flex flex-start">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span class="text text2">
+                                    <a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
+                                    <a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
+
+                                </span>
+                            </li>
+                        </ul>
+                        <ul class="social-icon d-flex flex-start">
                             <li>
                                 <a href="https://www.facebook.com/Izenixsolutions/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             </li>
@@ -722,17 +819,17 @@ Would you like to know more? Contact us and we would be happy to give you a demo
                                 <a href="https://www.linkedin.com/company/izenix-solutions/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/izenixsolutions/"  class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/izenixsolutions/" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
-				<!-- Footer Widget Start -->
+                <!-- Footer Widget Start -->
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-sm-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Service</h5>
                         <ul class="footer-widget-list">
-							<li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
+                            <li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
                             <li><a href="web-development-services.html">Web Development </a></li>
                             <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
                             <li><a href="dynamic-365-solutions.html">Dynamics 365 </a></li>
@@ -741,36 +838,36 @@ Would you like to know more? Contact us and we would be happy to give you a demo
                         </ul>
                     </div>
                 </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Solutions</h5>
                         <ul class="footer-widget-list">
                             <li><a href="dynamic-365-portals.html">Portals</a></li>
-                               <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
-                              <li><a href="business-automation-solutions.html">Business Automation</a></li>
-                              <li><a href="dynamics-365-marketing.html">Marketing</a></li>
-                              <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
-							  <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
-	                          
+                            <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
+                            <li><a href="business-automation-solutions.html">Business Automation</a></li>
+                            <li><a href="dynamics-365-marketing.html">Marketing</a></li>
+                            <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
+                            <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+
                         </ul>
                     </div>
                 </div>
-				<div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Quick Links</h5>
                         <ul class="footer-widget-list">
                             <li><a href="about.html">About Us</a></li>
-							 <li><a href="contact.html">Contact Us</a></li>
-							 <li><a href="blog.html">Our Blogs</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="blog.html">Our Blogs</a></li>
                             <!--<li><a href="#ourteam">Our Team</a></li>-->
                             <li><a href="career.html">Career</a></li>
-                                                   
-													
+
+
                         </ul>
                     </div>
                 </div>
-             </div>
-			  <div class="row">
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="copyright wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                         <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2023</span> </p>
@@ -784,17 +881,14 @@ Would you like to know more? Contact us and we would be happy to give you a demo
             </div>
         </div>
     </footer>
-<!-- Footer Section End -->
-
+    <!-- Footer Section End -->
     <!-- Scroll Top Start -->
     <a href="#" class="scroll-top show" id="scroll-top">
         <i class="arrow-top fas fa-angle-double-up"></i>
         <i class="arrow-bottom fas fa-angle-double-up"></i>
     </a>
     <!-- Scroll Top End -->
-
     <!-- JS Vendor, Plugins & Activation Script Files -->
-
     <!-- Vendors JS -->
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
@@ -810,6 +904,41 @@ Would you like to know more? Contact us and we would be happy to give you a demo
     <!-- Activation JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/pages/blank.js"></script>
+    <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
+        <button onclick="toggleClass()" class="bpw-floating-button">
+            <img src="assets/images/chatbot1.png" />
+        </button>
+        <div class="iframe-content">
+            <iframe src="https://web.powerva.microsoft.com/environments/Default-3a9459c9-6409-4cd3-a455-7fa6062c0b2d/bots/cr478_izenixSolutions/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%; background-color:white; "></iframe>
 
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const para = document.getElementById('chatbox');
+
+            // After 5 seconds, open the chat box
+            setTimeout(function () {
+                toggleClass();
+                //    playAlertSound(); // Play audio alert
+            }, 5000);
+
+            // Toggle class 'open' and 'closed' on click
+            para.addEventListener('click', function () {
+                toggleClass();
+            });
+
+            function toggleClass() {
+                //para.classList.toggle('closed');
+                para.classList.toggle('open');
+            }
+
+            //function playAlertSound() {
+            //    // Replace 'path/to/alert.mp3' with the actual path to your audio file
+            //    var audio = new Audio('assets/audio/notifications-sound.mp3');
+            //    audio.play();
+            //}
+        });
+    </script>
 </body>
  </html>

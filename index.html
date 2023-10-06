@@ -25,94 +25,154 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <style>
-background: #fff;
+/*background: #fff;
     height: 53px;
-    margin-bottom: 10px;
+    margin-bottom: 10px;*/
+
+   /* .iframe-content {
+        display: block;
+        height: 500px;
+        width: 350px;
+    }
+    div.open 
+        .iframe-content {
+              display:none;
+              height: 0px;
+          }
+    div.closed
+    .iframe-content {
+        display: none;
+        height: 0px;
+    }*/
+    .iframe-content {
+        display: none;
+        height: 0px;
+        width: 350px;
+    }
+
+    div.open .iframe-content {
+        display: block;
+        height: 500px;
+    }
+
+    div.closed .iframe-content {
+        display: none;
+        height: 0px;
+    }
+    .bpw-floating-button {
+        float: right;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        border-radius: 60%;
+/*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+*/        overflow: hidden;
+        padding: 0;
+        border: none;
+        background-clip: padding-box;
+        transition: width 1s, height 1s;
+        background-color: transparent;
+        color: white;
+       transition: opacity 0.3s ease;
+        opacity: 1;
+        fill: inherit;
+        stroke: inherit;
+        line-height: 0;
+    }
+
+        
+
 </style>
 <body>
     <header class="header-wrapper">
         <div class="">
             <div class="container-fluid flud-top-colm">
-            <div class="container">
-			<div class="header-top">
-		<div class="header-top-fluid">
-			<div class="row align-items-center">
-								<div class="col-12 top-header-left">
-								<div class="top-header-left-lign">
-									<ul>
-										
-                                        <!--<li>
-										
-                                            <span> <i class="fa fa-location-alt"></i> </span> <strong> Our Address:</strong>  7903 W 129th Ter
-                                            Overland Park, KS 66213
-                                        </li> -->
-										<li>
-										<div class="header-right_call">
-                                        <div class="icon btn btn-style-one btn-style-ones">
-                                            <span><i class="fas fa-phone-alt"></i></span>
-                                        </div>
-                                        <div class="call-meta">
-                                            <span class=""><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span>
-                                            
-                                        </div>
+                <div class="container">
+                    <div class="header-top">
+                        <div class="header-top-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-12 top-header-left">
+                                    <div class="top-header-left-lign">
+                                        <ul>
+
+                                            <!--<li>
+
+                                                <span> <i class="fa fa-location-alt"></i> </span> <strong> Our Address:</strong>  7903 W 129th Ter
+                                                Overland Park, KS 66213
+                                            </li> -->
+                                            <li>
+                                                <div class="header-right_call">
+                                                    <div class="icon btn btn-style-one btn-style-ones">
+                                                        <span><i class="fas fa-phone-alt"></i></span>
+                                                    </div>
+                                                    <div class="call-meta">
+                                                        <span class=""><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span>
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li> <strong>Email us:</strong> </span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></li>
+                                            <!--li>
+                                            <div class="icon btn btn-style-one btn-style-ones">
+                                                <span><i class="fas fa-phone-alt"></i></span>
+                                            </div> <span>Call Us: </span>
+                                            <a href="tel:01234567889" class="call-meta_number">+1 (425) 802 6433</a></li-->
+
+                                        </ul>
                                     </div>
-										</li>
-										<li> <strong>Email us:</strong> </span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></li>
-										<!--li> 
-										<div class="icon btn btn-style-one btn-style-ones">
-                                            <span><i class="fas fa-phone-alt"></i></span>
-                                        </div> <span>Call Us: </span>
-										<a href="tel:01234567889" class="call-meta_number">+1 (425) 802 6433</a></li-->
-										
-									</ul>
-								</div>
-								</div>
-								 
-									<div class="social-icons">
-									<div class="social-icons-align">
-										<ul>
-											<li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-											<li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-										 </ul>
-									</div>
-									</div>
-								</div>
-								</div>
-			</div>
-		</div>
-	</div>
-	</div>
-				<!--div class="row">
-                    <div class="col-12">
-                        <div class="flex-right justify-content float-end">
-							  <ul>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-							  </ul>
-						</div>
-					</div>
-				</div-->
-			<div class="sticky-header">
-				<div class="container">
+                                </div>
+
+                                <div class="social-icons">
+                                    <div class="social-icons-align">
+                                        <ul>
+                                            <li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                            <li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--div class="row">
+            <div class="col-12">
+                <div class="flex-right justify-content float-end">
+                      <ul>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                            <li><a href=""></a></li>
+                      </ul>
+                </div>
+            </div>
+        </div-->
+        <div class="sticky-header">
+            <div class="container">
                 <div class="row">
-                    
-                        <div class="flex-center justify-content-between ">
-						<div class="col-3">
+
+                    <div class="flex-center justify-content-between ">
+                        <div class="col-3">
                             <!-- Header Logo Start -->
                             <div class="logo">
                                 <a href="index.html">
                                     <img src="assets/images/logo7.png" alt="">
                                 </a>
                             </div>
-                           </div>
-                           
-                            <!-- Header Logo End -->
-						<div class="col-9">
+                        </div>
+
+                        <!-- Header Logo End -->
+                        <div class="col-9">
                             <div class="flex-center header-right">
                                 <!-- Header Menu Start -->
                                 <div class="d-none d-lg-flex header-right_menu">
@@ -161,24 +221,24 @@ background: #fff;
                                         </ul>
                                     </nav>
                                 </div>
-                                 <div class="header-right_actions flex-center">
+                                <div class="header-right_actions flex-center">
                                     <div class="header-right_call">
-                                     </div>
-										<div class="hamburger d-block d-lg-none">
-                                         <a class="header-action-btn header-action-btn-menu hamburger_button d-flex" href="#/" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-header">
+                                    </div>
+                                    <div class="hamburger d-block d-lg-none">
+                                        <a class="header-action-btn header-action-btn-menu hamburger_button d-flex" href="#/" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-header">
                                             <span></span>
                                             <span></span>
                                             <span></span>
                                         </a>
-                                      </div>
+                                    </div>
 
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-               </div>
             </div>
+        </div>
         </div>
     </header>
 
@@ -229,7 +289,7 @@ background: #fff;
                             <!--<li><a href="#ourteam">Our Team</a></li>-->
                             <!--<li><a href="our-process.html">Our Process</a></li>-->
                             <li><a href="blog.html">Our Blogs</a></li>
-                             <li><a href="career.html">Career</a></li>
+                            <li><a href="career.html">Career</a></li>
 
                         </ul>
                     </li>
@@ -251,17 +311,17 @@ background: #fff;
                     <!-- Single Slider Start -->
                     <div class="slingle-slider single-slider-three overlay slider-bg-image" data-bg-color="#E9EDF4" data-bg-image="assets/images/slider/01_home_01.png">
                         <span class="shape shape-11 layery" data-speed="2">
-                    <img src="assets/images/slider/shape-11.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/shape-11.png" alt="Shape">
+                        </span>
                         <span class="shape shape-seven">
-                    <img src="assets/images/slider/circle-three.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/circle-three.png" alt="Shape">
+                        </span>
                         <span class="shape shape-12 layer" data-speed="2">
-                    <img src="assets/images/slider/shape-5.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/shape-5.png" alt="Shape">
+                        </span>
                         <span class="shape shape-13">
-                    <img src="assets/images/slider/circle-six.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/circle-six.png" alt="Shape">
+                        </span>
                         <div class="shape shape-14">
                             <img src="assets/images/slider/shape-12.png" alt="Shape">
                         </div>
@@ -297,8 +357,8 @@ background: #fff;
                                                 <img src="assets/images/slider/img-four.png" alt="Slider Image">
                                             </div>
                                             <span class="shape shape-circle-two">
-                                        <img src="assets/images/slider/circle-four.png" alt="Shape">
-                                    </span>
+                                                <img src="assets/images/slider/circle-four.png" alt="Shape">
+                                            </span>
                                             <div class="shape shape-circle-three">
                                                 <img src="assets/images/slider/circle-five.png" alt="Shape">
                                             </div>
@@ -324,17 +384,17 @@ background: #fff;
                     <!-- Single Slider Start -->
                     <div class="slingle-slider single-slider-three overlay slider-bg-image" data-bg-color="#E9EDF4" data-bg-image="assets/images/slider/01_home_01.png">
                         <span class="shape shape-11 layery" data-speed="2">
-                    <img src="assets/images/slider/shape-11.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/shape-11.png" alt="Shape">
+                        </span>
                         <span class="shape shape-seven">
-                    <img src="assets/images/slider/circle-three.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/circle-three.png" alt="Shape">
+                        </span>
                         <span class="shape shape-12 layer" data-speed="2">
-                    <img src="assets/images/slider/shape-5.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/shape-5.png" alt="Shape">
+                        </span>
                         <span class="shape shape-13">
-                    <img src="assets/images/slider/circle-six.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/circle-six.png" alt="Shape">
+                        </span>
                         <div class="shape shape-14">
                             <img src="assets/images/slider/shape-12.png" alt="Shape">
                         </div>
@@ -370,8 +430,8 @@ background: #fff;
                                                 <img src="assets/images/slider/img-five.png" alt="Slider Image">
                                             </div>
                                             <span class="shape shape-circle-two">
-                                        <img src="assets/images/slider/circle-four.png" alt="Shape">
-                                    </span>
+                                                <img src="assets/images/slider/circle-four.png" alt="Shape">
+                                            </span>
                                             <div class="shape shape-circle-three">
                                                 <img src="assets/images/slider/circle-five.png" alt="Shape">
                                             </div>
@@ -397,17 +457,17 @@ background: #fff;
                     <!-- Single Slider Start -->
                     <div class="slingle-slider single-slider-three overlay slider-bg-image" data-bg-color="#E9EDF4" data-bg-image="assets/images/slider/01_home_01.png">
                         <span class="shape shape-11 layery" data-speed="2">
-                    <img src="assets/images/slider/shape-11.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/shape-11.png" alt="Shape">
+                        </span>
                         <span class="shape shape-seven">
-                    <img src="assets/images/slider/circle-three.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/circle-three.png" alt="Shape">
+                        </span>
                         <span class="shape shape-12 layer" data-speed="2">
-                    <img src="assets/images/slider/shape-5.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/shape-5.png" alt="Shape">
+                        </span>
                         <span class="shape shape-13">
-                    <img src="assets/images/slider/circle-six.png" alt="Shape">
-                </span>
+                            <img src="assets/images/slider/circle-six.png" alt="Shape">
+                        </span>
                         <div class="shape shape-14">
                             <img src="assets/images/slider/shape-12.png" alt="Shape">
                         </div>
@@ -443,8 +503,8 @@ background: #fff;
                                                 <img src="assets/images/slider/img-six.png" alt="Slider Image">
                                             </div>
                                             <span class="shape shape-circle-two">
-                                        <img src="assets/images/slider/circle-four.png" alt="Shape">
-                                    </span>
+                                                <img src="assets/images/slider/circle-four.png" alt="Shape">
+                                            </span>
                                             <div class="shape shape-circle-three">
                                                 <img src="assets/images/slider/circle-five.png" alt="Shape">
                                             </div>
@@ -471,44 +531,48 @@ background: #fff;
         </div>
     </div>
     <!-- Slider Section Start -->
-	<div class="funfact-two section-top-bottom">
+    <div class="funfact-two section-top-bottom">
         <div class="container">
             <div class="row">
                 <div class="container">
                     <div class="row align-items-center">
-                        
+
                         <div class="col-lg-6">
                             <div class="funfact-content">
                                 <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
                                     <span class="subtitle">WE ARE IZENIX SOLUTIONS</span>
                                     <h2 class="title">We Work to Ensure Your Success</h2>
-                                    <p class="txtAlign text-hgt-size">Izenix Solutions is a unique startup company specialized on visual, UI & UX Design, application development, specialized in Dynamics 365 and consulting service provider with strong vertical background knowledge on banking, finance, healthcare, and education/university.
-									</p>
-									<p class="text-hgt-size pb-5">We have talented experts selective for parttime, fulltime and project / task-based allocation from across the globe, at you dispense.
+                                    <p class="txtAlign text-hgt-size">
+                                        Izenix Solutions is a unique startup company specialized on visual, UI & UX Design, application development, specialized in Dynamics 365 and consulting service provider with strong vertical background knowledge on banking, finance, healthcare, and education/university.
                                     </p>
-									 
-									 <a href="about.html" class="btn btn-style-one"> <span>Read More</span> </a>
-								 </div>
+                                    <p class="text-hgt-size pb-5">
+                                        We have talented experts selective for parttime, fulltime and project / task-based allocation from across the globe, at you dispense.
+                                    </p>
+
+                                    <a href="about.html" class="btn btn-style-one"> <span>Read More</span> </a>
                                 </div>
+                            </div>
                         </div>
-						<div class="col-lg-6">
+                        <div class="col-lg-6">
                             <div class="main-image">
                                 <img class="funfact-img js-tilt" src="assets/images/about/about-2-5.png" alt="about" style="will-change: transform; transform: perspective(3000px) rotateX(0deg) rotateY(0deg);">
                                 <div class="shape-one wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;"></div>
                                 <div class="circle-thumb wow pulse" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: pulse;">
                                     <span class="number">100%</span>
-                                    <span class="text">Customer
- <br> Satisfaction</span>
-                                </div-->
+                                    <span class="text">
+                                        Customer
+                                        <br> Satisfaction
+                                    </span>
+                                    </div-->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>	
-	</div>
-	<!-- Service Section Start -->
+    </div>
+    <!-- Service Section Start -->
     <div class="service-section service-three pb-5 my-5 ">
         <div class="container">
             <div class="row">
@@ -517,8 +581,10 @@ background: #fff;
                     <div class="section-title-center section-head text-center">
                         <span class="subtitle">Service</span>
                         <h2 class="title">What We Do</h2>
-                        <p class="text mx-auto">We design and build powerful 
-						and meaningful IT business systems. Onsite, Offsite and Offshore.</p>
+                        <p class="text mx-auto">
+                            We design and build powerful
+                            and meaningful IT business systems. Onsite, Offsite and Offshore.
+                        </p>
                     </div>
                     <!-- Section Title End  -->
                 </div>
@@ -583,10 +649,12 @@ background: #fff;
                                 <a href="dynamic-365-solutions.html">Dynamics <br>365</a>
                             </h4>
                         </div>
-                        <p class="single-service-text">Microsoft Dynamics 365 is the only cloud-based platform as a service that gives all that you 
-						need for CRM  </p>
+                        <p class="single-service-text">
+                            Microsoft Dynamics 365 is the only cloud-based platform as a service that gives all that you
+                            need for CRM
+                        </p>
                         <a class="readmore-btn" href="dynamic-365-solutions.html"><i class="fas fa-angle-right"></i> Read More</a>
-						<br/>
+                        <br />
                     </div>
                     <!-- Single Service End -->
                 </div>
@@ -619,7 +687,7 @@ background: #fff;
                         </div>
                         <p class="single-service-text">Izenix Integration  bringing together smaller components into a single system that functions as one. </p>
                         <a class="readmore-btn" href="appian-solutions.html"><i class="fas fa-angle-right"></i> Read More</a>
-						<br>
+                        <br>
                     </div>
                     <!-- Single Service End -->
                 </div>
@@ -638,9 +706,11 @@ background: #fff;
                         </div>
                         <div class="solution-content">
                             <h6 class="title">Implementation</h6>
-                            <p class="text bd-example tooltip-demo ">We can make your CRM system transition as seamless as possible. 
-							Our skilled team will manage
-							<a href="#" data-bs-toggle="tooltip" title="and data and ensure your new technology works optimally with your IT network." data-bs-original-title="">..</a> </p>
+                            <p class="text bd-example tooltip-demo ">
+                                We can make your CRM system transition as seamless as possible.
+                                Our skilled team will manage
+                                <a href="#" data-bs-toggle="tooltip" title="and data and ensure your new technology works optimally with your IT network." data-bs-original-title="">..</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -651,8 +721,10 @@ background: #fff;
                         </div>
                         <div class="solution-content">
                             <h6 class="title">Training</h6>
-                            <p class="text">To empower your business to take full advantage of CRM system, 
-							our knowledgeable staff train and guide </p>
+                            <p class="text">
+                                To empower your business to take full advantage of CRM system,
+                                our knowledgeable staff train and guide
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -663,8 +735,9 @@ background: #fff;
                         </div>
                         <div class="solution-content">
                             <h6 class="title">Support</h6>
-                            <p class="text">Your CRM system is critical to your business workflow automation. Our team provide support on every step 
-							 </p>
+                            <p class="text">
+                                Your CRM system is critical to your business workflow automation. Our team provide support on every step
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -672,7 +745,6 @@ background: #fff;
         </div>
     </div>
     <!-- Solution Section End -->
-
     <!-- images section -->
     <!--div class="about-three pt-0">
         <div class="container">
@@ -689,9 +761,7 @@ background: #fff;
                 </div>
             </div>
         </div-->
-<!----->
-
-    
+    <!----->
     <!-- Funfact Section Start -->
     <div class="funfact">
         <div class="container">
@@ -739,7 +809,7 @@ background: #fff;
             </div>
         </div>
     </div>
-     <!-- About Four Section Start -->
+    <!-- About Four Section Start -->
     <div class="section-padding-bottom about-four about-four-pad section-padding">
         <div class="container ">
             <div class="row">
@@ -797,11 +867,13 @@ background: #fff;
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show faq-accordion-collapse" aria-labelledby="headingOne" data-bs-parent="#faqone">
                                 <div class="accordion-body">
-                                    <p class="text-hgt-size">A Dynamics 365 portal gives your customers access to a web application or a page
-                                    to communicate and collaborate. Depending on the audience that the portal is catering to,
-                                    a Dynamics 365 portal can enable people to search knowledge articles, book appointments, enter sales leads, applications, create
-                                    support issues, suggest new ideas,
-                                    and collaborate with communities to learn more about products and services.</p>
+                                    <p class="text-hgt-size">
+                                        A Dynamics 365 portal gives your customers access to a web application or a page
+                                        to communicate and collaborate. Depending on the audience that the portal is catering to,
+                                        a Dynamics 365 portal can enable people to search knowledge articles, book appointments, enter sales leads, applications, create
+                                        support issues, suggest new ideas,
+                                        and collaborate with communities to learn more about products and services.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -814,7 +886,7 @@ background: #fff;
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse faq-accordion-collapse" aria-labelledby="headingTwo" data-bs-parent="#faqone">
                                 <div class="accordion-body">
-                                   <p class="text-hgt-size">We at Izenix can help you figure out the right Sales center that satisfies your business requirement and scales your outcome.</p>
+                                    <p class="text-hgt-size">We at Izenix can help you figure out the right Sales center that satisfies your business requirement and scales your outcome.</p>
                                 </div>
                             </div>
                         </div>
@@ -827,8 +899,10 @@ background: #fff;
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse faq-accordion-collapse" aria-labelledby="headingThree" data-bs-parent="#faqone">
                                 <div class="accordion-body">
-                                   <p class="text-hgt-size"> A Dynamics 365 Marketing gives real-time journey experiences based on customer interactions across email, mobile,
-                                    social media, text messaging (SMS), custom channels, and in-person touchpoints.</p>
+                                    <p class="text-hgt-size">
+                                        A Dynamics 365 Marketing gives real-time journey experiences based on customer interactions across email, mobile,
+                                        social media, text messaging (SMS), custom channels, and in-person touchpoints.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -841,8 +915,10 @@ background: #fff;
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse faq-accordion-collapse" aria-labelledby="headingFour" data-bs-parent="#faqone">
                                 <div class="accordion-body">
-                                    <p class="text-hgt-size">Customer Service Hub: Helps in managing knowledge articles and routing of cases and is available for use on desktop browsers and mobile devices. Use the Service Management site map to set up features, such as case management,
-                                    queues, routing rules, service terms, insights, and service scheduling.</p>
+                                    <p class="text-hgt-size">
+                                        Customer Service Hub: Helps in managing knowledge articles and routing of cases and is available for use on desktop browsers and mobile devices. Use the Service Management site map to set up features, such as case management,
+                                        queues, routing rules, service terms, insights, and service scheduling.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -855,249 +931,251 @@ background: #fff;
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse faq-accordion-collapse" aria-labelledby="headingFive" data-bs-parent="#faqone">
                                 <div class="accordion-body">
-                                    <p class="text-hgt-size">Loan Origination / Document Generation System: Helps Lenders or Agents in initating a loan and routing of application approvals and documents genration using templates is available for use on desktop browsers and mobile devices. Use the Loan Doc System to set up documents, such as Loan Origination Agreements, Legal Agreements, Lease Agreements,
-                                    Purchase Agreements, IPA Agreement & Drawdowns, Master Agreements etc..</p>
+                                    <p class="text-hgt-size">
+                                        Loan Origination / Document Generation System: Helps Lenders or Agents in initating a loan and routing of application approvals and documents genration using templates is available for use on desktop browsers and mobile devices. Use the Loan Doc System to set up documents, such as Loan Origination Agreements, Legal Agreements, Lease Agreements,
+                                        Purchase Agreements, IPA Agreement & Drawdowns, Master Agreements etc..
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
 
-                </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <!-- About Four Section End >
-<div class="team-section all-members section-margin" id="ourteam">
-        <div class="container" >
-            <div class="row mb-n30">
-				<div class="section-title-center section-head text-center">
-                        <span class="subtitle">Team Members </span>
-                        <h2 class="title">Our Team Members</h2>
-                        <p class="text mx-auto">We design and build powerful 
-						and meaningful IT business systems. Onsite, Offsite and Offshore.</p>
-                    </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                     <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+    <div class="team-section all-members section-margin" id="ourteam">
+            <div class="container" >
+                <div class="row mb-n30">
+                    <div class="section-title-center section-head text-center">
+                            <span class="subtitle">Team Members </span>
+                            <h2 class="title">Our Team Members</h2>
+                            <p class="text mx-auto">We design and build powerful
+                            and meaningful IT business systems. Onsite, Offsite and Offshore.</p>
                         </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-                         <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Niaz Labbe</a>
-                            </h4>
-                            <span class="subtitle">Founder &amp; CEO</span>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                         <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                             <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Niaz Labbe</a>
+                                </h4>
+                                <span class="subtitle">Founder &amp; CEO</span>
+                            </div>
                         </div>
-                    </div>
+                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                        <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details .html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                            <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Mohammad Abdul Hafiz</a>
+                                </h4>
+                                <span class="subtitle">CRM Architect</span>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                       <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".3s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.3s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                            <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Eekshith Pavan Kumar</a>
+                                </h4>
+                                <span class="subtitle">Dynamics CRM Developer</span>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                        <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".4s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                             <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Hafeez Ur Rahman</a>
+                                </h4>
+                                <span class="subtitle">Visual, UI /	 UX Designer <br/> Front-End Developer </span>
+                            </div>
+
+                        </div>
+                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                        <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                             <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Mohammed Javid Basha</a>
+                                </h4>
+                                <span class="subtitle">Integration &amp; Appain Architect</span>
+                            </div>
+
+                        </div>
+                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                        <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                             <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Ramesh Avula</a>
+                                </h4>
+                                <span class="subtitle">Cloud Solutions Specialist</span>
+                            </div>
+                        </div>
+                      </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                         <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".3s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.3s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                            <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Ebenezer (Eby)</a>
+                                </h4>
+                                <span class="subtitle">Marketing &amp; Social Media Specialist</span>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
+                        <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".4s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeIn;">
+                            <div class="team-thumb">
+                                <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
+                            </div>
+                            <ul class="sidebar-social">
+                                <li>
+                                    <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+                            <div class="team-content">
+                                <h4 class="title">
+                                    <a href="member-details.html">Ahmed Khaleel</a>
+                                </h4>
+                                <span class="subtitle">.Net Developer/Data Architect</span>
+                            </div>
+                        </div>
+                      </div>
                  </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                    <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details .html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-						<div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Mohammad Abdul Hafiz</a>
-                            </h4>
-                            <span class="subtitle">CRM Architect</span>
-                        </div>						
-                    </div>
-                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                   <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".3s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.3s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-                        <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Eekshith Pavan Kumar</a>
-                            </h4>
-                            <span class="subtitle">Dynamics CRM Developer</span>
-                        </div>
-                    </div>
-                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                    <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".4s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-						 <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Hafeez Ur Rahman</a>
-                            </h4>
-                            <span class="subtitle">Visual, UI /	 UX Designer <br/> Front-End Developer </span>
-                        </div>
-                       
-                    </div>
-                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                    <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-						 <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Mohammed Javid Basha</a>
-                            </h4>
-                            <span class="subtitle">Integration &amp; Appain Architect</span>
-                        </div>
-                       
-                    </div>
-                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                    <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-                         <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Ramesh Avula</a>
-                            </h4>
-                            <span class="subtitle">Cloud Solutions Specialist</span>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                     <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".3s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.3s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-                        <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Ebenezer (Eby)</a>
-                            </h4>
-                            <span class="subtitle">Marketing &amp; Social Media Specialist</span>
-                        </div>
-                    </div>
-                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 team-wrapper">
-                    <div class="single-team wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".4s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeIn;">
-                        <div class="team-thumb">
-                            <a class="image" href="member-details.html"><img src="assets/images/team/blank-profile-dp.jpg" alt="Team"></a>
-                        </div>
-                        <ul class="sidebar-social">
-                            <li>
-                                <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" class="instagram"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
-                        <div class="team-content">
-                            <h4 class="title">
-                                <a href="member-details.html">Ahmed Khaleel</a>
-                            </h4>
-                            <span class="subtitle">.Net Developer/Data Architect</span>
-                        </div>
-                    </div>
-                  </div>
-             </div>
-        </div>
-    </div-->
+            </div>
+        </div-->
     <!-- Boost Section Start >
     <div class="section-padding boost">
         <div class="container">
@@ -1162,7 +1240,6 @@ background: #fff;
         </div>
     </div>
     <!-- Boost Section End -->
-
     <!-- Testimonial Three Section Start -->
     <div class="section-padding testimonial-three">
         <div class="container">
@@ -1289,7 +1366,6 @@ background: #fff;
         </div>
     </div>
     <!-- Testimonial Three Section End -->
-
     <!-- Brand Section Start >
     <div class="brand-three section">
         <div class="container">
@@ -1324,7 +1400,6 @@ background: #fff;
         </div>
     </div>
     <!-- Brand Section End -->
-
     <!-- Blog Three Start -->
     <div class="section-top-100">
         <div class="container">
@@ -1334,7 +1409,7 @@ background: #fff;
                     <div class="section-title-center section-head text-center">
                         <span class="subtitle">Our Blog</span>
                         <h2 class="title">Our Latest Updates</h2>
-                     </div>
+                    </div>
                     <!-- Section Title End  -->
                 </div>
             </div>
@@ -1355,7 +1430,7 @@ background: #fff;
                             <h3 class="title">
                                 <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
                             </h3>
-							<br/>
+                            <br />
                         </div>
                     </div>
                     <!-- Single Blog End -->
@@ -1394,9 +1469,9 @@ background: #fff;
                                 <li>Dec 09, 2022</li>
                             </ul>
                             <h3 class="title">
-                                <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>								 
+                                <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
                             </h3>
-							<br/><br/> 
+                            <br /><br />
                         </div>
                     </div>
                     <!-- Single Blog End -->
@@ -1404,9 +1479,9 @@ background: #fff;
             </div>
         </div>
     </div>
-	
 
-<div class="workbanner-two">
+
+    <div class="workbanner-two">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -1420,7 +1495,8 @@ background: #fff;
                         <!-- Section Title End  -->
                         <!-- Portfolio Button Start -->
                         <a class="btn-style-three" href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/">
-						Schedule for Free Demo</a>
+                            Schedule for Free Demo
+                        </a>
                         <!-- Portfolio Button End -->
                     </div>
                 </div>
@@ -1459,7 +1535,7 @@ background: #fff;
             </div-->
             <div class="row mb-n30">
 
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget negative-margin">
                         <div class="logo">
                             <a href="index.html">
@@ -1468,20 +1544,25 @@ background: #fff;
                         </div>
                         <ul class="footer-widget-list-icon">
                             <li>
-                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span></li>
-                            
+                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span>
+                            </li>
+
                             <li><i class="fas fa-phone"></i><span><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span> </li>
-                         <li style="">  
-							<i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span></li>
-                            
+                            <li style="">
+                                <i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span>
+                            </li>
+
                             <li><i class="fas fa-envelope"></i> <span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></span> </li>
-                            <li><i class="fas fa-phone"></i> 
-								<span class="text text2"><a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
-								<a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
-								 
-						 </span> </li>
-						</ul>
-						 <ul class="social-icon d-flex flex-start">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span class="text text2">
+                                    <a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
+                                    <a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
+
+                                </span>
+                            </li>
+                        </ul>
+                        <ul class="social-icon d-flex flex-start">
                             <li>
                                 <a href="https://www.facebook.com/Izenixsolutions/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             </li>
@@ -1492,17 +1573,17 @@ background: #fff;
                                 <a href="https://www.linkedin.com/company/izenix-solutions/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/izenixsolutions/"  class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/izenixsolutions/" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
-				<!-- Footer Widget Start -->
+                <!-- Footer Widget Start -->
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-sm-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Service</h5>
                         <ul class="footer-widget-list">
-							<li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
+                            <li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
                             <li><a href="web-development-services.html">Web Development </a></li>
                             <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
                             <li><a href="dynamic-365-solutions.html">Dynamics 365 </a></li>
@@ -1511,36 +1592,36 @@ background: #fff;
                         </ul>
                     </div>
                 </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Solutions</h5>
                         <ul class="footer-widget-list">
                             <li><a href="dynamic-365-portals.html">Portals</a></li>
-                               <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
-                              <li><a href="business-automation-solutions.html">Business Automation</a></li>
-                              <li><a href="dynamics-365-marketing.html">Marketing</a></li>
-                              <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
-							  <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
-	                          
+                            <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
+                            <li><a href="business-automation-solutions.html">Business Automation</a></li>
+                            <li><a href="dynamics-365-marketing.html">Marketing</a></li>
+                            <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
+                            <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+
                         </ul>
                     </div>
                 </div>
-				<div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Quick Links</h5>
                         <ul class="footer-widget-list">
                             <li><a href="about.html">About Us</a></li>
-							 <li><a href="contact.html">Contact Us</a></li>
-							 <li><a href="blog.html">Our Blogs</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="blog.html">Our Blogs</a></li>
                             <!--<li><a href="#ourteam">Our Team</a></li>-->
                             <li><a href="career.html">Career</a></li>
-                                                   
-													
+
+
                         </ul>
                     </div>
                 </div>
-             </div>
-			  <div class="row">
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="copyright wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                         <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2023</span> </p>
@@ -1561,9 +1642,7 @@ background: #fff;
         <i class="arrow-bottom fas fa-angle-double-up"></i>
     </a>
     <!-- Scroll Top End -->
-
     <!-- JS Vendor, Plugins & Activation Script Files -->
-
     <!-- Vendors JS -->
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
@@ -1586,5 +1665,44 @@ background: #fff;
     <script src="assets/js/main.js"></script>
     <script src="assets/js/pages/home.js"></script>
 
+    <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
+        <button onclick="toggleClass()" class="bpw-floating-button" >
+            <img src="assets/images/chatbot1.png" />
+        </button>
+        <div class="iframe-content" >
+            <iframe src="https://web.powerva.microsoft.com/environments/Default-3a9459c9-6409-4cd3-a455-7fa6062c0b2d/bots/cr478_izenixSolutions/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%; background-color:white; "></iframe>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+       
+        document.addEventListener("DOMContentLoaded", function () {
+            const para = document.getElementById('chatbox');
+
+            // After 5 seconds, open the chat box
+            setTimeout(function () {
+                toggleClass();
+            //    playAlertSound(); // Play audio alert
+            }, 5000);
+
+            // Toggle class 'open' and 'closed' on click
+            para.addEventListener('click', function () {
+                toggleClass();
+            });
+
+            function toggleClass() {
+                //para.classList.toggle('closed');
+                para.classList.toggle('open');
+            }
+
+            //function playAlertSound() {
+            //    // Replace 'path/to/alert.mp3' with the actual path to your audio file
+            //    var audio = new Audio('assets/audio/notifications-sound.mp3');
+            //    audio.play();
+            //}
+        });
+
+
+    </script>
 </body>
 </html>

@@ -20,7 +20,69 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+<style>
+        /*background: #fff;
+        height: 53px;
+        margin-bottom: 10px;*/
 
+        /* .iframe-content {
+            display: block;
+            height: 500px;
+            width: 350px;
+        }
+        div.open
+            .iframe-content {
+                  display:none;
+                  height: 0px;
+              }
+        div.closed
+        .iframe-content {
+            display: none;
+            height: 0px;
+        }*/
+        .iframe-content {
+            display: none;
+            height: 0px;
+            width: 350px;
+        }
+
+        div.open .iframe-content {
+            display: block;
+            height: 500px;
+        }
+
+        div.closed .iframe-content {
+            display: none;
+            height: 0px;
+        }
+
+        .bpw-floating-button {
+            float: right;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            border-radius: 60%;
+            /*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    */ overflow: hidden;
+            padding: 0;
+            border: none;
+            background-clip: padding-box;
+            transition: width 1s, height 1s;
+            background-color: transparent;
+            color: white;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+            fill: inherit;
+            stroke: inherit;
+            line-height: 0;
+        }
+</style>
 <body>
 
     <header class="header-wrapper">
@@ -369,15 +431,15 @@
                                 <img src="assets/images/favicon.png" alt="Map-Icon">
                             </div>
                             <div class="map-inner" style="width: 100%">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.1920683040266!2d-117.63758248446267!3d33.9619024806305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dccb8599d3fd05%3A0xad9acc1c942cb1cd!2s7759%20Horizon%20St%2C%20Chino%2C%20CA%2091708!5e0!3m2!1sen!2sus!4v1675715115972!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>	
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.1920683040266!2d-117.63758248446267!3d33.9619024806305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dccb8599d3fd05%3A0xad9acc1c942cb1cd!2s7759%20Horizon%20St%2C%20Chino%2C%20CA%2091708!5e0!3m2!1sen!2sus!4v1675715115972!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                         <!-- Google Map Area Start -->
                     </div>
                 </div>
-				<div class="col-6">
+                <div class="col-6">
                     <div class="contact-map-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-						
+
                         <!-- Google Map Area Start -->
                         <div class="google-map-area w-100">
                             <div class="icon">
@@ -385,46 +447,46 @@
                             </div>
                             <div class="map-inner" style="width: 100%">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3838.502414528087!2d78.03723551502792!3d15.830169889029047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb5e7752b8acacb%3A0x11c3c42fbe4800f1!2sIzenix%20Solutions!5e0!3m2!1sen!2sus!4v1670140447048!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            <!-- Google Map Area Start -->
                         </div>
-                        <!-- Google Map Area Start -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Contact Map Section End -->
+        <!-- Contact Map Section End -->
 
 
-    <div class="workbanner-two">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="work-banner">
-                        <!-- Section Title Start -->
-                        <div class="section-title-center section-head text-start mb-0">
-                            <span class="subtitle">We Are Here For You</span>
-                            <h2 class="title">Let’s Get Back to Work</h2>
-                            <p class="text mb-0">Getting a better understanding of Izenix's specialized services and solutions</p>
+        <div class="workbanner-two">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="work-banner">
+                            <!-- Section Title Start -->
+                            <div class="section-title-center section-head text-start mb-0">
+                                <span class="subtitle">We Are Here For You</span>
+                                <h2 class="title">Let’s Get Back to Work</h2>
+                                <p class="text mb-0">Getting a better understanding of Izenix's specialized services and solutions</p>
+                            </div>
+                            <!-- Section Title End  -->
+                            <!-- Portfolio Button Start -->
+                            <a class="btn-style-three" href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Schedule for Free Demo</a>
+                            <!-- Portfolio Button End -->
                         </div>
-                        <!-- Section Title End  -->
-                        <!-- Portfolio Button Start -->
-                        <a class="btn-style-three" href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Schedule for Free Demo</a>
-                        <!-- Portfolio Button End -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Footer Style Three Start -->
-    <footer class="footer-wrapper">
-        <div class="shape-one">
-            <img src="assets/images/footer/shape-one.png" alt="Footer-Shape">
-        </div>
-        <div class="shape-two">
-            <img src="assets/images/footer/shape-two.png" alt="Footer-Shape">
-        </div>
-        <div class="container">
-            <!--div class="row">
+        <!-- Footer Style Three Start -->
+        <footer class="footer-wrapper">
+            <div class="shape-one">
+                <img src="assets/images/footer/shape-one.png" alt="Footer-Shape">
+            </div>
+            <div class="shape-two">
+                <img src="assets/images/footer/shape-two.png" alt="Footer-Shape">
+            </div>
+            <div class="container">
+                <!--div class="row">
                 <div class="col-12">
                     <div class="footer-top">
                        <div class="section-title-center section-head mb-0 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
@@ -445,121 +507,160 @@
                     </div>
                  </div>
             </div-->
-            <div class="row mb-n30">
+                <div class="row mb-n30">
 
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                    <div class="footer-widget negative-margin">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="assets/images/logo4.png" class="f-logo" alt="">
-                            </a>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                        <div class="footer-widget negative-margin">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logo4.png" class="f-logo" alt="">
+                                </a>
+                            </div>
+                            <ul class="footer-widget-list-icon">
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span>
+                                </li>
+
+                                <li><i class="fas fa-phone"></i><span><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span> </li>
+                                <li style="">
+                                    <i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span>
+                                </li>
+
+                                <li><i class="fas fa-envelope"></i> <span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></span> </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <span class="text text2">
+                                        <a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
+                                        <a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
+
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul class="social-icon d-flex flex-start">
+                                <li>
+                                    <a href="https://www.facebook.com/Izenixsolutions/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/Izenixsolutions" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/izenix-solutions/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/izenixsolutions/" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="footer-widget-list-icon">
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span></li>
-                            
-                            <li><i class="fas fa-phone"></i><span><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span> </li>
-                         <li style="">  
-							<i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span></li>
-                            
-                            <li><i class="fas fa-envelope"></i> <span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></span> </li>
-                            <li><i class="fas fa-phone"></i> 
-								<span class="text text2"><a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
-								<a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
-								 
-						 </span> </li>
-						</ul>
-						 <ul class="social-icon d-flex flex-start">
-                            <li>
-                                <a href="https://www.facebook.com/Izenixsolutions/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/Izenixsolutions" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/company/izenix-solutions/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/izenixsolutions/"  class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                            </li>
-                        </ul>
                     </div>
-                </div>
-				<!-- Footer Widget Start -->
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-sm-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                    <div class="footer-widget">
-                        <h5 class="footer-widget-title">Service</h5>
-                        <ul class="footer-widget-list">
-							<li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
-                            <li><a href="web-development-services.html">Web Development </a></li>
-                            <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
-                            <li><a href="dynamic-365-solutions.html">Dynamics 365 </a></li>
-                            <li><a href="training-and-enablament.html">Trainings &amp; Enablement	</a></li>
-                            <li><a href="appian-solutions.html">Appian</a></li>
-                        </ul>
+                    <!-- Footer Widget Start -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-sm-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                        <div class="footer-widget">
+                            <h5 class="footer-widget-title">Service</h5>
+                            <ul class="footer-widget-list">
+                                <li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
+                                <li><a href="web-development-services.html">Web Development </a></li>
+                                <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
+                                <li><a href="dynamic-365-solutions.html">Dynamics 365 </a></li>
+                                <li><a href="training-and-enablament.html">Trainings &amp; Enablement	</a></li>
+                                <li><a href="appian-solutions.html">Appian</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                    <div class="footer-widget">
-                        <h5 class="footer-widget-title">Solutions</h5>
-                        <ul class="footer-widget-list">
-                            <li><a href="dynamic-365-portals.html">Portals</a></li>
-                               <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
-                              <li><a href="business-automation-solutions.html">Business Automation</a></li>
-                              <li><a href="dynamics-365-marketing.html">Marketing</a></li>
-                              <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
-							  <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
-	                          
-                        </ul>
-                    </div>
-                </div>
-				<div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                    <div class="footer-widget">
-                        <h5 class="footer-widget-title">Quick Links</h5>
-                        <ul class="footer-widget-list">
-                            <li><a href="about.html">About Us</a></li>
-							 <li><a href="contact.html">Contact Us</a></li>
-							 <li><a href="blog.html">Our Blogs</a></li>
-                            <!--<li><a href="#ourteam">Our Team</a></li>-->
-                            <li><a href="career.html">Career</a></li>
-                                                   
-													
-                        </ul>
-                    </div>
-                </div>
-             </div>
-			  <div class="row">
-                <div class="col-12">
-                    <div class="copyright wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                        <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2023</span> </p>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                        <div class="footer-widget">
+                            <h5 class="footer-widget-title">Solutions</h5>
+                            <ul class="footer-widget-list">
+                                <li><a href="dynamic-365-portals.html">Portals</a></li>
+                                <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
+                                <li><a href="business-automation-solutions.html">Business Automation</a></li>
+                                <li><a href="dynamics-365-marketing.html">Marketing</a></li>
+                                <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
+                                <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
 
-                        <ul class="footer-bootm-list order-md-2 order-1">
-                            <li><a href="terms.html">Terms & Condition</a></li>
-                            <li><a href="policy.html">Privacy Policy</a></li>
-                        </ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                        <div class="footer-widget">
+                            <h5 class="footer-widget-title">Quick Links</h5>
+                            <ul class="footer-widget-list">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="blog.html">Our Blogs</a></li>
+                                <!--<li><a href="#ourteam">Our Team</a></li>-->
+                                <li><a href="career.html">Career</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="copyright wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                            <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2023</span> </p>
+
+                            <ul class="footer-bootm-list order-md-2 order-1">
+                                <li><a href="terms.html">Terms & Condition</a></li>
+                                <li><a href="policy.html">Privacy Policy</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+        </footer>
+        <!-- JS Vendor, Plugins & Activation Script Files -->
+        <!-- Vendors JS -->
+        <script src="./assets/js/vendor/modernizr-3.11.7.min.js"></script>
+        <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
+        <script src="./assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+        <script src="./assets/js/vendor/bootstrap.min.js"></script>
+
+        <!-- Plugins JS -->
+        <script src="./assets/js/plugins/magnificpopup.min.js"></script>
+        <script src="./assets/js/plugins/waypoint.min.js"></script>
+        <script src="./assets/js/plugins/wow.min.js"></script>
+        <script src="./assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+
+        <!-- Activation JS -->
+        <script src="./assets/js/main.js"></script>
+        <script src="./assets/js/pages/contact.js"></script>
+        <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
+            <button onclick="toggleClass()" class="bpw-floating-button">
+                <img src="assets/images/chatbot1.png" />
+            </button>
+            <div class="iframe-content">
+                <iframe src="https://web.powerva.microsoft.com/environments/Default-3a9459c9-6409-4cd3-a455-7fa6062c0b2d/bots/cr478_izenixSolutions/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%; background-color:white; "></iframe>
+
+            </div>
         </div>
-    </footer>
-    <!-- JS Vendor, Plugins & Activation Script Files -->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                const para = document.getElementById('chatbox');
 
-    <!-- Vendors JS -->
-    <script src="./assets/js/vendor/modernizr-3.11.7.min.js"></script>
-    <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="./assets/js/vendor/bootstrap.min.js"></script>
+                // After 5 seconds, open the chat box
+                setTimeout(function () {
+                    toggleClass();
+                    //    playAlertSound(); // Play audio alert
+                }, 5000);
 
-    <!-- Plugins JS -->
-    <script src="./assets/js/plugins/magnificpopup.min.js"></script>
-    <script src="./assets/js/plugins/waypoint.min.js"></script>
-    <script src="./assets/js/plugins/wow.min.js"></script>
-    <script src="./assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+                // Toggle class 'open' and 'closed' on click
+                para.addEventListener('click', function () {
+                    toggleClass();
+                });
 
-    <!-- Activation JS -->
-    <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/pages/contact.js"></script>
+                function toggleClass() {
+                    //para.classList.toggle('closed');
+                    para.classList.toggle('open');
+                }
 
+                //function playAlertSound() {
+                //    // Replace 'path/to/alert.mp3' with the actual path to your audio file
+                //    var audio = new Audio('assets/audio/notifications-sound.mp3');
+                //    audio.play();
+                //}
+            });
+        </script>
 </body>
 
 </html>

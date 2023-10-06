@@ -22,156 +22,220 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+<style>
+/*background: #fff;
+    height: 53px;
+    margin-bottom: 10px;*/
 
+   /* .iframe-content {
+        display: block;
+        height: 500px;
+        width: 350px;
+    }
+    div.open 
+        .iframe-content {
+              display:none;
+              height: 0px;
+          }
+    div.closed
+    .iframe-content {
+        display: none;
+        height: 0px;
+    }*/
+    .iframe-content {
+        display: none;
+        height: 0px;
+        width: 350px;
+    }
+
+    div.open .iframe-content {
+        display: block;
+        height: 500px;
+    }
+
+    div.closed .iframe-content {
+        display: none;
+        height: 0px;
+    }
+    .bpw-floating-button {
+        float: right;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        border-radius: 60%;
+/*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+*/        overflow: hidden;
+        padding: 0;
+        border: none;
+        background-clip: padding-box;
+        transition: width 1s, height 1s;
+        background-color: transparent;
+        color: white;
+       transition: opacity 0.3s ease;
+        opacity: 1;
+        fill: inherit;
+        stroke: inherit;
+        line-height: 0;
+    }
+
+        
+
+</style>
 <body>
 
     <header class="header-wrapper">
         <div class="">
-             <div class="container-fluid flud-top-colm">
-            <div class="container">
-			<div class="header-top">
-		<div class="header-top-fluid">
-			<div class="row align-items-center">
-								<div class="col-12 top-header-left">
-								<div class="top-header-left-lign">
-									<ul>
-										
-                                        <!--<li>
-										
-                                            <span> <i class="fa fa-location-alt"></i> </span> <strong> Our Address:</strong>  7903 W 129th Ter
-                                            Overland Park, KS 66213
-                                        </li> -->
-										<li>
-										<div class="header-right_call">
-                                        <div class="icon btn btn-style-one btn-style-ones">
-                                            <span><i class="fas fa-phone-alt"></i></span>
-                                        </div>
-                                        <div class="call-meta">
-                                            <span class=""><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span>
-                                            
-                                        </div>
-                                    </div>
-										</li>
-										<li> <strong>Email us:</strong> </span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></li>
-										<!--li> 
-										<div class="icon btn btn-style-one btn-style-ones">
-                                            <span><i class="fas fa-phone-alt"></i></span>
-                                        </div> <span>Call Us: </span>
-										<a href="tel:01234567889" class="call-meta_number">+1 (425) 802 6433</a></li-->
-										
-									</ul>
-								</div>
-								</div>
-								 
-									<div class="social-icons">
-									<div class="social-icons-align">
-										<ul>
-											<li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-											<li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
-											<li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-											<li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-										 </ul>
-									</div>
-									</div>
-								</div>
-								</div>
-			</div>
-		</div>
-	</div>
-				<!--div class="row">
-                    <div class="col-12">
-                        <div class="flex-right justify-content float-end">
-							  <ul>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-									<li><a href=""></a></li>
-							  </ul>
-						</div>
-					</div>
-				</div-->
-			<div class="sticky-header">
-				<div class="container">
-                <div class="row">
-                    
-                        <div class="flex-center justify-content-between ">
-						<div class="col-3">
-                            <!-- Header Logo Start -->
-                            <div class="logo">
-                                <a href="index.html">
-                                    <img class="about-img js-tilt img-curve" src="assets/images/logo7.png" alt="">
-                                </a>
-                            </div>
-                           </div>
-                           
-                            <!-- Header Logo End -->
-						<div class="col-9">
-                            <div class="flex-center header-right">
-                                <!-- Header Menu Start -->
-                                <div class="d-none d-lg-flex header-right_menu">
-                                    <nav class="main-menu">
+            <div class="container-fluid flud-top-colm">
+                <div class="container">
+                    <div class="header-top">
+                        <div class="header-top-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-12 top-header-left">
+                                    <div class="top-header-left-lign">
                                         <ul>
-                                            <li class="has-children">
-                                                <a href="index.html">Home</a>
 
-                                            </li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li class="has-children">
-                                                <a href="#">Service</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="ui-ux-design-services.html">Visual, UI & UX Design</a></li>
-                                                    <li><a href="web-development-services.html">Web Development</a></li>
-                                                    <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
-                                                    <li><a href="dynamic-365-solutions.html">Dynamics 365</a></li>
-                                                    <li><a href="training-and-enablament.html">Trainings & Enablement</a></li>
-                                                    <li><a href="appian-solutions.html">Appian</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">Solutions</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="dynamic-365-portals.html">Portals</a></li>
-                                                    <!--li><a href="referral-rogram-grid.html">Referral Program</a></li-->
-                                                    <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
-                                                    <li><a href="business-automation-solutions.html">Business Automation</a></li>
-                                                    <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
-                                                    <li><a href="dynamics-365-marketing.html">Marketing</a></li>
-                                                    <!--<li><a href="telephonic-integration.html">Telephonic Integration</a></li>-->
-                                                </ul>
-                                            </li>
-                                            <li class="has-children">
-                                                <a href="#">Company</a>
-                                                <ul class="sub-menu">
-                                                    <!--<li><a href="#ourteam">Our Team</a></li>-->
-                                                    <!--<li><a href="our-process.html">Our Process</a></li>-->
-                                                    <li><a href="blog.html">Our Blogs</a></li>
-                                                    <li><a href="career.html">Career</a></li>
+                                            <!--<li>
 
-                                                </ul>
+                                                <span> <i class="fa fa-location-alt"></i> </span> <strong> Our Address:</strong>  7903 W 129th Ter
+                                                Overland Park, KS 66213
+                                            </li> -->
+                                            <li>
+                                                <div class="header-right_call">
+                                                    <div class="icon btn btn-style-one btn-style-ones">
+                                                        <span><i class="fas fa-phone-alt"></i></span>
+                                                    </div>
+                                                    <div class="call-meta">
+                                                        <span class=""><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span>
+
+                                                    </div>
+                                                </div>
                                             </li>
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                            <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+                                            <li> <strong>Email us:</strong> </span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></li>
+                                            <!--li>
+                                            <div class="icon btn btn-style-one btn-style-ones">
+                                                <span><i class="fas fa-phone-alt"></i></span>
+                                            </div> <span>Call Us: </span>
+                                            <a href="tel:01234567889" class="call-meta_number">+1 (425) 802 6433</a></li-->
 
                                         </ul>
-                                    </nav>
+                                    </div>
                                 </div>
-                                  <div class="header-right_actions flex-center">
-                                    <div class="header-right_call">
-                                     </div>
-									<div class="hamburger d-block d-lg-none">
-                                         <a class="header-action-btn header-action-btn-menu hamburger_button d-flex" href="#/" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-header">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                        </a>
-                                      </div>
-									</div>
-                             </div>
+
+                                <div class="social-icons">
+                                    <div class="social-icons-align">
+                                        <ul>
+                                            <li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                            <li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-               </div>
+            </div>
+            <!--div class="row">
+                <div class="col-12">
+                    <div class="flex-right justify-content float-end">
+                          <ul>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                                <li><a href=""></a></li>
+                          </ul>
+                    </div>
+                </div>
+            </div-->
+            <div class="sticky-header">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="flex-center justify-content-between ">
+                            <div class="col-3">
+                                <!-- Header Logo Start -->
+                                <div class="logo">
+                                    <a href="index.html">
+                                        <img class="about-img js-tilt img-curve" src="assets/images/logo7.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Header Logo End -->
+                            <div class="col-9">
+                                <div class="flex-center header-right">
+                                    <!-- Header Menu Start -->
+                                    <div class="d-none d-lg-flex header-right_menu">
+                                        <nav class="main-menu">
+                                            <ul>
+                                                <li class="has-children">
+                                                    <a href="index.html">Home</a>
+
+                                                </li>
+                                                <li><a href="about.html">About</a></li>
+                                                <li class="has-children">
+                                                    <a href="#">Service</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="ui-ux-design-services.html">Visual, UI & UX Design</a></li>
+                                                        <li><a href="web-development-services.html">Web Development</a></li>
+                                                        <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
+                                                        <li><a href="dynamic-365-solutions.html">Dynamics 365</a></li>
+                                                        <li><a href="training-and-enablament.html">Trainings & Enablement</a></li>
+                                                        <li><a href="appian-solutions.html">Appian</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="has-children">
+                                                    <a href="#">Solutions</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="dynamic-365-portals.html">Portals</a></li>
+                                                        <!--li><a href="referral-rogram-grid.html">Referral Program</a></li-->
+                                                        <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
+                                                        <li><a href="business-automation-solutions.html">Business Automation</a></li>
+                                                        <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
+                                                        <li><a href="dynamics-365-marketing.html">Marketing</a></li>
+                                                        <!--<li><a href="telephonic-integration.html">Telephonic Integration</a></li>-->
+                                                    </ul>
+                                                </li>
+                                                <li class="has-children">
+                                                    <a href="#">Company</a>
+                                                    <ul class="sub-menu">
+                                                        <!--<li><a href="#ourteam">Our Team</a></li>-->
+                                                        <!--<li><a href="our-process.html">Our Process</a></li>-->
+                                                        <li><a href="blog.html">Our Blogs</a></li>
+                                                        <li><a href="career.html">Career</a></li>
+
+                                                    </ul>
+                                                </li>
+                                                <li><a href="contact.html">Contact Us</a></li>
+                                                <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="header-right_actions flex-center">
+                                        <div class="header-right_call">
+                                        </div>
+                                        <div class="hamburger d-block d-lg-none">
+                                            <a class="header-action-btn header-action-btn-menu hamburger_button d-flex" href="#/" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-header">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -268,7 +332,6 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-
     <!-- About Section End -->
     <div class="about ">
         <div class="container">
@@ -301,155 +364,157 @@
                             <h2 class="title">Cloud Solutions & Integrations</h2>
                             <p class="text">Izenix Solutions is a Unique Web Cloud Solutions</p>
                             <p class="text-two abt">
-							Cloud solutions and integrations refer to the use of cloud computing technology to deliver software, infrastructure, and platform services 
-							to users over the internet. This technology offers numerous benefits to businesses, including increased scalability, flexibility, and cost savings. 
-							Here is an overview of cloud solutions and integrations:
-							 </p>
-							 
-							 </div>
-                    </div>
-                </div>
-            </div>
-			<!---------colom--------------------------->
-			<div class="row ">
-          
-          <!--/column -->
-          <div class="col-lg-6">
-          <div class="about-content mrgin-section">
-				 <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-		   
-		  <p class="text-two abt ">  
-			<strong>Cloud Computing Technology:</strong> This eliminates the need for businesses to maintain their own IT infrastructure and allows them to access these resources on-demand.
-		</p>
-		  <p class="text-two abt">  
-			<strong>Scalability and Flexibility:</strong> Cloud solutions are highly scalable and flexible, meaning that businesses can easily adjust their computing resources based on changing needs. This enables businesses to quickly scale up or down their resources as required, and pay only for what they use.
-		</p>
-		      
-							<p class="text-two abt">  
-								<strong>Cost Savings:</strong> Cloud solutions offer cost savings to businesses by eliminating the need for them to invest in their own IT infrastructure. This means that businesses can avoid capital expenditures and instead pay for computing resources on a subscription basis.
-		 
-							</p>
-		 </div>
-			  </div>
-          </div>
-          <div class="col-lg-6 mt-5 pt-5">
-            <div class="row gx-md-5 gy-5">
-              <div class="col-md-6">
-                <figure class="rounded"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/cl1.png" alt=""></figure>
-              </div>
-              <!--/column -->
-              <div class="col-md-6 align-self-end">
-                <figure class="rounded"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/tm4.jpg" alt=""></figure>
-              </div>
-              <!--/column -->
-              <div class="col-12">
-                <figure class="rounded mx-md-5" style="margin-top: -30px;"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/tm5.jpg" alt=""></figure>
-              </div>
-              <!--/column -->
-            </div>
-            <!--/.row -->
-          </div>
-		  <div class="row align-items-center">
-               
-                <div class="col-lg-12">
-                    <div class="about-content">
-                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                           
-							 <p class="text-two widt-normal abt">  
-									<strong>Integration with Existing Systems: </strong> Cloud solutions can be integrated with existing systems to provide businesses with a seamless experience. This means that businesses can continue to use their existing applications while also leveraging the benefits of cloud computing technology.
-							 </p>
-			
-							 
-                            <!--a href="about.html" class="btn btn-style-one"> <span>Read More</span> </a-->
+                                Cloud solutions and integrations refer to the use of cloud computing technology to deliver software, infrastructure, and platform services
+                                to users over the internet. This technology offers numerous benefits to businesses, including increased scalability, flexibility, and cost savings.
+                                Here is an overview of cloud solutions and integrations:
+                            </p>
+
                         </div>
                     </div>
                 </div>
-				 <div class="col-lg-12">
-				 <div class="about-content">
-                   <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                             
-							<p class="text-two widt-normal abt">  
-								<strong>Security and Reliability:</strong> Cloud solutions are highly secure and reliable, with built-in redundancy and failover mechanisms. This means that businesses can rely on their cloud solutions to be available and secure, even in the event of a disaster or outage.
-							</p>
-							 <p class="text-two widt-normal abt"> 
-								<strong>Overall:</strong>
-								Cloud solutions and integrations provide businesses with numerous benefits, including increased scalability, 
-								flexibility, cost savings, and security. 
-							</p>
-			  </div>
-                </div>	
-                </div>	
             </div>
-        </div>
-			
+            <!---------colom--------------------------->
+            <div class="row ">
+
+                <!--/column -->
+                <div class="col-lg-6">
+                    <div class="about-content mrgin-section">
+                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+
+                            <p class="text-two abt ">
+                                <strong>Cloud Computing Technology:</strong> This eliminates the need for businesses to maintain their own IT infrastructure and allows them to access these resources on-demand.
+                            </p>
+                            <p class="text-two abt">
+                                <strong>Scalability and Flexibility:</strong> Cloud solutions are highly scalable and flexible, meaning that businesses can easily adjust their computing resources based on changing needs. This enables businesses to quickly scale up or down their resources as required, and pay only for what they use.
+                            </p>
+
+                            <p class="text-two abt">
+                                <strong>Cost Savings:</strong> Cloud solutions offer cost savings to businesses by eliminating the need for them to invest in their own IT infrastructure. This means that businesses can avoid capital expenditures and instead pay for computing resources on a subscription basis.
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 pt-5">
+                    <div class="row gx-md-5 gy-5">
+                        <div class="col-md-6">
+                            <figure class="rounded"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/cl1.png" alt=""></figure>
+                        </div>
+                        <!--/column -->
+                        <div class="col-md-6 align-self-end">
+                            <figure class="rounded"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/tm4.jpg" alt=""></figure>
+                        </div>
+                        <!--/column -->
+                        <div class="col-12">
+                            <figure class="rounded mx-md-5" style="margin-top: -30px;"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/tm5.jpg" alt=""></figure>
+                        </div>
+                        <!--/column -->
+                    </div>
+                    <!--/.row -->
+                </div>
+                <div class="row align-items-center">
+
+                    <div class="col-lg-12">
+                        <div class="about-content">
+                            <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+
+                                <p class="text-two widt-normal abt">
+                                    <strong>Integration with Existing Systems: </strong> Cloud solutions can be integrated with existing systems to provide businesses with a seamless experience. This means that businesses can continue to use their existing applications while also leveraging the benefits of cloud computing technology.
+                                </p>
+
+
+                                <!--a href="about.html" class="btn btn-style-one"> <span>Read More</span> </a-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="about-content">
+                            <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+
+                                <p class="text-two widt-normal abt">
+                                    <strong>Security and Reliability:</strong> Cloud solutions are highly secure and reliable, with built-in redundancy and failover mechanisms. This means that businesses can rely on their cloud solutions to be available and secure, even in the event of a disaster or outage.
+                                </p>
+                                <p class="text-two widt-normal abt">
+                                    <strong>Overall:</strong>
+                                    Cloud solutions and integrations provide businesses with numerous benefits, including increased scalability,
+                                    flexibility, cost savings, and security.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-	<!-------------banner-------------->
-	
-	<div class="progress-section mt-5" style="background:#fff;">
-         <figure class="" style="margin-top:;"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/img-Bnr.jpg" alt=""></figure>
-		  <div class="about section-padding section-padding-decrease">
-        <div class="container">
-            <div class="row align-items-center">
-			
-			<div class="col-lg-12">
-				 <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-				<div class="about-content">
-						<h4 class="head-clr">Scalability</h4>
-                        <p class="text-two ful-width abt" style="margin-top: 20px;">  
-							 Businesses can respond to changing demands without having to invest in new hardware or software.
-							  </p><br>
-<h4 class="head-clr">Cost Savings </h4>
-<p class="text-two abt ful-width">Cloud solutions can help businesses save money by reducing hardware and software costs. Instead of purchasing and maintaining their own IT infrastructure, businesses can pay for computing resources on a subscription basis.
-					</p>
-                    </div>
-                    </div>
-                    </div>
-			</div>
-			
-			<div class="row">
-          
-          <!--/column -->
-          <div class="col-lg-12">
-          <div class="about-content">
-				 <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-		  <p class="text-two abt widt-normal">  
-		   <strong>Accessibility:</strong> Cloud solutions can be accessed from anywhere with an internet connection, making it easier for businesses to collaborate and work remotely.
-		   </p>
-		   <p class="text-two widt-normal abt">  
-			<strong>Improved Security:</strong> Cloud solutions offer enhanced security measures to protect business data and systems. Cloud providers employ advanced security measures such as encryption, multi-factor authentication, and access controls to keep data safe.
-			</p>
-		     <p class="text-two widt-normal abt">  
-			<strong>Automatic Updates:</strong>Cloud solutions are automatically updated with the latest software and security patches, reducing the risk of security vulnerabilities and ensuring that businesses are always using the most up-to-date software.
-			</p>
-		  
-			  
-          </div>
-			  </div>
-          </div>		  
-		 
-		   <div class="col-lg-12">
-				 <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-				<div class="about-content">
-						<h4 class="head-clr">Integration</h4>
-                        <p class="text-two ful-width abt" style="margin-top: 20px;">  
-							Cloud solutions can be easily integrated with existing systems and applications, providing businesses with a seamless experience and allowing them to leverage the benefits of cloud computing while still using their existing tools.
-							</p><br>
-<h4 class="head-clr">Disaster Recovery </h4>
-<p class="text-two abt ful-width" style="margin-top: 20px;">
-		Cloud solutions offer built-in disaster recovery measures, ensuring that business data is safe and accessible even in the event of a disaster or outage.
+    <!-------------banner-------------->
 
-					</p>
-					<h4 class="head-clr">Overall</h4>
-<p class="text-two abt ful-width" style="margin-top: 20px;">
-		Cloud solutions and integrations can help businesses improve efficiency, reduce costs, and enhance security.</p>
+    <div class="progress-section mt-5" style="background:#fff;">
+        <figure class="" style="margin-top:;"><img class="about-img js-tilt img-curve" src="./assets/images/cloud/img-Bnr.jpg" alt=""></figure>
+        <div class="about section-padding section-padding-decrease">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-12">
+                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <div class="about-content">
+                                <h4 class="head-clr">Scalability</h4>
+                                <p class="text-two ful-width abt" style="margin-top: 20px;">
+                                    Businesses can respond to changing demands without having to invest in new hardware or software.
+                                </p><br>
+                                <h4 class="head-clr">Cost Savings </h4>
+                                <p class="text-two abt ful-width">
+                                    Cloud solutions can help businesses save money by reducing hardware and software costs. Instead of purchasing and maintaining their own IT infrastructure, businesses can pay for computing resources on a subscription basis.
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="row">
+
+                    <!--/column -->
+                    <div class="col-lg-12">
+                        <div class="about-content">
+                            <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <p class="text-two abt widt-normal">
+                                    <strong>Accessibility:</strong> Cloud solutions can be accessed from anywhere with an internet connection, making it easier for businesses to collaborate and work remotely.
+                                </p>
+                                <p class="text-two widt-normal abt">
+                                    <strong>Improved Security:</strong> Cloud solutions offer enhanced security measures to protect business data and systems. Cloud providers employ advanced security measures such as encryption, multi-factor authentication, and access controls to keep data safe.
+                                </p>
+                                <p class="text-two widt-normal abt">
+                                    <strong>Automatic Updates:</strong>Cloud solutions are automatically updated with the latest software and security patches, reducing the risk of security vulnerabilities and ensuring that businesses are always using the most up-to-date software.
+                                </p>
+
+
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-lg-12">
+                        <div class="section-head wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <div class="about-content">
+                                <h4 class="head-clr">Integration</h4>
+                                <p class="text-two ful-width abt" style="margin-top: 20px;">
+                                    Cloud solutions can be easily integrated with existing systems and applications, providing businesses with a seamless experience and allowing them to leverage the benefits of cloud computing while still using their existing tools.
+                                </p><br>
+                                <h4 class="head-clr">Disaster Recovery </h4>
+                                <p class="text-two abt ful-width" style="margin-top: 20px;">
+                                    Cloud solutions offer built-in disaster recovery measures, ensuring that business data is safe and accessible even in the event of a disaster or outage.
+
+                                </p>
+                                <h4 class="head-clr">Overall</h4>
+                                <p class="text-two abt ful-width" style="margin-top: 20px;">
+                                    Cloud solutions and integrations can help businesses improve efficiency, reduce costs, and enhance security.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-          </div>
-		  <div class="row mt-5">
-			<div class="col-lg-4">
-		   <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-4">
+                        <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
                             <h4 class="sidebar-title">Get A Quote</h4>
                             <form class="comment-form-inner p-0" action="#">
                                 <div class="row">
@@ -468,9 +533,9 @@
                                 </div>
                             </form>
                         </div>
-                        </div>
-			<div class="col-lg-8">
-				<div class="service-desc">
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="service-desc">
                             <h3 class="service-desc-title">Neat Outcome</h3>
                             <div class="row mb-n25">
                                 <div class="col-md-4 mb-25 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s;">
@@ -493,13 +558,13 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
-                        </div>
-	</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-	
-<!------------------------------------------------->
+
+    <!------------------------------------------------->
     <div class="workbanner-two">
 
         <div class="container">
@@ -553,7 +618,7 @@
             </div-->
             <div class="row mb-n30">
 
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget negative-margin">
                         <div class="logo">
                             <a href="index.html">
@@ -562,20 +627,25 @@
                         </div>
                         <ul class="footer-widget-list-icon">
                             <li>
-                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span></li>
-                            
+                                <i class="fas fa-map-marker-alt"></i><span>7759 Horizon St, Chino, CA 91708 </span>
+                            </li>
+
                             <li><i class="fas fa-phone"></i><span><a href="tel:+1 786 565 7005" class="call-meta_number">+1 786 565 7005</a></span> </li>
-                         <li style="">  
-							<i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span></li>
-                            
+                            <li style="">
+                                <i class="fas fa-map-marker-alt"></i><span>#40/321-A-S-21,Skanda Business Park, Kurnool, Andhra Pradesh - 518001. </span>
+                            </li>
+
                             <li><i class="fas fa-envelope"></i> <span> <a href="mailto:contact@izenix.com">contact@izenix.com</a></span> </li>
-                            <li><i class="fas fa-phone"></i> 
-								<span class="text text2"><a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
-								<a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
-								 
-						 </span> </li>
-						</ul>
-						 <ul class="social-icon d-flex flex-start">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span class="text text2">
+                                    <a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
+                                    <a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
+
+                                </span>
+                            </li>
+                        </ul>
+                        <ul class="social-icon d-flex flex-start">
                             <li>
                                 <a href="https://www.facebook.com/Izenixsolutions/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             </li>
@@ -586,17 +656,17 @@
                                 <a href="https://www.linkedin.com/company/izenix-solutions/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/izenixsolutions/"  class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/izenixsolutions/" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
-				<!-- Footer Widget Start -->
+                <!-- Footer Widget Start -->
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-sm-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Service</h5>
                         <ul class="footer-widget-list">
-							<li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
+                            <li><a href="ui-ux-design-services.html">Visual, UI &amp; UX Design </a></li>
                             <li><a href="web-development-services.html">Web Development </a></li>
                             <li><a href="cloud-solutions-and-integrations.html">Cloud Solutions & Integrations</a></li>
                             <li><a href="dynamic-365-solutions.html">Dynamics 365 </a></li>
@@ -605,36 +675,36 @@
                         </ul>
                     </div>
                 </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Solutions</h5>
                         <ul class="footer-widget-list">
                             <li><a href="dynamic-365-portals.html">Portals</a></li>
-                               <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
-                              <li><a href="business-automation-solutions.html">Business Automation</a></li>
-                              <li><a href="dynamics-365-marketing.html">Marketing</a></li>
-                              <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
-							  <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
-	                          
+                            <li><a href="referral-lead-generation.html">Referral - Lead Generation</a></li>
+                            <li><a href="business-automation-solutions.html">Business Automation</a></li>
+                            <li><a href="dynamics-365-marketing.html">Marketing</a></li>
+                            <li><a href="case-and-ticketing-system.html">Case/Ticketing System</a></li>
+                            <li><a href="https://outlook.office365.com/owa/calendar/IZenixSolutions1@izenix.com/bookings/" target="_blank">Free Demo</a></li>
+
                         </ul>
                     </div>
                 </div>
-				<div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 mb-30 justify-content-lg-center justify-content-md-end wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                     <div class="footer-widget">
                         <h5 class="footer-widget-title">Quick Links</h5>
                         <ul class="footer-widget-list">
                             <li><a href="about.html">About Us</a></li>
-							 <li><a href="contact.html">Contact Us</a></li>
-							 <li><a href="blog.html">Our Blogs</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="blog.html">Our Blogs</a></li>
                             <!--<li><a href="#ourteam">Our Team</a></li>-->
                             <li><a href="career.html">Career</a></li>
-                                                   
-													
+
+
                         </ul>
                     </div>
                 </div>
-             </div>
-			  <div class="row">
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="copyright wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                         <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2023</span> </p>
@@ -655,9 +725,7 @@
         <i class="arrow-bottom fas fa-angle-double-up"></i>
     </a>
     <!-- Scroll Top End -->
-
     <!-- JS Vendor, Plugins & Activation Script Files -->
-
     <!-- Vendors JS -->
     <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
@@ -678,6 +746,41 @@
     <!-- Activation JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/pages/home.js"></script>
+    <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
+        <button onclick="toggleClass()" class="bpw-floating-button">
+            <img src="assets/images/chatbot1.png" />
+        </button>
+        <div class="iframe-content">
+            <iframe src="https://web.powerva.microsoft.com/environments/Default-3a9459c9-6409-4cd3-a455-7fa6062c0b2d/bots/cr478_izenixSolutions/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%; background-color:white; "></iframe>
 
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const para = document.getElementById('chatbox');
+
+            // After 5 seconds, open the chat box
+            setTimeout(function () {
+                toggleClass();
+                //    playAlertSound(); // Play audio alert
+            }, 5000);
+
+            // Toggle class 'open' and 'closed' on click
+            para.addEventListener('click', function () {
+                toggleClass();
+            });
+
+            function toggleClass() {
+                //para.classList.toggle('closed');
+                para.classList.toggle('open');
+            }
+
+            //function playAlertSound() {
+            //    // Replace 'path/to/alert.mp3' with the actual path to your audio file
+            //    var audio = new Audio('assets/audio/notifications-sound.mp3');
+            //    audio.play();
+            //}
+        });
+    </script>
 </body>
 </html>
