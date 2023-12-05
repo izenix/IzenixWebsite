@@ -1123,6 +1123,9 @@
             req.setRequestHeader('Content-Type', 'application/json');
             req.send(input);
             alert("Your Information has been Submitted Successfully Our Team Shall Get back in 1-2 Bussiness Days");
+
+            // Clear the form fields
+            document.getElementById("contactForm").reset();
         }
     </script>
 </body>
