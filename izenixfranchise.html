@@ -1090,6 +1090,12 @@
         document.getElementById("contactForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevents the form from submitting in the traditional way
 
+            VisitorAPI(
+                "5Myl8uBF8lRCKvEZkNnP",
+                function (data) { console.log(data) },
+                function (errorCode, errorMessage) { console.log(errorCode, errorMessage) }
+            );
+
             // Fetch form values
             var firstName = document.getElementById("firstName").value;
             var lastName = document.getElementById("lastName").value;
@@ -1114,6 +1120,9 @@
             // Call the submitTrigger function with the form data
             submitTrigger(inputData);
         });
+
+        var VisitorAPI = function (t, e, a) { var s = new XMLHttpRequest; s.onreadystatechange = function () { var t; s.readyState === XMLHttpRequest.DONE && (200 === (t = JSON.parse(s.responseText)).status ? e(t.data) : a(t.status, t.result)) }, s.open("GET", "https://api.visitorapi.com/api/?pid=" + t), s.send(null) };
+
 
         function submitTrigger(input) {
             var flowUrl = "https://prod-45.westus.logic.azure.com:443/workflows/00032b41c6214a5a83ddd5a80bc6b10d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=X3J-Mw62N-S0BeqHYVg2X9cNikjCfV_bvi6e2cEDoWw";
