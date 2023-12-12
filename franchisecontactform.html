@@ -1116,8 +1116,7 @@
                         var phoneNumber = document.getElementById("phoneNumber").value;
                         var zipCode = document.getElementById("zipCode").value;
                         var additionalDetails = document.getElementById("additionalDetails").value;
-                        // var ipAddress = data.ipAddress;
-
+                        var deviceType = getDeviceType
 
                         // Create an object with form data
                         var formData = {
@@ -1133,7 +1132,8 @@
                             "region": region,
                             "osVersion": osVersion,
                             "cityLatLong": cityLatLong,
-                            "browserVersion": browserVersion
+                            "browserVersion": browserVersion,
+                            "deviceType": deviceType
                         };
 
                         // Convert object to JSON
@@ -1158,6 +1158,14 @@
             }, s.open("GET", "https://api.visitorapi.com/api/?pid=" + t), s.send(null)
         };
 
+        function isMobileDevice() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
+        // Function to get device type
+        function getDeviceType() {
+            return isMobileDevice() ? "Mobile" : "Desktop";
+        }
 
         function submitTrigger(input) {
             var flowUrl = "https://prod-45.westus.logic.azure.com:443/workflows/00032b41c6214a5a83ddd5a80bc6b10d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=X3J-Mw62N-S0BeqHYVg2X9cNikjCfV_bvi6e2cEDoWw";
