@@ -1089,14 +1089,19 @@
     <script>
         document.getElementById("contactForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevents the form from submitting in the traditional way
+            var ipAddress = "";
 
             VisitorAPI(
                 "5Myl8uBF8lRCKvEZkNnP",
                     function (data) {
                         debugger;
+                        ipAddress = data.ipAddress;
+
                         console.log(data)
                     },
-                function (errorCode, errorMessage) { console.log(errorCode, errorMessage) }
+                function (errorCode, errorMessage) {
+                    console.log(errorCode, errorMessage)
+                }
             );
 
             // Fetch form values
@@ -1106,7 +1111,7 @@
             var phoneNumber = document.getElementById("phoneNumber").value;
             var zipCode = document.getElementById("zipCode").value;
             var additionalDetails = document.getElementById("additionalDetails").value;
-            var ipAddress = data.ipAddress;
+           // var ipAddress = data.ipAddress;
             var city = data.city;
             var country = data.countryName;
             var region = data.region;
