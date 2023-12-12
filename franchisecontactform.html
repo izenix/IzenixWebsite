@@ -1105,48 +1105,50 @@
                         city = data.city;
                         country = data.countryName;
                         region = data.region;
-                        osVersion = data.os + " -" + data.osVersion;
+                        osVersion = data.os + "-" + data.osVersion;
                         cityLatLong = data.cityLatLong;
-                        browserVersion = data.browser + " -" + data.browserVersion;
-                        console.log(data)
+                        browserVersion = data.browser + "-" + data.browserVersion;
+
+                        // Fetch form values
+                        var firstName = document.getElementById("firstName").value;
+                        var lastName = document.getElementById("lastName").value;
+                        var email = document.getElementById("email").value;
+                        var phoneNumber = document.getElementById("phoneNumber").value;
+                        var zipCode = document.getElementById("zipCode").value;
+                        var additionalDetails = document.getElementById("additionalDetails").value;
+                        // var ipAddress = data.ipAddress;
+
+
+                        // Create an object with form data
+                        var formData = {
+                            "firstName": firstName,
+                            "lastName": lastName,
+                            "email": email,
+                            "phoneNumber": phoneNumber,
+                            "zipCode": zipCode,
+                            "additionalDetails": additionalDetails,
+                            "ipAddress": ipAddress,
+                            "city": city,
+                            "country": country,
+                            "region": region,
+                            "osVersion": osVersion,
+                            "cityLatLong": cityLatLong,
+                            "browserVersion": browserVersion
+                        };
+
+                        // Convert object to JSON
+                        var inputData = JSON.stringify(formData);
+
+                        // Call the submitTrigger function with the form data
+                        submitTrigger(inputData);
+                        //console.log(data)
                     },
                 function (errorCode, errorMessage) {
                     console.log(errorCode, errorMessage)
                 }
             );
 
-            // Fetch form values
-            var firstName = document.getElementById("firstName").value;
-            var lastName = document.getElementById("lastName").value;
-            var email = document.getElementById("email").value;
-            var phoneNumber = document.getElementById("phoneNumber").value;
-            var zipCode = document.getElementById("zipCode").value;
-            var additionalDetails = document.getElementById("additionalDetails").value;
-           // var ipAddress = data.ipAddress;
-            
-
-            // Create an object with form data
-            var formData = {
-                "firstName": firstName,
-                "lastName": lastName,
-                "email": email,
-                "phoneNumber": phoneNumber,
-                "zipCode": zipCode,
-                "additionalDetails": additionalDetails,
-                "ipAddress": ipAddress,
-                "city": city,
-                "country": country,
-                "region": region,
-                "osVersion": osVersion,
-                "cityLatLong": cityLatLong,
-                "browserVersion": browserVersion
-            };
-
-            // Convert object to JSON
-            var inputData = JSON.stringify(formData);
-
-            // Call the submitTrigger function with the form data
-            submitTrigger(inputData);
+           
         });
 
         var VisitorAPI = function (t, e, a) {
