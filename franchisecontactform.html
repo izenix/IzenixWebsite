@@ -1087,14 +1087,14 @@
         });
     </script>
     <script>
-        function isMobileDevice() {
-            return /Mobi|Android/i.test(navigator.userAgent);
-        }
+        //function isMobileDevice() {
+        //    return /Mobi|Android/i.test(navigator.userAgent);
+        //}
 
-        // Function to get device type
-        function getDeviceType() {
-            return isMobileDevice() ? "Mobile" : "Desktop";
-        }
+        //// Function to get device type
+        //function getDeviceType() {
+        //    return isMobileDevice() ? "Mobile" : "Desktop";
+        //}
 
 
         document.getElementById("contactForm").addEventListener("submit", function (event) {
@@ -1126,7 +1126,7 @@
                         var phoneNumber = document.getElementById("phoneNumber").value;
                         var zipCode = document.getElementById("zipCode").value;
                         var additionalDetails = document.getElementById("additionalDetails").value;
-                        var deviceType = getDeviceType
+                        //var deviceType = getDeviceType
 
                         // Create an object with form data
                         var formData = {
@@ -1143,7 +1143,7 @@
                             "osVersion": osVersion,
                             "cityLatLong": cityLatLong,
                             "browserVersion": browserVersion,
-                            "deviceType": deviceType
+                           // "deviceType": deviceType
                         };
 
                         // Convert object to JSON
