@@ -89,41 +89,88 @@
             font-family: Arial, sans-serif;
         }
 
-        form {
-            max-width: 500px;
-            margin: auto;
+     /**/  
+
+        #contactForm {
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            max-width: 50%;
+            box-shadow: 0px 0px 5px #7153d9;
         }
+
+        /*/* Label styles */
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        input,
-        textarea {
+        /* Input and textarea styles */
+
+        input, textarea {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-
-        textarea {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin-bottom: 15px;
             resize: vertical;
         }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
+        /* Checkbox container styles */
+
+        #checkboxContainer {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* Checkbox input styles */
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            appearance: none;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
-            font-size: 16px;
+            background-color: #fff;
+        }
+
+            /* Checked state of checkbox */
+
+            input[type="checkbox"]:checked {
+                background-color: #7153d9;
+                border-color: #7153d9;
+            }
+
+        /* Checkbox label styles */
+
+        label[for="mobileUpdates"], label[for="emailUpdates"] {
+            cursor: pointer;
+            line-height: 16px;
+        }
+
+        /* Submit button styles */
+
+        button {
+            background-color: #7153d9;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+
         }
 
             button:hover {
-                background-color: #45a049;
+                background-color: #7153d9;
             }
+
     </style>
 
 </head>
@@ -368,30 +415,63 @@
                 <div class="col-12 ">
                     <!--Breadcrumb Wrapper Start-->
                     <div>
-                        <h1 class="title text-center">Izenix Franchise</h1>
-                        <!--<p class="text mb-0">Izenix Solutions Latest Updates</p>-->
-                        <form id="contactForm">
-                            <label for="firstName">First Name:</label>
-                            <input type="text" id="firstName" name="firstName" required>
+                        <h1 class="title text-center mb-30">Izenix Franchise</h1>
+                        <p class="text-hgt-size text-center mb-30">Embark on a rewarding journey with Izenix Franchise, where innovation meets opportunity. As a franchisee, you join a network of forward-thinkers dedicated to providing cutting-edge solutions in any domain. At Izenix, we prioritize collaboration, integrity, and customer satisfaction. Join us and unlock the potential for growth and prosperity in your entrepreneurial venture.</p>
+                        <form id="contactForm" class="form-container">
+                            <div class="row">
+                                <div class="col-md-6" style="color: #7153d9;">
+                                    <label for="firstName">First Name:</label>
+                                    <input type="text" id="firstName" name="firstName" required placeholder="Enter Here">
+                                </div>
+                                <div class="col-md-6" style="color: #7153d9;">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="text" id="lastName" name="lastName" required placeholder="Enter Here">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="color: #7153d9;">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" required placeholder="Enter Here">
+                                </div>
+                                <div class="col-md-6" style="color: #7153d9;">
+                                    <label for="phoneNumber">Phone Number:</label>
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter Here">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="color: #7153d9;">
+                                    <label for="zipCode">Zip Code:</label>
+                                    <input type="text" id="zipCode" name="zipCode" required placeholder="Enter Here">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="color: #7153d9;">
+                                    <label for="additionalDetails">Additional Details:</label>
+                                    <textarea id="additionalDetails" name="additionalDetails" rows="4" placeholder="Please share any details you would like us to consider in our response to your interest in becoming a Goddard School franchisee."></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-30">
+                                <div class="col-md-12">
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" id="mobileUpdates" name="mobileUpdates">
+                                        <label for="mobileUpdates">Sign me up for mobile updates, events, and news</label>
+                                    </div>
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" id="emailUpdates" name="emailUpdates">
+                                        <label for="emailUpdates">Sign me up for email updates, events, and news</label>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <label for="lastName">Last Name:</label>
-                            <input type="text" id="lastName" name="lastName" required>
+                            <div class="g-recaptcha mb-3" data-sitekey="6LfuuC8pAAAAADCxgV3IKmJemq7Czik142NwMA-Q">
+                                
+                            </div>
 
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-
-                            <label for="phoneNumber">Phone Number:</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" required>
-
-                            <label for="zipCode">Zip Code:</label>
-                            <input type="text" id="zipCode" name="zipCode" required>
-
-                            <label for="additionalDetails">Additional Details:</label>
-                            <textarea id="additionalDetails" name="additionalDetails" rows="4"></textarea>
 
                             <button type="submit">Submit</button>
                         </form>
                     </div>
+
                     <!--Breadcrumb Wrapper End-->
                 </div>
             </div>
@@ -1109,56 +1189,59 @@
 
             VisitorAPI(
                 "5Myl8uBF8lRCKvEZkNnP",
-                    function (data) {
-                        debugger;
-                        ipAddress = data.ipAddress;
-                        city = data.city;
-                        country = data.countryName;
-                        region = data.region;
-                        osVersion = data.os + "-" + data.osVersion;
-                        cityLatLong = data.cityLatLong;
-                        browserVersion = data.browser + "-" + data.browserVersion;
+                function (data) {
+                    debugger;
+                    ipAddress = data.ipAddress;
+                    city = data.city;
+                    country = data.countryName;
+                    region = data.region;
+                    osVersion = data.os + "-" + data.osVersion;
+                    cityLatLong = data.cityLatLong;
+                    browserVersion = data.browser + "-" + data.browserVersion;
 
-                        // Fetch form values
-                        var firstName = document.getElementById("firstName").value;
-                        var lastName = document.getElementById("lastName").value;
-                        var email = document.getElementById("email").value;
-                        var phoneNumber = document.getElementById("phoneNumber").value;
-                        var zipCode = document.getElementById("zipCode").value;
-                        var additionalDetails = document.getElementById("additionalDetails").value;
-                        //var deviceType = getDeviceType
+                    // Fetch form values
+                    var firstName = document.getElementById("firstName").value;
+                    var lastName = document.getElementById("lastName").value;
+                    var email = document.getElementById("email").value;
+                    var phoneNumber = document.getElementById("phoneNumber").value;
+                    var zipCode = document.getElementById("zipCode").value;
+                    var additionalDetails = document.getElementById("additionalDetails").value;
+                    var mobileUpdatesEl = document.getElementById("mobileUpdates");
+                    var emailUpdatesEl = document.getElementById("emailUpdates");
 
-                        // Create an object with form data
-                        var formData = {
-                            "firstName": firstName,
-                            "lastName": lastName,
-                            "email": email,
-                            "phoneNumber": phoneNumber,
-                            "zipCode": zipCode,
-                            "additionalDetails": additionalDetails,
-                            "ipAddress": ipAddress,
-                            "city": city,
-                            "country": country,
-                            "region": region,
-                            "osVersion": osVersion,
-                            "cityLatLong": cityLatLong,
-                            "browserVersion": browserVersion,
-                           // "deviceType": deviceType
-                        };
 
-                        // Convert object to JSON
-                        var inputData = JSON.stringify(formData);
 
-                        // Call the submitTrigger function with the form data
-                        submitTrigger(inputData);
-                        //console.log(data)
-                    },
+                    // Create an object with form data
+                    var formData = {
+                        "firstName": firstName,
+                        "lastName": lastName,
+                        "email": email,
+                        "phoneNumber": phoneNumber,
+                        "zipCode": zipCode,
+                        "additionalDetails": additionalDetails,
+                        "ipAddress": ipAddress,
+                        "city": city,
+                        "country": country,
+                        "region": region,
+                        "osVersion": osVersion,
+                        "cityLatLong": cityLatLong,
+                        "browserVersion": browserVersion,
+                        // "deviceType": deviceType
+                    };
+
+                    // Convert object to JSON
+                    var inputData = JSON.stringify(formData);
+
+                    // Call the submitTrigger function with the form data
+                    submitTrigger(inputData);
+                    //console.log(data)
+                },
                 function (errorCode, errorMessage) {
                     console.log(errorCode, errorMessage)
                 }
             );
 
-           
+
         });
 
         var VisitorAPI = function (t, e, a) {
@@ -1180,6 +1263,18 @@
             // Clear the form fields
             document.getElementById("contactForm").reset();
         }
+    </script>
+
+
+    <script type="text/javascript">
+        var onloadCallback = function () {
+            alert("grecaptcha is ready!");
+        };
+    </script>
+
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
     </script>
 </body>
 </html>
