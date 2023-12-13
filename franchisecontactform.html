@@ -1210,23 +1210,15 @@
                     var emailUpdatesChecked = document.getElementById("emailUpdates").checked;
 
                     if (mobileUpdatesChecked) {
-                        // User wants mobile updates
                         mobileUpdatesChecked = true;
-                        console.log("Mobile updates selected");
                     } else {
-                        // User doesn't want mobile updates
                         mobileUpdatesChecked = false;
-                        console.log("Mobile updates not selected");
                     }
 
                     if (emailUpdatesChecked) {
-                        // User wants email updates
                         emailUpdatesChecked = true;
-                        console.log("Email updates selected");
                     } else {
-                        // User doesn't want email updates
                         emailUpdatesChecked = false;
-                        console.log("Email updates not selected");
                     }
 
 
@@ -1246,7 +1238,8 @@
                         "osVersion": osVersion,
                         "cityLatLong": cityLatLong,
                         "browserVersion": browserVersion,
-                        // "deviceType": deviceType
+                        "mobileUpdatesChecked": mobileUpdatesChecked,
+                        "emailUpdatesChecked": emailUpdatesChecked
                     };
 
                     // Convert object to JSON
