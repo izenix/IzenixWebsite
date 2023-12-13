@@ -22,6 +22,7 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         /*background: #fff;
             height: 53px;
@@ -89,7 +90,7 @@
             font-family: Arial, sans-serif;
         }
 
-     /**/  
+        /**/
 
         #contactForm {
             margin: 0 auto;
@@ -164,13 +165,11 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-
         }
 
             button:hover {
                 background-color: #7153d9;
             }
-
     </style>
 
 </head>
@@ -464,7 +463,7 @@
                             </div>
 
                             <div class="g-recaptcha mb-3" data-sitekey="6LfuuC8pAAAAADCxgV3IKmJemq7Czik142NwMA-Q">
-                                
+
                             </div>
 
 
@@ -1125,6 +1124,7 @@
     <script src="assets/js/plugins/wow.min.js"></script>
     <script src="assets/js/plugins/fancybox.min.js"></script>
     <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <script src="assets/js/app.js"></script>
 
     <!-- Activation JS -->
     <script src="assets/js/main.js"></script>
@@ -1159,26 +1159,45 @@
                 para.classList.toggle('open');
             }
 
-            //function playAlertSound() {
-            //    // Replace 'path/to/alert.mp3' with the actual path to your audio file
-            //    var audio = new Audio('assets/audio/notifications-sound.mp3');
-            //    audio.play();
-            //}
         });
     </script>
     <script>
-        //function isMobileDevice() {
-        //    return /Mobi|Android/i.test(navigator.userAgent);
-        //}
 
-        //// Function to get device type
-        //function getDeviceType() {
-        //    return isMobileDevice() ? "Mobile" : "Desktop";
-        //}
+        const form = document.querySelector("contactForm")
+
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const captchaResponse = grecaptcha.getResponse();
+
+            if (!captchaResponse.length > 0) {
+                throw new Error("Captcha not Complete");
+            }
+
+            const fd = new FormData(e.target);
+            const params = new URLSearchParams(fd);
+
+            fetch("https://izenix.com/upload", {
+                method: "POST",
+                body: params,
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.captchaSuccess) {
+                        console.log("Validation Successful");
+                    } else {
+                        console.error("Validation failed");
+                    }
+                })
+                .catch(err => console.log(err))
+        });
+
 
 
         document.getElementById("contactForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevents the form from submitting in the traditional way
+
             var ipAddress = "";
             var city = "";
             var country = "";
@@ -1286,8 +1305,6 @@
     </script>
 
 
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-            async defer>
-    </script>
+
 </body>
 </html>
