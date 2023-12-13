@@ -1124,7 +1124,6 @@
     <script src="assets/js/plugins/wow.min.js"></script>
     <script src="assets/js/plugins/fancybox.min.js"></script>
     <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>
-    <script src="assets/js/app.js"></script>
 
     <!-- Activation JS -->
     <script src="assets/js/main.js"></script>
@@ -1162,39 +1161,6 @@
         });
     </script>
     <script>
-
-        const form = document.querySelector("contactForm")
-
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const captchaResponse = grecaptcha.getResponse();
-
-            if (!captchaResponse.length > 0) {
-                throw new Error("Captcha not Complete");
-            }
-
-            const fd = new FormData(e.target);
-            const params = new URLSearchParams(fd);
-
-            fetch("https://izenix.com/upload", {
-                method: "POST",
-                body: params,
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.captchaSuccess) {
-                        console.log("Validation Successful");
-                    } else {
-                        console.error("Validation failed");
-                    }
-                })
-                .catch(err => console.log(err))
-        });
-
-
-
         document.getElementById("contactForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevents the form from submitting in the traditional way
 
