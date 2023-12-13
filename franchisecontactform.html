@@ -1206,8 +1206,28 @@
                     var phoneNumber = document.getElementById("phoneNumber").value;
                     var zipCode = document.getElementById("zipCode").value;
                     var additionalDetails = document.getElementById("additionalDetails").value;
-                    var mobileUpdatesEl = document.getElementById("mobileUpdates");
-                    var emailUpdatesEl = document.getElementById("emailUpdates");
+                    var mobileUpdatesChecked = document.getElementById("mobileUpdates").checked;
+                    var emailUpdatesChecked = document.getElementById("emailUpdates").checked;
+
+                    if (mobileUpdatesChecked) {
+                        // User wants mobile updates
+                        mobileUpdatesChecked = true;
+                        console.log("Mobile updates selected");
+                    } else {
+                        // User doesn't want mobile updates
+                        mobileUpdatesChecked = false;
+                        console.log("Mobile updates not selected");
+                    }
+
+                    if (emailUpdatesChecked) {
+                        // User wants email updates
+                        emailUpdatesChecked = true;
+                        console.log("Email updates selected");
+                    } else {
+                        // User doesn't want email updates
+                        emailUpdatesChecked = false;
+                        console.log("Email updates not selected");
+                    }
 
 
 
