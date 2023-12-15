@@ -760,6 +760,8 @@
     <!-- Activation JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/pages/home.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+
     <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
         <button onclick="toggleClass()" class="bpw-floating-button">
             <img src="assets/images/chatbot1.png" />
@@ -769,32 +771,6 @@
 
         </div>
     </div>
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            const para = document.getElementById('chatbox');
-
-            // After 5 seconds, open the chat box
-            setTimeout(function () {
-                toggleClass();
-                //    playAlertSound(); // Play audio alert
-            }, 5000);
-
-            // Toggle class 'open' and 'closed' on click
-            para.addEventListener('click', function () {
-                toggleClass();
-            });
-
-            function toggleClass() {
-                //para.classList.toggle('closed');
-                para.classList.toggle('open');
-            }
-
-            //function playAlertSound() {
-            //    // Replace 'path/to/alert.mp3' with the actual path to your audio file
-            //    var audio = new Audio('assets/audio/notifications-sound.mp3');
-            //    audio.play();
-            //}
-        });
-    </script>
+    
 </body>
 </html>
