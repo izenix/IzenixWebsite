@@ -100,77 +100,10 @@ function submitTrigger(input) {
     document.getElementById("contactForm").reset();
 }
 
-var onloadCallback = function () {
-    alert("grecaptcha is ready!");
-};
+//var onloadCallback = function () {
+//    alert("grecaptcha is ready!");
+//};
 
 
 
 
-const form = document.querySelector("#contactForm"); // Use # to select by ID
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const captchaResponse = grecaptcha.getResponse();
-
-    if (captchaResponse.length === 0) {
-        throw new Error("Captcha not Complete");
-    }
-
-    const fd = new FormData(e.target);
-    fd.append('g-recaptcha-response', captchaResponse); // Add captcha response to FormData
-
-    fetch("https://izenix.com", {
-        method: "POST",
-        body: fd,
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.captchaSuccess) {
-                console.log("Validation Successful");
-            } else {
-                console.error("Validation failed");
-            }
-        })
-        .catch(err => console.log(err));
-});
-
-
-const express = require('express');
-const cors = require('cors');
-const fetch = require('node-fetch'); // Import fetch module
-const app = express();
-const port = 3000; // Set a valid port number
-
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-
-app.post('/upload', function (req, res) {
-    const params = new URLSearchParams({
-        secret: '6LfuuC8pAAAAAGEzwHH4cwupUD1KYARjq5Dd3Upp',
-        response: req.body['g-recaptcha-response'],
-        remoteip: req.ip
-    });
-
-    fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: "POST",
-        body: params,
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                res.json({ captchaSuccess: true });
-            } else {
-                res.json({ captchaSuccess: false });
-            }
-        })
-        .catch(error => {
-            console.error("Error verifying captcha:", error);
-            res.json({ captchaSuccess: false });
-        });
-});
-
-app.listen(port, () => {
-    console.log(`App running on port ${port}`);
-});
