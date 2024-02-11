@@ -1,84 +1,84 @@
-//Franchise Submit Form Trigger Code
-//document.getElementById("contactForm").addEventListener("submit", function (event) {
-//    event.preventDefault(); // Prevents the form from submitting in the traditional way
+Franchise Submit Form Trigger Code
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents the form from submitting in the traditional way
 
-//    var ipAddress = "";
-//    var city = "";
-//    var country = "";
-//    var region = "";
-//    var osVersion = "";
-//    var cityLatLong = "";
-//    var browserVersion = "";
+    var ipAddress = "";
+    var city = "";
+    var country = "";
+    var region = "";
+    var osVersion = "";
+    var cityLatLong = "";
+    var browserVersion = "";
 
-//    VisitorAPI(
-//        "5Myl8uBF8lRCKvEZkNnP",
-//        function (data) {
-//            debugger;
-//            ipAddress = data.ipAddress;
-//            city = data.city;
-//            country = data.countryName;
-//            region = data.region;
-//            osVersion = data.os + "-" + data.osVersion;
-//            cityLatLong = data.cityLatLong;
-//            browserVersion = data.browser + "-" + data.browserVersion;
+    VisitorAPI(
+        "5Myl8uBF8lRCKvEZkNnP",
+        function (data) {
+            debugger;
+            ipAddress = data.ipAddress;
+            city = data.city;
+            country = data.countryName;
+            region = data.region;
+            osVersion = data.os + "-" + data.osVersion;
+            cityLatLong = data.cityLatLong;
+            browserVersion = data.browser + "-" + data.browserVersion;
 
-//            // Fetch form values
-//            var firstName = document.getElementById("firstName").value;
-//            var lastName = document.getElementById("lastName").value;
-//            var email = document.getElementById("email").value;
-//            var phoneNumber = document.getElementById("phoneNumber").value;
-//            var zipCode = document.getElementById("zipCode").value;
-//            var additionalDetails = document.getElementById("additionalDetails").value;
-//            var mobileUpdatesChecked = document.getElementById("mobileUpdates").checked;
-//            var emailUpdatesChecked = document.getElementById("emailUpdates").checked;
+            // Fetch form values
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var email = document.getElementById("email").value;
+            var phoneNumber = document.getElementById("phoneNumber").value;
+            var zipCode = document.getElementById("zipCode").value;
+            var additionalDetails = document.getElementById("additionalDetails").value;
+            var mobileUpdatesChecked = document.getElementById("mobileUpdates").checked;
+            var emailUpdatesChecked = document.getElementById("emailUpdates").checked;
 
-//            if (mobileUpdatesChecked) {
-//                mobileUpdatesChecked = true;
-//            } else {
-//                mobileUpdatesChecked = false;
-//            }
+            if (mobileUpdatesChecked) {
+                mobileUpdatesChecked = true;
+            } else {
+                mobileUpdatesChecked = false;
+            }
 
-//            if (emailUpdatesChecked) {
-//                emailUpdatesChecked = true;
-//            } else {
-//                emailUpdatesChecked = false;
-//            }
-
-
-
-//            // Create an object with form data
-//            var formData = {
-//                "firstName": firstName,
-//                "lastName": lastName,
-//                "email": email,
-//                "phoneNumber": phoneNumber,
-//                "zipCode": zipCode,
-//                "additionalDetails": additionalDetails,
-//                "ipAddress": ipAddress,
-//                "city": city,
-//                "country": country,
-//                "region": region,
-//                "osVersion": osVersion,
-//                "cityLatLong": cityLatLong,
-//                "browserVersion": browserVersion,
-//                "mobileUpdatesChecked": mobileUpdatesChecked,
-//                "emailUpdatesChecked": emailUpdatesChecked
-//            };
-
-//            // Convert object to JSON
-//            var inputData = JSON.stringify(formData);
-
-//            // Call the submitTrigger function with the form data
-//            submitTrigger(inputData);
-//            //console.log(data)
-//        },
-//        function (errorCode, errorMessage) {
-//            console.log(errorCode, errorMessage)
-//        }
-//    );
+            if (emailUpdatesChecked) {
+                emailUpdatesChecked = true;
+            } else {
+                emailUpdatesChecked = false;
+            }
 
 
-//});
+
+            // Create an object with form data
+            var formData = {
+                "firstName": firstName,
+                "lastName": lastName,
+                "email": email,
+                "phoneNumber": phoneNumber,
+                "zipCode": zipCode,
+                "additionalDetails": additionalDetails,
+                "ipAddress": ipAddress,
+                "city": city,
+                "country": country,
+                "region": region,
+                "osVersion": osVersion,
+                "cityLatLong": cityLatLong,
+                "browserVersion": browserVersion,
+                "mobileUpdatesChecked": mobileUpdatesChecked,
+                "emailUpdatesChecked": emailUpdatesChecked
+            };
+
+            // Convert object to JSON
+            var inputData = JSON.stringify(formData);
+
+            // Call the submitTrigger function with the form data
+            submitTrigger(inputData);
+            //console.log(data)
+        },
+        function (errorCode, errorMessage) {
+            console.log(errorCode, errorMessage)
+        }
+    );
+
+
+});
 
 var VisitorAPI = function (t, e, a) {
     debugger;
