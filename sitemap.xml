@@ -112,6 +112,10 @@
   <lastmod>2023-07-15T02:49:01+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
+	<url>
+		<loc>https://www.izenix.com/IzenixLearn.html</loc>
+		<lastmod>2023-07-15T02:49:01+00:00</lastmod>
+		<priority>0.65</priority>
+	</url>
 
 </urlset>
