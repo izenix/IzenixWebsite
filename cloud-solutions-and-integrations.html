@@ -516,19 +516,22 @@
                     <div class="col-lg-4">
                         <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
                             <h4 class="sidebar-title">Get A Quote</h4>
-                            <form class="comment-form-inner p-0" action="#">
+                            <form class="comment-form-inner p-0" action="#" id="contactform">
                                 <div class="row">
                                     <div class="col-md-12 col-12 mb-3">
-                                        <input placeholder="Your name" name="name">
+                                        <input placeholder="Your name" name="name" id="name">
                                     </div>
                                     <div class="col-md-12 col-12 mb-3">
-                                        <input type="email" placeholder="Your email" name="email">
+                                        <input type="email" placeholder="Your email" name="email" id="email">
+                                    </div>
+                                    <div class="col-md-12 col-12 mb-3">
+                                        <input placeholder="Your phone" name="phone" id="phoneNumber">
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <textarea name="message" placeholder="Write your comment here"></textarea>
+                                        <textarea name="message" placeholder="Write your comment here" id="comments"></textarea>
                                     </div>
                                     <div class="col-12 text-left">
-                                        <button class="btn btn-style-four"> <span>Submit Now</span> </button>
+                                        <button class="btn btn-style-four" type="submit"> <span>Submit Now</span> </button>
                                     </div>
                                 </div>
                             </form>
@@ -747,6 +750,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/pages/home.js"></script>
     <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/contactform.js"></script>
 
     <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
         <button onclick="toggleClass()" class="bpw-floating-button">
@@ -757,6 +761,6 @@
 
         </div>
     </div>
-   
+
 </body>
 </html>
