@@ -1,4 +1,4 @@
-Franchise Submit Form Trigger Code
+//Franchise Submit Form Trigger Code
 document.getElementById("contactForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevents the form from submitting in the traditional way
 
