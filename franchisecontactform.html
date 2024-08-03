@@ -19,157 +19,159 @@
     <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
     <link rel="stylesheet" href="assets/css/plugins/odometer-theme-default.min.css">
     <link rel="stylesheet" href="assets/css/plugins/fancybox.min.css">
+    <script src="https://kit.fontawesome.com/a39add2b67.js" crossorigin="anonymous"></script>
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
-        /*background: #fff;
-            height: 53px;
-            margin-bottom: 10px;*/
+                /*background: #fff;
+                    height: 53px;
+                    margin-bottom: 10px;*/
 
-        /* .iframe-content {
-                display: block;
-                height: 500px;
-                width: 350px;
-            }
-            div.open
+                /* .iframe-content {
+                        display: block;
+                        height: 500px;
+                        width: 350px;
+                    }
+                    div.open
+                        .iframe-content {
+                              display:none;
+                              height: 0px;
+                          }
+                    div.closed
+                    .iframe-content {
+                        display: none;
+                        height: 0px;
+                    }*/
                 .iframe-content {
-                      display:none;
-                      height: 0px;
-                  }
-            div.closed
-            .iframe-content {
-                display: none;
-                height: 0px;
-            }*/
-        .iframe-content {
-            display: none;
-            height: 0px;
-            width: 350px;
-        }
+                    display: none;
+                    height: 0px;
+                    width: 350px;
+                }
 
-        div.open .iframe-content {
-            display: block;
-            height: 500px;
-        }
+                div.open .iframe-content {
+                    display: block;
+                    height: 500px;
+                }
 
-        div.closed .iframe-content {
-            display: none;
-            height: 0px;
-        }
+                div.closed .iframe-content {
+                    display: none;
+                    height: 0px;
+                }
 
-        .bpw-floating-button {
-            float: right;
-            cursor: pointer;
-            outline: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            border-radius: 60%;
-            /*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
-        */ overflow: hidden;
-            padding: 0;
-            border: none;
-            background-clip: padding-box;
-            transition: width 1s, height 1s;
-            background-color: transparent;
-            color: white;
-            transition: opacity 0.3s ease;
-            opacity: 1;
-            fill: inherit;
-            stroke: inherit;
-            line-height: 0;
-        }
+                .bpw-floating-button {
+                    float: right;
+                    cursor: pointer;
+                    outline: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1;
+                    width: 60px;
+                    height: 60px;
+                    cursor: pointer;
+                    border-radius: 60%;
+                    /*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+                */ overflow: hidden;
+                    padding: 0;
+                    border: none;
+                    background-clip: padding-box;
+                    transition: width 1s, height 1s;
+                    background-color: transparent;
+                    color: white;
+                    transition: opacity 0.3s ease;
+                    opacity: 1;
+                    fill: inherit;
+                    stroke: inherit;
+                    line-height: 0;
+                }
 
-        body {
-            font-family: Arial, sans-serif;
-        }
+                body {
+                    font-family: Arial, sans-serif;
+                }
 
-        /**/
+                /**/
 
-        #contactForm {
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            max-width: 50%;
-            box-shadow: 0px 0px 5px #7153d9;
-        }
+                #contactForm {
+                    margin: 0 auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 20px;
+                    max-width: 50%;
+                    box-shadow: 0px 0px 5px #7153d9;
+                }
 
-        /*/* Label styles */
+                /*/* Label styles */
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
 
-        /* Input and textarea styles */
+                /* Input and textarea styles */
 
-        input, textarea {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            margin-bottom: 15px;
-            resize: vertical;
-        }
+                input, textarea {
+                    width: 100%;
+                    padding: 5px;
+                    border: 1px solid #ddd;
+                    border-radius: 3px;
+                    margin-bottom: 15px;
+                    resize: vertical;
+                }
 
-        /* Checkbox container styles */
+                /* Checkbox container styles */
 
-        #checkboxContainer {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+                #checkboxContainer {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 15px;
+                }
 
-        /* Checkbox input styles */
+                /* Checkbox input styles */
 
-        input[type="checkbox"] {
-            margin-right: 10px;
-            /*appearance: none;
-            border: 1px solid #ddd;*/
-            border-radius: 5px;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-/*            background-color: #fff;
-*/        }
+                input[type="checkbox"] {
+                    margin-right: 10px;
+                    /*appearance: none;
+                    border: 1px solid #ddd;*/
+                    border-radius: 5px;
+                    width: 16px;
+                    height: 16px;
+                    cursor: pointer;
+                    /*            background-color: #fff;
+        */
+                }
 
-            /* Checked state of checkbox */
+                    /* Checked state of checkbox */
 
-            input[type="checkbox"]:checked {
-/*                background-color: #7153d9;
-*/                border-color: #7153d9;
-            }
+                    input[type="checkbox"]:checked {
+                        /*                background-color: #7153d9;
+        */ border-color: #7153d9;
+                    }
 
-        /* Checkbox label styles */
+                /* Checkbox label styles */
 
-        label[for="mobileUpdates"], label[for="emailUpdates"] {
-            cursor: pointer;
-            line-height: 16px;
-        }
+                label[for="mobileUpdates"], label[for="emailUpdates"] {
+                    cursor: pointer;
+                    line-height: 16px;
+                }
 
-        /* Submit button styles */
+                /* Submit button styles */
 
-        button {
-            background-color: #7153d9;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+                button {
+                    background-color: #7153d9;
+                    color: #fff;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-weight: bold;
+                }
 
-            button:hover {
-                background-color: #7153d9;
-            }
+                    button:hover {
+                        background-color: #7153d9;
+                    }
     </style>
 
 </head>
@@ -218,7 +220,7 @@
                                     <div class="social-icons-align">
                                         <ul>
                                             <li><a href="https://www.facebook.com/Izenixsolutions/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="https://twitter.com/Izenixsolutions" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
                                             <li><a href="https://www.linkedin.com/company/izenix-solutions/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                                             <li><a href="https://www.instagram.com/izenixsolutions/" target="_blank"><i class="fab fa-instagram"></i></a></li>
                                         </ul>
@@ -844,7 +846,7 @@
                                 <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a>
                             </li>
                             <li>
                                 <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
@@ -871,7 +873,7 @@
                                 <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a>
                             </li>
                             <li>
                                 <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
@@ -898,7 +900,7 @@
                                 <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a>
                             </li>
                             <li>
                                 <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
@@ -925,7 +927,7 @@
                                 <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/" class="twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a>
                             </li>
                             <li>
                                 <a href="https://www.linkedin.com/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
@@ -1031,7 +1033,7 @@
                                 <a href="https://www.facebook.com/Izenixsolutions/" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/Izenixsolutions" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/Izenixsolutions" class="twitter" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
                             </li>
                             <li>
                                 <a href="https://www.linkedin.com/company/izenix-solutions/" class="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
