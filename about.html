@@ -896,14 +896,20 @@
     <script src="assets/js/pages/home.js"></script>
     <script src="assets/js/chatbot.js"></script>
     <!-- Google tag (gtag.js) -->
- <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM8FK0FD9P"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM8FK0FD9P"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-MM8FK0FD9P');
+        gtag('consent', 'default', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+        });
     </script>
-
+    <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/a86e4f2b517d1.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="0"></script>
     <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
         <button onclick="toggleClass()" class="bpw-floating-button">
             <img src="assets/images/chatbot1.png" />
