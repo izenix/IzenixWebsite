@@ -752,13 +752,12 @@
     <!-- Scroll Top End -->
     <!-- JS Vendor, Plugins & Activation Script Files -->
     <!-- Vendors JS -->
-    <script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
+    <!--<script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
     <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-
+    <script src="assets/js/vendor/bootstrap.min.js"></script>-->
     <!-- Plugins JS -->
-    <script src="assets/js/plugins/magnificpopup.min.js"></script>
+    <!--<script src="assets/js/plugins/magnificpopup.min.js"></script>
     <script src="assets/js/plugins/swiper-bundle.min.js"></script>
     <script src="assets/js/plugins/tilt.jquery.min.js"></script>
     <script src="assets/js/plugins/odometer.min.js"></script>
@@ -766,13 +765,37 @@
     <script src="assets/js/plugins/imagesloaded.min.js"></script>
     <script src="assets/js/plugins/wow.min.js"></script>
     <script src="assets/js/plugins/fancybox.min.js"></script>
-    <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>
-
+    <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>-->
     <!-- Activation JS -->
-    <script src="assets/js/main.js"></script>
+    <!--<script src="assets/js/main.js"></script>
     <script src="assets/js/pages/home.js"></script>
     <script src="assets/js/chatbot.js"></script>
-    <script src="assets/js/contactform.js"></script>
+    <script src="assets/js/contactform.js"></script>-->
+
+    <script src="assets/js/vendor/modernizr-3.11.7.min.js" async></script>
+
+    <!-- Defer non-critical JS to avoid render-blocking -->
+    <script src="assets/js/vendor/jquery-3.6.0.min.js" defer></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.2.min.js" defer></script>
+    <script src="assets/js/vendor/bootstrap.min.js" defer></script>
+
+    <!-- Plugins JS -->
+    <script src="assets/js/plugins/magnificpopup.min.js" defer></script>
+    <script src="assets/js/plugins/swiper-bundle.min.js" defer></script>
+    <script src="assets/js/plugins/tilt.jquery.min.js" defer></script>
+    <script src="assets/js/plugins/odometer.min.js" defer></script>
+    <script src="assets/js/plugins/isotope.min.js" defer></script>
+    <script src="assets/js/plugins/imagesloaded.min.js" defer></script>
+    <script src="assets/js/plugins/waypoint.min.js" defer></script>
+    <script src="assets/js/plugins/wow.min.js" defer></script>
+    <script src="assets/js/plugins/fancybox.min.js" defer></script>
+    <script src="assets/js/plugins/jquery.ajaxchimp.min.js" defer></script>
+
+    <!-- Activation JS -->
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/pages/home.js" defer></script>
+    <script src="assets/js/chatbot.js" defer></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM8FK0FD9P"></script>
     <script>
@@ -782,7 +805,7 @@
         gtag('config', 'G-MM8FK0FD9P');
     </script>
     <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
-        <button  class="bpw-floating-button" aria-label="Toggle Chatbox">
+        <button class="bpw-floating-button" aria-label="Toggle Chatbox">
             <!--<img src="assets/images/chatbot1.png" />-->
             <i class="fa-brands fa-rocketchat" style="color: #ff5733; font-size: 30px;"></i>
 
@@ -793,7 +816,7 @@
         </div>
     </div>
 
-    
+
 
 </body>
 </html>
