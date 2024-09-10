@@ -661,11 +661,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                        <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2023</span> </p>
+                        <p class="order-md-1 order-2"><strong>Powerd by : </strong> <span>Izenix Solutions © 2024</span> </p>
 
                         <ul class="footer-bootm-list order-md-2 order-1">
-                            <li><a href="terms.html">Terms & Condition</a></li>
-                            <li><a href="policy.html">Privacy Policy</a></li>
+                            <li> <a href="#" id="openTermsDialog" class="dialog-link">Terms and Conditions</a></li>
+                            <li><a href="#" id="openPrivacyDialog" class="dialog-link">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
@@ -678,11 +678,17 @@
         <i class="arrow-top fas fa-angle-double-up"></i>
         <i class="arrow-bottom fas fa-angle-double-up"></i>
     </a>
-
-
-
-
     <!-- Scroll Top End -->
+    <!--Terms and condition and Privacy Policy Start-->
+    <!-- Dialog box structure -->
+    <div id="dialogBox" class="dialog">
+        <div class="dialog-content">
+            <span id="closeDialog" class="close-button">&times;</span>
+            <!-- Embed iframe dynamically based on the clicked link -->
+            <iframe id="dialogIframe" class="terms-iframe"></iframe>
+        </div>
+    </div>
+    <!--Terms and condition and Privacy Policy End-->
     <!-- JS Vendor, Plugins & Activation Script Files -->
     <!-- Vendors JS -->
     <!--<script src="assets/js/vendor/modernizr-3.11.7.min.js"></script>
@@ -727,6 +733,7 @@
     <script src="assets/js/main.js" defer></script>
     <script src="assets/js/pages/home.js" defer></script>
     <script src="assets/js/chatbot.js" defer></script>
+    <script src="assets/js/termsandconditions.js" defer></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM8FK0FD9P"></script>
