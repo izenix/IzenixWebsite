@@ -1,0 +1,246 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Data Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .table-wrapper {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+            .search-button:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NFC Tracking Data</h1>
+        <div class="search-container">
+            <input type="text" id="searchTagId" placeholder="Enter Tag ID to search">
+            <button class="search-button" onclick="searchTagId()">Search</button>
+        </div>
+        <button onclick="getNFCTTrackingData()">Fetch All Data</button>
+        <div id="tableContainer" class="table-wrapper"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
+        const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
+        const clientSecret = 'rh08Q~iL2rGWKsew.ySqCuLs55ej.WP~MIia6c7J';
+        const resource = 'https://izenixlearn.crm.dynamics.com';
+
+        // Function to get the data from OData API
+        async function getNFCTTrackingData() {
+            const oDataUrl = `${resource}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+
+            const token = await getAccessToken();
+            debugger;
+            if (!token) {
+                alert('Authentication failed. Please check your OAuth token.');
+                return;
+            }
+
+            try {
+                const response = await axios.get(oDataUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'OData-MaxVersion': '4.0',
+                        'OData-Version': '4.0',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                displayNFCTTrackingData(response.data.value);
+            } catch (error) {
+                console.error('Error fetching NFC tracking data:', error);
+                alert('Error fetching data.');
+            }
+        }
+
+        // Function to search for a specific Tag ID
+        async function searchTagId() {
+            const tagId = document.getElementById('searchTagId').value.trim();
+            if (!tagId) {
+                alert('Please enter a valid Tag ID.');
+                return;
+            }
+
+            const oDataUrl = `${resource}/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '${tagId}'&$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+
+            const token = await getAccessToken();
+            if (!token) {
+                alert('Authentication failed. Please check your OAuth token.');
+                return;
+            }
+
+            try {
+                const response = await axios.get(oDataUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'OData-MaxVersion': '4.0',
+                        'OData-Version': '4.0',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.data.value.length === 0) {
+                    alert('No record found for the given Tag ID.');
+                } else {
+                    displayNFCTTrackingData(response.data.value);
+                }
+            } catch (error) {
+                console.error('Error searching NFC tracking data:', error);
+                alert('Error fetching data.');
+            }
+        }
+
+        // Function to get OAuth token
+        async function getAccessToken() {
+            const tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
+
+            const params = new URLSearchParams();
+            params.append('grant_type', 'client_credentials');
+            params.append('client_id', clientId);
+            params.append('client_secret', clientSecret);
+            params.append('scope', `${resource}/.default`);
+
+            try {
+                const response = await fetch(tokenEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params,
+                });
+
+                if (!response.ok) {
+                    const errorResponse = await response.json();
+                    console.error('Error fetching OAuth token:', errorResponse);
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const tokenData = await response.json();
+                return tokenData.access_token;
+            } catch (error) {
+                console.error('Error fetching OAuth token:', error);
+                return null;
+            }
+        }
+
+        // Function to display the fetched data in an HTML table
+        function displayNFCTTrackingData(data) {
+            const table = document.createElement("table");
+
+            const headerRow = table.insertRow();
+            const headers = ["Sr. No.", "Name", "Tag ID", "Status", "Timestamp"];
+            headers.forEach(header => {
+                const headerCell = document.createElement("th");
+                headerCell.innerText = header;
+                headerRow.appendChild(headerCell);
+            });
+
+            data.forEach((item, index) => {
+                const row = table.insertRow();
+                row.insertCell().innerText = index + 1;
+                row.insertCell().innerText = item.izx_name || "N/A";
+                row.insertCell().innerText = item.izx_tagid || "N/A";
+                row.insertCell().innerText = item.izx_status === 0 ? "Inactive" : "Active";
+                row.insertCell().innerText = item.izx_timestamp ? new Date(item.izx_timestamp).toLocaleString() : "N/A";
+            });
+
+            const tableContainer = document.getElementById("tableContainer");
+            tableContainer.innerHTML = '';
+            tableContainer.appendChild(table);
+        }
+    </script>
+</body>
+</html>
+
