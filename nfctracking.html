@@ -1,4 +1,5 @@
 ﻿
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,18 +111,68 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
-        const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
-        const clientSecret = 'rh08Q~iL2rGWKsew.ySqCuLs55ej.WP~MIia6c7J';
-        const resource = 'https://izenixlearn.crm.dynamics.com';
+    <script src="https://alcdn.msauth.net/browser/2.37.0/js/msal-browser.min.js"></script>
 
-        // Function to get the data from OData API
+    <script>
+        const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
+        const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
+        const resourceUrl = 'https://izenixlearn.crm.dynamics.com'; // Replace with your CRM resource URL
+        const redirectUri = 'https://login.microsoftonline.com/common/oauth2/nativeclient'; // Your redirect URI
+
+        // MSAL configuration
+        const msalConfig = {
+            auth: {
+                clientId: clientId,
+                authority: `https://login.microsoftonline.com/${tenantId}`,
+                redirectUri: redirectUri,
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        // Function to acquire token using MSAL.js
+        async function getAccessToken() {
+            const request = {
+                scopes: [`${resourceUrl}/.default`],
+            };
+
+            try {
+                const response = await msalInstance.acquireTokenPopup(request);
+                return response.accessToken;
+            } catch (error) {
+                console.error('Error acquiring access token:', error);
+                throw error;
+            }
+        }
+
+        // Function to fetch NFC tracking data from CRM API (using fetch)
+        async function fetchData() {
+            const accessToken = await getAccessToken();
+            const apiUrl = `${resourceUrl}//api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`; // Replace with your desired API endpoint
+
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                displayNFCTTrackingData(data.value);
+            } else {
+                console.error('Error fetching data:', response.status, response.statusText);
+                alert('Error fetching data.');
+            }
+        }
+
+        // Function to fetch NFC tracking data from CRM API (using axios)
         async function getNFCTTrackingData() {
-            const oDataUrl = `${resource}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
 
             const token = await getAccessToken();
-            debugger;
+
             if (!token) {
                 alert('Authentication failed. Please check your OAuth token.');
                 return;
@@ -134,7 +185,7 @@
                         'OData-MaxVersion': '4.0',
                         'OData-Version': '4.0',
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     }
                 });
                 displayNFCTTrackingData(response.data.value);
@@ -152,9 +203,10 @@
                 return;
             }
 
-            const oDataUrl = `${resource}/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '${tagId}'&$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '${tagId}'&$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
 
             const token = await getAccessToken();
+
             if (!token) {
                 alert('Authentication failed. Please check your OAuth token.');
                 return;
@@ -167,7 +219,7 @@
                         'OData-MaxVersion': '4.0',
                         'OData-Version': '4.0',
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     }
                 });
 
@@ -179,39 +231,6 @@
             } catch (error) {
                 console.error('Error searching NFC tracking data:', error);
                 alert('Error fetching data.');
-            }
-        }
-
-        // Function to get OAuth token
-        async function getAccessToken() {
-            const tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
-
-            const params = new URLSearchParams();
-            params.append('grant_type', 'client_credentials');
-            params.append('client_id', clientId);
-            params.append('client_secret', clientSecret);
-            params.append('scope', `${resource}/.default`);
-
-            try {
-                const response = await fetch(tokenEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: params,
-                });
-
-                if (!response.ok) {
-                    const errorResponse = await response.json();
-                    console.error('Error fetching OAuth token:', errorResponse);
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const tokenData = await response.json();
-                return tokenData.access_token;
-            } catch (error) {
-                console.error('Error fetching OAuth token:', error);
-                return null;
             }
         }
 
@@ -241,6 +260,7 @@
             tableContainer.appendChild(table);
         }
     </script>
+
+
 </body>
 </html>
-
