@@ -106,20 +106,19 @@
             <input type="text" id="searchTagId" placeholder="Enter Tag ID to search">
             <button class="search-button" onclick="searchTagId()">Search</button>
         </div>
-        <button onclick="getNFCTTrackingData()">Fetch All Data</button>
+        <button id="fetchAllDataButton">Fetch All Data</button>
         <div id="tableContainer" class="table-wrapper"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!--<script src="https://alcdn.msauth.net/browser/2.37.0/js/msal-browser.min.js"></script>-->
     <script src="https://alcdn.msauth.net/browser/2.34.0/js/msal-browser.min.js"></script>
 
     <script>
-        debugger;
         const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
         const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
         const resourceUrl = 'https://izenixlearn.crm.dynamics.com'; // CRM resource URL
         const redirectUri = 'https://www.izenix.com/nfctracking.html'; // Redirect URI
+        //const redirectUri = 'file:///D:/ScripttSpherre/Retrieve%20data%20from%20CRM.html';
 
         const msalConfig = {
             auth: {
@@ -131,59 +130,37 @@
 
         const msalInstance = new msal.PublicClientApplication(msalConfig);
 
+        // Function to get the access token
         async function getAccessToken() {
             const request = { scopes: [`${resourceUrl}/.default`] };
 
             try {
-                const response = await msalInstance.acquireTokenPopup(request);
-                console.log('Access Token acquired:', response.accessToken);
+                // Attempt to acquire token silently first
+                const response = await msalInstance.acquireTokenSilent(request);
+                console.log('Token acquired silently:', response.accessToken);
                 return response.accessToken;
             } catch (error) {
-                if (error.name === 'InteractionRequiredAuthError') {
-                    console.warn('Interactive login required.');
+                if (error instanceof msal.InteractionRequiredAuthError) {
+                    console.warn('Silent acquisition failed. Interactive login required.');
                     try {
+                        // Fall back to login popup
                         const loginResponse = await msalInstance.loginPopup(request);
-                        console.log('Interactive login successful. Token:', loginResponse.accessToken);
+                        console.log('Interactive login successful:', loginResponse.accessToken);
                         return loginResponse.accessToken;
                     } catch (loginError) {
-                        console.error('Error during interactive login:', loginError);
-                        alert('Authentication failed. Please log in.');
+                        console.error('Login failed:', loginError);
+                        alert('Authentication failed. Please try again.');
                         throw loginError;
                     }
+                } else {
+                    console.error('Error acquiring token:', error);
+                    alert('Authentication failed. Please try again.');
+                    throw error;
                 }
-                console.error('Error acquiring token:', error);
-                alert('Authentication failed. Please try logging in.');
-                throw error;
             }
         }
 
-        async function getNFCTTrackingData() {
-            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
-
-            const token = await getAccessToken();
-
-            if (!token) {
-                alert('Authentication failed. Please check your OAuth token.');
-                return;
-            }
-
-            try {
-                const response = await axios.get(oDataUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'OData-MaxVersion': '4.0',
-                        'OData-Version': '4.0',
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }
-                });
-                displayNFCTTrackingData(response.data.value);
-            } catch (error) {
-                console.error('Error fetching NFC tracking data:', error);
-                alert('Error fetching data.');
-            }
-        }
-
+        // Function to fetch NFC Tracking Data
         async function fetchData() {
             try {
                 const accessToken = await getAccessToken();
@@ -209,6 +186,7 @@
             }
         }
 
+        // Function to search data by Tag ID
         async function searchTagId() {
             const tagId = document.getElementById('searchTagId').value.trim();
             if (!tagId) {
@@ -238,6 +216,7 @@
             }
         }
 
+        // Function to display NFC tracking data in a table
         function displayNFCTTrackingData(data) {
             const tableContainer = document.getElementById("tableContainer");
             tableContainer.innerHTML = '';
@@ -267,158 +246,15 @@
 
             tableContainer.appendChild(table);
         }
+
+        // Add event listener for fetching all data
+        document.getElementById("fetchAllDataButton").addEventListener("click", async function () {
+            try {
+                await fetchData(); // Ensure this is awaited
+            } catch (error) {
+                console.error('Error during NFC data fetching:', error);
+            }
+        });
     </script>
-
-    <!--<script>
-        debugger;
-        const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
-        const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
-        const resourceUrl = 'https://izenixlearn.crm.dynamics.com'; // Replace with your CRM resource URL
-        //const redirectUri = 'https://login.microsoftonline.com/common/oauth2/nativeclient'; // Your redirect URI
-        const redirectUri = 'https://www.izenix.com/nfctracking.html'; // Your redirect URI
-
-        // MSAL configuration
-        const msalConfig = {
-            auth: {
-                clientId: clientId,
-                authority: `https://login.microsoftonline.com/${tenantId}`,
-                redirectUri: redirectUri,
-            }
-        };
-
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
-
-        // Function to acquire token using MSAL.js
-        async function getAccessToken() {
-            const request = {
-                scopes: [`${resourceUrl}/.default`],
-            };
-
-            try {
-                const response = await msalInstance.acquireTokenPopup(request);
-                return response.accessToken;
-            } catch (error) {
-                console.error('Error acquiring access token:', error);
-                throw error;
-            }
-        }
-
-        // Function to fetch NFC tracking data from CRM API (using fetch)
-        async function fetchData() {
-            const accessToken = await getAccessToken();
-            const apiUrl = `${resourceUrl}//api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`; // Replace with your desired API endpoint
-
-            const response = await fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                displayNFCTTrackingData(data.value);
-            } else {
-                console.error('Error fetching data:', response.status, response.statusText);
-                alert('Error fetching data.');
-            }
-        }
-
-        // Function to fetch NFC tracking data from CRM API (using axios)
-        async function getNFCTTrackingData() {
-            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
-
-            const token = await getAccessToken();
-
-            if (!token) {
-                alert('Authentication failed. Please check your OAuth token.');
-                return;
-            }
-
-            try {
-                const response = await axios.get(oDataUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'OData-MaxVersion': '4.0',
-                        'OData-Version': '4.0',
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }
-                });
-                displayNFCTTrackingData(response.data.value);
-            } catch (error) {
-                console.error('Error fetching NFC tracking data:', error);
-                alert('Error fetching data.');
-            }
-        }
-
-        // Function to search for a specific Tag ID
-        async function searchTagId() {
-            const tagId = document.getElementById('searchTagId').value.trim();
-            if (!tagId) {
-                alert('Please enter a valid Tag ID.');
-                return;
-            }
-
-            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '${tagId}'&$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
-
-            const token = await getAccessToken();
-
-            if (!token) {
-                alert('Authentication failed. Please check your OAuth token.');
-                return;
-            }
-
-            try {
-                const response = await axios.get(oDataUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'OData-MaxVersion': '4.0',
-                        'OData-Version': '4.0',
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                if (response.data.value.length === 0) {
-                    alert('No record found for the given Tag ID.');
-                } else {
-                    displayNFCTTrackingData(response.data.value);
-                }
-            } catch (error) {
-                console.error('Error searching NFC tracking data:', error);
-                alert('Error fetching data.');
-            }
-        }
-
-        // Function to display the fetched data in an HTML table
-        function displayNFCTTrackingData(data) {
-            const table = document.createElement("table");
-
-            const headerRow = table.insertRow();
-            const headers = ["Sr. No.", "Name", "Tag ID", "Status", "Timestamp"];
-            headers.forEach(header => {
-                const headerCell = document.createElement("th");
-                headerCell.innerText = header;
-                headerRow.appendChild(headerCell);
-            });
-
-            data.forEach((item, index) => {
-                const row = table.insertRow();
-                row.insertCell().innerText = index + 1;
-                row.insertCell().innerText = item.izx_name || "N/A";
-                row.insertCell().innerText = item.izx_tagid || "N/A";
-                row.insertCell().innerText = item.izx_status === 0 ? "Inactive" : "Active";
-                row.insertCell().innerText = item.izx_timestamp ? new Date(item.izx_timestamp).toLocaleString() : "N/A";
-            });
-
-            const tableContainer = document.getElementById("tableContainer");
-            tableContainer.innerHTML = '';
-            tableContainer.appendChild(table);
-        }
-    </script>-->
-
-
 </body>
 </html>
