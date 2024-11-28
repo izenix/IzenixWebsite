@@ -131,20 +131,31 @@
         const msalInstance = new msal.PublicClientApplication(msalConfig);
 
         async function getAccessToken() {
-            const request = {
-                scopes: [`${resourceUrl}/.default`],
-            };
+            const request = { scopes: [`${resourceUrl}/.default`] };
 
             try {
                 const response = await msalInstance.acquireTokenPopup(request);
-                console.log('Access Token:', response.accessToken);
+                console.log('Access Token acquired:', response.accessToken);
                 return response.accessToken;
             } catch (error) {
-                console.error('Error acquiring access token:', error);
-                alert("Authentication failed. Please try logging in.");
+                if (error.name === 'InteractionRequiredAuthError') {
+                    console.warn('Interactive login required.');
+                    try {
+                        const loginResponse = await msalInstance.loginPopup(request);
+                        console.log('Interactive login successful. Token:', loginResponse.accessToken);
+                        return loginResponse.accessToken;
+                    } catch (loginError) {
+                        console.error('Error during interactive login:', loginError);
+                        alert('Authentication failed. Please log in.');
+                        throw loginError;
+                    }
+                }
+                console.error('Error acquiring token:', error);
+                alert('Authentication failed. Please try logging in.');
                 throw error;
             }
         }
+
 
         async function fetchData() {
             try {
