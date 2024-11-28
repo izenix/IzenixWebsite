@@ -157,6 +157,32 @@
             }
         }
 
+        async function getNFCTTrackingData() {
+            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+
+            const token = await getAccessToken();
+
+            if (!token) {
+                alert('Authentication failed. Please check your OAuth token.');
+                return;
+            }
+
+            try {
+                const response = await axios.get(oDataUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'OData-MaxVersion': '4.0',
+                        'OData-Version': '4.0',
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                });
+                displayNFCTTrackingData(response.data.value);
+            } catch (error) {
+                console.error('Error fetching NFC tracking data:', error);
+                alert('Error fetching data.');
+            }
+        }
 
         async function fetchData() {
             try {
