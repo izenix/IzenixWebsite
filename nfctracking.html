@@ -114,8 +114,124 @@
     <!--<script src="https://alcdn.msauth.net/browser/2.37.0/js/msal-browser.min.js"></script>-->
     <script src="https://alcdn.msauth.net/browser/2.34.0/js/msal-browser.min.js"></script>
 
-
     <script>
+        const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
+        const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
+        const resourceUrl = 'https://izenixlearn.crm.dynamics.com'; // CRM resource URL
+        const redirectUri = 'https://www.izenix.com/nfctracking.html'; // Redirect URI
+
+        const msalConfig = {
+            auth: {
+                clientId: clientId,
+                authority: `https://login.microsoftonline.com/${tenantId}`,
+                redirectUri: redirectUri,
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        async function getAccessToken() {
+            const request = {
+                scopes: [`${resourceUrl}/.default`],
+            };
+
+            try {
+                const response = await msalInstance.acquireTokenPopup(request);
+                console.log('Access Token:', response.accessToken);
+                return response.accessToken;
+            } catch (error) {
+                console.error('Error acquiring access token:', error);
+                alert("Authentication failed. Please try logging in.");
+                throw error;
+            }
+        }
+
+        async function fetchData() {
+            try {
+                const accessToken = await getAccessToken();
+                const apiUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    displayNFCTTrackingData(data.value);
+                } else {
+                    console.error('Error fetching data:', response.status, response.statusText);
+                    alert('Error fetching data.');
+                }
+            } catch (error) {
+                console.error('Error in fetchData:', error);
+            }
+        }
+
+        async function searchTagId() {
+            const tagId = document.getElementById('searchTagId').value.trim();
+            if (!tagId) {
+                alert('Please enter a valid Tag ID.');
+                return;
+            }
+
+            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '${tagId}'&$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+
+            try {
+                const token = await getAccessToken();
+                const response = await axios.get(oDataUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.data.value.length === 0) {
+                    alert('No record found for the given Tag ID.');
+                } else {
+                    displayNFCTTrackingData(response.data.value);
+                }
+            } catch (error) {
+                console.error('Error searching NFC tracking data:', error);
+                alert('Error fetching data.');
+            }
+        }
+
+        function displayNFCTTrackingData(data) {
+            const tableContainer = document.getElementById("tableContainer");
+            tableContainer.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                tableContainer.innerHTML = '<p>No data available.</p>';
+                return;
+            }
+
+            const table = document.createElement("table");
+            const headerRow = table.insertRow();
+            const headers = ["Sr. No.", "Name", "Tag ID", "Status", "Timestamp"];
+            headers.forEach(header => {
+                const headerCell = document.createElement("th");
+                headerCell.innerText = header;
+                headerRow.appendChild(headerCell);
+            });
+
+            data.forEach((item, index) => {
+                const row = table.insertRow();
+                row.insertCell().innerText = index + 1;
+                row.insertCell().innerText = item.izx_name || "N/A";
+                row.insertCell().innerText = item.izx_tagid || "N/A";
+                row.insertCell().innerText = item.izx_status === 0 ? "Inactive" : "Active";
+                row.insertCell().innerText = item.izx_timestamp ? new Date(item.izx_timestamp).toLocaleString() : "N/A";
+            });
+
+            tableContainer.appendChild(table);
+        }
+    </script>
+
+    <!--<script>
         debugger;
         const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
         const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
@@ -263,7 +379,7 @@
             tableContainer.innerHTML = '';
             tableContainer.appendChild(table);
         }
-    </script>
+    </script>-->
 
 
 </body>
