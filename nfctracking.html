@@ -1,260 +1,266 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Data Display</title>
+    <title>Simple SPA - NFC Tracking Data</title>
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
         }
 
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 900px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
         button {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
+            padding: 10px 20px;
+            margin: 20px 10px;
             border: none;
+            background-color: #0078d7;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
-            margin: 10px 0;
+            transition: background-color 0.3s ease;
         }
 
             button:hover {
-                background-color: #0056b3;
+                background-color: #005a9e;
             }
 
-        .table-wrapper {
-            max-height: 400px;
-            overflow-y: auto;
-            margin-top: 20px;
+        #message, #errorMessage {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        #message {
+            color: green;
+        }
+
+        #errorMessage {
+            color: red;
         }
 
         table {
-            width: 100%;
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 20px;
             border-collapse: collapse;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
         }
 
         th, td {
-            padding: 8px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             text-align: left;
-            border: 1px solid #ccc;
         }
 
         th {
+            background-color: #0078d7;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        tr:nth-child(even) {
             background-color: #f2f2f2;
-            position: sticky;
-            top: 0;
         }
 
         tr:hover {
-            background-color: #f9f9f9;
+            background-color: #e0e0e0;
         }
 
-        .search-container {
-            margin-bottom: 20px;
+        caption {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
-
-        input[type="text"] {
-            padding: 10px;
-            width: 70%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .search-button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-left: 10px;
-        }
-
-            .search-button:hover {
-                background-color: #218838;
-            }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>NFC Tracking Data</h1>
-        <div class="search-container">
-            <input type="text" id="searchTagId" placeholder="Enter Tag ID to search">
-            <button class="search-button" onclick="searchTagId()">Search</button>
-        </div>
-        <button id="fetchAllDataButton">Fetch All Data</button>
-        <div id="tableContainer" class="table-wrapper"></div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://alcdn.msauth.net/browser/2.34.0/js/msal-browser.min.js"></script>
+    <button id="login">Login</button>
+    <button id="logout" style="display:none;">Logout</button>
+    <button id="getNFCTrackingData" style="display:none;">NFC Tracking Data</button>
 
-    <script>
-        const clientId = '78d9abf2-52c4-4f68-a69d-dfab8a564eab';
-        const tenantId = '3729cd9f-f399-4420-a54a-cd1d4483b626';
-        const resourceUrl = 'https://izenixlearn.crm.dynamics.com'; // CRM resource URL
-        const redirectUri = 'https://www.izenix.com/nfctracking.html'; // Redirect URI
-        //const redirectUri = 'file:///D:/ScripttSpherre/Retrieve%20data%20from%20CRM.html';
+    <div id="errorMessage"></div>
+    <div id="message"></div>
 
-        const msalConfig = {
-            auth: {
-                clientId: clientId,
-                authority: `https://login.microsoftonline.com/${tenantId}`,
-                redirectUri: redirectUri,
+    <table id="nfctrackingsTable" style="display:none;">
+        <caption>NFC Tracking Data</caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Tag ID</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="nfctrackingsTableBody"></tbody>
+    </table>
+
+    <script type="text/javascript">
+        "use strict";
+
+        //Set these variables to match your environment
+        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; //The URL to connect to CRM (online)
+        var tenant = "izenixlearn.onmicrosoft.com"; //Azure AD organization
+        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; //ClientId from application registration
+        var pageUrl = "https://www.izenix.com/nfctracking.html"; //URL of this page in your environment
+
+        var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, nfctrackingsTable, nfctrackingsTableBody;
+
+        //Configuration data for AuthenticationContext
+        var endpoints = {
+            orgUri: organizationURI
+        };
+
+        window.config = {
+            tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage',
+        };
+
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+
+                //Set DOM elements referenced by scripts
+                message = document.getElementById("message");
+                errorMessage = document.getElementById("errorMessage");
+                loginButton = document.getElementById("login");
+                logoutButton = document.getElementById("logout");
+                getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
+                nfctrackingsTable = document.getElementById("nfctrackingsTable");
+                nfctrackingsTableBody = document.getElementById("nfctrackingsTableBody");
+
+                //Event handlers on DOM elements
+                loginButton.addEventListener("click", login);
+                logoutButton.addEventListener("click", logout);
+                getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
+
+                authenticate();
+
+                if (user) {
+                    loginButton.style.display = "none";
+                    logoutButton.style.display = "block";
+                    getNFCTrackingDataButton.style.display = "block";
+
+                    var helloMessage = document.createElement("p");
+                    helloMessage.textContent = "Hello " + user.profile.name;
+                    message.appendChild(helloMessage);
+                } else {
+                    loginButton.style.display = "block";
+                    logoutButton.style.display = "none";
+                    getNFCTrackingDataButton.style.display = "none";
+                }
             }
         };
 
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
+        // Authentication
+        function authenticate() {
+            authContext = new AuthenticationContext(config);
 
-        // Function to get the access token
-        async function getAccessToken() {
-            const request = { scopes: [`${resourceUrl}/.default`] };
+            var isCallback = authContext.isCallback(window.location.hash);
+            if (isCallback) {
+                authContext.handleWindowCallback();
+            }
+            var loginError = authContext.getLoginError();
+            if (isCallback && !loginError) {
+                window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
+            } else {
+                errorMessage.textContent = loginError;
+            }
+            user = authContext.getCachedUser();
+        }
 
-            try {
-                // Attempt to acquire token silently first
-                const response = await msalInstance.acquireTokenSilent(request);
-                console.log('Token acquired silently:', response.accessToken);
-                return response.accessToken;
-            } catch (error) {
-                if (error instanceof msal.InteractionRequiredAuthError) {
-                    console.warn('Silent acquisition failed. Interactive login required.');
-                    try {
-                        // Fall back to login popup
-                        const loginResponse = await msalInstance.loginPopup(request);
-                        console.log('Interactive login successful:', loginResponse.accessToken);
-                        return loginResponse.accessToken;
-                    } catch (loginError) {
-                        console.error('Login failed:', loginError);
-                        alert('Authentication failed. Please try again.');
-                        throw loginError;
+        function login() {
+            authContext.login();
+        }
+
+        function logout() {
+            authContext.logOut();
+            nfctrackingsTable.style.display = "none";
+            nfctrackingsTableBody.innerHTML = "";
+        }
+
+        function getNFCTrackingData() {
+            getNFCTrackingDataButton.disabled = true;
+            var retrievingMessage = document.createElement("p");
+            retrievingMessage.textContent = "Retrieving NFC tracking data...";
+            message.appendChild(retrievingMessage);
+
+            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
+        }
+
+        function retrieveNFCTrackingData(error, token) {
+            if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                return;
+            }
+
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp"), true);
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+
+            req.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    req.onreadystatechange = null;
+                    if (this.status == 200) {
+                        var nfctrackings = JSON.parse(this.response).value;
+                        renderNFCTrackingData(nfctrackings);
+                    } else {
+                        var error = JSON.parse(this.response).error;
+                        console.log(error.message);
+                        errorMessage.textContent = error.message;
                     }
-                } else {
-                    console.error('Error acquiring token:', error);
-                    alert('Authentication failed. Please try again.');
-                    throw error;
                 }
-            }
+            };
+            req.send();
         }
 
-        // Function to fetch NFC Tracking Data
-        async function fetchData() {
-            try {
-                const accessToken = await getAccessToken();
-                const apiUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+        function renderNFCTrackingData(nfctrackings) {
+            nfctrackings.forEach(function (tracking) {
+                var nameCell = document.createElement("td");
+                nameCell.textContent = tracking.izx_name;
 
-                const response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json',
-                    },
-                });
+                var tagIdCell = document.createElement("td");
+                tagIdCell.textContent = tracking.izx_tagid;
 
-                if (response.ok) {
-                    const data = await response.json();
-                    displayNFCTTrackingData(data.value);
-                } else {
-                    console.error('Error fetching data:', response.status, response.statusText);
-                    alert('Error fetching data.');
-                }
-            } catch (error) {
-                console.error('Error in fetchData:', error);
-            }
-        }
+                var statusCell = document.createElement("td");
+                statusCell.textContent = tracking.izx_status;
 
-        // Function to search data by Tag ID
-        async function searchTagId() {
-            const tagId = document.getElementById('searchTagId').value.trim();
-            if (!tagId) {
-                alert('Please enter a valid Tag ID.');
-                return;
-            }
+                var timestampCell = document.createElement("td");
+                timestampCell.textContent = tracking.izx_timestamp;
 
-            const oDataUrl = `${resourceUrl}/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '${tagId}'&$select=izx_name,izx_tagid,izx_status,izx_timestamp`;
+                var row = document.createElement("tr");
+                row.appendChild(nameCell);
+                row.appendChild(tagIdCell);
+                row.appendChild(statusCell);
+                row.appendChild(timestampCell);
 
-            try {
-                const token = await getAccessToken();
-                const response = await axios.get(oDataUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                if (response.data.value.length === 0) {
-                    alert('No record found for the given Tag ID.');
-                } else {
-                    displayNFCTTrackingData(response.data.value);
-                }
-            } catch (error) {
-                console.error('Error searching NFC tracking data:', error);
-                alert('Error fetching data.');
-            }
-        }
-
-        // Function to display NFC tracking data in a table
-        function displayNFCTTrackingData(data) {
-            const tableContainer = document.getElementById("tableContainer");
-            tableContainer.innerHTML = '';
-
-            if (!data || data.length === 0) {
-                tableContainer.innerHTML = '<p>No data available.</p>';
-                return;
-            }
-
-            const table = document.createElement("table");
-            const headerRow = table.insertRow();
-            const headers = ["Sr. No.", "Name", "Tag ID", "Status", "Timestamp"];
-            headers.forEach(header => {
-                const headerCell = document.createElement("th");
-                headerCell.innerText = header;
-                headerRow.appendChild(headerCell);
+                nfctrackingsTableBody.appendChild(row);
             });
 
-            data.forEach((item, index) => {
-                const row = table.insertRow();
-                row.insertCell().innerText = index + 1;
-                row.insertCell().innerText = item.izx_name || "N/A";
-                row.insertCell().innerText = item.izx_tagid || "N/A";
-                row.insertCell().innerText = item.izx_status === 0 ? "Inactive" : "Active";
-                row.insertCell().innerText = item.izx_timestamp ? new Date(item.izx_timestamp).toLocaleString() : "N/A";
-            });
-
-            tableContainer.appendChild(table);
+            nfctrackingsTable.style.display = "block";
         }
-
-        // Add event listener for fetching all data
-        document.getElementById("fetchAllDataButton").addEventListener("click", async function () {
-            try {
-                await fetchData(); // Ensure this is awaited
-            } catch (error) {
-                console.error('Error during NFC data fetching:', error);
-            }
-        });
     </script>
 </body>
 </html>
