@@ -202,9 +202,7 @@
 
 </body>
 </html>-->
-
-
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -469,4 +467,350 @@
         }
     </script>
 </body>
+</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User and NFC Tracking Data - Dynamics 365</title>
+
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Styling for buttons */
+        button {
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #45a049; /* Darker green on hover */
+            }
+
+            button:disabled {
+                background-color: #cccccc; /* Grey for disabled button */
+                cursor: not-allowed;
+            }
+
+        /* Error message styling */
+        #errorMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Styling for message (user greeting) */
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Table styling */
+        table {
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        caption {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive design for mobile */
+        @media screen and (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        "use strict";
+
+        // Set these variables to match your environment
+        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // The URL to connect to CRM (online)
+        var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD organization
+        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // ClientId from application registration
+        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // URL of this page in your environment
+
+        var user, authContext, message, errorMessage, loginButton, logoutButton, getUserNameButton, getNFCTrackingDataButton, nfctrackingsTable, nfctrackingsTableBody;
+
+        // Configuration data for AuthenticationContext
+        var endpoints = {
+            orgUri: organizationURI
+        };
+
+        window.config = {
+            tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage',
+        };
+
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+
+                // Set DOM elements referenced by scripts
+                message = document.getElementById("message");
+                errorMessage = document.getElementById("errorMessage");
+                loginButton = document.getElementById("login");
+                logoutButton = document.getElementById("logout");
+                getUserNameButton = document.getElementById("getUserName");
+                getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
+                nfctrackingsTable = document.getElementById("nfctrackingsTable");
+                nfctrackingsTableBody = document.getElementById("nfctrackingsTableBody");
+
+                // Event handlers on DOM elements
+                loginButton.addEventListener("click", login);
+                logoutButton.addEventListener("click", logout);
+                getUserNameButton.addEventListener("click", getUserName);
+                getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
+
+                authenticate();
+
+                if (user) {
+                    loginButton.style.display = "none";
+                    logoutButton.style.display = "block";
+                    getUserNameButton.style.display = "block";
+                    getNFCTrackingDataButton.style.display = "block";
+
+                    var helloMessage = document.createElement("p");
+                    helloMessage.textContent = "Hello " + user.profile.name;
+                    message.appendChild(helloMessage);
+                } else {
+                    loginButton.style.display = "block";
+                    logoutButton.style.display = "none";
+                    getUserNameButton.style.display = "none";
+                    getNFCTrackingDataButton.style.display = "none";
+                }
+            }
+        };
+
+        // Authentication
+        function authenticate() {
+            authContext = new AuthenticationContext(config);
+
+            var isCallback = authContext.isCallback(window.location.hash);
+            if (isCallback) {
+                authContext.handleWindowCallback();
+            }
+            var loginError = authContext.getLoginError();
+            if (isCallback && !loginError) {
+                window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
+            } else {
+                errorMessage.textContent = loginError;
+            }
+            user = authContext.getCachedUser();
+        }
+
+        function login() {
+            authContext.login();
+        }
+
+        function logout() {
+            authContext.logOut();
+            nfctrackingsTable.style.display = "none";
+            nfctrackingsTableBody.innerHTML = "";
+            message.innerHTML = ""; // Clear user name message
+        }
+
+        // Function to retrieve user's name based on predefined full names
+        function getUserName() {
+            getUserNameButton.disabled = true;
+            var retrievingMessage = document.createElement("p");
+            retrievingMessage.textContent = "Retrieving user name...";
+            message.appendChild(retrievingMessage);
+
+            authContext.acquireToken(organizationURI, function (error, token) {
+                if (error || !token) {
+                    errorMessage.textContent = 'ADAL error occurred: ' + error;
+                    return;
+                }
+                getUserNameFromCRM(token);
+            });
+        }
+
+        function getUserNameFromCRM(token) {
+            var req = new XMLHttpRequest();
+            req.open("GET", organizationURI + "/api/data/v9.2/systemusers?$select=fullname", true);   //&$filter=(fullname eq 'Ramesh A' or fullname eq 'Eekshith M' or fullname eq 'Prudhvi Parne' or fullname eq 'Niaz Labbe')
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    var userData = JSON.parse(this.responseText).value;
+                    if (userData.length > 0) {
+                        var userName = userData[0].fullname; // Assuming the first result is what you want to display
+                        displayUserName(userName);
+                    } else {
+                        errorMessage.textContent = "No users found with the given names.";
+                    }
+                    getUserNameButton.disabled = false;
+                } else if (this.readyState === 4) {
+                    errorMessage.textContent = "Error retrieving user data: " + this.status;
+                    getUserNameButton.disabled = false;
+                }
+            };
+            req.send();
+        }
+
+        function displayUserName(userName) {
+            message.innerHTML = ""; // Clear previous messages
+            var helloMessage = document.createElement("p");
+            helloMessage.textContent = "Hello " + userName;
+            message.appendChild(helloMessage);
+        }
+
+        // Function to retrieve NFC Tracking Data
+        function getNFCTrackingData() {
+            getNFCTrackingDataButton.disabled = true;
+            var retrievingMessage = document.createElement("p");
+            retrievingMessage.textContent = "Retrieving NFC tracking data...";
+            message.appendChild(retrievingMessage);
+
+            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
+        }
+
+        function retrieveNFCTrackingData(error, token) {
+            if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                return;
+            }
+
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out,izx_timeint,izx_timeoutt"), true);
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+
+            req.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    req.onreadystatechange = null;
+                    if (this.status == 200) {
+                        var nfctrackings = JSON.parse(this.response).value;
+                        renderNFCTrackingData(nfctrackings);
+                    } else {
+                        var error = JSON.parse(this.response).error;
+                        console.log(error.message);
+                        errorMessage.textContent = error.message;
+                    }
+                    getNFCTrackingDataButton.disabled = false;
+                }
+            };
+            req.send();
+        }
+
+        function renderNFCTrackingData(nfctrackings) {
+            nfctrackingsTableBody.innerHTML = ""; // Clear previous data
+            nfctrackings.forEach(function (tracking) {
+                var row = document.createElement("tr");
+
+                row.innerHTML = `
+                            <td>${tracking.izx_name}</td>
+                            <td>${tracking.izx_tagid}</td>
+                            <td>${tracking.izx_status}</td>
+                            <td>${tracking.izx_timestamp}</td>
+                            <td>${tracking.izx_timein}</td>
+                            <td>${tracking.izx_timeout}</td>
+                            <td>${tracking.izx_duration}</td>
+                            <td>${tracking.izx_in_out}</td>
+                            <td>${tracking.izx_timeint}</td>
+                            <td>${tracking.izx_timeoutt}</td>
+                        `;
+
+                nfctrackingsTableBody.appendChild(row);
+            });
+
+            nfctrackingsTable.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+
+    <button id="login">Login</button>
+    <button id="logout" style="display:none;">Logout</button>
+
+    <!-- New buttons for User Name and NFC Tracking Data -->
+    <button id="getUserName" style="display:none;">Get User Name</button>
+    <button id="getNFCTrackingData" style="display:none;">Get NFC Tracking Data</button>
+
+    <div id="errorMessage" style="color:red;"></div>
+    <div id="message"></div>
+
+    <table id="nfctrackingsTable" style="display:none;">
+        <caption>NFC Tracking Data</caption>
+        <thead>
+            <tr>
+                <th>Tracking Name</th>
+                <th>Tag Id</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Duration</th>
+                <th>In/Out</th>
+                <th>Time In Total</th>
+                <th>Time Out Total</th>
+            </tr>
+        </thead>
+        <tbody id="nfctrackingsTableBody"></tbody>
+    </table>
+
+</body>
 </html>
+
+
