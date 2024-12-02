@@ -204,11 +204,8 @@
 </html>-->
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -317,15 +314,12 @@
                 <th>Tag ID</th>
                 <th>Status</th>
                 <th>Timestamp</th>
-<<<<<<< HEAD
                 <th>Time In</th>
                 <th>Time Out</th>
                 <th>Time Duration</th>
                 <th>Time In Out</th>
                 <th>Time Int</th>
                 <th>Time Outt</th>
-=======
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
             </tr>
         </thead>
         <tbody id="nfctrackingsTableBody"></tbody>
@@ -338,11 +332,7 @@
         var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; //The URL to connect to CRM (online)
         var tenant = "izenixlearn.onmicrosoft.com"; //Azure AD organization
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; //ClientId from application registration
-<<<<<<< HEAD
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; //URL of this page in your environment
-=======
-        var pageUrl = "https://izenix.com/SimpleSPA.html"; //URL of this page in your environment
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
+        var pageUrl = "https://www.izenix.com/nfctracking.html"; //URL of this page in your environment
 
         var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, nfctrackingsTable, nfctrackingsTableBody;
 
@@ -437,11 +427,7 @@
             }
 
             var req = new XMLHttpRequest();
-<<<<<<< HEAD
             req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out,izx_timeint,izx_timeoutt"), true);
-=======
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp"), true);
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -478,7 +464,6 @@
                 var timestampCell = document.createElement("td");
                 timestampCell.textContent = tracking.izx_timestamp;
 
-<<<<<<< HEAD
                 var timeinCell = document.createElement("td");
                 timeinCell.textContent = tracking.izx_timein;
 
@@ -497,22 +482,17 @@
                 var timetimeouttCell = document.createElement("td");
                 timetimeouttCell.textContent = tracking.izx_timeoutt;
 
-=======
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
                 var row = document.createElement("tr");
                 row.appendChild(nameCell);
                 row.appendChild(tagIdCell);
                 row.appendChild(statusCell);
                 row.appendChild(timestampCell);
-<<<<<<< HEAD
                 row.appendChild(timeinCell)
                 row.appendChild(timeoutCell)
                 row.appendChild(durationCell)
                 row.appendChild(timeinoutCell)
                 row.appendChild(timeintCell)
                 row.appendChild(timetimeouttCell)
-=======
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
 
                 nfctrackingsTableBody.appendChild(row);
             });
@@ -523,8 +503,4 @@
 </body>
 </html>
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> ff04d42dc14cc90621f82bddc492883509d7830e
