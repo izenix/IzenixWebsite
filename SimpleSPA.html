@@ -202,14 +202,7 @@
 
 </body>
 </html>-->
-
-
-
-
-
-
-
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -487,13 +480,12 @@
                 var row = document.createElement("tr");
                 row.appendChild(nameCell);
                 row.appendChild(tagIdCell);
-                row.appendChild(statusCell);
                 row.appendChild(timestampCell);
-                row.appendChild(timeinCell)
-                row.appendChild(timeoutCell)
+                row.appendChild(timeintCell)
+
+                row.appendChild(timetimeouttCell)
                 row.appendChild(durationCell)
                 row.appendChild(timeintCell)
-                row.appendChild(timetimeouttCell)
 
                 nfctrackingsTableBody.appendChild(row);
             });
@@ -503,5 +495,327 @@
     </script>
 
 </body>
-</html>
+</html>-->
 
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple SPA - NFC Tracking Data</title>
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #0078d7;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #005a9e;
+            }
+
+        #message, #errorMessage {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        #message {
+            color: green;
+        }
+
+        #errorMessage {
+            color: red;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0078d7;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        caption {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #searchBar {
+            margin: 20px 0;
+            padding: 10px;
+            width: 90%;
+            max-width: 600px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="login">Login</button>
+    <button id="logout" class="hidden">Logout</button>
+    <button id="getNFCTrackingData" class="hidden">NFC Tracking Data</button>
+
+    <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
+
+    <div id="errorMessage"></div>
+    <div id="message"></div>
+
+    <table id="nfctrackingsTable" class="hidden">
+        <caption>NFC Tracking Data</caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Tag ID</th>
+                <th>Timestamp</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Time Duration</th>
+                <th>Time In Out</th>
+
+            </tr>
+        </thead>
+        <tbody id="nfctrackingsTableBody"></tbody>
+    </table>
+
+    <script type="text/javascript">
+        "use strict";
+
+        var organizationURI = "https://izenixlearn.api.crm.dynamics.com";
+        var tenant = "izenixlearn.onmicrosoft.com";
+        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";
+        var pageUrl = "https://www.izenix.com/SimpleSPA.html";
+
+        var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody;
+
+        var endpoints = { orgUri: organizationURI };
+
+        window.config = {
+            tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage',
+        };
+
+        document.onreadystatechange = function () {
+            if (document.readyState === "complete") {
+                message = document.getElementById("message");
+                errorMessage = document.getElementById("errorMessage");
+                loginButton = document.getElementById("login");
+                logoutButton = document.getElementById("logout");
+                getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
+                searchBar = document.getElementById("searchBar");
+                nfctrackingsTable = document.getElementById("nfctrackingsTable");
+                nfctrackingsTableBody = document.getElementById("nfctrackingsTableBody");
+
+                loginButton.addEventListener("click", login);
+                logoutButton.addEventListener("click", logout);
+                getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
+                searchBar.addEventListener("input", searchByTagID);
+
+                authenticate();
+
+                if (user) {
+                    toggleLoggedInState(true);
+                }
+            }
+        };
+
+        function toggleLoggedInState(isLoggedIn) {
+            if (isLoggedIn) {
+                loginButton.classList.add("hidden");
+                logoutButton.classList.remove("hidden");
+                getNFCTrackingDataButton.classList.remove("hidden");
+                searchBar.classList.remove("hidden");
+            } else {
+                loginButton.classList.remove("hidden");
+                logoutButton.classList.add("hidden");
+                getNFCTrackingDataButton.classList.add("hidden");
+                searchBar.classList.add("hidden");
+                nfctrackingsTable.classList.add("hidden");
+            }
+        }
+
+        function authenticate() {
+            authContext = new AuthenticationContext(config);
+
+            var isCallback = authContext.isCallback(window.location.hash);
+            if (isCallback) {
+                authContext.handleWindowCallback();
+            }
+
+            var loginError = authContext.getLoginError();
+            if (isCallback && !loginError) {
+                window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
+            } else {
+                errorMessage.textContent = loginError;
+            }
+            user = authContext.getCachedUser();
+        }
+
+        function login() {
+            authContext.login();
+        }
+
+        function logout() {
+            authContext.logOut();
+            nfctrackingsTableBody.innerHTML = "";
+            toggleLoggedInState(false);
+        }
+
+        function getNFCTrackingData() {
+            getNFCTrackingDataButton.disabled = true;
+            message.textContent = "Retrieving NFC tracking data...";
+
+            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
+        }
+
+        function retrieveNFCTrackingData(error, token) {
+            if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                return;
+            }
+
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out"), true);
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            req.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        var nfctrackings = JSON.parse(this.response).value;
+                        renderNFCTrackingData(nfctrackings);
+                    } else {
+                        errorMessage.textContent = JSON.parse(this.response).error.message;
+                    }
+                }
+            };
+            req.send();
+        }
+
+        function renderNFCTrackingData(nfctrackings) {
+            nfctrackingsTableBody.innerHTML = "";
+            nfctrackings.forEach(function (tracking) {
+                var row = document.createElement("tr");
+
+                var nameCell = document.createElement("td");
+                nameCell.textContent = tracking.izx_name;
+
+                var tagIdCell = document.createElement("td");
+                tagIdCell.textContent = tracking.izx_tagid;
+                tagIdCell.classList.add("tag-id");
+
+                var timestampCell = document.createElement("td");
+                timestampCell.textContent = tracking.izx_timestamp;
+
+                var timeInCell = document.createElement("td");
+                timeInCell.textContent = tracking.izx_timein;
+
+                var timeOutCell = document.createElement("td");
+                timeOutCell.textContent = tracking.izx_timeout;
+
+                var durationCell = document.createElement("td");
+                durationCell.textContent = tracking.izx_duration;
+
+                var inoutCell = document.createElement("td");
+                inoutCell.textContent = tracking.izx_in_out;
+
+
+                row.appendChild(nameCell);
+                row.appendChild(tagIdCell);               
+                row.appendChild(timestampCell);
+                row.appendChild(timeInCell);
+                row.appendChild(timeOutCell);
+                row.appendChild(durationCell);
+                row.appendChild(inoutCell);
+
+                nfctrackingsTableBody.appendChild(row);
+            });
+
+            message.textContent = "NFC tracking data loaded successfully.";
+            nfctrackingsTable.classList.remove("hidden");
+        }
+
+        function searchByTagID() {
+            var filterValue = searchBar.value.toUpperCase();
+            var rows = nfctrackingsTableBody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
+                if (tagIdCell) {
+                    var tagId = tagIdCell.textContent.toUpperCase();
+                    rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
