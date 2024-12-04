@@ -263,13 +263,13 @@
                 tagIdCell.classList.add("tag-id");
 
                 var timestampCell = document.createElement("td");
-                timestampCell.textContent = tracking.izx_timestamp;
+                timestampCell.textContent = formatDate(tracking.izx_timestamp);
 
                 var timeInCell = document.createElement("td");
-                timeInCell.textContent = tracking.izx_timein;
+                timeInCell.textContent = formatTime(tracking.izx_timein);
 
                 var timeOutCell = document.createElement("td");
-                timeOutCell.textContent = tracking.izx_timeout;
+                timeOutCell.textContent = formatTime(tracking.izx_timeout);
 
                 var durationCell = document.createElement("td");
                 durationCell.textContent = tracking.izx_duration;
@@ -373,7 +373,7 @@
             background-color: #f1f1f1;
         }
     </style>
-    Load ADAL.js
+
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
 </head>
 <body>
@@ -393,6 +393,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>TagID<button onclick="addNewTag()">Show</button></th>
             </tr>
         </thead>
         <tbody id="usersTableBody"></tbody>
