@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,101 +7,7 @@
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
 
     <style>
-        /*body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            background-color: #0078d7;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-            button:hover {
-                background-color: #005a9e;
-            }
-
-        #message, #errorMessage {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-        #message {
-            color: green;
-        }
-
-        #errorMessage {
-            color: red;
-        }
-
-        table {
-            width: 90%;
-            max-width: 1000px;
-            margin-top: 20px;
-            border-collapse: collapse;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: #0078d7;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        td {
-            font-size: 16px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e0e0e0;
-        }
-
-        caption {
-            font-size: 20px;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        #searchBar {
-            margin: 20px 0;
-            padding: 10px;
-            width: 90%;
-            max-width: 600px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .hidden {
-            display: none;
-        }*/
+       
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
@@ -424,13 +330,13 @@
     </script>
 
 </body>
-</html>
+</html>-->
 
 
 
 
 
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -508,7 +414,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>TagID<button onclick="addNewTag()">Show</button></th>
+                <th>TagID</th>
             </tr>
         </thead>
         <tbody id="usersTableBody"></tbody>
@@ -646,10 +552,9 @@
             req.send();
         }
 
-        // Function to render users into the table
         function renderUsers(users) {
             usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user) {
+            users.forEach(function (user, index) {
                 var row = document.createElement("tr");
 
                 var nameCell = document.createElement("td");
@@ -661,9 +566,20 @@
                 var mobilePhone = document.createElement("td");
                 mobilePhone.textContent = user.mobilephone;
 
+                var tagidCell = document.createElement("td");
+                // Create button for each tagID
+                var tagidButton = document.createElement("button");
+                tagidButton.textContent = "Show";
+                tagidButton.onclick = function () {
+                    alert("TagID: " + user.izx_tagid);
+                };
+
+                tagidCell.appendChild(tagidButton); // Add button to cell
+
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
                 row.appendChild(mobilePhone);
+                row.appendChild(tagidCell);
 
                 usersTableBody.appendChild(row);
             });
@@ -671,6 +587,7 @@
             getUsersButton.disabled = false; // Re-enable the button
             message.textContent = "Users loaded successfully.";
         }
+
     </script>
 </body>
-</html>-->
+</html>
