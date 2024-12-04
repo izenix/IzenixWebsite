@@ -7,7 +7,7 @@
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
 
     <style>
-       
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
@@ -336,6 +336,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -529,7 +531,7 @@
             }
 
             var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone"), true);  //email phone tagID
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid"), true);
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -552,9 +554,10 @@
             req.send();
         }
 
+        // Function to render users into the table
         function renderUsers(users) {
             usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user, index) {
+            users.forEach(function (user) {
                 var row = document.createElement("tr");
 
                 var nameCell = document.createElement("td");
@@ -567,33 +570,12 @@
                 mobilePhone.textContent = user.mobilephone;
 
                 var tagidCell = document.createElement("td");
-
-                // Create button for each tagID
-                var tagidButton = document.createElement("button");
-                tagidButton.textContent = "Show TagID";
-                tagidButton.onclick = function () {
-                    // Call Xrm.WebApi to fetch tagid
-                    Xrm.WebApi.retrieveMultipleRecords("contact", "?$select=izx_tagid&$filter=contactid eq '" + user.contactid + "'").then(
-                        function success(results) {
-                            // Check if results contain any records
-                            if (results.entities.length > 0) {
-                                var result = results.entities[0];
-                                var izx_tagid = result["izx_tagid"];
-
-                                // Show the TagID
-                                alert("TagID for " + user.fullname + ": " + izx_tagid);
-                            } else {
-                                alert("No TagID found for " + user.fullname);
-                            }
-                        },
-                        function (error) {
-                            console.error("Error retrieving tagID:", error.message);
-                            alert("Error retrieving TagID");
-                        }
-                    );
-                };
-
-                tagidCell.appendChild(tagidButton); // Add button to the cell
+                var tagIdButton = document.createElement("button");
+                tagIdButton.textContent = "Show";
+                tagIdButton.addEventListener("click", function () {
+                    showTagIdData(user.izx_tagid);
+                });
+                tagidCell.appendChild(tagIdButton);
 
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
@@ -607,7 +589,43 @@
             message.textContent = "Users loaded successfully.";
         }
 
+        // Function to show TagID data in a new page
+        function showTagIdData(tagId) {
+            if (!tagId) {
+                alert("No TagID found for this user.");
+                return;
+            }
 
+            Xrm.WebApi.retrieveMultipleRecords("contact", "?$select=izx_tagid,contactid,fullname,emailaddress1,mobilephone&$filter=izx_tagid eq '" + tagId + "'").then(
+                function success(results) {
+                    if (results.entities.length > 0) {
+                        var result = results.entities[0];
+
+                        // Create an object with the retrieved data
+                        var tagIdDetails = {
+                            "Contact ID": result["contactid"],
+                            "Full Name": result["fullname"],
+                            "Email": result["emailaddress1"],
+                            "Phone Number": result["mobilephone"],
+                            "TagID": result["izx_tagid"]
+                        };
+
+                        // Store the data in localStorage
+                        localStorage.setItem('tagIdData', JSON.stringify(tagIdDetails));
+
+                        // Redirect to the details page
+                        window.location.href = 'tagid-details.html';
+                    } else {
+                        alert("No data found for the selected TagID.");
+                    }
+                },
+                function (error) {
+                    console.error(error.message);
+                    alert("Error retrieving data: " + error.message);
+                }
+            );
+        }
     </script>
+
 </body>
 </html>
