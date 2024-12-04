@@ -880,18 +880,55 @@
         }
 
         // Function to show TagID data on a new page via URL query parameters
-        function showTagIdData(tagId, fullName, email, phone) {
+        //function showTagIdData(tagId, fullName, email, phone) {
+        //    if (!tagId) {
+        //        alert("No TagID found for this user.");
+        //        return;
+        //    }
+
+        //    // Build the URL with query parameters
+        //    var url = `tagid-details.html?tagid=${encodeURIComponent(tagId)}&fullname=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+
+        //    // Redirect to the details page
+        //    window.location.href = url;
+        //}
+
+        Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", "?$select=izx_status,izx_tagid,izx_name&$filter=izx_tagid ne null").then(
+            function success(results) {
+                console.log(results);
+                for (var i = 0; i < results.entities.length; i++) {
+                    var result = results.entities[i];
+                    // Columns from the result
+                    var izx_nfctrackingid = result["izx_nfctrackingid"]; // Guid
+                    var izx_status = result["izx_status"]; // Choice
+                    var izx_status_formatted = result["izx_status@OData.Community.Display.V1.FormattedValue"];
+                    var izx_tagid = result["izx_tagid"]; // Text
+                    var izx_name = result["izx_name"]; // Text
+
+                    // Call the showTagIdData function with the retrieved data
+                    showTagIdData(izx_tagid, izx_name, izx_status_formatted);
+                }
+            },
+            function (error) {
+                console.log(error.message);
+            }
+        );
+
+        function showTagIdData(tagId, name, status) {
             if (!tagId) {
                 alert("No TagID found for this user.");
                 return;
             }
 
             // Build the URL with query parameters
-            var url = `tagid-details.html?tagid=${encodeURIComponent(tagId)}&fullname=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+            var url = `tagid-details.html?tagid=${encodeURIComponent(tagId)}&name=${encodeURIComponent(name)}&status=${encodeURIComponent(status)}`;
 
             // Redirect to the details page
             window.location.href = url;
         }
+
+
+
     </script>
 
 </body>

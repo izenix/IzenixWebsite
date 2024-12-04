@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -78,6 +78,142 @@
             });
 
             detailsDiv.appendChild(table);
+        });
+    </script>
+
+</body>
+</html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TagID Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .tagid-container {
+            margin-top: 20px;
+        }
+
+            .tagid-container h2 {
+                margin-bottom: 10px;
+            }
+    </style>
+</head>
+<body>
+
+    <h1>TagID Details</h1>
+    <div id="details"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const tagids = JSON.parse(urlParams.get('tagids')); // Multiple TagIDs as an array
+            const fullname = urlParams.get('izx_name');
+            const email = urlParams.get('izx_status');
+            const phone = urlParams.get('phone');
+
+            // Display the data in a table
+            const detailsDiv = document.getElementById('details');
+
+            const headerRow = document.createElement('tr');
+            const header1 = document.createElement('th');
+            header1.textContent = 'Field';
+            const header2 = document.createElement('th');
+            header2.textContent = 'Value';
+            headerRow.appendChild(header1);
+            headerRow.appendChild(header2);
+
+            const table = document.createElement('table');
+            table.appendChild(headerRow);
+
+            const fields = [
+                { name: 'Full Name', value: fullname },
+                { name: 'Email', value: email },
+                { name: 'Phone Number', value: phone }
+            ];
+
+            fields.forEach(function (field) {
+                const row = document.createElement('tr');
+                const fieldCell = document.createElement('td');
+                fieldCell.textContent = field.name;
+
+                const valueCell = document.createElement('td');
+                valueCell.textContent = field.value;
+
+                row.appendChild(fieldCell);
+                row.appendChild(valueCell);
+                table.appendChild(row);
+            });
+
+            detailsDiv.appendChild(table);
+
+            // Create a section to display the TagID details
+            const tagidContainer = document.createElement('div');
+            tagidContainer.classList.add('tagid-container');
+            const tagidHeader = document.createElement('h2');
+            tagidHeader.textContent = 'TagID Records';
+            tagidContainer.appendChild(tagidHeader);
+
+            const tagidTable = document.createElement('table');
+            tagidTable.innerHTML = '<tr><th>TagID</th><th>Status</th><th>Name</th></tr>';
+
+            tagids.forEach(function (tag) {
+                const tagidRow = document.createElement('tr');
+                const tagidCell = document.createElement('td');
+                tagidCell.textContent = tag.tagid;
+                const statusCell = document.createElement('td');
+                statusCell.textContent = tag.status;
+                const nameCell = document.createElement('td');
+                nameCell.textContent = tag.name;
+
+                tagidRow.appendChild(tagidCell);
+                tagidRow.appendChild(statusCell);
+                tagidRow.appendChild(nameCell);
+                tagidTable.appendChild(tagidRow);
+            });
+
+            tagidContainer.appendChild(tagidTable);
+            detailsDiv.appendChild(tagidContainer);
         });
     </script>
 
