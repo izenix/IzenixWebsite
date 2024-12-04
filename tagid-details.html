@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TagID Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>TagID Details</h1>
+    <div id="details"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const tagid = urlParams.get('tagid');
+            const fullname = urlParams.get('firstname');
+            const email = urlParams.get('emailaddress1');
+            const phone = urlParams.get('mobilephone');
+
+            // Display the data in a table
+            const detailsDiv = document.getElementById('details');
+            const table = document.createElement('table');
+            const headerRow = document.createElement('tr');
+
+            const header1 = document.createElement('th');
+            header1.textContent = 'Field';
+            const header2 = document.createElement('th');
+            header2.textContent = 'Value';
+
+            headerRow.appendChild(header1);
+            headerRow.appendChild(header2);
+            table.appendChild(headerRow);
+
+            const fields = [
+                { name: 'Full Name', value: fullname },
+                { name: 'Email', value: email },
+                { name: 'Phone Number', value: phone },
+                { name: 'TagID', value: tagid }
+            ];
+
+            fields.forEach(function(field) {
+                const row = document.createElement('tr');
+                const fieldCell = document.createElement('td');
+                fieldCell.textContent = field.name;
+
+                const valueCell = document.createElement('td');
+                valueCell.textContent = field.value;
+
+                row.appendChild(fieldCell);
+                row.appendChild(valueCell);
+                table.appendChild(row);
+            });
+
+            detailsDiv.appendChild(table);
+        });
+    </script>
+
+</body>
+</html>
