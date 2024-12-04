@@ -250,6 +250,18 @@
             req.send();
         }
 
+        // Helper function to format date (YYYY-MM-DD)
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
+        }
+
+        // Helper function to format time (HH:MM:SS)
+        function formatTime(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
+        }
+
         function renderNFCTrackingData(nfctrackings) {
             nfctrackingsTableBody.innerHTML = "";
             nfctrackings.forEach(function (tracking) {
