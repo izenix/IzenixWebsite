@@ -567,14 +567,33 @@
                 mobilePhone.textContent = user.mobilephone;
 
                 var tagidCell = document.createElement("td");
+
                 // Create button for each tagID
                 var tagidButton = document.createElement("button");
-                tagidButton.textContent = "Show";
+                tagidButton.textContent = "Show TagID";
                 tagidButton.onclick = function () {
-                    alert("TagID: " + user.izx_tagid);
+                    // Call Xrm.WebApi to fetch tagid
+                    Xrm.WebApi.retrieveMultipleRecords("contact", "?$select=izx_tagid&$filter=contactid eq '" + user.contactid + "'").then(
+                        function success(results) {
+                            // Check if results contain any records
+                            if (results.entities.length > 0) {
+                                var result = results.entities[0];
+                                var izx_tagid = result["izx_tagid"];
+
+                                // Show the TagID
+                                alert("TagID for " + user.fullname + ": " + izx_tagid);
+                            } else {
+                                alert("No TagID found for " + user.fullname);
+                            }
+                        },
+                        function (error) {
+                            console.error("Error retrieving tagID:", error.message);
+                            alert("Error retrieving TagID");
+                        }
+                    );
                 };
 
-                tagidCell.appendChild(tagidButton); // Add button to cell
+                tagidCell.appendChild(tagidButton); // Add button to the cell
 
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
@@ -587,6 +606,7 @@
             getUsersButton.disabled = false; // Re-enable the button
             message.textContent = "Users loaded successfully.";
         }
+
 
     </script>
 </body>
