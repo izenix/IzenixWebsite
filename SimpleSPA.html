@@ -908,7 +908,7 @@
             message.textContent = "Users loaded successfully.";
         }
 
-        // Function to show TagID data on a new page via URL query parameters
+         //Function to show TagID data on a new page via URL query parameters
         //function showTagIdData(tagId, fullName, email, phone) {
         //    if (!tagId) {
         //        alert("No TagID found for this user.");
@@ -922,99 +922,44 @@
         //    window.location.href = url;
         //}
 
-        //Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", "?$select=izx_status,izx_tagid,izx_name&$filter=izx_tagid ne null").then(
-        //    function success(results) {
-        //        console.log(results);
-        //        for (var i = 0; i < results.entities.length; i++) {
-        //            var result = results.entities[i];
-        //            // Columns from the result
-        //            var izx_nfctrackingid = result["izx_nfctrackingid"]; // Guid
-        //            var izx_status = result["izx_status"]; // Choice
-        //            var izx_status_formatted = result["izx_status@OData.Community.Display.V1.FormattedValue"];
-        //            var izx_tagid = result["izx_tagid"]; // Text
-        //            var izx_name = result["izx_name"]; // Text
 
-        //            // Call the showTagIdData function with the retrieved data
-        //            showTagIdData(izx_tagid, izx_name, izx_status_formatted);
-        //        }
-        //    },
-        //    function (error) {
-        //        console.log(error.message);
-        //    }
-        //);
 
-        //function showTagIdData(tagId, name, status) {
-        //    if (!tagId) {
-        //        alert("No TagID found for this user.");
-        //        return;
-        //    }
 
-        //    // Build the URL with query parameters
-        //    var url = `tagid-details.html?tagid=${encodeURIComponent(tagId)}&name=${encodeURIComponent(name)}&status=${encodeURIComponent(status)}`;
 
-        //    // Redirect to the details page
-        //    window.location.href = url;
-        //}
-
-        // Xrm.WebApi.retrieveMultipleRecords to fetch the data
         Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", "?$select=izx_status,izx_tagid,izx_name&$filter=izx_tagid ne null").then(
             function success(results) {
                 console.log(results);
-
-                // Create a table to display the results
-                const detailsDiv = document.getElementById('details');
-                const table = document.createElement('table');
-
-                // Create table header row
-                const headerRow = document.createElement('tr');
-                const header1 = document.createElement('th');
-                header1.textContent = 'TagID';
-                const header2 = document.createElement('th');
-                header2.textContent = 'Name';
-                const header3 = document.createElement('th');
-                header3.textContent = 'Status';
-
-                headerRow.appendChild(header1);
-                headerRow.appendChild(header2);
-                headerRow.appendChild(header3);
-                table.appendChild(headerRow);
-
-                // Loop through results and add rows to the table
                 for (var i = 0; i < results.entities.length; i++) {
                     var result = results.entities[i];
-
+                    // Columns from the result
+                    var izx_nfctrackingid = result["izx_nfctrackingid"]; // Guid
+                    var izx_status = result["izx_status"]; // Choice
+                    var izx_status_formatted = result["izx_status@OData.Community.Display.V1.FormattedValue"];
                     var izx_tagid = result["izx_tagid"]; // Text
                     var izx_name = result["izx_name"]; // Text
-                    var izx_status = result["izx_status@OData.Community.Display.V1.FormattedValue"]; // Choice (formatted)
 
-                    // Create a row for each result
-                    var row = document.createElement('tr');
-                    var tagIdCell = document.createElement('td');
-                    var nameCell = document.createElement('td');
-                    var statusCell = document.createElement('td');
-
-                    // Set the cell values
-                    tagIdCell.textContent = izx_tagid;
-                    nameCell.textContent = izx_name;
-                    statusCell.textContent = izx_status;
-
-                    // Append cells to the row
-                    row.appendChild(tagIdCell);
-                    row.appendChild(nameCell);
-                    row.appendChild(statusCell);
-
-                    // Append row to the table
-                    table.appendChild(row);
+                    // Call the showTagIdData function with the retrieved data
+                    showTagIdData(izx_tagid, izx_name, izx_status_formatted);
                 }
-
-                // Append the table to the detailsDiv
-                detailsDiv.appendChild(table);
             },
             function (error) {
                 console.log(error.message);
             }
         );
 
+        function showTagIdData(tagId, name, status) {
+            if (!tagId) {
+                alert("No TagID found for this user.");
+                return;
+            }
+
+            // Build the URL with query parameters
+            var url = `tagid-details.html?tagid=${encodeURIComponent(tagId)}&name=${encodeURIComponent(name)}&status=${encodeURIComponent(status)}`;
+
+            // Redirect to the details page
+            window.location.href = url;
+        }
+     
 
 
     </script>

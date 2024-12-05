@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -82,23 +82,7 @@
     </script>
 
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>-->
 <!--<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -219,3 +203,148 @@
 
 </body>
 </html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TagID Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>TagID Details</h1>
+        <div id="details"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const tagids = JSON.parse(urlParams.get('tagids')); // Multiple TagIDs as an array
+            const fullname = urlParams.get('izx_name');
+            const email = urlParams.get('izx_status');
+            const phone = urlParams.get('phone');
+
+            // Display the data in a table
+            const detailsDiv = document.getElementById('details');
+
+            // Create table header row
+            const table = document.createElement('table');
+            const headerRow = document.createElement('tr');
+
+            // Create headers
+            const header1 = document.createElement('th');
+            header1.textContent = '#'; // Serial Number
+            const header2 = document.createElement('th');
+            header2.textContent = 'TagID';
+            const header3 = document.createElement('th');
+            header3.textContent = 'Name';
+            const header4 = document.createElement('th');
+            header4.textContent = 'Status';
+
+            // Append headers to row
+            headerRow.appendChild(header1);
+            headerRow.appendChild(header2);
+            headerRow.appendChild(header3);
+            headerRow.appendChild(header4);
+            table.appendChild(headerRow);
+
+            // Loop through the tagids array and add rows to the table
+            tagids.forEach(function (tag, index) {
+                const row = document.createElement('tr');
+
+                // Create cells
+                const serialCell = document.createElement('td');
+                serialCell.textContent = index + 1; // Serial number
+
+                const tagidCell = document.createElement('td');
+                tagidCell.textContent = tag.tagid;
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = tag.name;
+
+                const statusCell = document.createElement('td');
+                statusCell.textContent = tag.status;
+
+                // Append cells to the row
+                row.appendChild(serialCell);
+                row.appendChild(tagidCell);
+                row.appendChild(nameCell);
+                row.appendChild(statusCell);
+
+                // Append row to the table
+                table.appendChild(row);
+            });
+
+            // Append the table to the details div
+            detailsDiv.appendChild(table);
+        });
+    </script>
+
+</body>
+</html>
