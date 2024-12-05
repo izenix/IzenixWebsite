@@ -1327,8 +1327,6 @@
 
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1365,6 +1363,7 @@
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
         }
 
         th, td {
@@ -1385,7 +1384,6 @@
         tr:hover {
             background-color: #f1f1f1;
         }
-
         /* Styling for the body */
         body {
             font-family: Arial, sans-serif;
@@ -1426,8 +1424,6 @@
     <button id="login">Login</button>
     <button id="logout" style="display: none;">Logout</button>
     <button id="getUsers" style="display: none;">Get Users</button>
-
-    <button id="togglePage">Toggle Page</button> <!-- Button to toggle pages -->
 
     <table id="usersTable">
         <thead>
@@ -1496,8 +1492,6 @@
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
                 getUsersButton.addEventListener("click", getUsers);
-
-                document.getElementById('togglePage').addEventListener("click", togglePage); // Toggle button listener
 
                 authenticate();
 
@@ -1571,7 +1565,7 @@
             }
 
             var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid"), true);
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -1609,54 +1603,25 @@
                 var mobilePhone = document.createElement("td");
                 mobilePhone.textContent = user.mobilephone;
 
-                var tagIdCell = document.createElement("td");
+                var tagidCell = document.createElement("td");
                 var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = user.izx_tagid;
+                tagIdButton.textContent = "Show";
                 tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid); // Call function to show data
+                    showTagIdData(user.izx_tagid);
                 });
-                tagIdCell.appendChild(tagIdButton);
+                tagidCell.appendChild(tagIdButton);
 
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
                 row.appendChild(mobilePhone);
-                row.appendChild(tagIdCell);
+                row.appendChild(tagidCell);
+
                 usersTableBody.appendChild(row);
             });
-            usersTable.style.display = 'table';
-            getUsersButton.disabled = false;
-            message.textContent = '';
+            usersTable.style.display = "block";
+            getUsersButton.disabled = false; // Re-enable the button
+            message.textContent = "Users loaded successfully.";
         }
-
-        //// Function to show Tag ID data dynamically
-        //function showTagIdData(tagId) {
-        //    authContext.acquireToken(organizationURI, function (error, token) {
-        //        if (error || !token) {
-        //            console.error("Token error:", error);
-        //            errorMessage.textContent = 'ADAL error occurred: ' + error;
-        //            return;
-        //        }
-
-        //        // Fetch data using Xrm.WebApi
-        //        Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=izx_tagid eq '${tagId}'`)
-        //            .then(function success(results) {
-        //                // Assuming results contain the data you need
-        //                for (var i = 0; i < results.entities.length; i++) {
-        //                    var result = results.entities[i];
-        //                    // Use the data to populate your details view
-        //                    document.getElementById("tagIdData").textContent = result.izx_tagid;
-        //                    document.getElementById("nameData").textContent = result["_izx_contact_value"];
-        //                    document.getElementById("statusData").textContent = result["status"] || 'Unknown';
-        //                }
-        //                document.getElementById("tagDetails").style.display = 'block'; // Show tag details
-        //            }, function (error) {
-        //                console.error(error.message);
-        //                errorMessage.textContent = error.message;
-        //            });
-        //    });
-        //}
-
-
 
         function showTagIdData(tagId) {
             authContext.acquireToken(organizationURI, function (error, token) {
@@ -1700,14 +1665,7 @@
                     });
             });
         }
-
-
-
-
-        // Toggle between two pages (simple page navigation)
-        function togglePage() {
-            window.location.href = "anotherPage.html"; // Navigates to another HTML page
-        }
     </script>
+
 </body>
 </html>
