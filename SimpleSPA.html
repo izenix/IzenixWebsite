@@ -939,7 +939,15 @@
 
 </body>
 </html>-->
-<!--<!DOCTYPE html>
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1064,9 +1072,9 @@
             </tr>
         </thead>
         <tbody id="usersTableBody"></tbody>
-    </table>-->
-<!-- Section to display TagID data -->
-<!--<div id="tagDetails">
+    </table>
+ Section to display TagID data 
+<div id="tagDetails">
         <h2>Tag ID Details</h2>
         <table>
             <tr>
@@ -1250,7 +1258,6 @@
             message.textContent = '';
         }
 
-        // Function to show Tag ID data dynamically
         function showTagIdData(tagId) {
             authContext.acquireToken(organizationURI, function (error, token) {
                 if (error || !token) {
@@ -1259,75 +1266,50 @@
                     return;
                 }
 
+                // Fetch TagID data using Xrm.WebApi based on the contact linked to the tagId
+                Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`)
+                    .then(function success(results) {
+                        if (results.entities.length > 0) {
+                            // Clear existing data
+                            document.getElementById("tagIdData").textContent = "";
+                            document.getElementById("nameData").textContent = "";
+                            document.getElementById("statusData").textContent = "";
 
-                Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", "?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq" + izx_tagid).then(
-                    function success(results) {
-                        console.log(results);
-                        for (var i = 0; i < results.entities.length; i++) {
-                            var result = results.entities[i];
-                            // Columns
-                            var izx_nfctrackingid = result["izx_nfctrackingid"]; // Guid
-                            var izx_contact = result["_izx_contact_value"]; // Lookup
-                            var izx_contact_formatted = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"];
-                            var izx_contact_lookuplogicalname = result["_izx_contact_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                            var izx_tagid = result["izx_tagid"]; // Text
+                            // Assuming the contact has multiple tagId records
+                            let tagIds = [];
+                            for (var i = 0; i < results.entities.length; i++) {
+                                var result = results.entities[i];
+                                tagIds.push(result["izx_tagid"]); // Collect all TagID values
+
+                                // You can also display the contact name or other details if available
+                                document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
+                            }
+
+                            // Display all collected TagIDs as a comma-separated list
+                            document.getElementById("tagIdData").textContent = tagIds.join(", ");
+                            document.getElementById("statusData").textContent = "Active"; // You can set the status based on logic
+
+                            // Make the tagDetails section visible
+                            document.getElementById("tagDetails").style.display = 'block';
+                        } else {
+                            errorMessage.textContent = "No TagID data found for this contact.";
                         }
-                    },
-                    function (error) {
-                        console.log(error.message);
-                    }
-                );
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //    var req = new XMLHttpRequest();
-            //    req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '" + tagId + "'"), true);
-            //    req.setRequestHeader("Authorization", "Bearer " + token);
-            //    req.setRequestHeader("Accept", "application/json");
-            //    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            //    req.setRequestHeader("OData-MaxVersion", "4.0");
-            //    req.setRequestHeader("OData-Version", "4.0");
-
-            //    req.onreadystatechange = function () {
-            //        if (this.readyState === 4) {
-            //            req.onreadystatechange = null;
-            //            if (this.status === 200) {
-            //                var tagDetails = JSON.parse(this.response).value[0];
-            //                document.getElementById("tagIdData").textContent = tagDetails.izx_tagid;
-            //                document.getElementById("nameData").textContent = tagDetails.izx_name;
-            //                document.getElementById("statusData").textContent = tagDetails.izx_status;
-
-            //                // Display the tag details section
-            //                document.getElementById("tagDetails").style.display = "block";
-            //            } else {
-            //                var error = JSON.parse(this.response).error;
-            //                console.error("Error retrieving tag details:", error.message);
-            //                errorMessage.textContent = error.message;
-            //            }
-            //        }
-            //    };
-            //    req.send();
-            //});
+                    }, function (error) {
+                        console.error("Error retrieving TagID data:", error.message);
+                        errorMessage.textContent = "Error retrieving TagID data: " + error.message;
+                    });
+            });
         }
+
     </script>
 </body>
-</html>-->
+</html>
 
 
 
 
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1435,10 +1417,10 @@
             </tr>
         </thead>
         <tbody id="usersTableBody"></tbody>
-    </table>
+    </table>-->
 
     <!-- Section to display TagID data -->
-    <div id="tagDetails">
+    <!--<div id="tagDetails">
         <h2>Tag ID Details</h2>
         <table>
             <tr>
@@ -1668,4 +1650,4 @@
     </script>
 
 </body>
-</html>
+</html>-->
