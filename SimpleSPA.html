@@ -2044,12 +2044,15 @@
                         req.onreadystatechange = null;
                         if (this.status === 200) {
                             var tagDetails = JSON.parse(this.response).value[0];
-                            document.getElementById("tagIdData").textContent = tagDetails.izx_tagid;
-                            document.getElementById("nameData").textContent = tagDetails.izx_name;
-                            document.getElementById("statusData").textContent = tagDetails.izx_status;
+                            if (tagDetails) {
+                                document.getElementById("tagIdData").textContent = tagDetails.izx_tagid || 'N/A';
 
-                            // Display the tag details section
-                            document.getElementById("tagDetails").style.display = "block";
+                                document.getElementById("tagDetails").style.display = "block";
+                            } else {
+                                console.error("No tag details found for the provided tag ID.");
+                                errorMessage.textContent = 'No tag details found for the provided tag ID.';
+                            }
+
                         } else {
                             var error = JSON.parse(this.response).error;
                             console.error("Error retrieving tag details:", error.message);
