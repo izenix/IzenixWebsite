@@ -1241,7 +1241,8 @@
 
                 var tagIdCell = document.createElement("td");
                 var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = user.izx_tagid;
+                tagIdButton.textContent = "Show";
+                //tagIdButton.textContent = user.izx_tagid;
                 tagIdButton.addEventListener("click", function () {
                     showTagIdData(user.izx_tagid); // Call function to show data
                 });
