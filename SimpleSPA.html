@@ -1628,7 +1628,36 @@
             message.textContent = '';
         }
 
-        // Function to show Tag ID data dynamically
+        //// Function to show Tag ID data dynamically
+        //function showTagIdData(tagId) {
+        //    authContext.acquireToken(organizationURI, function (error, token) {
+        //        if (error || !token) {
+        //            console.error("Token error:", error);
+        //            errorMessage.textContent = 'ADAL error occurred: ' + error;
+        //            return;
+        //        }
+
+        //        // Fetch data using Xrm.WebApi
+        //        Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=izx_tagid eq '${tagId}'`)
+        //            .then(function success(results) {
+        //                // Assuming results contain the data you need
+        //                for (var i = 0; i < results.entities.length; i++) {
+        //                    var result = results.entities[i];
+        //                    // Use the data to populate your details view
+        //                    document.getElementById("tagIdData").textContent = result.izx_tagid;
+        //                    document.getElementById("nameData").textContent = result["_izx_contact_value"];
+        //                    document.getElementById("statusData").textContent = result["status"] || 'Unknown';
+        //                }
+        //                document.getElementById("tagDetails").style.display = 'block'; // Show tag details
+        //            }, function (error) {
+        //                console.error(error.message);
+        //                errorMessage.textContent = error.message;
+        //            });
+        //    });
+        //}
+
+
+
         function showTagIdData(tagId) {
             authContext.acquireToken(organizationURI, function (error, token) {
                 if (error || !token) {
@@ -1637,24 +1666,43 @@
                     return;
                 }
 
-                // Fetch data using Xrm.WebApi
-                Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=izx_tagid eq '${tagId}'`)
+                // Fetch TagID data using Xrm.WebApi based on the contact linked to the tagId
+                Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`)
                     .then(function success(results) {
-                        // Assuming results contain the data you need
-                        for (var i = 0; i < results.entities.length; i++) {
-                            var result = results.entities[i];
-                            // Use the data to populate your details view
-                            document.getElementById("tagIdData").textContent = result.izx_tagid;
-                            document.getElementById("nameData").textContent = result["_izx_contact_value"];
-                            document.getElementById("statusData").textContent = result["status"] || 'Unknown';
+                        if (results.entities.length > 0) {
+                            // Clear existing data
+                            document.getElementById("tagIdData").textContent = "";
+                            document.getElementById("nameData").textContent = "";
+                            document.getElementById("statusData").textContent = "";
+
+                            // Assuming the contact has multiple tagId records
+                            let tagIds = [];
+                            for (var i = 0; i < results.entities.length; i++) {
+                                var result = results.entities[i];
+                                tagIds.push(result["izx_tagid"]); // Collect all TagID values
+
+                                // You can also display the contact name or other details if available
+                                document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
+                            }
+
+                            // Display all collected TagIDs as a comma-separated list
+                            document.getElementById("tagIdData").textContent = tagIds.join(", ");
+                            document.getElementById("statusData").textContent = "Active"; // You can set the status based on logic
+
+                            // Make the tagDetails section visible
+                            document.getElementById("tagDetails").style.display = 'block';
+                        } else {
+                            errorMessage.textContent = "No TagID data found for this contact.";
                         }
-                        document.getElementById("tagDetails").style.display = 'block'; // Show tag details
                     }, function (error) {
-                        console.error(error.message);
-                        errorMessage.textContent = error.message;
+                        console.error("Error retrieving TagID data:", error.message);
+                        errorMessage.textContent = "Error retrieving TagID data: " + error.message;
                     });
             });
         }
+
+
+
 
         // Toggle between two pages (simple page navigation)
         function togglePage() {
