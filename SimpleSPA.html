@@ -367,614 +367,6 @@
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            color: #333;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
-
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
-</head>
-<body>
-
-    <h1>Get Users from Dynamics 365</h1>
-
-    <div id="message"></div>
-    <div id="errorMessage" style="color: red;"></div>
-
-    <button id="login">Login</button>
-    <button id="logout" style="display: none;">Logout</button>
-    <button id="getUsers" style="display: none;">Get Users</button>
-
-    <table id="usersTable">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>TagID</th>
-            </tr>
-        </thead>
-        <tbody id="usersTableBody"></tbody>
-    </table>
-
-    <script type="text/javascript">
-        "use strict";
-
-        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // CRM URL
-        var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD tenant
-        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
-
-        var authContext, user, loginButton, logoutButton, getUsersButton, usersTable, usersTableBody, message, errorMessage;
-
-        // ADAL configuration
-        var endpoints = {
-            orgUri: organizationURI
-        };
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: endpoints,
-            cacheLocation: 'localStorage' // Store tokens in localStorage
-        };
-
-        document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                message = document.getElementById("message");
-                errorMessage = document.getElementById("errorMessage");
-                loginButton = document.getElementById("login");
-                logoutButton = document.getElementById("logout");
-                getUsersButton = document.getElementById("getUsers");
-                usersTable = document.getElementById("usersTable");
-                usersTableBody = document.getElementById("usersTableBody");
-
-                loginButton.addEventListener("click", login);
-                logoutButton.addEventListener("click", logout);
-                getUsersButton.addEventListener("click", getUsers);
-
-                authenticate();
-
-                if (user) {
-                    loginButton.style.display = "none";
-                    logoutButton.style.display = "block";
-                    getUsersButton.style.display = "block";
-                    var helloMessage = document.createElement("p");
-                    helloMessage.textContent = "Hello " + user.profile.name;
-                    message.appendChild(helloMessage);
-                } else {
-                    loginButton.style.display = "block";
-                    logoutButton.style.display = "none";
-                    getUsersButton.style.display = "none";
-                }
-            }
-        };
-
-        // Function to authenticate the user
-        function authenticate() {
-            try {
-                authContext = new AuthenticationContext(config);
-                var isCallback = authContext.isCallback(window.location.hash);
-                if (isCallback) {
-                    authContext.handleWindowCallback();
-                }
-                var loginError = authContext.getLoginError();
-                if (isCallback && !loginError) {
-                    window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
-                } else if (loginError) {
-                    errorMessage.textContent = loginError;
-                }
-
-                user = authContext.getCachedUser();
-            } catch (e) {
-                console.error("Authentication error:", e);
-                errorMessage.textContent = "Authentication initialization failed.";
-            }
-        }
-
-        // Login function
-        function login() {
-            try {
-                authContext.login();
-            } catch (e) {
-                console.error("Login error:", e);
-                errorMessage.textContent = "Login failed.";
-            }
-        }
-
-        // Logout function
-        function logout() {
-            authContext.logOut();
-            usersTable.style.display = "none";
-            usersTableBody.innerHTML = "";
-        }
-
-        // Function to get users
-        function getUsers() {
-            getUsersButton.disabled = true;
-            message.textContent = "Retrieving users...";
-            authContext.acquireToken(organizationURI, retrieveUsers);
-        }
-
-        // Function to retrieve users
-        function retrieveUsers(error, token) {
-            if (error || !token) {
-                console.error("Token error:", error);
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var users = JSON.parse(this.response).value;
-                        renderUsers(users);
-                    } else {
-                        var error = JSON.parse(this.response).error;
-                        console.error("Error retrieving users:", error.message);
-                        errorMessage.textContent = error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Function to render users into the table
-        function renderUsers(users) {
-            usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user) {
-                var row = document.createElement("tr");
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.fullname;
-
-                var emailCell = document.createElement("td");
-                emailCell.textContent = user.emailaddress1;
-
-                var mobilePhone = document.createElement("td");
-                mobilePhone.textContent = user.mobilephone;
-
-                var tagidCell = document.createElement("td");
-                var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = "Show";
-                tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid);
-                });
-                tagidCell.appendChild(tagIdButton);
-
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(mobilePhone);
-                row.appendChild(tagidCell);
-
-                usersTableBody.appendChild(row);
-            });
-            usersTable.style.display = "block";
-            getUsersButton.disabled = false; // Re-enable the button
-            message.textContent = "Users loaded successfully.";
-        }
-
-        // Function to show TagID data in a new page
-        function showTagIdData(tagId) {
-            if (!tagId) {
-                alert("No TagID found for this user.");
-                return;
-            }
-
-            Xrm.WebApi.retrieveMultipleRecords("contact", "?$select=izx_tagid,contactid,fullname,emailaddress1,mobilephone&$filter=izx_tagid eq '" + tagId + "'").then(
-                function success(results) {
-                    if (results.entities.length > 0) {
-                        var result = results.entities[0];
-
-                        // Create an object with the retrieved data
-                        var tagIdDetails = {
-                            "Contact ID": result["contactid"],
-                            "Full Name": result["fullname"],
-                            "Email": result["emailaddress1"],
-                            "Phone Number": result["mobilephone"],
-                            "TagID": result["izx_tagid"]
-                        };
-
-                        // Store the data in localStorage
-                        localStorage.setItem('tagIdData', JSON.stringify(tagIdDetails));
-
-                        // Redirect to the details page
-                        window.location.href = 'tagid-details.html';
-                    } else {
-                        alert("No data found for the selected TagID.");
-                    }
-                },
-                function (error) {
-                    console.error(error.message);
-                    alert("Error retrieving data: " + error.message);
-                }
-            );
-        }
-    </script>
-
-</body>
-</html>-->
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Users - Dynamics 365</title>
-    <style>
-        /* Styling for buttons and table */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-            button:hover {
-                background-color: #45a049;
-            }
-
-            button:disabled {
-                background-color: #cccccc;
-                cursor: not-allowed;
-            }
-
-        #usersTable {
-            width: 90%;
-            max-width: 1000px;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            color: #333;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /*tagdidatacss*/
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-    </style>
-
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
-</head>
-<body>
-
-    <h1>Get Users from Dynamics 365</h1>
-
-    <div id="message"></div>
-    <div id="errorMessage" style="color: red;"></div>
-
-    <button id="login">Login</button>
-    <button id="logout" style="display: none;">Logout</button>
-    <button id="getUsers" style="display: none;">Get Users</button>
-
-    <table id="usersTable">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>TagID</th>
-            </tr>
-        </thead>
-        <tbody id="usersTableBody"></tbody>
-    </table>
-
-
-
-    <script type="text/javascript">
-        "use strict";
-
-        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // CRM URL
-        var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD tenant
-        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
-
-        var authContext, user, loginButton, logoutButton, getUsersButton, usersTable, usersTableBody, message, errorMessage;
-
-        // ADAL configuration
-        var endpoints = {
-            orgUri: organizationURI
-        };
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: endpoints,
-            cacheLocation: 'localStorage' // Store tokens in localStorage
-        };
-
-        document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                message = document.getElementById("message");
-                errorMessage = document.getElementById("errorMessage");
-                loginButton = document.getElementById("login");
-                logoutButton = document.getElementById("logout");
-                getUsersButton = document.getElementById("getUsers");
-                usersTable = document.getElementById("usersTable");
-                usersTableBody = document.getElementById("usersTableBody");
-
-                loginButton.addEventListener("click", login);
-                logoutButton.addEventListener("click", logout);
-                getUsersButton.addEventListener("click", getUsers);
-
-                authenticate();
-
-                if (user) {
-                    loginButton.style.display = "none";
-                    logoutButton.style.display = "block";
-                    getUsersButton.style.display = "block";
-                    var helloMessage = document.createElement("p");
-                    helloMessage.textContent = "Hello " + user.profile.name;
-                    message.appendChild(helloMessage);
-                } else {
-                    loginButton.style.display = "block";
-                    logoutButton.style.display = "none";
-                    getUsersButton.style.display = "none";
-                }
-            }
-        };
-
-        // Function to authenticate the user
-        function authenticate() {
-            try {
-                authContext = new AuthenticationContext(config);
-                var isCallback = authContext.isCallback(window.location.hash);
-                if (isCallback) {
-                    authContext.handleWindowCallback();
-                }
-                var loginError = authContext.getLoginError();
-                if (isCallback && !loginError) {
-                    window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
-                } else if (loginError) {
-                    errorMessage.textContent = loginError;
-                }
-
-                user = authContext.getCachedUser();
-            } catch (e) {
-                console.error("Authentication error:", e);
-                errorMessage.textContent = "Authentication initialization failed.";
-            }
-        }
-
-        // Login function
-        function login() {
-            try {
-                authContext.login();
-            } catch (e) {
-                console.error("Login error:", e);
-                errorMessage.textContent = "Login failed.";
-            }
-        }
-
-        // Logout function
-        function logout() {
-            authContext.logOut();
-            usersTable.style.display = "none";
-            usersTableBody.innerHTML = "";
-        }
-
-        // Function to get users
-        function getUsers() {
-            getUsersButton.disabled = true;
-            message.textContent = "Retrieving users...";
-            authContext.acquireToken(organizationURI, retrieveUsers);
-        }
-
-        // Function to retrieve users
-        function retrieveUsers(error, token) {
-            if (error || !token) {
-                console.error("Token error:", error);
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var users = JSON.parse(this.response).value;
-                        renderUsers(users);
-                    } else {
-                        var error = JSON.parse(this.response).error;
-                        console.error("Error retrieving users:", error.message);
-                        errorMessage.textContent = error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Function to render users into the table
-        function renderUsers(users) {
-            usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user) {
-                var row = document.createElement("tr");
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.fullname;
-
-                var emailCell = document.createElement("td");
-                emailCell.textContent = user.emailaddress1;
-
-                var mobilePhone = document.createElement("td");
-                mobilePhone.textContent = user.mobilephone;
-
-                var tagidCell = document.createElement("td");
-                var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = "Show";
-                tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid, user.fullname, user.emailaddress1, user.mobilephone);
-                });
-                tagidCell.appendChild(tagIdButton);
-
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(mobilePhone);
-                row.appendChild(tagidCell);
-
-                usersTableBody.appendChild(row);
-            });
-            usersTable.style.display = "block";
-            getUsersButton.disabled = false; // Re-enable the button
-            message.textContent = "Users loaded successfully.";
-        }
-
-
-
-
-        Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", "?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq" + izx_tagid).then(
-            function success(results) {
-                console.log(results);
-                for (var i = 0; i < results.entities.length; i++) {
-                    var result = results.entities[i];
-                    // Columns
-                    var izx_nfctrackingid = result["izx_nfctrackingid"]; // Guid
-                    var izx_contact = result["_izx_contact_value"]; // Lookup
-                    var izx_contact_formatted = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"];
-                    var izx_contact_lookuplogicalname = result["_izx_contact_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                    var izx_tagid = result["izx_tagid"]; // Text
-                }
-            },
-            function (error) {
-                console.log(error.message);
-            }
-        );
-
-        function showTagIdData(tagId, name, status) {
-            if (!tagId) {
-                alert("No TagID found for this user.");
-                return;
-            }
-
-            // Build the URL with query parameters
-            var url = `tagid-details.html?tagid=${encodeURIComponent(tagId)}&name=${encodeURIComponent(name)}&status=${encodeURIComponent(status)}`;
-
-            // Redirect to the details page
-            window.location.href = url;
-        }
-
-
-
-    </script>
-
-</body>
-</html>-->
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Users - Dynamics 365</title>
-    <style>
-        /* Styling for buttons and table */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-            button:hover {
-                background-color: #45a049;
-            }
-
-            button:disabled {
-                background-color: #cccccc;
-                cursor: not-allowed;
-            }
-
-        #usersTable {
-            width: 90%;
-            max-width: 1000px;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         th, td {
@@ -1017,397 +409,6 @@
         th {
             background-color: #4CAF50;
             color: white;
-        }
-
-        /* Styling for tag ID data section */
-        #tagDetails {
-            margin-top: 20px;
-            display: none;
-        }
-
-            #tagDetails table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            #tagDetails th, #tagDetails td {
-                padding: 10px;
-                border: 1px solid #ccc;
-            }
-
-            #tagDetails th {
-                background-color: #4CAF50;
-                color: white;
-            }
-    </style>
-
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
-</head>
-<body>
-
-    <h1>Get Users from Dynamics 365</h1>
-
-    <div id="message"></div>
-    <div id="errorMessage" style="color: red;"></div>
-
-    <button id="login">Login</button>
-    <button id="logout" style="display: none;">Logout</button>
-    <button id="getUsers" style="display: none;">Get Users</button>
-
-    <table id="usersTable">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>TagID</th>
-            </tr>
-        </thead>
-        <tbody id="usersTableBody"></tbody>
-    </table>
- Section to display TagID data
-<div id="tagDetails">
-        <h2>Tag ID Details</h2>
-        <table>
-            <tr>
-                <th>TagID</th>
-                <td id="tagIdData"></td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td id="nameData"></td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td id="statusData"></td>
-            </tr>
-        </table>
-    </div>
-
-    <script type="text/javascript">
-        "use strict";
-
-        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // CRM URL
-        var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD tenant
-        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
-
-        var authContext, user, loginButton, logoutButton, getUsersButton, usersTable, usersTableBody, message, errorMessage;
-
-        // ADAL configuration
-        var endpoints = {
-            orgUri: organizationURI
-        };
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: endpoints,
-            cacheLocation: 'localStorage' // Store tokens in localStorage
-        };
-
-        document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                message = document.getElementById("message");
-                errorMessage = document.getElementById("errorMessage");
-                loginButton = document.getElementById("login");
-                logoutButton = document.getElementById("logout");
-                getUsersButton = document.getElementById("getUsers");
-                usersTable = document.getElementById("usersTable");
-                usersTableBody = document.getElementById("usersTableBody");
-
-                loginButton.addEventListener("click", login);
-                logoutButton.addEventListener("click", logout);
-                getUsersButton.addEventListener("click", getUsers);
-
-                authenticate();
-
-                if (user) {
-                    loginButton.style.display = "none";
-                    logoutButton.style.display = "block";
-                    getUsersButton.style.display = "block";
-                    var helloMessage = document.createElement("p");
-                    helloMessage.textContent = "Hello " + user.profile.name;
-                    message.appendChild(helloMessage);
-                } else {
-                    loginButton.style.display = "block";
-                    logoutButton.style.display = "none";
-                    getUsersButton.style.display = "none";
-                }
-            }
-        };
-
-        // Function to authenticate the user
-        function authenticate() {
-            try {
-                authContext = new AuthenticationContext(config);
-                var isCallback = authContext.isCallback(window.location.hash);
-                if (isCallback) {
-                    authContext.handleWindowCallback();
-                }
-                var loginError = authContext.getLoginError();
-                if (isCallback && !loginError) {
-                    window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
-                } else if (loginError) {
-                    errorMessage.textContent = loginError;
-                }
-
-                user = authContext.getCachedUser();
-            } catch (e) {
-                console.error("Authentication error:", e);
-                errorMessage.textContent = "Authentication initialization failed.";
-            }
-        }
-
-        // Login function
-        function login() {
-            try {
-                authContext.login();
-            } catch (e) {
-                console.error("Login error:", e);
-                errorMessage.textContent = "Login failed.";
-            }
-        }
-
-        // Logout function
-        function logout() {
-            authContext.logOut();
-            usersTable.style.display = "none";
-            usersTableBody.innerHTML = "";
-        }
-
-        // Function to get users
-        function getUsers() {
-            getUsersButton.disabled = true;
-            message.textContent = "Retrieving users...";
-            authContext.acquireToken(organizationURI, retrieveUsers);
-        }
-
-        // Function to retrieve users
-        function retrieveUsers(error, token) {
-            if (error || !token) {
-                console.error("Token error:", error);
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var users = JSON.parse(this.response).value;
-                        renderUsers(users);
-                    } else {
-                        var error = JSON.parse(this.response).error;
-                        console.error("Error retrieving users:", error.message);
-                        errorMessage.textContent = error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Function to render users into the table
-        function renderUsers(users) {
-            usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user) {
-                var row = document.createElement("tr");
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.fullname;
-
-                var emailCell = document.createElement("td");
-                emailCell.textContent = user.emailaddress1;
-
-                var mobilePhone = document.createElement("td");
-                mobilePhone.textContent = user.mobilephone;
-
-                var tagIdCell = document.createElement("td");
-                var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = "Show";
-                //tagIdButton.textContent = user.izx_tagid;
-                tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid); // Call function to show data
-                });
-                tagIdCell.appendChild(tagIdButton);
-
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(mobilePhone);
-                row.appendChild(tagIdCell);
-                usersTableBody.appendChild(row);
-            });
-            usersTable.style.display = 'table';
-            getUsersButton.disabled = false;
-            message.textContent = '';
-        }
-
-        //function showTagIdData(tagId) {
-        //    authContext.acquireToken(organizationURI, function (error, token) {
-        //        if (error || !token) {
-        //            console.error("Token error:", error);
-        //            errorMessage.textContent = 'ADAL error occurred: ' + error;
-        //            return;
-        //        }
-
-        //        // Fetch TagID data using Xrm.WebApi based on the contact linked to the tagId
-        //        Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`)
-        //            .then(function success(results) {
-        //                if (results.entities.length > 0) {
-        //                    // Clear existing data
-        //                    document.getElementById("tagIdData").textContent = "";
-        //                    document.getElementById("nameData").textContent = "";
-        //                    document.getElementById("statusData").textContent = "";
-
-        //                    // Assuming the contact has multiple tagId records
-        //                    let tagIds = [];
-        //                    for (var i = 0; i < results.entities.length; i++) {
-        //                        var result = results.entities[i];
-        //                        tagIds.push(result["izx_tagid"]); // Collect all TagID values
-
-        //                        // You can also display the contact name or other details if available
-        //                        document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
-        //                    }
-
-        //                    // Display all collected TagIDs as a comma-separated list
-        //                    document.getElementById("tagIdData").textContent = tagIds.join(", ");
-        //                    document.getElementById("statusData").textContent = "Active"; // You can set the status based on logic
-
-        //                    // Make the tagDetails section visible
-        //                    document.getElementById("tagDetails").style.display = 'block';
-        //                } else {
-        //                    errorMessage.textContent = "No TagID data found for this contact.";
-        //                }
-        //            }, function (error) {
-        //                console.error("Error retrieving TagID data:", error.message);
-        //                errorMessage.textContent = "Error retrieving TagID data: " + error.message;
-        //            });
-        //    });
-        //}
-
-
-
-
-
-        function showTagIdData(tagId) {
-            debugger;
-            authContext.acquireToken(organizationURI, function (error, token) {
-                if (error || !token) {
-                    console.error("Token error:", error);
-                    errorMessage.textContent = 'ADAL error occurred: ' + error;
-                    return;
-                }
-
-                // Fetch TagID data using Xrm.WebApi based on the contact linked to the tagId
-                Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`)
-                    .then(function success(results) {
-                        if (results.entities.length > 0) {
-                            // Clear existing data
-                            document.getElementById("tagIdData").textContent = "";
-                            document.getElementById("nameData").textContent = "";
-                            document.getElementById("statusData").textContent = "";
-
-                            // Assuming the contact has multiple tagId records
-                            let tagIds = [];
-                            for (var i = 0; i < results.entities.length; i++) {
-                                var result = results.entities[i];
-                                tagIds.push(result["izx_tagid"]); // Collect all TagID values
-
-                                // You can also display the contact name or other details if available
-                                document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
-                            }
-
-                            // Display the collected TagIDs in an alert box as a comma-separated list
-                            alert("TagID(s): " + tagIds.join(", "));
-
-                            document.getElementById("statusData").textContent = "Active"; // You can set the status based on logic
-
-                            // Make the tagDetails section visible
-                            document.getElementById("tagDetails").style.display = 'block';
-                        } else {
-                            errorMessage.textContent = "No TagID data found for this contact.";
-                        }
-                    }, function (error) {
-                        console.error("Error retrieving TagID data:", error.message);
-                        errorMessage.textContent = "Error retrieving TagID data: " + error.message;
-                    });
-            });
-        }
-
-
-    </script>
-</body>
-</html>-->
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Users - Dynamics 365</title>
-    <style>
-        /* Styling for buttons and table */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-            button:hover {
-                background-color: #45a049;
-            }
-
-            button:disabled {
-                background-color: #cccccc;
-                cursor: not-allowed;
-            }
-
-        #usersTable {
-            width: 90%;
-            max-width: 1000px;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            color: #333;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        /* Styling for the body */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
         }
 
         /* Styling for tag ID data section */
@@ -1458,384 +459,6 @@
     </table>-->
 <!-- Section to display TagID data -->
 <!--<div id="tagDetails">
-        <h2>Tag ID Details</h2>
-        <table>
-            <tr>
-                <th>TagID</th>
-                <td id="tagIdData"></td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td id="nameData"></td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td id="statusData"></td>
-            </tr>
-        </table>
-    </div>
-
-    <script type="text/javascript">
-        "use strict";
-
-        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // CRM URL
-        var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD tenant
-        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
-
-        var authContext, user, loginButton, logoutButton, getUsersButton, usersTable, usersTableBody, message, errorMessage;
-
-        // ADAL configuration
-        var endpoints = {
-            orgUri: organizationURI
-        };
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: endpoints,
-            cacheLocation: 'localStorage' // Store tokens in localStorage
-        };
-
-        document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                message = document.getElementById("message");
-                errorMessage = document.getElementById("errorMessage");
-                loginButton = document.getElementById("login");
-                logoutButton = document.getElementById("logout");
-                getUsersButton = document.getElementById("getUsers");
-                usersTable = document.getElementById("usersTable");
-                usersTableBody = document.getElementById("usersTableBody");
-
-                loginButton.addEventListener("click", login);
-                logoutButton.addEventListener("click", logout);
-                getUsersButton.addEventListener("click", getUsers);
-
-                authenticate();
-
-                if (user) {
-                    loginButton.style.display = "none";
-                    logoutButton.style.display = "block";
-                    getUsersButton.style.display = "block";
-                    var helloMessage = document.createElement("p");
-                    helloMessage.textContent = "Hello " + user.profile.name;
-                    message.appendChild(helloMessage);
-                } else {
-                    loginButton.style.display = "block";
-                    logoutButton.style.display = "none";
-                    getUsersButton.style.display = "none";
-                }
-            }
-        };
-
-        // Function to authenticate the user
-        function authenticate() {
-            try {
-                authContext = new AuthenticationContext(config);
-                var isCallback = authContext.isCallback(window.location.hash);
-                if (isCallback) {
-                    authContext.handleWindowCallback();
-                }
-                var loginError = authContext.getLoginError();
-                if (isCallback && !loginError) {
-                    window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
-                } else if (loginError) {
-                    errorMessage.textContent = loginError;
-                }
-
-                user = authContext.getCachedUser();
-            } catch (e) {
-                console.error("Authentication error:", e);
-                errorMessage.textContent = "Authentication initialization failed.";
-            }
-        }
-
-        // Login function
-        function login() {
-            try {
-                authContext.login();
-            } catch (e) {
-                console.error("Login error:", e);
-                errorMessage.textContent = "Login failed.";
-            }
-        }
-
-        // Logout function
-        function logout() {
-            authContext.logOut();
-            usersTable.style.display = "none";
-            usersTableBody.innerHTML = "";
-        }
-
-        // Function to get users
-        function getUsers() {
-            getUsersButton.disabled = true;
-            message.textContent = "Retrieving users...";
-            authContext.acquireToken(organizationURI, retrieveUsers);
-        }
-
-        // Function to retrieve users
-        function retrieveUsers(error, token) {
-            if (error || !token) {
-                console.error("Token error:", error);
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var users = JSON.parse(this.response).value;
-                        renderUsers(users);
-                    } else {
-                        var error = JSON.parse(this.response).error;
-                        console.error("Error retrieving users:", error.message);
-                        errorMessage.textContent = error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Function to render users into the table
-        function renderUsers(users) {
-            usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user) {
-                var row = document.createElement("tr");
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.fullname;
-
-                var emailCell = document.createElement("td");
-                emailCell.textContent = user.emailaddress1;
-
-                var mobilePhone = document.createElement("td");
-                mobilePhone.textContent = user.mobilephone;
-
-                var tagidCell = document.createElement("td");
-                var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = "Show";
-                tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid);
-                });
-                tagidCell.appendChild(tagIdButton);
-
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(mobilePhone);
-                row.appendChild(tagidCell);
-
-                usersTableBody.appendChild(row);
-            });
-            usersTable.style.display = "block";
-            getUsersButton.disabled = false; // Re-enable the button
-            message.textContent = "Users loaded successfully.";
-        }
-
-        function showTagIdData(tagId) {
-            authContext.acquireToken(organizationURI, function (error, token) {
-                if (error || !token) {
-                    console.error("Token error:", error);
-                    errorMessage.textContent = 'ADAL error occurred: ' + error;
-                    return;
-                }
-
-                // Fetch TagID data using Xrm.WebApi based on the contact linked to the tagId
-                Xrm.WebApi.retrieveMultipleRecords("izx_nfctracking", `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`)
-                    .then(function success(results) {
-                        if (results.entities.length > 0) {
-                            // Clear existing data
-                            document.getElementById("tagIdData").textContent = "";
-                            document.getElementById("nameData").textContent = "";
-                            document.getElementById("statusData").textContent = "";
-
-                            // Assuming the contact has multiple tagId records
-                            let tagIds = [];
-                            for (var i = 0; i < results.entities.length; i++) {
-                                var result = results.entities[i];
-                                tagIds.push(result["izx_tagid"]); // Collect all TagID values
-
-                                // You can also display the contact name or other details if available
-                                document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
-                            }
-
-                            // Display all collected TagIDs as a comma-separated list
-                            document.getElementById("tagIdData").textContent = tagIds.join(", ");
-                            document.getElementById("statusData").textContent = "Active"; // You can set the status based on logic
-
-                            // Make the tagDetails section visible
-                            document.getElementById("tagDetails").style.display = 'block';
-                        } else {
-                            errorMessage.textContent = "No TagID data found for this contact.";
-                        }
-                    }, function (error) {
-                        console.error("Error retrieving TagID data:", error.message);
-                        errorMessage.textContent = "Error retrieving TagID data: " + error.message;
-                    });
-            });
-        }
-    </script>
-
-</body>
-</html>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Users - Dynamics 365</title>
-    <style>
-        /* Styling for buttons and table */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-            button:hover {
-                background-color: #45a049;
-            }
-
-            button:disabled {
-                background-color: #cccccc;
-                cursor: not-allowed;
-            }
-
-        #usersTable {
-            width: 90%;
-            max-width: 1000px;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            color: #333;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* tagid data css */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        /* Styling for tag ID data section */
-        #tagDetails {
-            margin-top: 20px;
-            display: none;
-        }
-
-            #tagDetails table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            #tagDetails th, #tagDetails td {
-                padding: 10px;
-                border: 1px solid #ccc;
-            }
-
-            #tagDetails th {
-                background-color: #4CAF50;
-                color: white;
-            }
-    </style>
-
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
-</head>
-<body>
-
-    <h1>Get Users from Dynamics 365</h1>
-
-    <div id="message"></div>
-    <div id="errorMessage" style="color: red;"></div>
-
-    <button id="login">Login</button>
-    <button id="logout" style="display: none;">Logout</button>
-    <button id="getUsers" style="display: none;">Get Users</button>
-
-    <table id="usersTable">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>TagID</th>
-            </tr>
-        </thead>
-        <tbody id="usersTableBody"></tbody>
-    </table>
-
-    <!-- Section to display TagID data -->
-    <div id="tagDetails">
         <h2>Tag ID Details</h2>
         <table>
             <tr>
@@ -2064,5 +687,505 @@
             });
         }
     </script>
+</body>
+</html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Tracking and Users</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        #nfcTrackingSection, #usersSection {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            button:disabled {
+                background-color: #ddd;
+                cursor: not-allowed;
+            }
+
+        #showNFCButton, #showUsersButton {
+            background-color: #007bff;
+            margin-right: 10px;
+        }
+
+            #showNFCButton:hover, #showUsersButton:hover {
+                background-color: #0056b3;
+            }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            table caption {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                text-align: left;
+            }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-size: 16px;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Message & Error Styling */
+        #message, #userMessage {
+            margin-top: 10px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        #errorMessage, #userErrorMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Search Bar Styling */
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+        }
+    </style>
+
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
+</head>
+<body>
+
+    <!-- Buttons to toggle between NFC Tracking Data and Get Users -->
+    <button id="showNFCButton">Show NFC Tracking Data</button>
+    <button id="showUsersButton">Show Users</button>
+
+    <!-- NFC Tracking Data Section -->
+    <div id="nfcTrackingSection" class="hidden">
+        <button id="login">Login</button>
+        <button id="logout" class="hidden">Logout</button>
+        <button id="getNFCTrackingData" class="hidden">NFC Tracking Data</button>
+
+        <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
+        <div id="errorMessage"></div>
+        <div id="message"></div>
+
+        <table id="nfctrackingsTable" class="hidden">
+            <caption>NFC Tracking Data</caption>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Tag ID</th>
+                    <th>Timestamp</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                    <th>Time Duration</th>
+                    <th>Time In Out</th>
+                </tr>
+            </thead>
+            <tbody id="nfctrackingsTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Get Users Section -->
+    <div id="usersSection" class="hidden">
+        <h1>Get Users from Dynamics 365</h1>
+        <div id="userMessage"></div>
+        <div id="userErrorMessage" style="color: red;"></div>
+
+        <button id="userLogin">Login</button>
+        <button id="userLogout" style="display: none;">Logout</button>
+        <button id="getUsers" style="display: none;">Get Users</button>
+
+        <table id="usersTable">
+            <caption>Users</caption>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>TagID</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+        </table>
+
+        <div id="tagDetails">
+            <h2>Tag ID Details</h2>
+            <table>
+                <tr>
+                    <th>TagID</th>
+                    <td id="tagIdData"></td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td id="nameData"></td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td id="statusData"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+   
+
+        <script type="text/javascript">
+            "use strict";
+
+            // Variables for buttons and sections
+            var showNFCButton = document.getElementById("showNFCButton");
+            var showUsersButton = document.getElementById("showUsersButton");
+
+            var nfcTrackingSection = document.getElementById("nfcTrackingSection");
+            var usersSection = document.getElementById("usersSection");
+
+            // Add event listeners to toggle between sections
+            showNFCButton.addEventListener("click", function () {
+                toggleVisibility('nfc');
+            });
+
+            showUsersButton.addEventListener("click", function () {
+                toggleVisibility('users');
+            });
+
+            // Function to toggle visibility between NFC Tracking and Users section
+            function toggleVisibility(section) {
+                if (section === 'nfc') {
+                nfcTrackingSection.classList.remove('hidden');
+            usersSection.classList.add('hidden');
+                } else if (section === 'users') {
+                usersSection.classList.remove('hidden');
+            nfcTrackingSection.classList.add('hidden');
+                }
+            }
+
+            // ADAL configuration (shared for both NFC and Users sections)
+            var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // CRM URL
+            var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD tenant
+            var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID
+            var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
+            var endpoints = {orgUri: organizationURI };
+
+            var authContext, user, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTableBody, message, errorMessage;
+
+            window.config = {
+                tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage'
+            };
+
+            document.onreadystatechange = function () {
+                if (document.readyState === "complete") {
+                // NFC Tracking elements
+                message = document.getElementById("message");
+            errorMessage = document.getElementById("errorMessage");
+            loginButton = document.getElementById("login");
+            logoutButton = document.getElementById("logout");
+            getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
+            searchBar = document.getElementById("searchBar");
+            nfctrackingsTableBody = document.getElementById("nfctrackingsTableBody");
+
+            // Users elements
+            var userMessage = document.getElementById("userMessage");
+            var userErrorMessage = document.getElementById("userErrorMessage");
+            var userLoginButton = document.getElementById("userLogin");
+            var userLogoutButton = document.getElementById("userLogout");
+            var getUsersButton = document.getElementById("getUsers");
+
+            // NFC tracking button listeners
+            loginButton.addEventListener("click", login);
+            logoutButton.addEventListener("click", logout);
+            getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
+            searchBar.addEventListener("input", searchByTagID);
+
+            // Users button listeners
+            userLoginButton.addEventListener("click", login);
+            userLogoutButton.addEventListener("click", logout);
+            getUsersButton.addEventListener("click", getUsers);
+
+            authenticate();
+
+            if (user) {
+                toggleLoggedInState(true);
+                    }
+                }
+            };
+
+            function authenticate() {
+                authContext = new AuthenticationContext(config);
+
+            var isCallback = authContext.isCallback(window.location.hash);
+            if (isCallback) {
+                authContext.handleWindowCallback();
+                }
+
+            var loginError = authContext.getLoginError();
+            if (isCallback && !loginError) {
+                window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
+                } else {
+                errorMessage.textContent = loginError;
+                }
+            user = authContext.getCachedUser();
+            }
+
+            // NFC Tracking Data Section
+            function toggleLoggedInState(isLoggedIn) {
+                if (isLoggedIn) {
+                loginButton.classList.add("hidden");
+            logoutButton.classList.remove("hidden");
+            getNFCTrackingDataButton.classList.remove("hidden");
+            searchBar.classList.remove("hidden");
+                } else {
+                loginButton.classList.remove("hidden");
+            logoutButton.classList.add("hidden");
+            getNFCTrackingDataButton.classList.add("hidden");
+            searchBar.classList.add("hidden");
+            nfctrackingsTableBody.innerHTML = "";
+                }
+            }
+
+            function login() {
+                authContext.login();
+            }
+
+            function logout() {
+                authContext.logOut();
+            }
+
+            function getNFCTrackingData() {
+                getNFCTrackingDataButton.disabled = true;
+            message.textContent = "Retrieving NFC tracking data...";
+            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
+            }
+
+            function retrieveNFCTrackingData(error, token) {
+                if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+            return;
+                }
+
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out"), true);
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            req.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var nfctrackings = JSON.parse(this.response).value;
+            renderNFCTrackingData(nfctrackings);
+                        } else {
+                errorMessage.textContent = JSON.parse(this.response).error.message;
+                        }
+                    }
+                };
+            req.send();
+            }
+
+            function renderNFCTrackingData(nfctrackings) {
+                nfctrackingsTableBody.innerHTML = "";
+            nfctrackings.forEach(function (tracking) {
+                    var row = document.createElement("tr");
+
+            var nameCell = document.createElement("td");
+            nameCell.textContent = tracking.izx_name;
+
+            var tagIdCell = document.createElement("td");
+            tagIdCell.textContent = tracking.izx_tagid;
+            tagIdCell.classList.add("tag-id");
+
+            var timestampCell = document.createElement("td");
+            timestampCell.textContent = formatDate(tracking.izx_timestamp);
+
+            var timeInCell = document.createElement("td");
+            timeInCell.textContent = formatTime(tracking.izx_timein);
+
+            var timeOutCell = document.createElement("td");
+            timeOutCell.textContent = formatTime(tracking.izx_timeout);
+
+            var durationCell = document.createElement("td");
+            durationCell.textContent = tracking.izx_duration;
+
+            var inoutCell = document.createElement("td");
+            inoutCell.textContent = tracking.izx_in_out;
+
+            row.appendChild(nameCell);
+            row.appendChild(tagIdCell);
+            row.appendChild(timestampCell);
+            row.appendChild(timeInCell);
+            row.appendChild(timeOutCell);
+            row.appendChild(durationCell);
+            row.appendChild(inoutCell);
+
+            nfctrackingsTableBody.appendChild(row);
+                });
+
+            message.textContent = "NFC tracking data loaded successfully.";
+            }
+
+            // Helper function for date formatting
+            function formatDate(dateString) {
+                var date = new Date(dateString);
+            return date.toISOString().split('T')[0];
+            }
+
+            function formatTime(dateString) {
+                var date = new Date(dateString);
+            return date.toISOString().split('T')[1].split('Z')[0];
+            }
+
+            function searchByTagID() {
+                var filterValue = searchBar.value.toUpperCase();
+            var rows = nfctrackingsTableBody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                    var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
+            if (tagIdCell) {
+                        var tagId = tagIdCell.textContent.toUpperCase();
+                        rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
+                    }
+                }
+            }
+
+            // Get Users Section
+            function getUsers() {
+                getUsersButton.disabled = true;
+            userMessage.textContent = "Retrieving users...";
+            authContext.acquireToken(organizationURI, retrieveUsers);
+            }
+
+            function retrieveUsers(error, token) {
+                if (error || !token) {
+                userErrorMessage.textContent = 'ADAL error occurred: ' + error;
+            return;
+                }
+
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            req.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var users = JSON.parse(this.response).value;
+            renderUsers(users);
+                        } else {
+                userErrorMessage.textContent = JSON.parse(this.response).error.message;
+                        }
+                    }
+                };
+            req.send();
+            }
+
+            function renderUsers(users) {
+                var usersTableBody = document.getElementById("usersTableBody");
+            usersTableBody.innerHTML = "";
+
+            users.forEach(function (user) {
+                    var row = document.createElement("tr");
+
+            var nameCell = document.createElement("td");
+            nameCell.textContent = user.fullname;
+
+            var emailCell = document.createElement("td");
+            emailCell.textContent = user.emailaddress1;
+
+            var phoneCell = document.createElement("td");
+            phoneCell.textContent = user.mobilephone;
+
+            var tagIdCell = document.createElement("td");
+            tagIdCell.textContent = user.izx_tagid;
+
+            row.appendChild(nameCell);
+            row.appendChild(emailCell);
+            row.appendChild(phoneCell);
+            row.appendChild(tagIdCell);
+
+            usersTableBody.appendChild(row);
+                });
+
+            userMessage.textContent = "Users data loaded successfully.";
+            }
+
+    </script>
+
 </body>
 </html>
