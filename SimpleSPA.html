@@ -1,3 +1,5 @@
+<!--NFC Tracking Data-->
+
 <!--<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -331,6 +333,10 @@
 
 </body>
 </html>-->
+
+
+<!--Get Users - Dynamics 365-->
+
 <!--<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -888,14 +894,14 @@
                     <th>TagID</th>
                     <td id="tagIdData"></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <th>Name</th>
                     <td id="nameData"></td>
                 </tr>
                 <tr>
                     <th>Status</th>
                     <td id="statusData"></td>
-                </tr>
+                </tr>-->
             </table>
         </div>
     </div>
@@ -958,6 +964,14 @@
                 errorMessage = document.getElementById("errorMessage");
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
+
+                //NFC
+                getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
+                searchBar = document.getElementById("searchBar");
+                nfctrackingsTable = document.getElementById("nfctrackingsTable");
+                nfctrackingsTableBody = document.getElementById("nfctrackingsTableBody");
+
+                //Users
                 getUsersButton = document.getElementById("getUsers");
                 usersTable = document.getElementById("usersTable");
                 usersTableBody = document.getElementById("usersTableBody");
@@ -965,20 +979,31 @@
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
                 getUsersButton.addEventListener("click", getUsers);
+                getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
+                searchBar.addEventListener("input", searchByTagID);
 
                 authenticate();
 
                 if (user) {
                     loginButton.style.display = "none";
                     logoutButton.style.display = "block";
+                    //users
                     getUsersButton.style.display = "block";
+                    //nfc
+                    getNFCTrackingDataButton.classList.remove("hidden");
+                    searchBar.classList.remove("hidden");
                     var helloMessage = document.createElement("p");
                     helloMessage.textContent = "Hello " + user.profile.name;
                     message.appendChild(helloMessage);
                 } else {
                     loginButton.style.display = "block";
                     logoutButton.style.display = "none";
+                    //users
                     getUsersButton.style.display = "none";
+                    //NFC
+                    getNFCTrackingDataButton.classList.add("hidden");
+                    searchBar.classList.add("hidden");
+                    nfctrackingsTable.classList.add("hidden");
                 }
             }
         };
@@ -1020,6 +1045,14 @@
             authContext.logOut();
             usersTable.style.display = "none";
             usersTableBody.innerHTML = "";
+        }
+
+        //function to NFC Tracking Data
+        function getNFCTrackingData() {
+            getNFCTrackingDataButton.disabled = true;
+            message.textContent = "Retrieving NFC tracking data...";
+
+            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
         }
 
         // Function to get users
