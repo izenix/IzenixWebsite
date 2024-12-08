@@ -1329,33 +1329,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC Tracking & Users</title>
     <style>
+        /* General styling for the page */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         .hidden {
             display: none;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
+        /* Buttons styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
-        table, th, td {
-            border: 1px solid black;
+            button:hover {
+                background-color: #45a049;
+                transform: scale(1.05);
+            }
+
+            button:disabled {
+                background-color: #aaa;
+                cursor: not-allowed;
+            }
+
+            button.hidden {
+                display: none;
+            }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
         th, td {
-            padding: 10px;
+            padding: 12px 15px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
 
-        button {
-            margin: 5px;
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+            td:hover {
+                background-color: #f1f1f1;
+            }
+
+        /* Error and message styling */
+        #errorMessage, #message {
+            color: #f44336;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        #errorMessage {
+            font-weight: bold;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        /* Input fields */
+        input[type="text"] {
             padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
         }
 
-        #tagDetails {
-            display: none;
+            input[type="text"]:focus {
+                border-color: #4CAF50;
+                outline: none;
+            }
+
+        /* Toggle section buttons styling */
+        #showNFCButton, #showUsersButton {
+            background-color: #008CBA;
+            color: white;
+            font-size: 16px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+            #showNFCButton:hover, #showUsersButton:hover {
+                background-color: #007B9E;
+            }
+
+        /* Tag ID Details */
+        #tagDetails table {
+            width: 50%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        #tagDetails td, #tagDetails th {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #tagDetails th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #tagDetails td {
+            background-color: #f9f9f9;
+        }
+
+            #tagDetails td:hover {
+                background-color: #f1f1f1;
+            }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            table, th, td {
+                font-size: 14px;
+            }
+
+            input[type="text"] {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
         }
     </style>
+
 </head>
 <body>
 
@@ -1459,7 +1612,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
         var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
 
-        var authContext, user, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, getUsersButton, usersTable, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, getUsersButton, usersTable, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -1473,6 +1626,8 @@
             endpoints: endpoints,
             cacheLocation: 'localStorage' // Store tokens in localStorage
         };
+
+
 
         document.onreadystatechange = function () {
             if (document.readyState === "complete") {
@@ -1572,6 +1727,7 @@
 
         function retrieveNFCTrackingData(error, token) {
             if (error || !token) {
+                console.error("Token error:", error);
                 errorMessage.textContent = 'ADAL error occurred: ' + error;
                 return;
             }
@@ -1581,9 +1737,12 @@
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
 
             req.onreadystatechange = function () {
                 if (this.readyState === 4) {
+                    req.onreadystatechange = null;
                     if (this.status === 200) {
                         var nfctrackings = JSON.parse(this.response).value;
                         renderNFCTrackingData(nfctrackings);
@@ -1615,6 +1774,19 @@
             message.textContent = "NFC tracking data retrieved successfully.";
         }
 
+        function searchByTagID() {
+            var filterValue = searchBar.value.toUpperCase();
+            var rows = nfctrackingsTableBody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
+                if (tagIdCell) {
+                    var tagId = tagIdCell.textContent.toUpperCase();
+                    rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
+                }
+            }
+        }
+
         // Function to retrieve Users
         function getUsers() {
             getUsersButton.disabled = true;
@@ -1630,10 +1802,12 @@
             }
 
             var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/systemusers?$select=fullname,emailaddress1,telephone1"), true);
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
 
             req.onreadystatechange = function () {
                 if (this.readyState === 4) {
