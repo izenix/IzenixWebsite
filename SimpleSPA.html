@@ -842,11 +842,14 @@
     <button id="showNFCButton">Show NFC Tracking Data</button>
     <button id="showUsersButton">Show Users</button>
 
+    <button id="login">Login</button>
+    <button id="logout" class="hidden">Logout</button>
+
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
-        <button id="login">Login</button>
-        <button id="logout" class="hidden">Logout</button>
-        <button id="getNFCTrackingData" >NFC Tracking Data</button>   <!--class="hidden"-->
+        <!--<button id="login">Login</button>
+        <button id="logout" class="hidden">Logout</button>-->
+        <button id="getNFCTrackingData" class="hidden">NFC Tracking Data</button>   <!--class="hidden"-->
 
         <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
         <div id="errorMessage"></div>
@@ -875,8 +878,8 @@
         <div id="userMessage"></div>
         <div id="userErrorMessage" style="color: red;"></div>
 
-        <button id="userLogin" style="display: block;">Login</button>
-        <button id="userLogout" style="display: none;">Logout</button>
+        <!--<button id="userLogin" style="display: block;">Login</button>
+        <button id="userLogout" style="display: none;">Logout</button>-->
         <button id="getUsers" style="display: none;">Get Users</button>
 
         <table id="usersTable">
@@ -898,14 +901,6 @@
                     <th>TagID</th>
                     <td id="tagIdData"></td>
                 </tr>
-                <!--<tr>
-                    <th>Name</th>
-                    <td id="nameData"></td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td id="statusData"></td>
-                </tr>-->
             </table>
         </div>
     </div>
@@ -968,8 +963,8 @@
                 errorMessage = document.getElementById("errorMessage");
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
-                userLoginButton = document.getElementById("userLogin");
-                userLogoutButton = document.getElementById("userLogout");
+                //userLoginButton = document.getElementById("userLogin");
+                //userLogoutButton = document.getElementById("userLogout");
 
 
 
@@ -986,13 +981,13 @@
 
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
-                userLoginButton.addEventListener("click", userLogin);
-                userLogoutButton.addEventListener("click", userLogout);
+                //userLoginButton.addEventListener("click", userLogin);
+                //userLogoutButton.addEventListener("click", userLogout);
 
 
                 getUsersButton.addEventListener("click", getUsers);
                 getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
-                searchBar.addEventListener("input", searchByTagID);
+                searchBar.addEventListener("input", searchBar);
 
                 authenticate();
 
