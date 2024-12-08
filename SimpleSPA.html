@@ -1330,6 +1330,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1370,8 +1372,8 @@
             transition: background-color 0.3s ease;
             margin-right: 10px;
             margin-left: 10px;
-            margin-top: auto;
-            margin-bottom: auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
             button:hover {
@@ -1467,7 +1469,7 @@
     <div id="nfcTrackingSection">
         <button id="login">Login</button>
         <button id="logout" class="hidden">Logout</button>
-        <button id="getNFCTrackingData">NFC Tracking Data</button>   <!--class="hidden"-->
+        <button id="getNFCTrackingData" style="display: none;">NFC Tracking Data</button>
 
         <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
         <div id="errorMessage"></div>
@@ -1497,7 +1499,7 @@
         <div id="userErrorMessage" style="color: red;"></div>
 
         <button id="userLogin">Login</button>
-        <button id="userLogout" style="display: none;">Logout</button>
+        <button id="userLogout" style="display: none;" class="hidden">Logout</button>
         <button id="getUsers" style="display: none;">Get Users</button>
 
         <table id="usersTable">
@@ -1590,6 +1592,10 @@
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
 
+                userLogin = document.getElementById("userLogin");
+                userLogout = document.getElementById("userLogout");
+
+
                 //NFC
                 getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
                 searchBar = document.getElementById("searchBar");
@@ -1608,28 +1614,6 @@
                 searchBar.addEventListener("input", searchByTagID);
 
                 authenticate();
-
-                //if (user) {
-                //    loginButton.style.display = "none";
-                //    logoutButton.style.display = "block";
-                //    //users
-                //    getUsersButton.style.display = "block";
-                //    //nfc
-                //    getNFCTrackingDataButton.classList.remove("block");   //hidden
-                //    searchBar.classList.remove("block");  //hidden
-                //    var helloMessage = document.createElement("p");
-                //    helloMessage.textContent = "Hello " + user.profile.name;
-                //    message.appendChild(helloMessage);
-                //} else {
-                //    loginButton.style.display = "block";
-                //    logoutButton.style.display = "none";
-                //    //users
-                //    getUsersButton.style.display = "none";
-                //    //NFC
-                //    getNFCTrackingDataButton.classList.add("none");   //hidden
-                //    searchBar.classList.add("none");                  //hidden
-                //    nfctrackingsTable.classList.add("none");          //hidden
-                //}
 
                 if (user) {
                     // Hide login button and show logout button when the user is logged in
@@ -1702,6 +1686,22 @@
             usersTable.style.display = "none";
             usersTableBody.innerHTML = "";
         }
+
+        function userlogin() {
+            try {
+                authContext.login();
+            } catch (e) {
+                console.error("Login error:", e);
+                errorMessage.textContent = "Login failed.";
+            }
+        }
+
+        function userLogout() {
+            authContext.logOut();
+            usersTable.style.display = "none";
+            usersTableBody.innerHTML = "";
+        }
+
 
         //function to NFC Tracking Data
         function getNFCTrackingData() {
@@ -1785,48 +1785,6 @@
             usersTable.style.display = 'table';
             getUsersButton.disabled = false;
             message.textContent = '';
-        }
-
-        // Function to show Tag ID data dynamically
-        function showTagIdData(tagId) {
-            authContext.acquireToken(organizationURI, function (error, token) {
-                if (error || !token) {
-                    console.error("Token error:", error);
-                    errorMessage.textContent = 'ADAL error occurred: ' + error;
-                    return;
-                }
-
-                var req = new XMLHttpRequest();
-                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '" + tagId + "'"), true);
-                req.setRequestHeader("Authorization", "Bearer " + token);
-                req.setRequestHeader("Accept", "application/json");
-                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                req.setRequestHeader("OData-MaxVersion", "4.0");
-                req.setRequestHeader("OData-Version", "4.0");
-
-                req.onreadystatechange = function () {
-                    if (this.readyState === 4) {
-                        req.onreadystatechange = null;
-                        if (this.status === 200) {
-                            var tagDetails = JSON.parse(this.response).value[0];
-                            if (tagDetails) {
-                                document.getElementById("tagIdData").textContent = tagDetails.izx_tagid || 'N/A';
-
-                                document.getElementById("tagDetails").style.display = "block";
-                            } else {
-                                console.error("No tag details found for the provided tag ID.");
-                                errorMessage.textContent = 'No tag details found for the provided tag ID.';
-                            }
-
-                        } else {
-                            var error = JSON.parse(this.response).error;
-                            console.error("Error retrieving tag details:", error.message);
-                            errorMessage.textContent = error.message;
-                        }
-                    }
-                };
-                req.send();
-            });
         }
 
         // Existing NFC Tracking Data code goes here
