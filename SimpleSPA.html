@@ -691,6 +691,12 @@
     </script>
 </body>
 </html>-->
+
+
+
+
+
+
 <!--<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1615,7 +1621,7 @@
                 getUsersButton.addEventListener("click", getUsers);
 
                 // Add event listener for search functionality
-                searchBar.addEventListener("input", searchByTagID);
+                searchBar.addEventListener("input", searchBar);
      
 
                 authenticate();
@@ -1791,6 +1797,119 @@
             getUsersButton.disabled = false;
             message.textContent = '';
         }
+        // Function to show Tag ID data dynamically
+        //function showTagIdData(tagId) {
+        //    authContext.acquireToken(organizationURI, function (error, token) {
+        //        if (error || !token) {
+        //            console.error("Token error:", error);
+        //            errorMessage.textContent = 'ADAL error occurred: ' + error;
+        //            return;
+        //        }
+
+        //        var req = new XMLHttpRequest();
+        //        req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$filter=izx_tagid eq '" + tagId + "'"), true);
+        //        req.setRequestHeader("Authorization", "Bearer " + token);
+        //        req.setRequestHeader("Accept", "application/json");
+        //        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        //        req.setRequestHeader("OData-MaxVersion", "4.0");
+        //        req.setRequestHeader("OData-Version", "4.0");
+
+        //        req.onreadystatechange = function () {
+        //            if (this.readyState === 4) {
+        //                req.onreadystatechange = null;
+        //                if (this.status === 200) {
+        //                    var tagDetails = JSON.parse(this.response).value[0];
+        //                    if (tagDetails) {
+        //                        document.getElementById("tagIdData").textContent = tagDetails.izx_tagid || 'N/A';
+
+        //                        document.getElementById("tagDetails").style.display = "block";
+        //                    } else {
+        //                        console.error("No tag details found for the provided tag ID.");
+        //                        errorMessage.textContent = 'No tag details found for the provided tag ID.';
+        //                    }
+
+        //                } else {
+        //                    var error = JSON.parse(this.response).error;
+        //                    console.error("Error retrieving tag details:", error.message);
+        //                    errorMessage.textContent = error.message;
+        //                }
+        //            }
+        //        };
+        //        req.send();
+        //    });
+        //}
+
+        // Function to show Tag ID data
+        function showTagIdData(tagId) {
+            const apiUrl = "https://izenixlearn.api.crm.dynamics.com/api/data/v9.1/izx_nfctrackings"; 
+            const token = "your_oauth_token_here";
+
+            const query = `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`;
+
+            fetch(`${apiUrl}${query}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(function (results) {
+                    if (results.value.length > 0) {
+                        document.getElementById("tagIdData").textContent = "";
+                        document.getElementById("nameData").textContent = "";
+                        document.getElementById("statusData").textContent = "";
+
+                        let tagIds = [];
+                        for (var i = 0; i < results.value.length; i++) {
+                            var result = results.value[i];
+                            tagIds.push(result["izx_tagid"]);
+
+                            document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
+                        }
+
+                        document.getElementById("tagIdData").textContent = tagIds.join(", ");
+                        document.getElementById("statusData").textContent = "Active";
+
+                        document.getElementById("tagDetails").style.display = 'block';
+                    } else {
+                        errorMessage.textContent = "No TagID found for this contact.";
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Error retrieving TagID data:", error.message);
+                    errorMessage.textContent = "Error retrieving TagID data: " + error.message;
+                });
+        }
+
+        // Populate NFC data into the table
+        function populateNFCData(data) {
+            // Clear the table body
+            nfctrackingsTableBody.innerHTML = "";
+
+            // Loop through the data and populate the table
+            data.value.forEach(function (record) {
+                const row = nfctrackingsTableBody.insertRow();
+                row.insertCell(0).textContent = record.izx_tagid;
+                row.insertCell(1).textContent = record._izx_contact_value;
+                row.insertCell(2).textContent = record.izx_timestamp;
+            });
+        }
+
+        // Populate Users data into the table
+        function populateUsersData(data) {
+            usersTableBody.innerHTML = "";
+
+            data.value.forEach(function (user) {
+                const row = usersTableBody.insertRow();
+                row.insertCell(0).textContent = user.fullname;
+                row.insertCell(1).textContent = user.emailaddress1;
+            });
+        }
+
+
+
+
 
         // Existing NFC Tracking Data code goes here
         var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody;
