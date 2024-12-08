@@ -875,7 +875,7 @@
         <div id="userMessage"></div>
         <div id="userErrorMessage" style="color: red;"></div>
 
-        <button id="userLogin">Login</button>
+        <button id="userLogin" style="display: block;">Login</button>
         <button id="userLogout" style="display: none;">Logout</button>
         <button id="getUsers" style="display: none;">Get Users</button>
 
@@ -947,7 +947,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
         var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, getUsersButton, usersTable, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, getUsersButton, userLoginButton, userLogoutButton, usersTable, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -968,6 +968,8 @@
                 errorMessage = document.getElementById("errorMessage");
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
+                userLoginButton = document.getElementById("userLogin");
+                userLogoutButton = document.getElementById("userLogout");
 
 
 
@@ -984,6 +986,8 @@
 
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
+                userLoginButton.addEventListener("click", userLogin);
+                userLogoutButton.addEventListener("click", userLogout);
 
 
                 getUsersButton.addEventListener("click", getUsers);
@@ -996,6 +1000,9 @@
                     // Hide login button and show logout button when the user is logged in
                     loginButton.style.display = "none";
                     logoutButton.style.display = "block";
+
+                    userLoginButton.style.display = "none";
+                    userLogoutButton.style.display = "block";
 
                     // Show the Get Users button
                     getUsersButton.style.display = "block";
@@ -1013,6 +1020,9 @@
                     // Show login button and hide logout button when the user is logged out
                     loginButton.style.display = "block";
                     logoutButton.style.display = "none";
+
+                    userLoginButton.style.display = "block";
+                    userLogoutButton.style.display = "none";
 
                     // Hide the Get Users button
                     getUsersButton.style.display = "none";
