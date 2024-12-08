@@ -749,8 +749,8 @@
             transition: background-color 0.3s ease;
             margin-right: 10px;
             margin-left: 10px;
-            margin-top:auto;
-            margin-bottom:auto;
+            margin-top:10px;
+            margin-bottom:10px;
         }
 
             button:hover {
@@ -1019,7 +1019,7 @@
                     getUsersButton.style.display = "block";
 
                     // Show the NFC tracking data button and search bar by removing "none" class
-                    getNFCTrackingDataButton.classList.remove("none");
+                    getNFCTrackingDataButton.style.display = "none"   /*.classList.remove("none");*/
                     searchBar.classList.remove("none");
 
                     // Display greeting message to the logged-in user
@@ -1083,9 +1083,24 @@
         // Logout function
         function logout() {
             authContext.logOut();
-            usersTable.style.display = "none";
+            /*usersTable.style.display = "none";*/
             usersTableBody.innerHTML = "";
+            toggleLoggedInState(false);
         }
+
+
+        //function login() {
+        //    authContext.login();
+        //}
+
+        //function logout() {
+        //    authContext.logOut();
+        //    nfctrackingsTableBody.innerHTML = "";
+        //    toggleLoggedInState(false);
+        //}
+
+
+
 
         //function to NFC Tracking Data
         function getNFCTrackingData() {
