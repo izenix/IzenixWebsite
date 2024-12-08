@@ -1521,14 +1521,6 @@
                     <th>TagID</th>
                     <td id="tagIdData"></td>
                 </tr>
-                <!--<tr>
-                    <th>Name</th>
-                    <td id="nameData"></td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td id="statusData"></td>
-                </tr>-->
             </table>
         </div>
     </div>
@@ -1570,7 +1562,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
         var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -1585,33 +1577,52 @@
             cacheLocation: 'localStorage' // Store tokens in localStorage
         };
 
+        document.addEventListener('DOMContentLoaded', function () {
+            // Your code that uses userLogin goes here
+            // Example:  if (userLogin) { ... }  //check if defined
+        });
+
+
         document.onreadystatechange = function () {
             if (document.readyState === "complete") {
+                // Get references to the necessary DOM elements
                 message = document.getElementById("message");
                 errorMessage = document.getElementById("errorMessage");
+
+                // Login and Logout buttons for NFC Tracking Data
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
 
-                userLogin = document.getElementById("userLogin");
-                userLogout = document.getElementById("userLogout");
+                // Login and Logout buttons for Users
+                userLoginButton = document.getElementById("userLogin");
+                userLogoutButton = document.getElementById("userLogout");
 
-
-                //NFC
+                // NFC Tracking Data elements
                 getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
                 searchBar = document.getElementById("searchBar");
                 nfctrackingsTable = document.getElementById("nfctrackingsTable");
                 nfctrackingsTableBody = document.getElementById("nfctrackingsTableBody");
 
-                //Users
+                // Users-related elements
                 getUsersButton = document.getElementById("getUsers");
                 usersTable = document.getElementById("usersTable");
                 usersTableBody = document.getElementById("usersTableBody");
 
+                // Add event listeners for NFC login/logout
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
-                getUsersButton.addEventListener("click", getUsers);
+
+                // Add event listeners for Users login/logout
+                userLoginButton.addEventListener("click", userLogin);
+                userLogoutButton.addEventListener("click", userLogout);
+
+                // Add event listeners for data retrieval and search
                 getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
+                getUsersButton.addEventListener("click", getUsers);
+
+                // Add event listener for search functionality
                 searchBar.addEventListener("input", searchByTagID);
+     
 
                 authenticate();
 
