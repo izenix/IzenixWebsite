@@ -1840,39 +1840,157 @@
         //}
 
         // Function to show Tag ID data
-        function showTagIdData(tagId) {
-            const apiUrl = "https://izenixlearn.api.crm.dynamics.com/api/data/v9.1/izx_nfctrackings"; 
-            const token = "your_oauth_token_here";
+        //function showTagIdData(tagId) {
+        //    const apiUrl = "https://izenixlearn.api.crm.dynamics.com/api/data/v9.1/izx_nfctrackings";
+        //    const token = "your_oauth_token_here";
+
+        //    const query = `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`;
+
+        //    fetch(`${apiUrl}${query}`, {
+        //        method: 'GET',
+        //        headers: {
+        //            'Authorization': `Bearer ${token}`,
+        //            'Content-Type': 'application/json'
+        //        }
+        //    })
+        //        .then(response => response.json())
+        //        .then(function (results) {
+        //            if (results.value.length > 0) {
+        //                document.getElementById("tagIdData").textContent = "";
+        //                document.getElementById("nameData").textContent = "";
+        //                document.getElementById("statusData").textContent = "";
+
+        //                let tagIds = [];
+        //                for (var i = 0; i < results.value.length; i++) {
+        //                    var result = results.value[i];
+        //                    tagIds.push(result["izx_tagid"]);
+
+        //                    document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
+        //                }
+
+        //                document.getElementById("tagIdData").textContent = tagIds.join(", ");
+        //                document.getElementById("statusData").textContent = "Active";
+
+        //                document.getElementById("tagDetails").style.display = 'block';
+        //            } else {
+        //                errorMessage.textContent = "No TagID found for this contact.";
+        //            }
+        //        })
+        //        .catch(function (error) {
+        //            console.error("Error retrieving TagID data:", error.message);
+        //            errorMessage.textContent = "Error retrieving TagID data: " + error.message;
+        //        });
+        //}
+
+        //// Populate NFC data into the table
+        //function populateNFCData(data) {
+        //    // Clear the table body
+        //    nfctrackingsTableBody.innerHTML = "";
+
+        //    // Loop through the data and populate the table
+        //    data.value.forEach(function (record) {
+        //        const row = nfctrackingsTableBody.insertRow();
+        //        row.insertCell(0).textContent = record.izx_tagid;
+        //        row.insertCell(1).textContent = record._izx_contact_value;
+        //        row.insertCell(2).textContent = record.izx_timestamp;
+        //    });
+        //}
+
+        //// Populate Users data into the table
+        //function populateUsersData(data) {
+        //    usersTableBody.innerHTML = "";
+
+        //    data.value.forEach(function (user) {
+        //        const row = usersTableBody.insertRow();
+        //        row.insertCell(0).textContent = user.fullname;
+        //        row.insertCell(1).textContent = user.emailaddress1;
+        //    });
+        //}
+
+
+        const msalConfig = {
+            auth: {
+                clientId: "78d9abf2-52c4-4f68-a69d-dfab8a564eab",  // Replace with your Azure AD App client ID
+                authority: "https://login.microsoftonline.com/izenixlearn.onmicrosoft.com", // Replace with your tenant ID
+                redirectUri: "https://www.izenix.com/SimpleSPA.html" // Replace with your redirect URI
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        async function getAccessToken() {
+            const request = {
+                scopes: ["https://izenixlearn.api.crm.dynamics.com/.default"] /*// Replace with your Dynamics 365 scope   //https://izenixlearn.api.crm.dynamics.com/api/data/v9.1/izx_nfctrackings*/
+            };
+
+            try {
+                const authResult = await msalInstance.acquireTokenSilent(request);
+                return authResult.accessToken;
+            } catch (error) {
+                if (error instanceof msal.InteractionRequiredAuthError) {
+                    const authResult = await msalInstance.acquireTokenPopup(request);
+                    return authResult.accessToken;
+                } else {
+                    console.error("Error acquiring token:", error);
+                }
+            }
+        }
+
+        async function showTagIdData(tagId) {
+            const apiUrl = "https://izenixlearn.api.crm.dynamics.com/api/data/v9.1/izx_nfctrackings"; // Replace with your organization's API URL
+            const token = await getAccessToken(); // Get OAuth access token
+
+            if (!token) {
+                console.error("Access token is missing");
+                errorMessage.textContent = "Error: Unable to retrieve access token";
+                return;
+            }
 
             const query = `?$select=_izx_contact_value,izx_tagid&$filter=_izx_contact_value eq '${tagId}'`;
 
             fetch(`${apiUrl}${query}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`, // Add the Bearer token
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.text().then(text => { throw new Error(text); });
+                    }
+                })
                 .then(function (results) {
                     if (results.value.length > 0) {
+                        // Clear existing data
                         document.getElementById("tagIdData").textContent = "";
                         document.getElementById("nameData").textContent = "";
                         document.getElementById("statusData").textContent = "";
 
+                        // Assuming the contact has multiple tagId records
                         let tagIds = [];
                         for (var i = 0; i < results.value.length; i++) {
                             var result = results.value[i];
-                            tagIds.push(result["izx_tagid"]);
+                            tagIds.push(result["izx_tagid"]); // Collect all TagID values
 
+                            // Display the contact name or other details if available
                             document.getElementById("nameData").textContent = result["_izx_contact_value@OData.Community.Display.V1.FormattedValue"] || "Unknown Contact";
                         }
 
+                        // Display all collected TagIDs as a comma-separated list
                         document.getElementById("tagIdData").textContent = tagIds.join(", ");
-                        document.getElementById("statusData").textContent = "Active";
+                        document.getElementById("statusData").textContent = "Active"; // Set the status based on your logic
 
+                        // Optionally, show an alert with the TagIDs
+                        alert("TagID(s): " + tagIds.join(", "));
+
+                        // Make the tagDetails section visible
                         document.getElementById("tagDetails").style.display = 'block';
                     } else {
+                        // If no TagID exists for this contact, show a different message
                         errorMessage.textContent = "No TagID found for this contact.";
                     }
                 })
@@ -1882,30 +2000,15 @@
                 });
         }
 
-        // Populate NFC data into the table
-        function populateNFCData(data) {
-            // Clear the table body
-            nfctrackingsTableBody.innerHTML = "";
 
-            // Loop through the data and populate the table
-            data.value.forEach(function (record) {
-                const row = nfctrackingsTableBody.insertRow();
-                row.insertCell(0).textContent = record.izx_tagid;
-                row.insertCell(1).textContent = record._izx_contact_value;
-                row.insertCell(2).textContent = record.izx_timestamp;
-            });
-        }
 
-        // Populate Users data into the table
-        function populateUsersData(data) {
-            usersTableBody.innerHTML = "";
 
-            data.value.forEach(function (user) {
-                const row = usersTableBody.insertRow();
-                row.insertCell(0).textContent = user.fullname;
-                row.insertCell(1).textContent = user.emailaddress1;
-            });
-        }
+
+
+
+
+
+
 
 
 
