@@ -1469,7 +1469,7 @@
     <div id="nfcTrackingSection">
         <button id="login">Login</button>
         <button id="logout" class="hidden">Logout</button>
-        <button id="getNFCTrackingData" style="display: none;">NFC Tracking Data</button>
+        <button id="getNFCTrackingData">NFC Tracking Data</button>
 
         <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
         <div id="errorMessage"></div>
@@ -1576,13 +1576,7 @@
             endpoints: endpoints,
             cacheLocation: 'localStorage' // Store tokens in localStorage
         };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Your code that uses userLogin goes here
-            // Example:  if (userLogin) { ... }  //check if defined
-        });
-
-
+                
         document.onreadystatechange = function () {
             if (document.readyState === "complete") {
                 // Get references to the necessary DOM elements
