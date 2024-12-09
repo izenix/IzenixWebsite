@@ -156,6 +156,36 @@
                 box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5); /* Add custom focus outline */
             }
 
+            /* Login and Logout Styling */
+        .auth-buttons {
+            position: absolute; /* Ensures it can be positioned freely */
+            left: 20px; /* Aligns the buttons 20px from the left edge */
+            top: 20px; /* 20px from the top of the page */
+        }
+
+            .auth-buttons button {
+                display: block; /* Stacks the buttons vertically */
+                width: 100px; /* Set a width for the buttons */
+                padding: 10px; /* Add padding inside the buttons for better size */
+                margin-bottom: 10px; /* Adds space between the buttons */
+                font-size: 16px; /* Increases font size for better readability */
+                background-color: #007bff; /* Blue background for the buttons */
+                color: white; /* White text color */
+                border: none; /* Removes the default border */
+                border-radius: 5px; /* Slightly rounded corners */
+                cursor: pointer; /* Shows a pointer cursor when hovering */
+                transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+            }
+
+                .auth-buttons button:hover {
+                    background-color: #0056b3; /* Darker blue on hover */
+                }
+
+                .auth-buttons button.hidden {
+                    display: none; /* Ensures the hidden class hides the element */
+                }
+
+
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -166,6 +196,11 @@
     <!-- Buttons to toggle between NFC Tracking Data and Get Users -->
     <button id="showNFCButton">Show NFC Tracking Data</button>
     <button id="showUsersButton">Show Users</button>
+
+    <div class="auth-buttons">
+        <button id="login">Login</button>
+        <button id="logout" class="hidden">Logout</button>
+    </div>
 
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
@@ -258,6 +293,17 @@
             }
         }
 
+        document.getElementById('login').addEventListener('click', function () {
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('logout').classList.remove('hidden');
+        });
+
+        document.getElementById('logout').addEventListener('click', function () {
+            document.getElementById('logout').classList.add('hidden');
+            document.getElementById('login').classList.remove('hidden');
+        });
+
+
         // Your existing NFC Tracking Data and Get Users code goes here
         var organizationURI = "https://izenixlearn.api.crm.dynamics.com";      // CRM URL
         var tenant = "izenixlearn.onmicrosoft.com";                            // Azure AD tenant
@@ -285,7 +331,7 @@
                 message = document.getElementById("message");
                 errorMessage = document.getElementById("errorMessage");
 
-                // Login and Logout buttons 
+                // Login and Logout buttons
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
 
@@ -309,7 +355,7 @@
                 getUsersButton.addEventListener("click", getUsers);
 
                 // Add event listener for search functionality
-                searchBar.addEventListener("input", searchBar);
+                searchBar.addEventListener("input", searchByTagID);
 
 
                 authenticate();
@@ -468,7 +514,7 @@
             getUsersButton.disabled = false;
             message.textContent = '';
         }
-     
+
         function showTagIdData(tagId) {
             debugger;
             authContext.acquireToken(organizationURI, function (error, token) {
