@@ -477,8 +477,8 @@
                 user = authContext.getCachedUser();
             } catch (e) {
                 console.error("Authentication error:", e);
-                alert("Authentication initialization failed.")
-                /*errorMessage.textContent = "Authentication initialization failed.";*/
+                /*alert("Authentication initialization failed.")*/
+                errorMessage.textContent = "Authentication initialization failed.";
             }
         }
 
@@ -488,8 +488,8 @@
                 authContext.login();
             } catch (e) {
                 console.error("Login error:", e);
-                alert("Login failed.");
-                /*errorMessage.textContent = "Login failed.";*/
+                /*alert("Login failed.");*/
+                errorMessage.textContent = "Login failed.";
             }
         }
 
@@ -532,20 +532,13 @@
                     } else {
                         var error = JSON.parse(this.response).error;
                         console.error("Error retrieving users:", error.message);
-                        alert("Error retrieving users: " + error.message); // Alert on user retrieval error
-                        /* errorMessage.textContent = error.message;*/
+                        /*alert("Error retrieving users: " + error.message); // Alert on user retrieval error*/
+                         errorMessage.textContent = error.message;
                     }
                 }
             };
             req.send();
         }
-
-
-        // Function to show error message and hide it after 5 seconds
-        //function errorMessage(message) {
-        //    alert(message); // Use alert for error message instead of div text
-        //}
-
 
         // Function to render users into the table
         function renderUsers(users) {
@@ -589,8 +582,8 @@
             authContext.acquireToken(organizationURI, function (error, token) {
                 if (error || !token) {
                     console.error("Token error:", error);
-                    alert('ADAL error occurred: ' + error);                            // Alert for token error
-                    /*errorMessage.textContent = 'ADAL error occurred: ' + error;*/
+                    /*alert('ADAL error occurred: ' + error);                            // Alert for token error*/
+                    errorMessage.textContent = 'ADAL error occurred: ' + error;
                     return;
                 }
 
@@ -640,14 +633,14 @@
                                 modal.style.display = "block";
 
                             } else {
-                                //console.error("No records found for the provided tag ID.");
-                                //errorMessage.textContent = 'No records found for the provided tag ID.';
+                                console.error("No records found for the provided tag ID.");
+                                errorMessage.textContent = 'No records found for the provided tag ID.';
                                 alert("No records found for the provided TagID.");                            // Alert when no tag records are found
                             }
                         } else {
                             var error = JSON.parse(this.response).error;
                             console.error("Error retrieving tag details:", error.message);
-                            /*errorMessage.textContent = error.message;*/
+                            errorMessage.textContent = error.message;
                             alert("Error retrieving tag details: " + error.message);                          // Alert on error retrieving tag details
                         }
                     }
@@ -717,8 +710,8 @@
 
         function retrieveNFCTrackingData(error, token) {
             if (error || !token) {
-                alert("ADAL error occurred: " + error); // Alert on token error
-                /*errorMessage.textContent = 'ADAL error occurred: ' + error;*/
+               /* alert("ADAL error occurred: " + error); // Alert on token error*/
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
                 return;
             }
 
@@ -734,8 +727,8 @@
                         var nfctrackings = JSON.parse(this.response).value;
                         renderNFCTrackingData(nfctrackings);
                     } else {
-                        alert("Error retrieving NFC Tracking Data: " + JSON.parse(this.response).error.message); // Alert on NFC tracking data error
-                        /*errorMessage.textContent = JSON.parse(this.response).error.message;*/
+                        /*alert("Error retrieving NFC Tracking Data: " + JSON.parse(this.response).error.message); // Alert on NFC tracking data error*/
+                        errorMessage.textContent = JSON.parse(this.response).error.message;
                     }
                 }
             };
