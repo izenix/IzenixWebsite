@@ -237,7 +237,12 @@
             text-decoration: none;
             cursor: pointer;
         }
-
+        #errorMessage {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+        }
 
     </style>
 
@@ -323,6 +328,7 @@
     <!-- Modal Structure -->
     <div id="tagDetailsModal" class="modal hidden">
         <div class="modal-content">
+            <div id="userMessage"></div>
             <span class="close">&times;</span>
             <h2>Tag Details</h2>
             <table>
@@ -548,6 +554,22 @@
             };
             req.send();
         }
+
+        // Function to show error message and hide it after 5 seconds
+        function errorMessage(message) {
+            // Get the error message div
+            var errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = message; // Set the error message text
+
+            // Show the error message
+            errorMessage.style.display = "block";
+
+            // Hide the error message after 5 seconds
+            setTimeout(function () {
+                errorMessage.style.display = "none";
+            }, 5000); // 5000 milliseconds = 5 seconds
+        }
+
 
         // Function to render users into the table
         function renderUsers(users) {
