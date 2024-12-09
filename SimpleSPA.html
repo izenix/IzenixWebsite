@@ -269,11 +269,8 @@
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
         <button id="getNFCTrackingData">NFC Tracking Data</button>
-
         <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
-
         <div id="message"></div>
-
         <table id="nfctrackingsTable" class="hidden">
             <caption>NFC Tracking Data</caption>
             <thead>
@@ -310,25 +307,11 @@
             </thead>
             <tbody id="usersTableBody"></tbody>
         </table>
-        <!--<table>
-            <thead>
-                <tr>
-                    <th>Tag ID</th>
-                    <th>Status</th>
-                    <th>Timestamp</th>
-                </tr>
-            </thead>
-            <tbody id="tagDetailsTableBody"></tbody>
-        </table>-->
     </div>
-
-
-
 
     <!-- Modal Structure -->
     <div id="tagDetailsModal" class="modal hidden">
         <div class="modal-content">
-            <div id="userMessage"></div>
             <span class="close">&times;</span>
             <h2>Tag Details</h2>
             <table>
@@ -340,12 +323,9 @@
                     </tr>
                 </thead>
                 <tbody id="modalTagDetailsTableBody"></tbody>
-                <!--<tbody id="tagDetailsTableBody"></tbody>-->
             </table>
         </div>
     </div>
-
-
 
     <script type="text/javascript">
         "use strict";
@@ -394,7 +374,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
         var pageUrl = "https://www.izenix.com/SimpleSPA.html";                 // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, userMessage, loginButton, logoutButton, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -414,6 +394,8 @@
                 // Get references to the necessary DOM elements
                 message = document.getElementById("message");
                 errorMessage = document.getElementById("errorMessage");
+                usermessage = document.getElementById("userMessage");
+
 
                 // Login and Logout buttons
                 loginButton = document.getElementById("login");
@@ -495,7 +477,8 @@
                 user = authContext.getCachedUser();
             } catch (e) {
                 console.error("Authentication error:", e);
-                errorMessage.textContent = "Authentication initialization failed.";
+                alert("Authentication initialization failed.")
+                /*errorMessage.textContent = "Authentication initialization failed.";*/
             }
         }
 
@@ -505,7 +488,8 @@
                 authContext.login();
             } catch (e) {
                 console.error("Login error:", e);
-                errorMessage.textContent = "Login failed.";
+                alert("Login failed.");
+                /*errorMessage.textContent = "Login failed.";*/
             }
         }
 
@@ -548,27 +532,19 @@
                     } else {
                         var error = JSON.parse(this.response).error;
                         console.error("Error retrieving users:", error.message);
-                        errorMessage.textContent = error.message;
+                        alert("Error retrieving users: " + error.message); // Alert on user retrieval error
+                        /* errorMessage.textContent = error.message;*/
                     }
                 }
             };
             req.send();
         }
 
+
         // Function to show error message and hide it after 5 seconds
-        function errorMessage(message) {
-            // Get the error message div
-            var errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = message; // Set the error message text
-
-            // Show the error message
-            errorMessage.style.display = "block";
-
-            // Hide the error message after 5 seconds
-            setTimeout(function () {
-                errorMessage.style.display = "none";
-            }, 5000); // 5000 milliseconds = 5 seconds
-        }
+        //function errorMessage(message) {
+        //    alert(message); // Use alert for error message instead of div text
+        //}
 
 
         // Function to render users into the table
@@ -608,80 +584,13 @@
             message.textContent = '';
         }
 
-        //function showTagIdData(tagId) {
-        //    debugger;
-        //    authContext.acquireToken(organizationURI, function (error, token) {
-        //        if (error || !token) {
-        //            console.error("Token error:", error);
-        //            errorMessage.textContent = 'ADAL error occurred: ' + error;
-        //            return;
-        //        }
-
-        //        var req = new XMLHttpRequest();
-        //        req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '" + tagId + "'"), true);
-        //        req.setRequestHeader("Authorization", "Bearer " + token);
-        //        req.setRequestHeader("Accept", "application/json");
-        //        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        //        req.setRequestHeader("OData-MaxVersion", "4.0");
-        //        req.setRequestHeader("OData-Version", "4.0");
-
-        //        req.onreadystatechange = function () {
-        //            if (this.readyState === 4) {
-        //                req.onreadystatechange = null;
-        //                if (this.status === 200) {
-        //                    var tagDetails = JSON.parse(this.response).value;
-
-        //                    // Check if records were returned for the tagId
-        //                    if (tagDetails.length > 0) {
-        //                        // Clear any existing rows in the table
-        //                        var tableBody = document.getElementById("tagDetailsTableBody");
-        //                        tableBody.innerHTML = "";
-
-        //                        // Loop through each record and append it to the table
-        //                        tagDetails.forEach(function (record) {
-        //                            var row = document.createElement("tr");
-
-        //                            // Create and append table cells for each field
-        //                            var tagIdCell = document.createElement("td");
-        //                            tagIdCell.textContent = record.izx_tagid || 'N/A';
-        //                            row.appendChild(tagIdCell);
-
-        //                            var statusCell = document.createElement("td");
-        //                            statusCell.textContent = record.izx_status || 'N/A';
-        //                            row.appendChild(statusCell);
-
-        //                            var timestampCell = document.createElement("td");
-        //                            timestampCell.textContent = record.izx_timestamp || 'N/A';
-        //                            row.appendChild(timestampCell);
-
-        //                            // Append the row to the table body
-        //                            tableBody.appendChild(row);
-        //                        });
-        //                    } else {
-        //                        console.error("No records found for the provided tag ID.");
-        //                        errorMessage.textContent = 'No records found for the provided tag ID.';
-        //                    }
-        //                } else {
-        //                    var error = JSON.parse(this.response).error;
-        //                    console.error("Error retrieving tag details:", error.message);
-        //                    errorMessage.textContent = error.message;
-        //                }
-        //            }
-        //        };
-        //        req.send();
-        //    });
-        //}
-
-
-
-
-
         function showTagIdData(tagId) {
             debugger;
             authContext.acquireToken(organizationURI, function (error, token) {
                 if (error || !token) {
                     console.error("Token error:", error);
-                    errorMessage.textContent = 'ADAL error occurred: ' + error;
+                    alert('ADAL error occurred: ' + error);                            // Alert for token error
+                    /*errorMessage.textContent = 'ADAL error occurred: ' + error;*/
                     return;
                 }
 
@@ -731,13 +640,15 @@
                                 modal.style.display = "block";
 
                             } else {
-                                console.error("No records found for the provided tag ID.");
-                                errorMessage.textContent = 'No records found for the provided tag ID.';
+                                //console.error("No records found for the provided tag ID.");
+                                //errorMessage.textContent = 'No records found for the provided tag ID.';
+                                alert("No records found for the provided TagID.");                            // Alert when no tag records are found
                             }
                         } else {
                             var error = JSON.parse(this.response).error;
                             console.error("Error retrieving tag details:", error.message);
-                            errorMessage.textContent = error.message;
+                            /*errorMessage.textContent = error.message;*/
+                            alert("Error retrieving tag details: " + error.message);                          // Alert on error retrieving tag details
                         }
                     }
                 };
@@ -761,17 +672,8 @@
         };
 
 
-
-
-
-
-
-
-
-
         // Existing NFC Tracking Data code goes here
         var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody;
-
         var endpoints = { orgUri: organizationURI };
 
         window.config = {
@@ -786,13 +688,13 @@
             if (isLoggedIn) {
                 loginButton.classList.add("hidden");
                 logoutButton.classList.remove("hidden");
-                getNFCTrackingDataButton.style.display = "block";      //.classList.remove("none");   //hidden
-                searchBar.style.display = "block";                     //.classList.remove("hidden");
+                getNFCTrackingDataButton.style.display = "block";      
+                searchBar.style.display = "block";                     
             } else {
                 loginButton.classList.remove("hidden");
                 logoutButton.classList.add("hidden");
-                getNFCTrackingDataButton.style.display = "none";       //.classList.add("none");       //hidden
-                searchBar.style.display = "none";                     //.classList.add("hidden");
+                getNFCTrackingDataButton.style.display = "none";       
+                searchBar.style.display = "none";                     
                 nfctrackingsTable.classList.add("hidden");
             }
         }
@@ -808,14 +710,15 @@
         }
 
         function getNFCTrackingData() {
-            getNFCTrackingDataButton.disabled = false;       //true
+            getNFCTrackingDataButton.disabled = false;       
             message.textContent = "Retrieving NFC tracking data...";
             authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
         }
 
         function retrieveNFCTrackingData(error, token) {
             if (error || !token) {
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                alert("ADAL error occurred: " + error); // Alert on token error
+                /*errorMessage.textContent = 'ADAL error occurred: ' + error;*/
                 return;
             }
 
@@ -831,7 +734,8 @@
                         var nfctrackings = JSON.parse(this.response).value;
                         renderNFCTrackingData(nfctrackings);
                     } else {
-                        errorMessage.textContent = JSON.parse(this.response).error.message;
+                        alert("Error retrieving NFC Tracking Data: " + JSON.parse(this.response).error.message); // Alert on NFC tracking data error
+                        /*errorMessage.textContent = JSON.parse(this.response).error.message;*/
                     }
                 }
             };
@@ -895,15 +799,27 @@
         function searchByTagID() {
             var filterValue = searchBar.value.toUpperCase();
             var rows = nfctrackingsTableBody.getElementsByTagName("tr");
+            var foundMatch = false; // Flag to track if a match is found
 
             for (var i = 0; i < rows.length; i++) {
                 var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
                 if (tagIdCell) {
                     var tagId = tagIdCell.textContent.toUpperCase();
                     rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
+                    foundMatch = true;
+                }
+                else {
+                    rows[i].style.display = "none"; // Hide row if no match
                 }
             }
+            // If no match is found, show an alert message
+            if (!foundMatch) {
+                alert('No TagID found searched by you');
+            }
         }
+        
+        
+
     </script>
 
 </body>
