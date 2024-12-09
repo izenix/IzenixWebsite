@@ -121,6 +121,41 @@
             background-color: #f8f8f8;
             font-size: 16px;
         }
+
+        /* Show Button Styling*/
+        #tagIdButton {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            padding: 15px 32px; /* Button padding */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* No underline */
+            display: inline-block; /* Inline block */
+            font-size: 16px; /* Font size */
+            margin: 10px 2px; /* Margins */
+            cursor: pointer; /* Pointer cursor */
+            border-radius: 12px; /* Rounded corners */
+            transition: all 0.3s ease; /* Smooth transitions */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Drop shadow */
+        }
+
+            #tagIdButton:hover {
+                background-color: #45a049; /* Darker green on hover */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
+                transform: translateY(-5px); /* Move button slightly up on hover */
+            }
+
+            #tagIdButton:active {
+                background-color: #3e8e41; /* Even darker green when clicked */
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Shadow on click */
+                transform: translateY(0); /* Reset position on click */
+            }
+
+            #tagIdButton:focus {
+                outline: none; /* Remove focus outline */
+                box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5); /* Add custom focus outline */
+            }
+
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -164,9 +199,6 @@
         <h1>Get Users from Dynamics 365</h1>
         <div id="userMessage"></div>
         <div id="userErrorMessage" style="color: red;"></div>
-
-        <!--<button id="userLogin">Login</button>
-    <button id="userLogout" style="display: none;" class="hidden">Logout</button>-->
         <button id="getUsers" style="display: none;">Get Users</button>
 
         <table id="usersTable">
@@ -181,18 +213,6 @@
             </thead>
             <tbody id="usersTableBody"></tbody>
         </table>
-
-        <!--<div id="tagDetails">
-        <h2>Tag ID Details</h2>
-        <table>
-            <tr>
-                <th>TagID</th>
-                <td id="tagIdData"></td>
-            </tr>
-        </table>
-    </div>-->
-
-
         <table>
             <thead>
                 <tr>
@@ -207,10 +227,6 @@
         </table>
 
     </div>
-
-
-    
-
 
     <script type="text/javascript">
         "use strict";
@@ -243,11 +259,10 @@
         }
 
         // Your existing NFC Tracking Data and Get Users code goes here
-
-        var organizationURI = "https://izenixlearn.api.crm.dynamics.com"; // CRM URL
-        var tenant = "izenixlearn.onmicrosoft.com"; // Azure AD tenant
-        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab"; // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html"; // Redirect URL
+        var organizationURI = "https://izenixlearn.api.crm.dynamics.com";      // CRM URL
+        var tenant = "izenixlearn.onmicrosoft.com";                            // Azure AD tenant
+        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
+        var pageUrl = "https://www.izenix.com/SimpleSPA.html";                 // Redirect URL
 
         var authContext, user, loginButton, logoutButton, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
@@ -270,13 +285,9 @@
                 message = document.getElementById("message");
                 errorMessage = document.getElementById("errorMessage");
 
-                // Login and Logout buttons for NFC Tracking Data
+                // Login and Logout buttons 
                 loginButton = document.getElementById("login");
                 logoutButton = document.getElementById("logout");
-
-                // Login and Logout buttons for Users
-                //userLoginButton = document.getElementById("userLogin");
-                //userLogoutButton = document.getElementById("userLogout");
 
                 // NFC Tracking Data elements
                 getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
@@ -292,10 +303,6 @@
                 // Add event listeners for NFC login/logout
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
-
-                // Add event listeners for Users login/logout
-                //userLoginButton.addEventListener("click", userLogin);
-                //userLogoutButton.addEventListener("click", userLogout);
 
                 // Add event listeners for data retrieval and search
                 getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
@@ -379,29 +386,12 @@
             usersTableBody.innerHTML = "";
         }
 
-        //function userlogin() {
-        //    try {
-        //        authContext.login();
-        //    } catch (e) {
-        //        console.error("Login error:", e);
-        //        errorMessage.textContent = "Login failed.";
-        //    }
-        //}
-
-        //function userLogout() {
-        //    authContext.logOut();
-        //    usersTable.style.display = "none";
-        //    usersTableBody.innerHTML = "";
-        //}
-
-
         //function to NFC Tracking Data
-        function getNFCTrackingData() {
-            getNFCTrackingDataButton.disabled = true;
-            message.textContent = "Retrieving NFC tracking data...";
-
-            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
-        }
+        //function getNFCTrackingData() {
+        //    getNFCTrackingDataButton.disabled = true;
+        //    message.textContent = "Retrieving NFC tracking data...";
+        //    authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
+        //}
 
         // Function to get users
         function getUsers() {
@@ -478,50 +468,7 @@
             getUsersButton.disabled = false;
             message.textContent = '';
         }
-        /*Function to show Tag ID data dynamically*/
-        //function showTagIdData(tagId) {
-        //    debugger;
-        //    authContext.acquireToken(organizationURI, function (error, token) {
-        //        if (error || !token) {
-        //            console.error("Token error:", error);
-        //            errorMessage.textContent = 'ADAL error occurred: ' + error;
-        //            return;
-        //        }
-
-        //        var req = new XMLHttpRequest();
-        //        req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '" + tagId + "'"), true);
-        //        req.setRequestHeader("Authorization", "Bearer " + token);
-        //        req.setRequestHeader("Accept", "application/json");
-        //        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        //        req.setRequestHeader("OData-MaxVersion", "4.0");
-        //        req.setRequestHeader("OData-Version", "4.0");
-
-        //        req.onreadystatechange = function () {
-        //            if (this.readyState === 4) {
-        //                req.onreadystatechange = null;
-        //                if (this.status === 200) {
-        //                    var tagDetails = JSON.parse(this.response).value[0];
-        //                    if (tagDetails) {
-        //                        document.getElementById("izx_tagid").textContent = tagDetails.izx_tagid || 'N/A';
-
-        //                    } else {
-        //                        console.error("No tag details found for the provided tag ID.");
-        //                        errorMessage.textContent = 'No tag details found for the provided tag ID.';
-        //                    }
-
-        //                } else {
-        //                    var error = JSON.parse(this.response).error;
-        //                    console.error("Error retrieving tag details:", error.message);
-        //                    errorMessage.textContent = error.message;
-        //                }
-        //            }
-        //        };
-        //        req.send();
-        //    });
-        //}
-
-
-
+     
         function showTagIdData(tagId) {
             debugger;
             authContext.acquireToken(organizationURI, function (error, token) {
@@ -587,9 +534,6 @@
         }
 
 
-
-
-
         // Existing NFC Tracking Data code goes here
         var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody;
 
@@ -607,13 +551,13 @@
             if (isLoggedIn) {
                 loginButton.classList.add("hidden");
                 logoutButton.classList.remove("hidden");
-                getNFCTrackingDataButton.classList.remove("none");   //hidden
-                searchBar.classList.remove("hidden");
+                getNFCTrackingDataButton.style.display = "block";      //.classList.remove("none");   //hidden
+                searchBar.style.display = "block";                     //.classList.remove("hidden");
             } else {
                 loginButton.classList.remove("hidden");
                 logoutButton.classList.add("hidden");
-                getNFCTrackingDataButton.classList.add("none");       //hidden
-                searchBar.classList.add("hidden");
+                getNFCTrackingDataButton.style.display = "none";       //.classList.add("none");       //hidden
+                searchBar.style.display = "none";                     //.classList.add("hidden");
                 nfctrackingsTable.classList.add("hidden");
             }
         }
@@ -629,9 +573,8 @@
         }
 
         function getNFCTrackingData() {
-            getNFCTrackingDataButton.disabled = true;
+            getNFCTrackingDataButton.disabled = false;       //true
             message.textContent = "Retrieving NFC tracking data...";
-
             authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
         }
 
