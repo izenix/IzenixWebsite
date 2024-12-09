@@ -157,10 +157,15 @@
             }
 
             /* Login and Logout Styling */
+        /*.auth-buttons {
+            position: absolute;*/ /* Ensures it can be positioned freely */
+            /*left: 20px;*/ /* Aligns the buttons 20px from the left edge */
+            /*top: 20px;*/ /* 20px from the top of the page */
+        /*}*/
+
         .auth-buttons {
-            position: absolute; /* Ensures it can be positioned freely */
-            left: 20px; /* Aligns the buttons 20px from the left edge */
-            top: 20px; /* 20px from the top of the page */
+            left: auto;
+            right: 20px; /* Changes alignment to 20px from the right edge */
         }
 
             .auth-buttons button {
@@ -204,8 +209,8 @@
 
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
-        <button id="login">Login</button>
-        <button id="logout" class="hidden">Logout</button>
+        <!--<button id="login">Login</button>
+        <button id="logout" class="hidden">Logout</button>-->
         <button id="getNFCTrackingData">NFC Tracking Data</button>
 
         <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
