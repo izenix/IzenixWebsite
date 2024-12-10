@@ -681,17 +681,50 @@
                                 tagDetails.forEach(function (record) {
                                     var row = document.createElement("tr");
 
+                                    //// Helper function to format date (YYYY-MM-DD)
+                                    //function formatDate(dateString) {
+                                    //    var date = new Date(dateString);
+                                    //    return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
+                                    //}
+
+                                    //// Helper function to format time (HH:MM:SS)
+                                    //function formatTime(dateString) {
+                                    //    var date = new Date(dateString);
+                                    //    return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
+                                    //}
+
                                     // Helper function to format date (YYYY-MM-DD)
                                     function formatDate(dateString) {
+                                        // Check if dateString is valid
+                                        if (!dateString) {
+                                            return 'N/A';  // Return 'N/A' or some default value if the date is invalid
+                                        }
+
                                         var date = new Date(dateString);
+                                        // Check if the date is valid
+                                        if (isNaN(date.getTime())) {
+                                            return 'Invalid Date';  // Return a default message if the date is invalid
+                                        }
+
                                         return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
                                     }
 
                                     // Helper function to format time (HH:MM:SS)
                                     function formatTime(dateString) {
+                                        // Check if dateString is valid
+                                        if (!dateString) {
+                                            return 'N/A';  // Return 'N/A' or some default value if the time is invalid
+                                        }
+
                                         var date = new Date(dateString);
+                                        // Check if the date is valid
+                                        if (isNaN(date.getTime())) {
+                                            return 'Invalid Time';  // Return a default message if the time is invalid
+                                        }
+
                                         return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
                                     }
+
 
                                     // Create and append table cells for each field
                                     var tagIdCell = document.createElement("td");
