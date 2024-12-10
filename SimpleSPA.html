@@ -247,7 +247,7 @@
         }
         #greetingMessage {
             font-family: 'Arial', sans-serif; /* Modern font */
-            font-size: 10px; /* Readable font size */
+            font-size: 13px; /* Readable font size */
             color: #333; /* Dark gray text color for a clean look */
             background-color: #f9f9f9; /* Light background color to make it stand out */
             padding: 10px 20px; /* Add some padding for spacing */
@@ -316,9 +316,9 @@
             <thead>
                 <tr>
                     <th>TagID</th>
-                    <th>Full Name</th> 
-                    <th>Email</th> 
-                    <th>Phone Number</th>  
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
                     <th>NFC Counter</th>
                     <th>-</th>
                 </tr>
@@ -626,10 +626,6 @@
                 actionCell.appendChild(tagIdButton);
                 row.appendChild(actionCell);
 
-
-
-
-
                 row.appendChild(tagId);
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
@@ -644,7 +640,7 @@
         }
 
     
-        function showTagIdData(tagId) {
+        function showTagIdData(actionCell) {
             debugger;
             authContext.acquireToken(organizationURI, function (error, token) {
                 if (error || !token) {
