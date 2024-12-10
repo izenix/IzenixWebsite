@@ -110,7 +110,8 @@
         /* Styling for NFC and Users buttons on the left side */
         .nfc-users-buttons {
             display: flex;
-            flex-direction: column; /* Buttons stacked vertically */
+            flex-direction: row; /* Buttons stacked vertically */
+            gap: 10px;
         }
 
             .nfc-users-buttons button {
@@ -244,6 +245,17 @@
             margin-top: 10px;
             display: none; /* Initially hidden */
         }
+        #greetingMessage {
+            font-family: 'Arial', sans-serif; /* Modern font */
+            font-size: 18px; /* Readable font size */
+            color: #333; /* Dark gray text color for a clean look */
+            background-color: #f9f9f9; /* Light background color to make it stand out */
+            padding: 10px 20px; /* Add some padding for spacing */
+            border-radius: 8px; /* Rounded corners for a smoother look */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            margin: 10px 0; /* Add margin for spacing around the element */
+            display: inline-block; /* Ensure the greeting stays inline with surrounding elements */
+        }
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -263,6 +275,7 @@
         <div class="auth-buttons">
             <button id="login">Login</button>
             <button id="logout" class="hidden">Logout</button>
+            <span id="greetingMessage"></span>                      <!-- Placeholder for greeting message -->
         </div>
     </div>
 
@@ -306,6 +319,8 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>TagID</th>
+                    <th>NFC Counter</th>
+                    <th>-</th>
                 </tr>
             </thead>
             <tbody id="usersTableBody"></tbody>
@@ -322,8 +337,11 @@
                 <thead>
                     <tr>
                         <th>Tag ID</th>
-                        <th>Status</th>
                         <th>Timestamp</th>
+                        <th>Time IN</th>
+                        <th>Time Out</th>
+                        <th>Duration</th>
+                        <th>In/Out</th>
                     </tr>
                 </thead>
                 <tbody id="modalTagDetailsTableBody"></tbody>
@@ -441,10 +459,23 @@
                     getNFCTrackingDataButton.style.display = "block";
                     searchBar.style.display = "block";
 
+                    //// Display greeting message to the logged-in user
+                    //var helloMessage = document.createElement("p");
+                    //helloMessage.textContent = "Hello " + user.profile.name;
+                    //message.appendChild(helloMessage);
+
+
                     // Display greeting message to the logged-in user
-                    var helloMessage = document.createElement("p");
-                    helloMessage.textContent = "Hello " + user.profile.name;
-                    message.appendChild(helloMessage);
+                    var greetingContainer = document.getElementById("greetingMessage");
+                    var helloMessage = document.createElement("span"); // Create a span to hold the greeting message
+                    helloMessage.textContent = "Hello " + user.profile.name; // Set the greeting message with user's name
+                    greetingContainer.appendChild(helloMessage); // Append the message to the greeting container
+
+                    // Optionally, style the message if needed
+                    helloMessage.style.marginLeft = "10px"; // Add some margin if needed
+                    helloMessage.style.fontWeight = "bold"; // Make it bold if required
+
+
 
                 } else {
                     // Show login button and hide logout button when the user is logged out
@@ -517,7 +548,7 @@
             }
 
             var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid&$filter=izx_tagid ne null"), true);
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid,izx_nfccounter&$filter=izx_tagid ne null"), true);
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -574,6 +605,9 @@
                 var mobilePhone = document.createElement("td");
                 mobilePhone.textContent = user.mobilephone;
 
+                var nfcCounterCell = document.createElement("tb");
+                nfcCounterCell.textContent = user.izx_nfccounter;
+
                 var tagIdCell = document.createElement("td");
                 var tagIdButton = document.createElement("button");
                 tagIdButton.textContent = "Show";
@@ -582,9 +616,11 @@
                 });
                 tagIdCell.appendChild(tagIdButton);
 
+                row.appendChild(tagId);
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
                 row.appendChild(mobilePhone);
+                row.appendChild(nfcCounterCell);
                 row.appendChild(tagIdCell);
                 usersTableBody.appendChild(row);
             });
@@ -604,7 +640,7 @@
                 }
 
                 var req = new XMLHttpRequest();
-                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$filter=izx_tagid eq '" + tagId + "'"), true);
+                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?select=izx_timein,izx_timeout,izx_duration,izx_in_out$filter=izx_tagid eq '" + tagId + "'"), true);
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -627,18 +663,42 @@
                                 tagDetails.forEach(function (record) {
                                     var row = document.createElement("tr");
 
+                                    // Helper function to format date (YYYY-MM-DD)
+                                    function formatDate(dateString) {
+                                        var date = new Date(dateString);
+                                        return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
+                                    }
+
+                                    // Helper function to format time (HH:MM:SS)
+                                    function formatTime(dateString) {
+                                        var date = new Date(dateString);
+                                        return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
+                                    }
+
                                     // Create and append table cells for each field
                                     var tagIdCell = document.createElement("td");
                                     tagIdCell.textContent = record.izx_tagid || 'N/A';
                                     row.appendChild(tagIdCell);
 
-                                    var statusCell = document.createElement("td");
-                                    statusCell.textContent = record.izx_status || 'N/A';
-                                    row.appendChild(statusCell);
-
                                     var timestampCell = document.createElement("td");
-                                    timestampCell.textContent = record.izx_timestamp || 'N/A';
+                                    timestampCell.textContent = formatDate(record.izx_timestamp) || 'N/A';
                                     row.appendChild(timestampCell);
+
+                                    var timeInCell = document.createElement("td");
+                                    timeInCell.textContent = formatTime(records.izx_timein) || 'N/A';
+                                    row.appendChild(timeInCell);
+
+                                    var timeOut = document.createElement("td");
+                                    timeOut.textContent = formatTime(record.izx_timeout) || 'N/A';
+                                    row.appendChild(timeOut);
+
+                                    var durationCell = document.createElement("td");
+                                    durationCell.textContent = record.izx_duration || 'N/A';
+                                    row.appendChild(durationCell);
+
+                                    var inOutCell = document.createElement("td");
+                                    inOutCell.textContent = record.izx_in_out || 'N/A';
+                                    row.appendChild(inOutCell);
 
                                     // Append the row to the modal table body
                                     modalTableBody.appendChild(row);
@@ -714,6 +774,7 @@
         function logout() {
             authContext.logOut();
             nfctrackingsTableBody.innerHTML = "";
+            nfctrackingsTable.style.display = "none";
             toggleLoggedInState(false);
         }
 
