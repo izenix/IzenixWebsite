@@ -608,30 +608,30 @@
                 var nfcCounterCell = document.createElement("tb");
                 nfcCounterCell.textContent = user.izx_nfccounter;
 
-                //var tagIdCell = document.createElement("td");
-                //var tagIdButton = document.createElement("button");
-                //tagIdButton.textContent = "Show";
-                //tagIdButton.addEventListener("click", function () {
-                //    showTagIdData(user.izx_tagid); // Call function to show data user.izx_tagid
-                //});
-                //tagIdCell.appendChild(tagIdButton);
-
-
-                var actionCell = document.createElement("td");
+                var tagIdCell = document.createElement("td");
                 var tagIdButton = document.createElement("button");
                 tagIdButton.textContent = "Show";
                 tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid);
+                    showTagIdData(user.izx_tagid); // Call function to show data user.izx_tagid
                 });
-                actionCell.appendChild(tagIdButton);
-                row.appendChild(actionCell);
+                tagIdCell.appendChild(tagIdButton);
+
+
+                //var actionCell = document.createElement("td");
+                //var tagIdButton = document.createElement("button");
+                //tagIdButton.textContent = "Show";
+                //tagIdButton.addEventListener("click", function () {
+                //    showTagIdData(user.izx_tagid);
+                //});
+                //actionCell.appendChild(tagIdButton);
+                //row.appendChild(actionCell);
 
                 row.appendChild(tagId);
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
                 row.appendChild(mobilePhone);
                 row.appendChild(nfcCounterCell);
-                row.appendChild(actionCell);
+                row.appendChild(tagIdCell);
                 usersTableBody.appendChild(row);
             });
             usersTable.style.display = 'table';
@@ -640,7 +640,7 @@
         }
 
     
-        function showTagIdData(actionCell) {
+        function showTagIdData(tagId) {
             debugger;
             authContext.acquireToken(organizationURI, function (error, token) {
                 if (error || !token) {
