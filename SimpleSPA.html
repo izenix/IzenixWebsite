@@ -650,7 +650,15 @@
                 }
 
                 var req = new XMLHttpRequest();
-                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_timein,izx_timeout,izx_duration,izx_in_out$filter=izx_tagid eq '" + tagId + "'"), true);
+
+                // Ensure proper concatenation of $select and $filter
+                var filterQuery = `$filter=izx_tagid eq '${tagId}'`;
+                var selectQuery = `$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out`;
+                var apiUrl = encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?" + selectQuery + "&" + filterQuery);
+
+                req.open("GET", apiUrl, true);
+
+                //req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out$filter=izx_tagid eq '" + tagId + "'"), true);
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
