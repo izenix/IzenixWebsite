@@ -653,7 +653,7 @@
 
                 // Ensure proper concatenation of $select and $filter
                 var filterQuery = `$filter=izx_tagid eq '${tagId}'`;
-                var selectQuery = `$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out`;
+                var selectQuery = `$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out,izx_timestamp`;
                 var apiUrl = encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?" + selectQuery + "&" + filterQuery);
 
                 req.open("GET", apiUrl, true);
