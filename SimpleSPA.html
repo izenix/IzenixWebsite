@@ -247,7 +247,7 @@
         }
         #greetingMessage {
             font-family: 'Arial', sans-serif; /* Modern font */
-            font-size: 18px; /* Readable font size */
+            font-size: 10px; /* Readable font size */
             color: #333; /* Dark gray text color for a clean look */
             background-color: #f9f9f9; /* Light background color to make it stand out */
             padding: 10px 20px; /* Add some padding for spacing */
@@ -315,10 +315,10 @@
         <table id="usersTable">
             <thead>
                 <tr>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
                     <th>TagID</th>
+                    <th>Full Name</th> 
+                    <th>Email</th> 
+                    <th>Phone Number</th>  
                     <th>NFC Counter</th>
                     <th>-</th>
                 </tr>
@@ -608,20 +608,34 @@
                 var nfcCounterCell = document.createElement("tb");
                 nfcCounterCell.textContent = user.izx_nfccounter;
 
-                var tagIdCell = document.createElement("td");
+                //var tagIdCell = document.createElement("td");
+                //var tagIdButton = document.createElement("button");
+                //tagIdButton.textContent = "Show";
+                //tagIdButton.addEventListener("click", function () {
+                //    showTagIdData(user.izx_tagid); // Call function to show data user.izx_tagid
+                //});
+                //tagIdCell.appendChild(tagIdButton);
+
+
+                var actionCell = document.createElement("td");
                 var tagIdButton = document.createElement("button");
                 tagIdButton.textContent = "Show";
                 tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid); // Call function to show data user.izx_tagid
+                    showTagIdData(user.izx_tagid);
                 });
-                tagIdCell.appendChild(tagIdButton);
+                actionCell.appendChild(tagIdButton);
+                row.appendChild(actionCell);
+
+
+
+
 
                 row.appendChild(tagId);
                 row.appendChild(nameCell);
                 row.appendChild(emailCell);
                 row.appendChild(mobilePhone);
                 row.appendChild(nfcCounterCell);
-                row.appendChild(tagIdCell);
+                row.appendChild(actionCell);
                 usersTableBody.appendChild(row);
             });
             usersTable.style.display = 'table';
