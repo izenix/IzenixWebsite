@@ -68,7 +68,7 @@
             }
 
         /* Table Styling */
-        table {
+       /* table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
@@ -100,7 +100,47 @@
         td {
             font-size: 14px;
             color: #333;
+        }*/
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
+
+            table caption {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                text-align: left;
+            }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-size: 16px;
+            color: #555;
+        }
+
+            th:nth-child(5) {
+                background-color: #e8e8e8; /* You can customize this color specifically for the "NFC Counter" column */
+            }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+
 
         /* Hidden class to toggle visibility */
         .hidden {
@@ -144,7 +184,7 @@
 
         /* Search Bar Styling */
         #searchBar {
-            width: 100%;
+            width: 98%;
             padding: 12px;
             margin: 10px 0;
             border: 2px solid #ccc;
@@ -256,6 +296,44 @@
             margin: 10px 0; /* Add margin for spacing around the element */
             display: inline-block; /* Ensure the greeting stays inline with surrounding elements */
         }
+
+        /* Container for the button and search bar */
+        #nfcTrackingContainer {
+            display: flex;
+            justify-content: space-between; /* Distribute the space between items */
+            align-items: center; /* Align items vertically in the center */
+            width: 100%; /* Full width */
+            padding: 10px; /* Optional padding for spacing */
+        }
+
+        /* Style for the NFC Tracking Data button */
+        #getNFCTrackingData {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+            #getNFCTrackingData:hover {
+                background-color: #218838;
+            }
+
+        /* Style for the search bar */
+        #searchBar {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px; /* Adjust width as per your design */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: none; /* Initially hidden */
+        }
+
+            #searchBar.active {
+                display: block; /* Display the search bar when activated */
+            }
+
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -282,7 +360,6 @@
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
         <button id="getNFCTrackingData">NFC Tracking Data</button>
-
         <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
 
         <div id="message"></div>
