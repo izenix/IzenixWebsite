@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC Tracking and Users</title>
+
     <style>
         /* General Styling */
         body {
@@ -67,7 +68,7 @@
                 background-color: #0056b3;
             }
 
-         Table Styling 
+        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -102,7 +103,252 @@
             color: #333;
         }
 
-       
+        /* Hidden class to toggle visibility */
+        .hidden {
+            display: none;
+        }
+
+        /* Styling for NFC and Users buttons on the left side */
+        .nfc-users-buttons {
+            display: flex;
+            flex-direction: column; /* Buttons stacked vertically */
+        }
+
+            .nfc-users-buttons button {
+                width: 220px;
+                padding: 12px;
+                font-size: 16px;
+                background-color: #28a745;
+            }
+
+                .nfc-users-buttons button:hover {
+                    background-color: #218838;
+                }
+
+        /* Styling for Login and Logout buttons on the right side */
+        .auth-buttons {
+            display: flex;
+            flex-direction: column; /* Stack login and logout buttons vertically */
+        }
+
+            .auth-buttons button {
+                width: 120px;
+                padding: 10px;
+                font-size: 16px;
+                background-color: #007bff;
+            }
+
+                .auth-buttons button:hover {
+                    background-color: #0056b3;
+                }
+
+        /* Search Bar Styling */
+        #searchBar {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+        }
+
+        /* Show Button Styling */
+        #tagIdButton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            font-size: 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+            #tagIdButton:hover {
+                background-color: #45a049;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+                transform: translateY(-5px);
+            }
+
+            #tagIdButton:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
+            }
+
+        /* Message & Error Styling */
+        #message, #userMessage {
+            margin-top: 10px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        #errorMessage, #userErrorMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack buttons vertically on smaller screens */
+                align-items: center; /* Center buttons on smaller screens */
+            }
+
+            .nfc-users-buttons button, .auth-buttons button {
+                width: 100%; /* Full width on smaller screens */
+                max-width: 300px; /* Optional max width */
+            }
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        #errorMessage {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+
+
+
+
+    <!--<style>
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        #nfcTrackingSection, #usersSection {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Flexbox Layout for Buttons */
+        .container {
+            display: flex;
+            justify-content: space-between; /* Space between left and right buttons */
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            button:hover {
+                background-color: #45a049;
+                transform: translateY(-2px);
+            }
+
+            button:disabled {
+                background-color: #ddd;
+                cursor: not-allowed;
+            }
+
+        #showNFCButton, #showUsersButton {
+            background-color: #007bff;
+        }
+
+            #showNFCButton:hover, #showUsersButton:hover {
+                background-color: #0056b3;
+            }
+
+         Table Styling
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            table caption {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                text-align: left;
+            }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-size: 16px;
+            color: #555;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+
+
 
 
         /* Hidden class to toggle visibility */
@@ -335,7 +581,7 @@
             /*}*/
 
 
-    </style>
+    </style>-->
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
     <script src="https://alcdn.msauth.net/browser/2.29.0/js/msal-browser.min.js"></script>
