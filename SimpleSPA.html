@@ -111,7 +111,7 @@
         /* Styling for NFC and Users buttons on the left side */
         .nfc-users-buttons {
             display: flex;
-            flex-direction: column; /* Buttons stacked vertically */
+            flex-direction: column; 
         }
 
             .nfc-users-buttons button {
@@ -128,7 +128,7 @@
         /* Styling for Login and Logout buttons on the right side */
         .auth-buttons {
             display: flex;
-            flex-direction: column; /* Stack login and logout buttons vertically */
+            flex-direction: row; 
         }
 
             .auth-buttons button {
@@ -179,38 +179,38 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Stack buttons vertically on smaller screens */
-                align-items: center; /* Center buttons on smaller screens */
+                flex-direction: column; 
+                align-items: center; 
             }
 
             .nfc-users-buttons button, .auth-buttons button {
-                width: 100%; /* Full width on smaller screens */
-                max-width: 300px; /* Optional max width */
+                width: 100%; 
+                max-width: 300px; 
             }
         }
 
         /* The Modal (background) */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
             padding-top: 60px;
         }
 
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            margin: 5% auto; /* 15% from the top and centered */
+            margin: 5% auto; 
             padding: 20px;
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+            width: 80%; 
         }
 
         /* The Close Button */
@@ -232,11 +232,11 @@
             color: red;
             font-weight: bold;
             margin-top: 10px;
-            display: none; /* Initially hidden */
+            display: none; 
         }
         #greetingMessage {
             font-family: 'Arial', sans-serif; 
-            font-size: 13px; 
+            font-size: 10px; 
             color: #333; 
             background-color: #f9f9f9; 
             padding: 10px 20px; 
@@ -249,10 +249,10 @@
          /* Container for the button and search bar */
         #nfcTrackingContainer {
             display: flex;
-            justify-content: space-between; /* Distribute the space between items */
-            align-items: center; /* Align items vertically in the center */
-            width: 100%; /* Full width */
-            padding: 10px; /* Optional padding for spacing */
+            justify-content: space-between; 
+            align-items: center; 
+            width: 100%; 
+            padding: 10px; 
         }
 
         /* Style for the NFC Tracking Data button */
@@ -278,30 +278,18 @@
             border: 1px solid #ccc;
             display: none;
             Initially hidden
-        }
-
-        /* Search Bar Styling */
-/*        #searchBar {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            background-color: #f8f8f8;
-            font-size: 16px;
-        }*/
-       
+        }   
 
         #searchBar.active {
-            display: block;  /* Display the search bar when activated*/
+            display: block;  
             
         }
 
         /* Styling for NFC and Users buttons on the left side */
         .nfc-users-buttons {
             display: flex;
-            flex-direction: row; /* Buttons aligned horizontally */
-            gap: 10px; /* Optional: Add space between the buttons */
+            flex-direction: row; 
+            gap: 10px; 
         }
 
             .nfc-users-buttons button {
@@ -318,13 +306,13 @@
         /* Responsive design: Stack buttons vertically on smaller screens */
         @media (max-width: 768px) {
             .nfc-users-buttons {
-                flex-direction: column; /* Stack buttons vertically on smaller screens */
-                align-items: center; /* Center buttons on smaller screens */
+                flex-direction: column; 
+                align-items: center; 
             }
 
                 .nfc-users-buttons button {
-                    width: 100%; /* Full width on smaller screens */
-                    max-width: 300px; /* Optional max width */
+                    width: 100%; 
+                    max-width: 300px; 
                 }
         }
 
@@ -353,17 +341,12 @@
 
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
-
         <div id="nfcTrackingContainer">
             <button id="getNFCTrackingData">NFC Tracking Data</button>
             <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
         </div>
 
-        <!--<button id="getNFCTrackingData">NFC Tracking Data</button>
-        <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">-->
-
         <div id="message"></div>
-
         <table id="nfctrackingsTable" class="hidden">
             <caption>NFC Tracking Data</caption>
             <thead>
@@ -422,7 +405,6 @@
                     </tr>
                 </thead>
                 <tbody id="modalTagDetailsTableBody"></tbody>
-                <!--<tbody id="tagDetailsTableBody"></tbody>-->
             </table>
         </div>
     </div>
@@ -538,13 +520,13 @@
 
                     // Display greeting message to the logged-in user
                     var greetingContainer = document.getElementById("greetingMessage");
-                    var helloMessage = document.createElement("span"); // Create a span to hold the greeting message
-                    helloMessage.textContent = "Hello " + user.profile.name; // Set the greeting message with user's name
-                    greetingContainer.appendChild(helloMessage); // Append the message to the greeting container
+                    var helloMessage = document.createElement("span"); 
+                    helloMessage.textContent = "Hello " + user.profile.name; 
+                    greetingContainer.appendChild(helloMessage); 
 
                     // Optionally, style the message if needed
-                    helloMessage.style.marginLeft = "10px"; // Add some margin if needed
-                    helloMessage.style.fontWeight = "bold"; // Make it bold if required
+                    helloMessage.style.marginLeft = "10px"; 
+                    helloMessage.style.fontWeight = "bold"; 
 
 
 
@@ -559,7 +541,6 @@
                     // Hide the NFC tracking data button, search bar, and table by adding "none" class
                     getNFCTrackingDataButton.style.display = "none";
                     searchBar.style.display = "none";
-                    /*nfctrackingsTable.classList.add("none");*/
                 }
             }
         };
@@ -642,22 +623,6 @@
             req.send();
         }
 
-        // Function to show error message and hide it after 5 seconds
-        function errorMessage(message) {
-            // Get the error message div
-            var errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = message; // Set the error message text
-
-            // Show the error message
-            errorMessage.style.display = "block";
-
-            // Hide the error message after 5 seconds
-            setTimeout(function () {
-                errorMessage.style.display = "none";
-            }, 5000); // 5000 milliseconds = 5 seconds
-        }
-
-
         // Function to render users into the table
         function renderUsers(users) {
             usersTableBody.innerHTML = ''; // Clear previous results
@@ -699,7 +664,6 @@
             getUsersButton.disabled = false;
             message.textContent = '';
         }
-
     
         function showTagIdData(tagId) {
             debugger;
@@ -711,14 +675,11 @@
                 }
 
                 var req = new XMLHttpRequest();
-
                 // Ensure proper concatenation of $select and $filter
                 var filterQuery = `$filter=izx_tagid eq '${tagId}'`;
                 var selectQuery = `$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out,izx_timestamp`;
                 var apiUrl = encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?" + selectQuery + "&" + filterQuery);
-
                 req.open("GET", apiUrl, true);
-
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -745,15 +706,14 @@
                                     function formatDate(dateString) {
                                         // Check if dateString is valid
                                         if (!dateString) {
-                                            return 'N/A';  // Return 'N/A' or some default value if the date is invalid
+                                            return 'N/A';  
                                         }
 
                                         var date = new Date(dateString);
                                         // Check if the date is valid
                                         if (isNaN(date.getTime())) {
-                                            return 'Invalid Date';  // Return a default message if the date is invalid
+                                            return 'Invalid Date';  
                                         }
-
                                         return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
                                     }
 
@@ -761,18 +721,16 @@
                                     function formatTime(dateString) {
                                         // Check if dateString is valid
                                         if (!dateString) {
-                                            return 'N/A';  // Return 'N/A' or some default value if the time is invalid
+                                            return 'N/A';  
                                         }
 
                                         var date = new Date(dateString);
                                         // Check if the date is valid
                                         if (isNaN(date.getTime())) {
-                                            return 'Invalid Time';  // Return a default message if the time is invalid
+                                            return 'Invalid Time';  
                                         }
-
                                         return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
                                     }
-
 
                                     // Create and append table cells for each field
                                     var tagIdCell = document.createElement("td");
