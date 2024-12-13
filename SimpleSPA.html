@@ -7,7 +7,7 @@
 
     <style>
         /* General Styling */
-        /*body {
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
@@ -26,18 +26,18 @@
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }*/
+        }
 
-        /* Flexbox Layout for Buttons */
-        /*.container {
+       /*  Flexbox Layout for Buttons */
+        .container {
             display: flex;
-            justify-content: space-between;*/ /* Space between left and right buttons */
-            /*align-items: center;
+            justify-content: space-between;  /*Space between left and right buttons*/
+            align-items: center;
             margin-bottom: 20px;
-        }*/
+        }
 
-        /* Button Styling */
-        /*button {
+       /*  Button Styling */
+        button {
             background-color: #4CAF50;
             color: white;
             padding: 12px 20px;
@@ -66,10 +66,10 @@
 
             #showNFCButton:hover, #showUsersButton:hover {
                 background-color: #0056b3;
-            }*/
+            }
 
-        /* Table Styling */
-        /*table {
+       /*  Table Styling*/ 
+        table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
@@ -101,15 +101,15 @@
         td {
             font-size: 14px;
             color: #333;
-        }*/
+        }
 
-        /* Hidden class to toggle visibility */
-        /*.hidden {
+         /*Hidden class to toggle visibility*/ 
+        .hidden {
             display: none;
-        }*/
+        }
 
-        /* Styling for NFC and Users buttons on the left side */
-        /*.nfc-users-buttons {
+         /*Styling for NFC and Users buttons on the left side */
+        .nfc-users-buttons {
             display: flex;
             flex-direction: column;
         }
@@ -123,10 +123,10 @@
 
                 .nfc-users-buttons button:hover {
                     background-color: #218838;
-                }*/
+                }
 
-        /* Styling for Login and Logout buttons on the right side */
-        /*.auth-buttons {
+         /*Styling for Login and Logout buttons on the right side*/ 
+        .auth-buttons {
             display: flex;
             flex-direction: row;
         }
@@ -140,10 +140,10 @@
 
                 .auth-buttons button:hover {
                     background-color: #0056b3;
-                }*/
+                }
 
-        /* Show Button Styling */
-        /*#tagIdButton {
+         /*Show Button Styling*/ 
+        #tagIdButton {
             background-color: #4CAF50;
             color: white;
             padding: 15px 32px;
@@ -162,10 +162,10 @@
             #tagIdButton:focus {
                 outline: none;
                 box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
-            }*/
+            }
 
-        /* Message & Error Styling */
-        /*#message, #userMessage {
+         /*Message & Error Styling*/ 
+        #message, #userMessage {
             margin-top: 10px;
             color: #4CAF50;
             font-weight: bold;
@@ -174,10 +174,10 @@
         #errorMessage, #userErrorMessage {
             color: red;
             margin-top: 10px;
-        }*/
+        }
 
-        /* Responsive Design */
-        /*@media (max-width: 768px) {
+         /*Responsive Design */
+        @media (max-width: 768px) {
             .container {
                 flex-direction: column;
                 align-items: center;
@@ -187,10 +187,10 @@
                 width: 100%;
                 max-width: 300px;
             }
-        }*/
+        }
 
-        /* The Modal (background) */
-        /*.modal {
+         /*The Modal (background) */
+        .modal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -202,19 +202,19 @@
             background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.4);
             padding-top: 60px;
-        }*/
+        }
 
-        /* Modal Content/Box */
-        /*.modal-content {
+         /*Modal Content/Box */
+        .modal-content {
             background-color: #fefefe;
             margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-        }*/
+        }
 
-        /* The Close Button */
-        /*.close {
+         /*The Close Button*/ 
+        .close {
             color: #aaa;
             float: right;
             font-size: 28px;
@@ -245,19 +245,19 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
             display: inline-block;
-        }*/
+        }
 
         /* Container for the button and search bar */
-        /*#nfcTrackingContainer {
+        #nfcTrackingContainer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
             padding: 10px;
-        }*/
+        }
 
-        /* Style for the NFC Tracking Data button */
-        /*#getNFCTrackingData {
+         /*Style for the NFC Tracking Data button */
+        #getNFCTrackingData {
             background-color: #28a745;
             color: white;
             padding: 12px 20px;
@@ -268,10 +268,10 @@
 
             #getNFCTrackingData:hover {
                 background-color: #218838;
-            }*/
+            }
 
-        /* Style for the search bar*/
-        /*#searchBar {
+         /*Style for the search bar*/
+        #searchBar {
             padding: 10px;
             font-size: 16px;
             width: 250px;
@@ -283,10 +283,10 @@
 
             #searchBar.active {
                 display: block;
-            }*/
+            }
 
-        /* Styling for NFC and Users buttons on the left side */
-        /*.nfc-users-buttons {
+         /*Styling for NFC and Users buttons on the left side */
+        .nfc-users-buttons {
             display: flex;
             flex-direction: row;
             gap: 10px;
@@ -301,10 +301,10 @@
 
                 .nfc-users-buttons button:hover {
                     background-color: #218838;
-                }*/
+                }
 
-        /* Responsive design: Stack buttons vertically on smaller screens */
-        /*@media (max-width: 768px) {
+         /*Responsive design: Stack buttons vertically on smaller screens */
+        @media (max-width: 768px) {
             .nfc-users-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -314,7 +314,7 @@
                     width: 100%;
                     max-width: 300px;
                 }
-        }*/
+        }
 
 
 
@@ -452,22 +452,6 @@
 <body>
 
     <!-- Buttons to toggle between NFC Tracking Data and Get Users -->
-    <!--<div class="container">
-        <div class="nfc-users-buttons">
-            <button id="showNFCButton">Show NFC Tracking Data</button>
-            <button id="showUsersButton">Show Users</button>
-            <button id="showMonthWiseDataNutton">Month Wise Data</button>
-        </div>-->
-    <!-- Authentication buttons -->
-    <!--<div class="auth-buttons">
-            <button id="login">Login</button>
-            <button id="logout" class="hidden">Logout</button>
-            <span id="greetingMessage"></span>
-        </div>
-    </div>-->
-    <!-- Header section -->
-
-
     <header class="bg-white">
         <nav>
             <!-- Logo on the left -->
@@ -606,63 +590,6 @@
 
     <script type="text/javascript">
         "use strict";
-
-        //// Variables for buttons and sections
-        //var showNFCButton = document.getElementById("showNFCButton");
-        //var showUsersButton = document.getElementById("showUsersButton");
-        //var showMonthButton = document.getElementById("showMonthWiseDataButton");
-
-        //var nfcTrackingSection = document.getElementById("nfcTrackingSection");
-        //var usersSection = document.getElementById("usersSection");
-        //var monthSection = document.getElementById("monthSection");
-
-
-
-        //function hideAllSections() {
-        //    nfcTrackingSection.style.display = 'none';
-        //    usersSection.style.display = 'none';
-        //    monthSection.style.display = 'none';
-        //}
-
-        //// Add event listeners to toggle between sections
-        //showNFCButton.addEventListener("click", function () {
-        //    hideAllSections();
-        //    nfcTrackingSection.style.display = 'block';
-        //    /*toggleVisibility('nfc');*/
-        //});
-
-        //showUsersButton.addEventListener("click", function () {
-        //    hideAllSections();
-        //    usersSection.style.display = 'block';
-        //    /*toggleVisibility('users');*/
-        //});
-
-        //showMonthButton.addEventListener("click", function () {
-        //    hideAllSections();
-        //    monthSection.style.display = 'block';
-        //    /*toggleVisibility('month');*/
-        //});
-
-        // Function to toggle visibility between NFC Tracking, Users and Month sections
-        //function toggleVisibility(section) {
-        //    // Hide all sections
-        //    nfcTrackingSection.classList.add('hidden');
-        //    usersSection.classList.add('hidden');
-        //    monthSection.classList.add('hidden');
-
-        //    if (section === 'nfc') {
-        //        nfcTrackingSection.classList.remove('hidden');
-
-        //    } else if (section === 'users') {
-        //        usersSection.classList.remove('hidden');
-
-        //    } else if (section === 'month') {
-        //        monthSection.classList.remove('hidden');
-
-        //    }
-        //}
-
-
         // Variables for buttons and sections
         var showNFCButton = document.getElementById("showNFCButton");
         var showUsersButton = document.getElementById("showUsersButton");
@@ -672,84 +599,35 @@
         var usersSection = document.getElementById("usersSection");
         var monthSection = document.getElementById("monthSection");
 
-        // Elements related to login/logout state
-        var loginButton = document.getElementById("login");
-        var logoutButton = document.getElementById("logout");
-        var getUsersButton = document.getElementById("getUsers");
-        var getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
-        var searchBar = document.getElementById("searchBar");
-        var getMonthButton = document.getElementById("getMonthData");
-        var greetingContainer = document.getElementById("greetingMessage");
-
         // Add event listeners to toggle between sections
         showNFCButton.addEventListener("click", function () {
-            toggleLoggedInState('nfc');
+            toggleVisibility('nfc');
         });
 
         showUsersButton.addEventListener("click", function () {
-            toggleLoggedInState('users');
+            toggleVisibility('users');
         });
 
         showMonthButton.addEventListener("click", function () {
-            toggleLoggedInState('month');
+            toggleVisibility('month');
         });
 
-        //// Function to toggle visibility between NFC Tracking, Users, and Month sections
-        //function toggleVisibility(section) {
-        //    // Hide all sections
-        //    nfcTrackingSection.classList.add('hidden');
-        //    usersSection.classList.add('hidden');
-        //    monthSection.classList.add('hidden');
-
-        //    // Show the selected section
-        //    if (section === 'nfc') {
-        //        nfcTrackingSection.classList.remove('hidden');
-        //    } else if (section === 'users') {
-        //        usersSection.classList.remove('hidden');
-        //    } else if (section === 'month') {
-        //        monthSection.classList.remove('hidden');
-        //    }
-        //}
-
-        // Function to toggle the logged-in state
-        function toggleLoggedInState(isLoggedIn, user = null) {
-            if (isLoggedIn) {
-                // If the user is logged in, hide the login button and show the logout button
-                loginButton.classList.add("hidden");
-                logoutButton.classList.remove("hidden");
-
-                // Show the Get Users, NFC Tracking Data, and Month buttons
-                getUsersButton.style.display = "block";
-                getNFCTrackingDataButton.style.display = "block";
-                searchBar.style.display = "block";
-                getMonthButton.style.display = "block";
-
-                // Display the greeting message
-                var helloMessage = document.createElement("span");
-                helloMessage.textContent = "Hello " + user.profile.name;
-                greetingContainer.appendChild(helloMessage);
-
-                // Optionally, style the message if needed
-                helloMessage.style.marginLeft = "10px";
-                helloMessage.style.fontWeight = "bold";
-            } else {
-                // If the user is logged out, show the login button and hide the logout button
-                loginButton.classList.remove("hidden");
-                logoutButton.classList.add("hidden");
-
-                // Hide the Get Users, NFC Tracking Data, and Month buttons
-                getUsersButton.style.display = "none";
-                getNFCTrackingDataButton.style.display = "none";
-                searchBar.style.display = "none";
-                getMonthButton.style.display = "none";
+        // Function to toggle visibility between NFC Tracking and Users section
+        function toggleVisibility(section) {
+            if (section === 'nfc') {
+                nfcTrackingSection.classList.remove('hidden');
+                usersSection.classList.add('hidden');
+                monthSection.classList.add('hidden');
+            } else if (section === 'users') {
+                usersSection.classList.remove('hidden');
+                nfcTrackingSection.classList.add('hidden');
+                monthSection.classList.add('hidden');
+            } else if (section === 'month') {
+                monthSection.classList.remove('hidden');
+                nfcTrackingSection.classList.add('hidden');
+                usersSection.classList.add('hidden');
             }
         }
-
-
-
-
-
-
 
         document.getElementById('login').addEventListener('click', function () {
             document.getElementById('login').classList.add('hidden');
@@ -759,6 +637,26 @@
         document.getElementById('logout').addEventListener('click', function () {
             document.getElementById('logout').classList.add('hidden');
             document.getElementById('login').classList.remove('hidden');
+        });
+
+
+   
+
+
+
+
+
+
+        document.getElementById('login').addEventListener('click', function () {
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('logout').classList.remove('hidden');
+            hideAllSections();  // Optionally hide sections when logging in
+        });
+
+        document.getElementById('logout').addEventListener('click', function () {
+            document.getElementById('logout').classList.add('hidden');
+            document.getElementById('login').classList.remove('hidden');
+            hideAllSections();  // Hide all sections on logout
         });
 
 
@@ -1089,8 +987,8 @@
                                     durationCell.textContent = record.izx_duration || 'N/A';
                                     row.appendChild(durationCell);
 
-                                    var inOutCell = document.createElement("td");
-                                    inOutCell.textContent = record.izx_in_out || 'N/A';
+                                    var inoutCell = document.createElement("td");
+                                    inoutCell.textContent = (tracking.izx_in_out === 1) ? "In" : (tracking.izx_in_out === 2 ? "Out" : "Unknown");
                                     row.appendChild(inOutCell);
 
                                     // Append the row to the modal table body
@@ -1146,22 +1044,19 @@
             cacheLocation: 'localStorage',
         };
 
-        // Function to toggle visibility of elements based on login state
         function toggleLoggedInState(isLoggedIn) {
             if (isLoggedIn) {
                 loginButton.classList.add("hidden");
                 logoutButton.classList.remove("hidden");
                 getNFCTrackingDataButton.style.display = "block";
-                getMonthButton.style.display = "block"; // Show "Get Month Data" button
                 searchBar.style.display = "block";
+
             } else {
                 loginButton.classList.remove("hidden");
                 logoutButton.classList.add("hidden");
                 getNFCTrackingDataButton.style.display = "none";
-                getMonthButton.style.display = "none"; // Hide "Get Month Data" button
                 searchBar.style.display = "none";
                 nfctrackingsTable.classList.add("hidden");
-                monthTable.classList.add("hidden");
             }
         }
 
@@ -1266,7 +1161,7 @@
                 durationCell.textContent = tracking.izx_duration;
 
                 var inoutCell = document.createElement("td");
-                inoutCell.textContent = tracking.izx_in_out;
+                inoutCell.textContent = (tracking.izx_in_out === 1) ? "In" : (tracking.izx_in_out === 2 ? "Out" : "Unknown");
 
                 row.appendChild(nameCell);
                 row.appendChild(tagIdCell);
@@ -1312,6 +1207,26 @@
             endpoints: endpoints,
             cacheLocation: 'localStorage',
         };
+
+
+        // Function to toggle visibility of elements based on login state
+        function toggleLoggedInState(isLoggedIn) {
+            if (isLoggedIn) {
+                loginButton.classList.add("hidden");
+                logoutButton.classList.remove("hidden");
+                getNFCTrackingDataButton.style.display = "block";
+                getMonthButton.style.display = "block"; // Show "Get Month Data" button
+                searchBar.style.display = "block";
+            } else {
+                loginButton.classList.remove("hidden");
+                logoutButton.classList.add("hidden");
+                getNFCTrackingDataButton.style.display = "none";
+                getMonthButton.style.display = "none"; // Hide "Get Month Data" button
+                searchBar.style.display = "none";
+                nfctrackingsTable.classList.add("hidden");
+                monthTable.classList.add("hidden");
+            }
+        }
 
 
         function login() {
@@ -1418,7 +1333,7 @@
                 durationCell.textContent = tracking.izx_duration;
 
                 var inoutCell = document.createElement("td");
-                inoutCell.textContent = tracking.izx_in_out;
+                inoutCell.textContent = (tracking.izx_in_out === 1) ? "In" : (tracking.izx_in_out === 2 ? "Out" : "Unknown");
 
                 row.appendChild(nameCell);
                 row.appendChild(tagIdCell);
