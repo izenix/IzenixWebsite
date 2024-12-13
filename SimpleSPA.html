@@ -479,8 +479,8 @@
             <div class="dropdown">
                 <button class="dropbtn text-light-black">NFC</button>
                 <div class="dropdown-content bg-white">
-                    <button id="showNFCButton" class="text-black">Show NFC Tracking Data</button>
-                    <button id="showUsersButton" class="text-black">Show Users</button>
+                    <button id="showNFCButton" class="text-black">NFC Tracking Data</button>
+                    <button id="showUsersButton" class="text-black">Users</button>
                     <button id="showMonthWiseDataButton" class="text-black">Month Wise Data</button>
                 </div>
             </div>
@@ -504,7 +504,7 @@
 
 
     <!-- NFC Tracking Data Section -->
-    <div id="nfcTrackingSection">
+    <div id="nfcTrackingSection" class="hidden">
         <div id="nfcTrackingContainer">
             <button id="getNFCTrackingData">NFC Tracking Data</button>
             <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
@@ -574,7 +574,7 @@
     </div>
 
     <!--Month Wise Data Table-->
-    <div class="container" id="monthSection">
+    <div class="container hidden" id="monthSection">
         <h2>Fetch Month-wise NFC Tracking Data</h2>
 
         <label for="monthYearInput">Select Month and Year: </label>
@@ -629,20 +629,22 @@
             toggleVisibility('month');
         });
 
-        // Function to toggle visibility between NFC Tracking and Users section
+        // Function to toggle visibility between NFC Tracking, Users and Month sections
         function toggleVisibility(section) {
+            // Hide all sections
+            nfcTrackingSection.classList.add('hidden');
+            usersSection.classList.add('hidden');
+            monthSection.classList.add('hidden');
+
             if (section === 'nfc') {
                 nfcTrackingSection.classList.remove('hidden');
-                usersSection.classList.add('hidden');
-                monthSection.classList.add('hidden');
+                
             } else if (section === 'users') {
                 usersSection.classList.remove('hidden');
-                nfcTrackingSection.classList.add('hidden');
-                monthSection.classList.add('hidden');
+                
             } else if (section === 'month') {
                 monthSection.classList.remove('hidden');
-                nfcTrackingSection.classList.add('hidden');
-                usersSection.classList.add('hidden');
+               
             }
         }
 
@@ -720,45 +722,45 @@
 
                 authenticate();
 
-                if (user) {
-                    // Hide login button and show logout button when the user is logged in
-                    loginButton.style.display = "none";
-                    logoutButton.style.display = "block";
+                //if (user) {
+                //    // Hide login button and show logout button when the user is logged in
+                //    loginButton.style.display = "none";
+                //    logoutButton.style.display = "block";
 
-                    // Show the Get Users button
-                    getUsersButton.style.display = "block";
+                //    // Show the Get Users button
+                //    getUsersButton.style.display = "block";
 
-                    // Show the NFC tracking data button and search bar by removing "none" class
-                    getNFCTrackingDataButton.style.display = "block";
-                    searchBar.style.display = "block";
+                //    // Show the NFC tracking data button and search bar by removing "none" class
+                //    getNFCTrackingDataButton.style.display = "block";
+                //    searchBar.style.display = "block";
 
-                    getMonthButton.style.display = "block";
+                //    getMonthButton.style.display = "block";
 
-                    // Display greeting message to the logged-in user
-                    var greetingContainer = document.getElementById("greetingMessage");
-                    var helloMessage = document.createElement("span");
-                    helloMessage.textContent = "Hello " + user.profile.name;
-                    greetingContainer.appendChild(helloMessage);
+                //    // Display greeting message to the logged-in user
+                //    var greetingContainer = document.getElementById("greetingMessage");
+                //    var helloMessage = document.createElement("span");
+                //    helloMessage.textContent = "Hello " + user.profile.name;
+                //    greetingContainer.appendChild(helloMessage);
 
-                    // Optionally, style the message if needed
-                    helloMessage.style.marginLeft = "10px";
-                    helloMessage.style.fontWeight = "bold";
+                //    // Optionally, style the message if needed
+                //    helloMessage.style.marginLeft = "10px";
+                //    helloMessage.style.fontWeight = "bold";
 
 
 
-                } else {
-                    // Show login button and hide logout button when the user is logged out
-                    loginButton.style.display = "block";
-                    logoutButton.style.display = "none";
+                //} else {
+                //    // Show login button and hide logout button when the user is logged out
+                //    loginButton.style.display = "block";
+                //    logoutButton.style.display = "none";
 
-                    // Hide the Get Users button
-                    getUsersButton.style.display = "none";
+                //    // Hide the Get Users button
+                //    getUsersButton.style.display = "none";
 
-                    // Hide the NFC tracking data button, search bar, and table by adding "none" class
-                    getNFCTrackingDataButton.style.display = "none";
-                    searchBar.style.display = "none";
-                    getMonthButton.style.display = "none";
-                }
+                //    // Hide the NFC tracking data button, search bar, and table by adding "none" class
+                //    getNFCTrackingDataButton.style.display = "none";
+                //    searchBar.style.display = "none";
+                //    getMonthButton.style.display = "none";
+                //}
             }
         };
 
@@ -1027,21 +1029,21 @@
             cacheLocation: 'localStorage',
         };
 
-        function toggleLoggedInState(isLoggedIn) {
-            if (isLoggedIn) {
-                loginButton.classList.add("hidden");
-                logoutButton.classList.remove("hidden");
-                getNFCTrackingDataButton.style.display = "block";
-                searchBar.style.display = "block";
+        //function toggleLoggedInState(isLoggedIn) {
+        //    if (isLoggedIn) {
+        //        loginButton.classList.add("hidden");
+        //        logoutButton.classList.remove("hidden");
+        //        getNFCTrackingDataButton.style.display = "block";
+        //        searchBar.style.display = "block";
 
-            } else {
-                loginButton.classList.remove("hidden");
-                logoutButton.classList.add("hidden");
-                getNFCTrackingDataButton.style.display = "none";
-                searchBar.style.display = "none";
-                nfctrackingsTable.classList.add("hidden");
-            }
-        }
+        //    } else {
+        //        loginButton.classList.remove("hidden");
+        //        logoutButton.classList.add("hidden");
+        //        getNFCTrackingDataButton.style.display = "none";
+        //        searchBar.style.display = "none";
+        //        nfctrackingsTable.classList.add("hidden");
+        //    }
+        //}
 
         function login() {
             authContext.login();
@@ -1156,7 +1158,7 @@
 
 
 
-        // Existing NFC Tracking Data code goes here
+        // Existing Month Wise Data code goes here
         var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
