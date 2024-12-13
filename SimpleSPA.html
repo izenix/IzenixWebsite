@@ -607,6 +607,62 @@
     <script type="text/javascript">
         "use strict";
 
+        //// Variables for buttons and sections
+        //var showNFCButton = document.getElementById("showNFCButton");
+        //var showUsersButton = document.getElementById("showUsersButton");
+        //var showMonthButton = document.getElementById("showMonthWiseDataButton");
+
+        //var nfcTrackingSection = document.getElementById("nfcTrackingSection");
+        //var usersSection = document.getElementById("usersSection");
+        //var monthSection = document.getElementById("monthSection");
+
+
+
+        //function hideAllSections() {
+        //    nfcTrackingSection.style.display = 'none';
+        //    usersSection.style.display = 'none';
+        //    monthSection.style.display = 'none';
+        //}
+
+        //// Add event listeners to toggle between sections
+        //showNFCButton.addEventListener("click", function () {
+        //    hideAllSections();
+        //    nfcTrackingSection.style.display = 'block';
+        //    /*toggleVisibility('nfc');*/
+        //});
+
+        //showUsersButton.addEventListener("click", function () {
+        //    hideAllSections();
+        //    usersSection.style.display = 'block';
+        //    /*toggleVisibility('users');*/
+        //});
+
+        //showMonthButton.addEventListener("click", function () {
+        //    hideAllSections();
+        //    monthSection.style.display = 'block';
+        //    /*toggleVisibility('month');*/
+        //});
+
+        // Function to toggle visibility between NFC Tracking, Users and Month sections
+        //function toggleVisibility(section) {
+        //    // Hide all sections
+        //    nfcTrackingSection.classList.add('hidden');
+        //    usersSection.classList.add('hidden');
+        //    monthSection.classList.add('hidden');
+
+        //    if (section === 'nfc') {
+        //        nfcTrackingSection.classList.remove('hidden');
+
+        //    } else if (section === 'users') {
+        //        usersSection.classList.remove('hidden');
+
+        //    } else if (section === 'month') {
+        //        monthSection.classList.remove('hidden');
+
+        //    }
+        //}
+
+
         // Variables for buttons and sections
         var showNFCButton = document.getElementById("showNFCButton");
         var showUsersButton = document.getElementById("showUsersButton");
@@ -615,6 +671,15 @@
         var nfcTrackingSection = document.getElementById("nfcTrackingSection");
         var usersSection = document.getElementById("usersSection");
         var monthSection = document.getElementById("monthSection");
+
+        // Elements related to login/logout state
+        var loginButton = document.getElementById("login");
+        var logoutButton = document.getElementById("logout");
+        var getUsersButton = document.getElementById("getUsers");
+        var getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
+        var searchBar = document.getElementById("searchBar");
+        var getMonthButton = document.getElementById("getMonthData");
+        var greetingContainer = document.getElementById("greetingMessage");
 
         // Add event listeners to toggle between sections
         showNFCButton.addEventListener("click", function () {
@@ -629,24 +694,62 @@
             toggleVisibility('month');
         });
 
-        // Function to toggle visibility between NFC Tracking, Users and Month sections
+        // Function to toggle visibility between NFC Tracking, Users, and Month sections
         function toggleVisibility(section) {
             // Hide all sections
             nfcTrackingSection.classList.add('hidden');
             usersSection.classList.add('hidden');
             monthSection.classList.add('hidden');
 
+            // Show the selected section
             if (section === 'nfc') {
                 nfcTrackingSection.classList.remove('hidden');
-                
             } else if (section === 'users') {
                 usersSection.classList.remove('hidden');
-                
             } else if (section === 'month') {
                 monthSection.classList.remove('hidden');
-               
             }
         }
+
+        // Function to toggle the logged-in state
+        function toggleLoggedInState(isLoggedIn, user = null) {
+            if (isLoggedIn) {
+                // If the user is logged in, hide the login button and show the logout button
+                loginButton.classList.add("hidden");
+                logoutButton.classList.remove("hidden");
+
+                // Show the Get Users, NFC Tracking Data, and Month buttons
+                getUsersButton.style.display = "block";
+                getNFCTrackingDataButton.style.display = "block";
+                searchBar.style.display = "block";
+                getMonthButton.style.display = "block";
+
+                // Display the greeting message
+                var helloMessage = document.createElement("span");
+                helloMessage.textContent = "Hello " + user.profile.name;
+                greetingContainer.appendChild(helloMessage);
+
+                // Optionally, style the message if needed
+                helloMessage.style.marginLeft = "10px";
+                helloMessage.style.fontWeight = "bold";
+            } else {
+                // If the user is logged out, show the login button and hide the logout button
+                loginButton.classList.remove("hidden");
+                logoutButton.classList.add("hidden");
+
+                // Hide the Get Users, NFC Tracking Data, and Month buttons
+                getUsersButton.style.display = "none";
+                getNFCTrackingDataButton.style.display = "none";
+                searchBar.style.display = "none";
+                getMonthButton.style.display = "none";
+            }
+        }
+
+
+
+
+
+
 
         document.getElementById('login').addEventListener('click', function () {
             document.getElementById('login').classList.add('hidden');
