@@ -1,1195 +1,3 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFC Dashboard</title>
-    <style>
-        /* Basic Styling */
-        /*body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }*/
-
-        /* Header Styling */
-        /*header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }*/
-
-        /* Logo Styling */
-        /*.logo {
-            display: flex;
-            align-items: center;
-        }
-
-            .logo img {
-                height: 50px;
-                margin-right: 10px;
-            }
-
-            .logo h1 {
-                font-size: 24px;
-                margin: 0;
-            }*/
-
-        /* Authentication Buttons and Username */
-        /*.auth-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-            .auth-buttons button {
-                margin-left: 10px;
-                padding: 10px 15px;
-                border: none;
-                cursor: pointer;
-                background-color: #007bff;
-                color: white;
-                font-size: 16px;
-                border-radius: 4px;
-            }
-
-                .auth-buttons button.hidden {
-                    display: none;
-                }*/
-
-        /* Username display */
-        /*#greetingMessage {
-            margin-right: 20px;
-            font-size: 16px;
-            color: black;
-        }*/
-
-        /* Menu Styling (NFC) */
-        /*.menu {
-            position: relative;
-        }
-
-        .menu-button {
-            background-color: transparent;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 18px;
-        }*/
-
-        /* Dropdown Styling */
-        /*.dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 220px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-            .dropdown-content button {
-                background-color: white;
-                color: black;
-                padding: 12px 16px;
-                text-align: left;
-                border: none;
-                width: 100%;
-                box-sizing: border-box;
-                cursor: pointer;
-            }
-
-                .dropdown-content button:hover {
-                    background-color: #f1f1f1;
-                }*/
-
-        /* Show the dropdown on hover */
-        /*.menu:hover .dropdown-content {
-            display: block;
-        }*/
-
-        /* Sections hidden initially */
-        /*#nfcTrackingSection, #usersSection, #monthSection {
-            display: none;
-        }*/
-
-        /* Basic Styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Header Styling */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Logo Styling */
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-            .logo img {
-                height: 50px;
-                margin-right: 10px;
-            }
-
-            .logo h1 {
-                font-size: 24px;
-                margin: 0;
-            }
-
-        /* Centering the Menu */
-        .menu {
-            position: relative;
-            margin: 0 auto;
-        }
-
-        .menu-button {
-            background-color: transparent;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        /* Dropdown Styling */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #f9f9f9;
-            min-width: 220px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-            .dropdown-content button {
-                background-color: white;
-                color: black;
-                padding: 12px 16px;
-                text-align: left;
-                border: none;
-                width: 100%;
-                box-sizing: border-box;
-                cursor: pointer;
-            }
-
-                .dropdown-content button:hover {
-                    background-color: #f1f1f1;
-                }
-
-        /* Show the dropdown on hover */
-        .menu:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Authentication Buttons and Username */
-        .auth-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-            .auth-buttons button {
-                margin-left: 10px;
-                padding: 10px 15px;
-                border: none;
-                cursor: pointer;
-                background-color: #007bff;
-                color: white;
-                font-size: 16px;
-                border-radius: 4px;
-            }
-
-                .auth-buttons button.hidden {
-                    display: none;
-                }
-
-        /* Username display */
-        #greetingMessage {
-            margin-right: 20px;
-            font-size: 16px;
-            color: black;
-        }
-
-        /* Sections hidden initially */
-        #nfcTrackingSection, #usersSection, #monthSection {
-            display: none;
-        }
-
-
-
-
-
-
-        /* General Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1, h2 {
-            color: #007bff;
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        /* NFC Tracking Section */
-        #nfcTrackingSection, #usersSection, #monthSection {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        #nfcTrackingContainer, #usersSection, #monthSection {
-            text-align: center;
-        }
-
-        button {
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        }
-
-            button:hover {
-                background-color: #0056b3;
-            }
-
-        input[type="text"], input[type="month"] {
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            width: 50%;
-            margin-top: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-            input[type="text"]:focus, input[type="month"]:focus {
-                border-color: #007bff;
-            }
-
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-            table caption {
-                font-size: 20px;
-                margin-bottom: 10px;
-                color: #007bff;
-            }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f4f6f9;
-        }
-
-        tbody tr:hover {
-            background-color: #f1f1f1;
-            cursor: pointer;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Message and Error Styling */
-        #errorMessage, #message, #userMessage, #userErrorMessage {
-            color: red;
-            font-size: 16px;
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        /* Modal Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 700px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
-
-        .modal-content {
-            text-align: center;
-        }
-
-        .modal table {
-            width: 100%;
-        }
-
-        .modal th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .modal td {
-            padding: 10px;
-        }
-
-        .modal .close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #333;
-            transition: color 0.3s ease;
-        }
-
-            .modal .close:hover {
-                color: #ff0000;
-            }
-
-        /* Button Animations */
-        button {
-            position: relative;
-            overflow: hidden;
-        }
-
-            button::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 300%;
-                height: 300%;
-                background: rgba(255, 255, 255, 0.2);
-                transition: all 0.5s;
-                border-radius: 50%;
-                z-index: 0;
-                opacity: 0;
-            }
-
-            button:hover::after {
-                width: 0;
-                height: 0;
-                opacity: 1;
-                transition: 0s;
-            }
-
-        /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            input[type="text"], input[type="month"] {
-                width: 80%;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
-            .modal {
-                width: 90%;
-            }
-        }
-    </style>
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
-    <script src="https://alcdn.msauth.net/browser/2.29.0/js/msal-browser.min.js"></script>
-
-</head>
-<body>-->
-<!--Header with Logo, Auth Buttons, and Menu-->
-<!--<header>-->
-<!--Logo on the left-->
-<!--<div class="logo">
-    <img src="assets/images/logo7.png" alt="Logo">
-    <h1>NFC</h1>
-</div>-->
-<!--Menu button in the center-->
-<!--<div class="menu">
-    <button class="menu-button">NFC</button>
-    <div class="dropdown-content">
-        <button id="showNFCButton">NFC Tracking Data</button>
-        <button id="showUsersButton">Users</button>
-        <button id="showMonthlywiseButton">Month Wise Data</button>
-    </div>
-</div>-->
-<!--Authentication buttons and greeting on the right-->
-<!--<div class="auth-buttons">
-        <span id="greetingMessage">Hello, User</span>
-        <button id="login">Login</button>
-        <button id="logout" class="hidden">Logout</button>
-    </div>
-</header>-->
-<!--Sections for NFC Tracking Data, Users, and Month Wise Data
-NFC Tracking Data Section-->
-<!--<div id="nfcTrackingSection">
-    <div id="nfcTrackingContainer">
-        <button id="getNFCTrackingData">NFC Tracking Data</button>
-        <input type="text" id="searchBar" placeholder="Search by Tag ID...">
-    </div>
-
-    <div id="message"></div>
-    <table id="nfctrackingsTable">
-        <caption>NFC Tracking Data</caption>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Tag ID</th>
-                <th>Timestamp</th>
-                <th>Time In</th>
-                <th>Time Out</th>
-                <th>Time Duration</th>
-                <th>Time In Out</th>
-            </tr>
-        </thead>
-        <tbody id="nfctrackingsTableBody"></tbody>
-    </table>
-</div>-->
-<!--Get Users Section-->
-<!--<div id="usersSection">
-    <h1>Get Users from Dynamics 365</h1>
-    <button id="getUsers">Get Users</button>
-
-    <table id="usersTable">
-        <thead>
-            <tr>
-                <th>TagID</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>NFC Counter</th>
-                <th>-</th>
-            </tr>
-        </thead>
-        <tbody id="usersTableBody"></tbody>
-    </table>
-</div>-->
-<!--Modal Structure-->
-<!--<div id="tagDetailsModal" class="modal hidden">
-    <div class="modal-content">
-        <div id="userMessage"></div>
-        <span class="close">&times;</span>
-        <h2>Tag Details</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tag ID</th>
-                    <th>Timestamp</th>
-                    <th>Time IN</th>
-                    <th>Time Out</th>
-                    <th>Duration</th>
-                    <th>In/Out</th>
-                </tr>
-            </thead>
-            <tbody id="modalTagDetailsTableBody"></tbody>
-        </table>
-    </div>
-</div>-->
-<!--Month Wise Data-->
-<!--<div class="container" id="monthSection">
-    <h2>Fetch Month-wise NFC Tracking Data</h2>
-
-    <label for="monthYearInput">Select Month and Year: </label>
-    <input type="month" id="monthYearInput" required>
-    <br><br>
-
-    <button id="monthDataButton">Get Data</button>
-
-    <p id="message"></p>
-
-    <table id="monthwisetable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Tag ID</th>
-                <th>Timestamp</th>
-                <th>Time In</th>
-                <th>Time Out</th>
-                <th>Duration</th>
-                <th>In/Out</th>
-            </tr>
-        </thead>
-        <tbody id="monthwisetableBody">-->
-<!--Data will be inserted here dynamically-->
-<!--</tbody>
-    </table>
-</div>-->
-<!--JavaScript for button functionality-->
-<!--<script>
-        // Get buttons and sections by ID
-        const showNFCButton = document.getElementById('showNFCButton');
-        const showUsersButton = document.getElementById('showUsersButton');
-        const showMonthlywiseButton = document.getElementById('showMonthlywiseButton');
-
-        const nfcTrackingSection = document.getElementById('nfcTrackingSection');
-        const usersSection = document.getElementById('usersSection');
-        const monthSection = document.getElementById('monthSection');
-
-        // Function to hide all sections
-        function hideAllSections() {
-            nfcTrackingSection.style.display = 'none';
-            usersSection.style.display = 'none';
-            monthSection.style.display = 'none';
-        }
-
-        // Event listeners for button clicks
-        showNFCButton.addEventListener('click', function () {
-            hideAllSections();
-            nfcTrackingSection.style.display = 'block';
-        });
-
-        showUsersButton.addEventListener('click', function () {
-            hideAllSections();
-            usersSection.style.display = 'block';
-        });
-
-        showMonthlywiseButton.addEventListener('click', function () {
-            hideAllSections();
-            monthSection.style.display = 'block';
-        });
-
-        document.getElementById('login').addEventListener('click', function () {
-            document.getElementById('login').classList.add('hidden');
-            document.getElementById('logout').classList.remove('hidden');
-
-            authenticate();
-        });
-
-        document.getElementById('logout').addEventListener('click', function () {
-            document.getElementById('logout').classList.add('hidden');
-            document.getElementById('login').classList.remove('hidden');
-            var greetingContainer = document.getElementById("greetingMessage");
-            greetingContainer.textContent = "Hello, User";  // Reset greeting message
-        });
-
-        // ADAL authentication
-        var organizationURI = "https://izenixlearn.api.crm.dynamics.com";      // CRM URL
-        var tenant = "izenixlearn.onmicrosoft.com";                            // Azure AD tenant
-        var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html";                 // Redirect URL
-
-        var authContext, user, loginButton, logoutButton, getUsersButton, getNFCTrackingDataButton, getMonthButton, searchBar, usersTable, nfctrackingsTable, monthTable;
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: { orgUri: organizationURI },
-            cacheLocation: 'localStorage'
-        };
-
-        document.onreadystatechange = function () {
-            if (document.readyState === "complete") {
-                message = document.getElementById("message");
-                errorMessage = document.getElementById("errorMessage");
-
-                loginButton = document.getElementById("login");
-                logoutButton = document.getElementById("logout");
-
-                getNFCTrackingDataButton = document.getElementById("getNFCTrackingData");
-                searchBar = document.getElementById("searchBar");
-                nfctrackingsTable = document.getElementById("nfctrackingsTable");
-
-                getUsersButton = document.getElementById("getUsers");
-                usersTable = document.getElementById("usersTable");
-
-                getMonthButton = document.getElementById("monthDataButton");
-                monthTable = document.getElementById("monthwisetable");
-
-
-                loginButton.addEventListener("click", login);
-                logoutButton.addEventListener("click", logout);
-                getUsersButton.addEventListener("click", getUsers);
-                getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
-                searchBar.addEventListener("input", searchByTagID);
-                getMonthButton.addEventListener("click", monthDataButton);
-
-
-            }
-        };
-
-        // Authenticate function
-        function authenticate() {
-            try {
-                authContext = new AuthenticationContext(config);
-                var isCallback = authContext.isCallback(window.location.hash);
-                if (isCallback) {
-                    authContext.handleWindowCallback();
-                }
-                var loginError = authContext.getLoginError();
-                if (isCallback && !loginError) {
-                    window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
-                } else if (loginError) {
-                    errorMessage.textContent = loginError;
-                }
-
-                user = authContext.getCachedUser();
-
-                // Only show greeting after user is available
-                if (user) {
-                    var greetingContainer = document.getElementById("greetingMessage");
-                    greetingContainer.textContent = "Hello, " + user.profile.name;
-                }
-
-
-            } catch (e) {
-                console.error("Authentication error:", e);
-                errorMessage.textContent = "Authentication initialization failed.";
-            }
-        }
-
-        // Login function
-        function login() {
-            try {
-                authContext.login();
-            } catch (e) {
-                console.error("Login error:", e);
-                errorMessage.textContent = "Login failed.";
-            }
-        }
-
-        // Logout function
-        function logout() {
-            authContext.logOut();
-            usersTable.style.display = "none";
-            usersTableBody.innerHTML = "";
-        }
-
-        // Function to get users
-        function getUsers() {
-            getUsersButton.disabled = true;
-            message.textContent = "Retrieving users...";
-            authContext.acquireToken(organizationURI, retrieveUsers);
-        }
-
-        // Function to retrieve users
-        function retrieveUsers(error, token) {
-            if (error || !token) {
-                console.error("Token error:", error);
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid,izx_nfccounter&$filter=izx_tagid ne null"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var users = JSON.parse(this.response).value;
-                        renderUsers(users);
-                    } else {
-                        var error = JSON.parse(this.response).error;
-                        console.error("Error retrieving users:", error.message);
-                        errorMessage.textContent = error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Function to render users into the table
-        function renderUsers(users) {
-            usersTableBody.innerHTML = ''; // Clear previous results
-            users.forEach(function (user) {
-                var row = document.createElement("tr");
-
-                var tagId = document.createElement("td");
-                tagId.textContent = user.izx_tagid;
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = user.fullname;
-
-                var emailCell = document.createElement("td");
-                emailCell.textContent = user.emailaddress1;
-
-                var mobilePhone = document.createElement("td");
-                mobilePhone.textContent = user.mobilephone;
-
-                var nfcCounterCell = document.createElement("tb");
-                nfcCounterCell.textContent = user.izx_nfccounter;
-
-                var tagIdCell = document.createElement("td");
-                var tagIdButton = document.createElement("button");
-                tagIdButton.textContent = "Show";
-                tagIdButton.addEventListener("click", function () {
-                    showTagIdData(user.izx_tagid); // Call function to show data user.izx_tagid
-                });
-                tagIdCell.appendChild(tagIdButton);
-
-                row.appendChild(tagId);
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(mobilePhone);
-                row.appendChild(nfcCounterCell);
-                row.appendChild(tagIdCell);
-                usersTableBody.appendChild(row);
-            });
-            usersTable.style.display = 'table';
-            getUsersButton.disabled = false;
-            message.textContent = '';
-        }
-
-        function showTagIdData(tagId) {
-            debugger;
-            authContext.acquireToken(organizationURI, function (error, token) {
-                if (error || !token) {
-                    console.error("Token error:", error);
-                    errorMessage.textContent = 'ADAL error occurred: ' + error;
-                    return;
-                }
-
-                var req = new XMLHttpRequest();
-                // Ensure proper concatenation of $select and $filter
-                var filterQuery = `$filter=izx_tagid eq '${tagId}'`;
-                var selectQuery = `$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out,izx_timestamp`;
-                var apiUrl = encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?" + selectQuery + "&" + filterQuery);
-                req.open("GET", apiUrl, true);
-                req.setRequestHeader("Authorization", "Bearer " + token);
-                req.setRequestHeader("Accept", "application/json");
-                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                req.setRequestHeader("OData-MaxVersion", "4.0");
-                req.setRequestHeader("OData-Version", "4.0");
-
-                req.onreadystatechange = function () {
-                    if (this.readyState === 4) {
-                        req.onreadystatechange = null;
-                        if (this.status === 200) {
-                            var tagDetails = JSON.parse(this.response).value;
-
-                            // Check if records were returned for the tagId
-                            if (tagDetails.length > 0) {
-                                // Clear any existing rows in the modal table
-                                var modalTableBody = document.getElementById("modalTagDetailsTableBody");
-                                modalTableBody.innerHTML = "";
-
-                                // Loop through each record and append it to the modal table
-                                tagDetails.forEach(function (record) {
-                                    var row = document.createElement("tr");
-
-                                    // Helper function to format date (YYYY-MM-DD)
-                                    function formatDate(dateString) {
-                                        // Check if dateString is valid
-                                        if (!dateString) {
-                                            return 'N/A';
-                                        }
-
-                                        var date = new Date(dateString);
-                                        // Check if the date is valid
-                                        if (isNaN(date.getTime())) {
-                                            return 'Invalid Date';
-                                        }
-                                        return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
-                                    }
-
-                                    // Helper function to format time (HH:MM:SS)
-                                    function formatTime(dateString) {
-                                        // Check if dateString is valid
-                                        if (!dateString) {
-                                            return 'N/A';
-                                        }
-
-                                        var date = new Date(dateString);
-                                        // Check if the date is valid
-                                        if (isNaN(date.getTime())) {
-                                            return 'Invalid Time';
-                                        }
-                                        return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
-                                    }
-
-                                    // Create and append table cells for each field
-                                    var tagIdCell = document.createElement("td");
-                                    tagIdCell.textContent = record.izx_tagid || 'N/A';
-                                    row.appendChild(tagIdCell);
-
-                                    var timestampCell = document.createElement("td");
-                                    timestampCell.textContent = formatDate(record.izx_timestamp) || 'N/A';
-                                    row.appendChild(timestampCell);
-
-                                    var timeInCell = document.createElement("td");
-                                    timeInCell.textContent = formatTime(record.izx_timein) || 'N/A';
-                                    row.appendChild(timeInCell);
-
-                                    var timeOut = document.createElement("td");
-                                    timeOut.textContent = formatTime(record.izx_timeout) || 'N/A';
-                                    row.appendChild(timeOut);
-
-                                    var durationCell = document.createElement("td");
-                                    durationCell.textContent = record.izx_duration || 'N/A';
-                                    row.appendChild(durationCell);
-
-                                    var inOutCell = document.createElement("td");
-                                    inOutCell.textContent = record.izx_in_out || 'N/A';
-                                    row.appendChild(inOutCell);
-
-                                    // Append the row to the modal table body
-                                    modalTableBody.appendChild(row);
-                                });
-
-                                // Open the modal to display the data
-                                var modal = document.getElementById("tagDetailsModal");
-                                modal.style.display = "block";
-
-                            } else {
-                                alert("No records found for the provided tag ID.");
-                                //console.error("No records found for the provided tag ID.");
-                                //errorMessage.textContent = 'No records found for the provided tag ID.';
-                            }
-                        } else {
-                            var error = JSON.parse(this.response).error;
-                            console.error("Error retrieving tag details:", error.message);
-                            errorMessage.textContent = error.message;
-                        }
-                    }
-                };
-                req.send();
-            });
-        }
-
-        // When the user clicks on the close button, close the modal
-        var closeModal = document.querySelector(".close");
-        closeModal.onclick = function () {
-            var modal = document.getElementById("tagDetailsModal");
-            modal.style.display = "none";
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            var modal = document.getElementById("tagDetailsModal");
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
-
-
-
-
-        // Existing NFC Tracking Data code goes here
-        var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody;
-
-        var endpoints = { orgUri: organizationURI };
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: endpoints,
-            cacheLocation: 'localStorage',
-        };
-
-        function toggleLoggedInState(isLoggedIn) {
-            if (isLoggedIn) {
-                loginButton.classList.add("hidden");
-                logoutButton.classList.remove("hidden");
-                getNFCTrackingDataButton.style.display = "block";
-                searchBar.style.display = "block";
-            } else {
-                loginButton.classList.remove("hidden");
-                logoutButton.classList.add("hidden");
-                getNFCTrackingDataButton.style.display = "none";
-                searchBar.style.display = "none";
-                nfctrackingsTable.classList.add("hidden");
-            }
-        }
-
-        function login() {
-            authContext.login();
-        }
-
-        function logout() {
-            authContext.logOut();
-            nfctrackingsTableBody.innerHTML = "";
-            nfctrackingsTable.style.display = "none";
-            toggleLoggedInState(false);
-        }
-
-        function getNFCTrackingData() {
-            getNFCTrackingDataButton.disabled = false;
-            message.textContent = "Retrieving NFC tracking data...";
-            authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
-        }
-
-        function retrieveNFCTrackingData(error, token) {
-            if (error || !token) {
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        var nfctrackings = JSON.parse(this.response).value;
-                        renderNFCTrackingData(nfctrackings);
-                    } else {
-                        errorMessage.textContent = JSON.parse(this.response).error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Helper function to format date (YYYY-MM-DD)
-        function formatDate(dateString) {
-            var date = new Date(dateString);
-            return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
-        }
-
-        // Helper function to format time (HH:MM:SS)
-        function formatTime(dateString) {
-            var date = new Date(dateString);
-            return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
-        }
-
-        function renderNFCTrackingData(nfctrackings) {
-            nfctrackingsTableBody.innerHTML = "";
-            nfctrackings.forEach(function (tracking) {
-                var row = document.createElement("tr");
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = tracking.izx_name;
-
-                var tagIdCell = document.createElement("td");
-                tagIdCell.textContent = tracking.izx_tagid;
-                tagIdCell.classList.add("tag-id");
-
-                var timestampCell = document.createElement("td");
-                timestampCell.textContent = formatDate(tracking.izx_timestamp);
-
-                var timeInCell = document.createElement("td");
-                timeInCell.textContent = formatTime(tracking.izx_timein);
-
-                var timeOutCell = document.createElement("td");
-                timeOutCell.textContent = formatTime(tracking.izx_timeout);
-
-                var durationCell = document.createElement("td");
-                durationCell.textContent = tracking.izx_duration;
-
-                var inoutCell = document.createElement("td");
-                inoutCell.textContent = tracking.izx_in_out;
-
-                row.appendChild(nameCell);
-                row.appendChild(tagIdCell);
-                row.appendChild(timestampCell);
-                row.appendChild(timeInCell);
-                row.appendChild(timeOutCell);
-                row.appendChild(durationCell);
-                row.appendChild(inoutCell);
-
-                nfctrackingsTableBody.appendChild(row);
-            });
-
-            message.textContent = "NFC tracking data loaded successfully.";
-            nfctrackingsTable.classList.remove("hidden");
-        }
-
-        function searchByTagID() {
-            var filterValue = searchBar.value.toUpperCase();
-            var rows = nfctrackingsTableBody.getElementsByTagName("tr");
-
-            for (var i = 0; i < rows.length; i++) {
-                var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
-                if (tagIdCell) {
-                    var tagId = tagIdCell.textContent.toUpperCase();
-                    rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
-                }
-            }
-        }
-
-
-
-        // Existing NFC Tracking Data code goes here
-        var authContext, user, loginButton, logoutButton, getUsersButton, getNFCTrackingDataButton, getMonthButton, searchBar, usersTable, nfctrackingsTable, monthTable, monthwisetableBody;
-
-        var endpoints = { orgUri: organizationURI };
-
-        window.config = {
-            tenant: tenant,
-            clientId: clientId,
-            postLogoutRedirectUri: pageUrl,
-            endpoints: endpoints,
-            cacheLocation: 'localStorage',
-        };
-
-
-        function login() {
-            authContext.login();
-        }
-
-        function logout() {
-            authContext.logOut();
-            monthwisetableBody.innerHTML = "";
-            monthTable.style.display = "none";
-            toggleLoggedInState(false);
-        }
-
-        function monthDataButton() {
-            getMonthButton.disabled = false;
-            message.textContent = "Retrieving NFC tracking data...";
-            authContext.acquireToken(organizationURI, retrieveMonthData);
-        }
-
-        function retrieveMonthData(error, token) {
-            if (error || !token) {
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var month = document.getElementById("monthInput").value;
-            var year = document.getElementById("yearInput").value;
-
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);
-            var req = new XMLHttpRequest();
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        var monthdata = JSON.parse(this.response).value;
-                        renderMonthData(monthdata);
-                    } else {
-                        errorMessage.textContent = JSON.parse(this.response).error.message;
-                    }
-                }
-            };
-            req.send();
-        }
-
-        // Helper function to format date (YYYY-MM-DD)
-        function formatDate(dateString) {
-            var date = new Date(dateString);
-            return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
-        }
-
-        // Helper function to format time (HH:MM:SS)
-        function formatTime(dateString) {
-            var date = new Date(dateString);
-            return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
-        }
-
-        function renderMonthData(monthdata) {
-            monthwisetableBody.innerHTML = "";
-            monthdata.forEach(function (tracking) {
-                var row = document.createElement("tr");
-
-                var nameCell = document.createElement("td");
-                nameCell.textContent = tracking.izx_name;
-
-                var tagIdCell = document.createElement("td");
-                tagIdCell.textContent = tracking.izx_tagid;
-                tagIdCell.classList.add("tag-id");
-
-                var timestampCell = document.createElement("td");
-                timestampCell.textContent = formatDate(tracking.izx_timestamp);
-
-                var timeInCell = document.createElement("td");
-                timeInCell.textContent = formatTime(tracking.izx_timein);
-
-                var timeOutCell = document.createElement("td");
-                timeOutCell.textContent = formatTime(tracking.izx_timeout);
-
-                var durationCell = document.createElement("td");
-                durationCell.textContent = tracking.izx_duration;
-
-                var inoutCell = document.createElement("td");
-                inoutCell.textContent = tracking.izx_in_out;
-
-                row.appendChild(nameCell);
-                row.appendChild(tagIdCell);
-                row.appendChild(timestampCell);
-                row.appendChild(timeInCell);
-                row.appendChild(timeOutCell);
-                row.appendChild(durationCell);
-                row.appendChild(inoutCell);
-
-                monthwisetableBody.appendChild(row);
-            });
-
-            message.textContent = "Month Wise data loaded successfully.";
-            monthTable.classList.remove("hidden");
-        }
-
-
-    </script>
-
-
-</body>
-</html>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1470,7 +278,7 @@ NFC Tracking Data Section-->
             border-radius: 5px;
             border: 1px solid #ccc;
             display: none;
-            Initially hidden
+            
         }
 
             #searchBar.active {
@@ -1520,6 +328,7 @@ NFC Tracking Data Section-->
         <div class="nfc-users-buttons">
             <button id="showNFCButton">Show NFC Tracking Data</button>
             <button id="showUsersButton">Show Users</button>
+            <button id="showMonthWiseDataNutton">Month Wise Data</button>
         </div>
 
         <!-- Authentication buttons -->
@@ -1600,15 +409,48 @@ NFC Tracking Data Section-->
         </div>
     </div>
 
+    <!--Month Wise Data Table-->
+    <div class="container" id="monthSection">
+        <h2>Fetch Month-wise NFC Tracking Data</h2>
+
+        <label for="monthYearInput">Select Month and Year: </label>
+        <input type="month" id="monthYearInput" required>
+        <br><br>
+
+        <button id="getMonthData">Get Data</button>
+
+        <p id="message"></p>
+
+        <table id="monthWiseTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Tag ID</th>
+                    <th>Timestamp</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                    <th>Duration</th>
+                    <th>In/Out</th>
+                </tr>
+            </thead>
+            <tbody id="monthWiseTableBody">
+                <!--Data will be inserted here dynamically-->
+            </tbody>
+        </table>
+    </div>
+
+
     <script type="text/javascript">
         "use strict";
 
         // Variables for buttons and sections
         var showNFCButton = document.getElementById("showNFCButton");
         var showUsersButton = document.getElementById("showUsersButton");
+        var showMonthButton = document.getElementById("showMonthWiseDataNutton");
 
         var nfcTrackingSection = document.getElementById("nfcTrackingSection");
         var usersSection = document.getElementById("usersSection");
+        var monthSection = document.getElementById("monthSection");
 
         // Add event listeners to toggle between sections
         showNFCButton.addEventListener("click", function () {
@@ -1619,14 +461,24 @@ NFC Tracking Data Section-->
             toggleVisibility('users');
         });
 
+        showMonthButton.addEventListener("click", function () {
+            toggleVisibility('month');
+        });
+
         // Function to toggle visibility between NFC Tracking and Users section
         function toggleVisibility(section) {
             if (section === 'nfc') {
                 nfcTrackingSection.classList.remove('hidden');
                 usersSection.classList.add('hidden');
+                monthSection.classList.add('hidden');
             } else if (section === 'users') {
                 usersSection.classList.remove('hidden');
                 nfcTrackingSection.classList.add('hidden');
+                monthSection.classList.add('hidden');
+            } else if (section === 'month') {
+                monthSection.classList.remove('hidden');
+                nfcTrackingSection.classList.add('hidden');
+                usersSection.classList.add('hidden');
             }
         }
 
@@ -1647,7 +499,7 @@ NFC Tracking Data Section-->
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
         var pageUrl = "https://www.izenix.com/SimpleSPA.html";                 // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -1683,6 +535,12 @@ NFC Tracking Data Section-->
                 usersTable = document.getElementById("usersTable");
                 usersTableBody = document.getElementById("usersTableBody");
 
+                //Month Related elements
+                getMonthButton = document.getElementById("getMonthData");
+                monthTable = document.getElementById("monthWiseTable");
+                monthTableBody = document.getElementById("monthWiseTableBody"); 
+
+
                 // Add event listeners for NFC login/logout
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
@@ -1690,6 +548,7 @@ NFC Tracking Data Section-->
                 // Add event listeners for data retrieval and search
                 getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
                 getUsersButton.addEventListener("click", getUsers);
+                getMonthButton.addEventListener("click", getMonthData);
 
                 // Add event listener for search functionality
                 searchBar.addEventListener("input", searchByTagID);
@@ -1708,6 +567,8 @@ NFC Tracking Data Section-->
                     // Show the NFC tracking data button and search bar by removing "none" class
                     getNFCTrackingDataButton.style.display = "block";
                     searchBar.style.display = "block";
+
+                    getMonthButton.style.display = "block";
 
                     // Display greeting message to the logged-in user
                     var greetingContainer = document.getElementById("greetingMessage");
@@ -1732,6 +593,7 @@ NFC Tracking Data Section-->
                     // Hide the NFC tracking data button, search bar, and table by adding "none" class
                     getNFCTrackingDataButton.style.display = "none";
                     searchBar.style.display = "none";
+                    getMonthButton.style.display = "none";
                 }
             }
         };
@@ -1989,7 +851,7 @@ NFC Tracking Data Section-->
 
 
         // Existing NFC Tracking Data code goes here
-        var user, authContext, message, errorMessage, loginButton, logoutButton, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -2007,6 +869,7 @@ NFC Tracking Data Section-->
                 logoutButton.classList.remove("hidden");
                 getNFCTrackingDataButton.style.display = "block";
                 searchBar.style.display = "block";
+
             } else {
                 loginButton.classList.remove("hidden");
                 logoutButton.classList.add("hidden");
@@ -2124,6 +987,129 @@ NFC Tracking Data Section-->
                 }
             }
         }
+
+
+
+
+
+        // Existing NFC Tracking Data code goes here
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+
+        var endpoints = { orgUri: organizationURI };
+
+        window.config = {
+            tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage',
+        };
+
+
+        function login() {
+            authContext.login();
+        }
+
+        function logout() {
+            authContext.logOut();
+            monthWiseTableBody.innerHTML = "";
+            monthTable.style.display = "none";
+            toggleLoggedInState(false);
+        }
+
+        function monthDataButton() {
+            getMonthButton.disabled = false;
+            message.textContent = "Retrieving NFC tracking data...";
+            authContext.acquireToken(organizationURI, retrieveMonthData);
+        }
+
+        function retrieveMonthData(error, token) {
+            if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                return;
+            }
+
+            var monthYear = document.getElementById("monthYearInput").value;
+
+            if (monthYear) {
+                // Split the value into year and month
+                var [year, month] = monthYear.split('-');
+
+                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);
+                var req = new XMLHttpRequest();
+                req.setRequestHeader("Authorization", "Bearer " + token);
+                req.setRequestHeader("Accept", "application/json");
+                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var monthdata = JSON.parse(this.response).value;
+                            renderMonthData(monthdata);
+                        } else {
+                            errorMessage.textContent = JSON.parse(this.response).error.message;
+                        }
+                    }
+                };
+                req.send();
+            }
+        }
+
+        // Helper function to format date (YYYY-MM-DD)
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
+        }
+
+        // Helper function to format time (HH:MM:SS)
+        function formatTime(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
+        }
+
+        function renderMonthData(monthdata) {
+            monthwisetableBody.innerHTML = "";
+            monthdata.forEach(function (tracking) {
+                var row = document.createElement("tr");
+
+                var nameCell = document.createElement("td");
+                nameCell.textContent = tracking.izx_name;
+
+                var tagIdCell = document.createElement("td");
+                tagIdCell.textContent = tracking.izx_tagid;
+                tagIdCell.classList.add("tag-id");
+
+                var timestampCell = document.createElement("td");
+                timestampCell.textContent = formatDate(tracking.izx_timestamp);
+
+                var timeInCell = document.createElement("td");
+                timeInCell.textContent = formatTime(tracking.izx_timein);
+
+                var timeOutCell = document.createElement("td");
+                timeOutCell.textContent = formatTime(tracking.izx_timeout);
+
+                var durationCell = document.createElement("td");
+                durationCell.textContent = tracking.izx_duration;
+
+                var inoutCell = document.createElement("td");
+                inoutCell.textContent = tracking.izx_in_out;
+
+                row.appendChild(nameCell);
+                row.appendChild(tagIdCell);
+                row.appendChild(timestampCell);
+                row.appendChild(timeInCell);
+                row.appendChild(timeOutCell);
+                row.appendChild(durationCell);
+                row.appendChild(inoutCell);
+
+                monthwisetableBody.appendChild(row);
+            });
+
+            message.textContent = "Month Wise data loaded successfully.";
+            monthTable.classList.remove("hidden");
+        }
+
+
     </script>
 
 </body>
