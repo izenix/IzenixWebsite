@@ -392,7 +392,7 @@
     <div id="nfcTrackingSection">
         <div id="nfcTrackingContainer">
             <button id="getNFCTrackingData">NFC Tracking Data</button>
-            <input type="text" id="searchBar" class="hidden" placeholder="Search by Tag ID...">
+            <input type="text" id="searchBar"  placeholder="Search by Tag ID...">
         </div>
         <div id="message"></div>
         <table id="nfctrackingsTable">
@@ -413,10 +413,10 @@
     </div>
 
     <!-- Get Users Section -->
-    <div id="usersSection" class="hidden">
+    <div id="usersSection">
         <h1>Get Users from Dynamics 365</h1>
         <div id="userErrorMessage" style="color: red;"></div>
-        <button id="getUsers" style="display: none;">Get Users</button>
+        <button id="getUsers">Get Users</button>
         <table id="usersTable">
             <thead>
                 <tr>
@@ -486,6 +486,8 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             // Buttons
+            const loginButton = document.getElementById('login');
+            const logoutButton = document.getElementById('logout');
             const nfcButton = document.getElementById('showNFCButton');
             const usersButton = document.getElementById('showUsersButton');
             const monthButton = document.getElementById('showMonthWiseDataButton');
@@ -500,6 +502,20 @@
                 nfcSection.classList.add('hidden');
                 usersSection.classList.add('hidden');
                 monthSection.classList.add('hidden');
+            }
+
+            // Show all buttons only after login
+            function enableAllButtons() {
+                nfcButton.classList.remove('hidden');
+                usersButton.classList.remove('hidden');
+                monthButton.classList.remove('hidden');
+            }
+
+            // Hide all buttons on logout
+            function disableAllButtons() {
+                nfcButton.classList.add('hidden');
+                usersButton.classList.add('hidden');
+                monthButton.classList.add('hidden');
             }
 
             // NFC Button Click Event
@@ -519,17 +535,42 @@
                 hideAllSections();
                 monthSection.classList.remove('hidden');
             });
+
+            // Login Button Click Event
+            loginButton.addEventListener('click', function () {
+                loginButton.classList.add('hidden'); // Hide login button
+                logoutButton.classList.remove('hidden'); // Show logout button
+                enableAllButtons(); // Enable section buttons
+                document.getElementById('greetingMessage').textContent = 'Welcome!';
+                // Display greeting message to the logged-in user
+                var greetingContainer = document.getElementById("greetingMessage");
+                var helloMessage = document.createElement("span");
+                helloMessage.textContent = "Hello " + user.profile.name;
+                greetingContainer.appendChild(helloMessage);
+
+                // Optionally, style the message if needed
+                helloMessage.style.marginLeft = "10px";
+                helloMessage.style.fontWeight = "bold";
+            });
+
+            // Logout Button Click Event
+            logoutButton.addEventListener('click', function () {
+                logoutButton.classList.add('hidden'); // Hide logout button
+                loginButton.classList.remove('hidden'); // Show login button
+                disableAllButtons(); // Disable section buttons
+                hideAllSections(); // Hide all sections
+                document.getElementById('greetingMessage').textContent = ''; // Clear greeting message
+            });
+
+            // Initially hide section buttons and sections until login
+            disableAllButtons();
+            hideAllSections();
         });
 
-        document.getElementById('login').addEventListener('click', function () {
-            document.getElementById('login').classList.add('hidden');
-            document.getElementById('logout').classList.remove('hidden');
-        });
 
-        document.getElementById('logout').addEventListener('click', function () {
-            document.getElementById('logout').classList.add('hidden');
-            document.getElementById('login').classList.remove('hidden');
-        });
+
+
+
 
 
         // Your existing NFC Tracking Data and Get Users code goes here
@@ -593,7 +634,21 @@
                 // Add event listener for search functionality
                 searchBar.addEventListener("input", searchByTagID);
 
+                // Display greeting message to the logged-in user
+                var greetingContainer = document.getElementById("greetingMessage");
+                var helloMessage = document.createElement("span");
+                helloMessage.textContent = "Hello " + user.profile.name;
+                greetingContainer.appendChild(helloMessage);
+
+                // Optionally, style the message if needed
+                helloMessage.style.marginLeft = "10px";
+                helloMessage.style.fontWeight = "bold";
+
                 authenticate();
+
+                                
+
+
             }
         };
 
