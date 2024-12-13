@@ -1845,122 +1845,61 @@
 
         /*Month Section CSS*/
         /* Container Styling for Month-wise Data Section */
-        #monthSection {
-            background-color: #fff; /* white background */
+        /* Container for two columns */
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
             padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
         }
 
-            #monthSection h2 {
-                font-size: 24px;
-                color: #333; /* dark text */
-                margin-bottom: 15px;
-            }
-
-            #monthSection label {
-                font-size: 16px;
-                color: #6a6a6a; /* dark gray text */
-                margin-right: 10px;
-            }
-
-        #monthYearInput {
-            padding: 8px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc; /* light border */
-            margin-bottom: 20px;
-            width: 200px;
+        /* Row containing two columns */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
         }
 
-            #monthYearInput:focus {
-                border-color: #C8A165; /* tan border on focus */
-                outline: none;
-            }
-
-        #monthSection button {
-            background-color: #C8A165; /* tan color */
-            color: white;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Columns */
+        .column {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-            #monthSection button:hover {
-                background-color: #C8A165; /* same tan on hover */
-                transform: translateY(-2px);
-            }
-
-        #monthSection #message {
-            margin-top: 10px;
-            color: #4CAF50; /* green message */
-            font-weight: bold;
+        /* Left column for form */
+        .form-column {
+            max-width: 400px; /* Adjust width as per your preference */
         }
 
-        #monthSection table {
+        /* Right column for table */
+        .table-column {
+            flex-grow: 2; /* Take the remaining space for the table */
+        }
+
+        /* Style the table to take full width */
+        #monthWiseTable {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            border: 1px solid #ddd;
         }
 
-            #monthSection table caption {
-                font-size: 20px;
-                font-weight: bold;
-                margin-bottom: 10px;
-                text-align: left;
+            #monthWiseTable th, #monthWiseTable td {
+                padding: 12px;
+                text-align: center;
+                border: 1px solid #ddd;
             }
 
-        #monthSection th, #monthSection td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        #monthSection th {
-            background-color: #f2f2f2; /* light background for header */
-            font-size: 16px;
-            color: #555; /* dark text for header */
-        }
-
-        #monthSection tr:hover {
-            background-color: #f5f5f5; /* light gray on hover */
-        }
-
-        #monthSection td {
-            font-size: 14px;
-            color: #333; /* dark text for table data */
-        }
-
-        #monthSection .hidden {
-            display: none;
-        }
-
-        /* Responsive Design for smaller screens */
+        /* Responsive behavior: Stack the columns on smaller screens */
         @media (max-width: 768px) {
-            #monthSection {
-                padding: 15px;
+            .row {
+                flex-direction: column;
             }
 
-            #monthYearInput {
-                width: 100%;
-                max-width: 250px;
-            }
-
-            #monthSection button {
-                width: 100%;
-            }
-
-            #monthSection table {
-                font-size: 14px;
+            .column {
+                max-width: 100%;
             }
         }
+
 
 
 
@@ -2201,7 +2140,7 @@
     </div>
 
     <!--Month Wise Data Table-->
-    <div class="container hidden" id="monthSection">
+    <!--<div class="container hidden" id="monthSection">
         <div>
             <h2>Fetch Month-wise NFC Tracking Data</h2>
 
@@ -2214,7 +2153,8 @@
             <p id="message"></p>
         </div>
 
-        <table id="monthWiseTable" class="hidden">
+
+        <table id="monthWiseTable" class="hidden" >
             <thead>
                 <tr>
                     <th>Name</th>
@@ -2226,11 +2166,51 @@
                     <th>In/Out</th>
                 </tr>
             </thead>
-            <tbody id="monthWiseTableBody">
-                <!--Data will be inserted here dynamically-->
-            </tbody>
+            <tbody id="monthWiseTableBody">-->
+    <!--Data will be inserted here dynamically-->
+    <!--</tbody>
         </table>
+    </div>-->
+    <!-- Month Wise Data Table -->
+    <div class="container" id="monthSection">
+        <div class="row">
+            <!-- Left column: Form content -->
+            <div class="column form-column">
+                <h2>Fetch Month-wise NFC Tracking Data</h2>
+                <label for="monthYearInput">Select Month and Year: </label>
+                <input type="month" id="monthYearInput" required>
+                <br><br>
+                <button id="getMonthData">Get Data</button>
+                <p id="message"></p>
+            </div>
+
+            <!-- Right column: Table content -->
+            <div class="column table-column">
+                <table id="monthWiseTable" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Tag ID</th>
+                            <th>Timestamp</th>
+                            <th>Time In</th>
+                            <th>Time Out</th>
+                            <th>Duration</th>
+                            <th>In/Out</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthWiseTableBody">
+                        <!-- Data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+
+
+
+
+
 
 
     <script type="text/javascript">
