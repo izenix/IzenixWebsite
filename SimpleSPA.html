@@ -484,6 +484,10 @@
             .auth-buttons span {
                 color: white;
             }
+
+        .hidden {
+            display: none;
+        }
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -591,7 +595,7 @@
     </div>
 
     <!--Month Wise Data Table-->
-    <div class="container" id="monthSection">
+    <div class="container hidden" id="monthSection">
         <div>
             <h2>Fetch Month-wise NFC Tracking Data</h2>
 
@@ -622,46 +626,7 @@
     </tbody>
         </table>
     </div>
-     <!--Month Wise Data Table 
-    <div class="container hidden" id="monthSection">
-        <div class="column hidden">-->
-            <!-- Left column: Form content -->
-            <!--<div class="column form-column">
-                <h2>Fetch Month-wise NFC Tracking Data</h2>
-                <label for="monthYearInput">Select Month and Year: </label>
-                <input type="month" id="monthYearInput" required>
-                <br><br>
-                <button id="getMonthData">Get Data</button>
-                <p id="message"></p>
-            </div>-->
-
-            <!-- Right column: Table content -->
-            <!--<div class="column table-column">
-                <table id="monthWiseTable" class="hidden">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Tag ID</th>
-                            <th>Timestamp</th>
-                            <th>Time In</th>
-                            <th>Time Out</th>
-                            <th>Duration</th>
-                            <th>In/Out</th>
-                        </tr>
-                    </thead>
-                    <tbody id="monthWiseTableBody">-->
-                        <!-- Data will be inserted here dynamically -->
-                    <!--</tbody>
-                </table>
-            </div>
-        </div>
-    </div>-->
-
-
-
-
-
-
+     
 
 
     <script type="text/javascript">
