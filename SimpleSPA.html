@@ -7,7 +7,7 @@
 
     <style>
         /* General Styling */
-        body {
+        /*body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
@@ -26,18 +26,18 @@
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
+        }*/
 
         /* Flexbox Layout for Buttons */
-        .container {
+        /*.container {
             display: flex;
-            justify-content: space-between; /* Space between left and right buttons */
-            align-items: center;
+            justify-content: space-between;*/ /* Space between left and right buttons */
+            /*align-items: center;
             margin-bottom: 20px;
-        }
+        }*/
 
         /* Button Styling */
-        button {
+        /*button {
             background-color: #4CAF50;
             color: white;
             padding: 12px 20px;
@@ -66,10 +66,10 @@
 
             #showNFCButton:hover, #showUsersButton:hover {
                 background-color: #0056b3;
-            }
+            }*/
 
         /* Table Styling */
-        table {
+        /*table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
@@ -101,15 +101,15 @@
         td {
             font-size: 14px;
             color: #333;
-        }
+        }*/
 
         /* Hidden class to toggle visibility */
-        .hidden {
+        /*.hidden {
             display: none;
-        }
+        }*/
 
         /* Styling for NFC and Users buttons on the left side */
-        .nfc-users-buttons {
+        /*.nfc-users-buttons {
             display: flex;
             flex-direction: column;
         }
@@ -123,10 +123,10 @@
 
                 .nfc-users-buttons button:hover {
                     background-color: #218838;
-                }
+                }*/
 
         /* Styling for Login and Logout buttons on the right side */
-        .auth-buttons {
+        /*.auth-buttons {
             display: flex;
             flex-direction: row;
         }
@@ -140,10 +140,10 @@
 
                 .auth-buttons button:hover {
                     background-color: #0056b3;
-                }
+                }*/
 
         /* Show Button Styling */
-        #tagIdButton {
+        /*#tagIdButton {
             background-color: #4CAF50;
             color: white;
             padding: 15px 32px;
@@ -162,10 +162,10 @@
             #tagIdButton:focus {
                 outline: none;
                 box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.5);
-            }
+            }*/
 
         /* Message & Error Styling */
-        #message, #userMessage {
+        /*#message, #userMessage {
             margin-top: 10px;
             color: #4CAF50;
             font-weight: bold;
@@ -174,10 +174,10 @@
         #errorMessage, #userErrorMessage {
             color: red;
             margin-top: 10px;
-        }
+        }*/
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        /*@media (max-width: 768px) {
             .container {
                 flex-direction: column;
                 align-items: center;
@@ -187,10 +187,10 @@
                 width: 100%;
                 max-width: 300px;
             }
-        }
+        }*/
 
         /* The Modal (background) */
-        .modal {
+        /*.modal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -202,19 +202,19 @@
             background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.4);
             padding-top: 60px;
-        }
+        }*/
 
         /* Modal Content/Box */
-        .modal-content {
+        /*.modal-content {
             background-color: #fefefe;
             margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-        }
+        }*/
 
         /* The Close Button */
-        .close {
+        /*.close {
             color: #aaa;
             float: right;
             font-size: 28px;
@@ -245,19 +245,19 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
             display: inline-block;
-        }
+        }*/
 
         /* Container for the button and search bar */
-        #nfcTrackingContainer {
+        /*#nfcTrackingContainer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
             padding: 10px;
-        }
+        }*/
 
         /* Style for the NFC Tracking Data button */
-        #getNFCTrackingData {
+        /*#getNFCTrackingData {
             background-color: #28a745;
             color: white;
             padding: 12px 20px;
@@ -268,10 +268,10 @@
 
             #getNFCTrackingData:hover {
                 background-color: #218838;
-            }
+            }*/
 
         /* Style for the search bar*/
-        #searchBar {
+        /*#searchBar {
             padding: 10px;
             font-size: 16px;
             width: 250px;
@@ -283,10 +283,10 @@
 
             #searchBar.active {
                 display: block;
-            }
+            }*/
 
         /* Styling for NFC and Users buttons on the left side */
-        .nfc-users-buttons {
+        /*.nfc-users-buttons {
             display: flex;
             flex-direction: row;
             gap: 10px;
@@ -301,10 +301,10 @@
 
                 .nfc-users-buttons button:hover {
                     background-color: #218838;
-                }
+                }*/
 
         /* Responsive design: Stack buttons vertically on smaller screens */
-        @media (max-width: 768px) {
+        /*@media (max-width: 768px) {
             .nfc-users-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -314,7 +314,7 @@
                     width: 100%;
                     max-width: 300px;
                 }
-        }
+        }*/
 
 
 
@@ -442,25 +442,25 @@
         </div>
     </div>-->
     <!-- Header section -->
-    
-    
-    <header>
+
+
+    <header class="bg-white">
         <nav>
-            <!-- NFC dropdown menu -->
+            <div class="nav-left"></div>
+
             <div class="dropdown">
-                <button class="dropbtn">NFC</button>
-                <div class="dropdown-content">
-                    <button id="showNFCButton">Show NFC Tracking Data</button>
-                    <button id="showUsersButton">Show Users</button>
-                    <button id="showMonthWiseDataButton">Month Wise Data</button>
+                <button class="dropbtn text-light-black">NFC</button>
+                <div class="dropdown-content bg-white">
+                    <button id="showNFCButton" class="text-black">Show NFC Tracking Data</button>
+                    <button id="showUsersButton" class="text-black">Show Users</button>
+                    <button id="showMonthWiseDataButton" class="text-black">Month Wise Data</button>
                 </div>
             </div>
 
-            <!-- Authentication buttons -->
             <div class="auth-buttons">
-                <button id="login">Login</button>
+                <span id="greetingMessage" class="text-gray">Hello, User</span>
+                <button id="login" class="text-tan">Login</button>
                 <button id="logout" class="hidden">Logout</button>
-                <span id="greetingMessage"></span>
             </div>
         </nav>
     </header>
@@ -580,7 +580,7 @@
         // Variables for buttons and sections
         var showNFCButton = document.getElementById("showNFCButton");
         var showUsersButton = document.getElementById("showUsersButton");
-        var showMonthButton = document.getElementById("showMonthWiseDataNutton");
+        var showMonthButton = document.getElementById("showMonthWiseDataButton");
 
         var nfcTrackingSection = document.getElementById("nfcTrackingSection");
         var usersSection = document.getElementById("usersSection");
