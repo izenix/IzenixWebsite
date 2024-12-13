@@ -683,33 +683,33 @@
 
         // Add event listeners to toggle between sections
         showNFCButton.addEventListener("click", function () {
-            toggleVisibility('nfc');
+            toggleLoggedInState('nfc');
         });
 
         showUsersButton.addEventListener("click", function () {
-            toggleVisibility('users');
+            toggleLoggedInState('users');
         });
 
         showMonthButton.addEventListener("click", function () {
-            toggleVisibility('month');
+            toggleLoggedInState('month');
         });
 
-        // Function to toggle visibility between NFC Tracking, Users, and Month sections
-        function toggleVisibility(section) {
-            // Hide all sections
-            nfcTrackingSection.classList.add('hidden');
-            usersSection.classList.add('hidden');
-            monthSection.classList.add('hidden');
+        //// Function to toggle visibility between NFC Tracking, Users, and Month sections
+        //function toggleVisibility(section) {
+        //    // Hide all sections
+        //    nfcTrackingSection.classList.add('hidden');
+        //    usersSection.classList.add('hidden');
+        //    monthSection.classList.add('hidden');
 
-            // Show the selected section
-            if (section === 'nfc') {
-                nfcTrackingSection.classList.remove('hidden');
-            } else if (section === 'users') {
-                usersSection.classList.remove('hidden');
-            } else if (section === 'month') {
-                monthSection.classList.remove('hidden');
-            }
-        }
+        //    // Show the selected section
+        //    if (section === 'nfc') {
+        //        nfcTrackingSection.classList.remove('hidden');
+        //    } else if (section === 'users') {
+        //        usersSection.classList.remove('hidden');
+        //    } else if (section === 'month') {
+        //        monthSection.classList.remove('hidden');
+        //    }
+        //}
 
         // Function to toggle the logged-in state
         function toggleLoggedInState(isLoggedIn, user = null) {
@@ -825,45 +825,45 @@
 
                 authenticate();
 
-                //if (user) {
-                //    // Hide login button and show logout button when the user is logged in
-                //    loginButton.style.display = "none";
-                //    logoutButton.style.display = "block";
+                if (user) {
+                    // Hide login button and show logout button when the user is logged in
+                    loginButton.style.display = "none";
+                    logoutButton.style.display = "block";
 
-                //    // Show the Get Users button
-                //    getUsersButton.style.display = "block";
+                    // Show the Get Users button
+                    getUsersButton.style.display = "block";
 
-                //    // Show the NFC tracking data button and search bar by removing "none" class
-                //    getNFCTrackingDataButton.style.display = "block";
-                //    searchBar.style.display = "block";
+                    // Show the NFC tracking data button and search bar by removing "none" class
+                    getNFCTrackingDataButton.style.display = "block";
+                    searchBar.style.display = "block";
 
-                //    getMonthButton.style.display = "block";
+                    getMonthButton.style.display = "block";
 
-                //    // Display greeting message to the logged-in user
-                //    var greetingContainer = document.getElementById("greetingMessage");
-                //    var helloMessage = document.createElement("span");
-                //    helloMessage.textContent = "Hello " + user.profile.name;
-                //    greetingContainer.appendChild(helloMessage);
+                    // Display greeting message to the logged-in user
+                    var greetingContainer = document.getElementById("greetingMessage");
+                    var helloMessage = document.createElement("span");
+                    helloMessage.textContent = "Hello " + user.profile.name;
+                    greetingContainer.appendChild(helloMessage);
 
-                //    // Optionally, style the message if needed
-                //    helloMessage.style.marginLeft = "10px";
-                //    helloMessage.style.fontWeight = "bold";
+                    // Optionally, style the message if needed
+                    helloMessage.style.marginLeft = "10px";
+                    helloMessage.style.fontWeight = "bold";
 
 
 
-                //} else {
-                //    // Show login button and hide logout button when the user is logged out
-                //    loginButton.style.display = "block";
-                //    logoutButton.style.display = "none";
+                } else {
+                    // Show login button and hide logout button when the user is logged out
+                    loginButton.style.display = "block";
+                    logoutButton.style.display = "none";
 
-                //    // Hide the Get Users button
-                //    getUsersButton.style.display = "none";
+                    // Hide the Get Users button
+                    getUsersButton.style.display = "none";
 
-                //    // Hide the NFC tracking data button, search bar, and table by adding "none" class
-                //    getNFCTrackingDataButton.style.display = "none";
-                //    searchBar.style.display = "none";
-                //    getMonthButton.style.display = "none";
-                //}
+                    // Hide the NFC tracking data button, search bar, and table by adding "none" class
+                    getNFCTrackingDataButton.style.display = "none";
+                    searchBar.style.display = "none";
+                    getMonthButton.style.display = "none";
+                }
             }
         };
 
@@ -902,9 +902,23 @@
         // Logout function
         function logout() {
             authContext.logOut();
+
+            // Hide NFC Tracking Data section
+            nfctrackingsTableBody.innerHTML = "";
+            nfctrackingsTable.style.display = "none";
+
+            // Hide Month Wise Data section
+            monthWiseTableBody.innerHTML = "";
+            monthTable.style.display = "none";
+
+            // Hide Users section
             usersTable.style.display = "none";
             usersTableBody.innerHTML = "";
+
+            // Call function to handle other logout tasks like hiding buttons or UI elements
+            toggleLoggedInState(false);
         }
+
 
         // Function to get users
         function getUsers() {
@@ -1132,21 +1146,24 @@
             cacheLocation: 'localStorage',
         };
 
-        //function toggleLoggedInState(isLoggedIn) {
-        //    if (isLoggedIn) {
-        //        loginButton.classList.add("hidden");
-        //        logoutButton.classList.remove("hidden");
-        //        getNFCTrackingDataButton.style.display = "block";
-        //        searchBar.style.display = "block";
-
-        //    } else {
-        //        loginButton.classList.remove("hidden");
-        //        logoutButton.classList.add("hidden");
-        //        getNFCTrackingDataButton.style.display = "none";
-        //        searchBar.style.display = "none";
-        //        nfctrackingsTable.classList.add("hidden");
-        //    }
-        //}
+        // Function to toggle visibility of elements based on login state
+        function toggleLoggedInState(isLoggedIn) {
+            if (isLoggedIn) {
+                loginButton.classList.add("hidden");
+                logoutButton.classList.remove("hidden");
+                getNFCTrackingDataButton.style.display = "block";
+                getMonthButton.style.display = "block"; // Show "Get Month Data" button
+                searchBar.style.display = "block";
+            } else {
+                loginButton.classList.remove("hidden");
+                logoutButton.classList.add("hidden");
+                getNFCTrackingDataButton.style.display = "none";
+                getMonthButton.style.display = "none"; // Hide "Get Month Data" button
+                searchBar.style.display = "none";
+                nfctrackingsTable.classList.add("hidden");
+                monthTable.classList.add("hidden");
+            }
+        }
 
         function login() {
             authContext.login();
@@ -1154,9 +1171,31 @@
 
         function logout() {
             authContext.logOut();
+
+            // Hide NFC Tracking Data section
             nfctrackingsTableBody.innerHTML = "";
             nfctrackingsTable.style.display = "none";
+
+            // Hide Month Wise Data section
+            monthWiseTableBody.innerHTML = "";
+            monthTable.style.display = "none";
+
+            // Hide Users section
+            usersTable.style.display = "none";
+            usersTableBody.innerHTML = "";
+
+            // Call function to handle other logout tasks like hiding buttons or UI elements
             toggleLoggedInState(false);
+        }
+
+
+        function logout() {
+            authContext.logOut();
+            nfctrackingsTableBody.innerHTML = "";
+            nfctrackingsTable.style.display = "none";
+            monthWiseTableBody.innerHTML = "";
+            monthTable.style.display = "none";
+            toggleLoggedInState(false); // Hide elements after logout
         }
 
         function getNFCTrackingData() {
@@ -1281,10 +1320,23 @@
 
         function logout() {
             authContext.logOut();
+
+            // Hide NFC Tracking Data section
+            nfctrackingsTableBody.innerHTML = "";
+            nfctrackingsTable.style.display = "none";
+
+            // Hide Month Wise Data section
             monthWiseTableBody.innerHTML = "";
             monthTable.style.display = "none";
+
+            // Hide Users section
+            usersTable.style.display = "none";
+            usersTableBody.innerHTML = "";
+
+            // Call function to handle other logout tasks like hiding buttons or UI elements
             toggleLoggedInState(false);
         }
+
 
         function getMonthData() {
             message.textContent = "Retrieving NFC tracking data...";
