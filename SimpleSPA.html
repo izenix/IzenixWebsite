@@ -421,7 +421,7 @@
 
         <p id="message"></p>
 
-        <table id="monthWiseTable">
+        <table id="monthWiseTable" class="hidden">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -1017,8 +1017,7 @@
             toggleLoggedInState(false);
         }
 
-        function monthDataButton() {
-            getMonthButton.disabled = false;
+        function getMonthData() {
             message.textContent = "Retrieving NFC tracking data...";
             authContext.acquireToken(organizationURI, retrieveMonthData);
         }
@@ -1035,8 +1034,9 @@
                 // Split the value into year and month
                 var [year, month] = monthYear.split('-');
 
-                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);
                 var req = new XMLHttpRequest();
+
+                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);        
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -1102,7 +1102,7 @@
                 row.appendChild(durationCell);
                 row.appendChild(inoutCell);
 
-                monthwisetableBody.appendChild(row);
+                monthWiseTableBody.appendChild(row);
             });
 
             message.textContent = "Month Wise data loaded successfully.";
