@@ -497,6 +497,22 @@
             const usersSection = document.getElementById('usersSection');
             const monthSection = document.getElementById('monthSection');
 
+            // Error Message
+            const errorMessage = document.getElementById('errorMessage');
+
+            // User placeholder (to be replaced by actual authentication)
+            let authContext, user, loginButton, logoutButton, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, getMonthButton, monthwisetable, monthwisetableBody, message, errorMessage;
+
+            // Initialize authentication context and check user status
+            authenticate();
+
+            // Check if the user is already logged in
+            if (user) {
+                showUserUI();
+            } else {
+                showGuestUI();
+            }
+
             // Hide all sections initially
             function hideAllSections() {
                 nfcSection.classList.add('hidden');
@@ -504,14 +520,14 @@
                 monthSection.classList.add('hidden');
             }
 
-            // Show all buttons only after login
+            // Show section buttons after login
             function enableAllButtons() {
                 nfcButton.classList.remove('hidden');
                 usersButton.classList.remove('hidden');
                 monthButton.classList.remove('hidden');
             }
 
-            // Hide all buttons on logout
+            // Hide section buttons after logout
             function disableAllButtons() {
                 nfcButton.classList.add('hidden');
                 usersButton.classList.add('hidden');
@@ -538,34 +554,86 @@
 
             // Login Button Click Event
             loginButton.addEventListener('click', function () {
-                loginButton.classList.add('hidden'); // Hide login button
-                logoutButton.classList.remove('hidden'); // Show logout button
-                enableAllButtons(); // Enable section buttons
-                document.getElementById('greetingMessage').textContent = 'Welcome!';
-                // Display greeting message to the logged-in user
-                var greetingContainer = document.getElementById("greetingMessage");
-                var helloMessage = document.createElement("span");
-                helloMessage.textContent = "Hello " + user.profile.name;
-                greetingContainer.appendChild(helloMessage);
-
-                // Optionally, style the message if needed
-                helloMessage.style.marginLeft = "10px";
-                helloMessage.style.fontWeight = "bold";
+                login();  // Call the login function to authenticate
             });
 
             // Logout Button Click Event
             logoutButton.addEventListener('click', function () {
-                logoutButton.classList.add('hidden'); // Hide logout button
-                loginButton.classList.remove('hidden'); // Show login button
-                disableAllButtons(); // Disable section buttons
-                hideAllSections(); // Hide all sections
-                document.getElementById('greetingMessage').textContent = ''; // Clear greeting message
+                logout();  // Call the logout function to log out the user
             });
 
-            // Initially hide section buttons and sections until login
+            // UI functions to handle user states
+            function showUserUI() {
+                loginButton.classList.add('hidden');
+                logoutButton.classList.remove('hidden');
+                enableAllButtons();
+
+                // Show welcome message with user's name
+                document.getElementById('greetingMessage').textContent = 'Welcome!';
+                const greetingContainer = document.getElementById("greetingMessage");
+                const helloMessage = document.createElement("span");
+                helloMessage.textContent = "Hello, " + user.profile.name;
+                greetingContainer.appendChild(helloMessage);
+            }
+
+            function showGuestUI() {
+                logoutButton.classList.add('hidden');
+                loginButton.classList.remove('hidden');
+                disableAllButtons();
+                hideAllSections();
+                document.getElementById('greetingMessage').textContent = '';  // Clear greeting message
+            }
+
+            // Initial UI state
             disableAllButtons();
             hideAllSections();
         });
+
+        // Function to authenticate the user
+        function authenticate() {
+            try {
+                authContext = new AuthenticationContext(config);
+                const isCallback = authContext.isCallback(window.location.hash);
+                if (isCallback) {
+                    authContext.handleWindowCallback();
+                }
+                const loginError = authContext.getLoginError();
+                if (isCallback && !loginError) {
+                    window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
+                } else if (loginError) {
+                    errorMessage.textContent = loginError;
+                }
+
+                // Cache the logged-in user
+                user = authContext.getCachedUser();
+
+            } catch (e) {
+                console.error("Authentication error:", e);
+                errorMessage.textContent = "Authentication initialization failed.";
+            }
+        }
+
+        // Login function
+        function login() {
+            try {
+                authContext.login();  // Initiates the authentication process
+            } catch (e) {
+                console.error("Login error:", e);
+                errorMessage.textContent = "Login failed.";
+            }
+        }
+
+        // Logout function
+        function logout() {
+            try {
+                authContext.logOut();  // Logs out the user and clears the session
+                showGuestUI();  // Update the UI to guest state
+            } catch (e) {
+                console.error("Logout error:", e);
+                errorMessage.textContent = "Logout failed.";
+            }
+        }
+
 
 
 
