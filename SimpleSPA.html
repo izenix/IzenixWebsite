@@ -321,7 +321,7 @@
         /* Container Styling for Month-wise Data Section */
         /* General container styling */
         #monthSection {
-            background-color: #fff;
+            
             padding: 20px;
             margin-top: 20px;
             border-radius: 8px;
@@ -329,6 +329,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            width: 100%;
         }
 
         /* Form container styling */
@@ -336,10 +337,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start; /* Aligns content to the left */
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            width: 100%
         }
 
             .form-container h2 {
@@ -393,13 +391,14 @@
 
         /* Table container styling */
         .table-container {
-            display: flex;
+            width: 100%;
+            /*display: flex;
             flex-direction: column;
             justify-content: center;
             background-color: #f9f9f9;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);*/
         }
 
         /* Styling for the table */
@@ -708,7 +707,7 @@
     </div>
 
     <!-- Month Wise Data Table -->
-    <div class="container" id="monthSection">
+    <div class="container hidden" id="monthSection">
 
         <!-- First Column: Form for selecting month and fetching data -->
         <div class="form-container">
