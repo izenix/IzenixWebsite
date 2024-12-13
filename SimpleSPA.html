@@ -325,19 +325,39 @@
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column; /* Column layout for smaller screens */
+            gap: 20px; /* Gap between sections */
         }
 
-            #monthSection h2 {
-                font-size: 24px;
-                color: #333; /* dark text */
-                margin-bottom: 15px;
+        #fetchContainer, #tableContainer {
+            width: 100%; /* Take full width */
+        }
+
+        /* Arrange form and table in two columns on wider screens */
+        @media (min-width: 1024px) {
+            #monthSection {
+                flex-direction: row; /* Row layout on larger screens */
+                justify-content: space-between;
+                align-items: flex-start;
             }
 
-            #monthSection label {
-                font-size: 16px;
-                color: #6a6a6a; /* dark gray text */
-                margin-right: 10px;
+            #fetchContainer, #tableContainer {
+                width: 48%; /* Adjust width for two-column layout */
             }
+        }
+
+        #monthSection h2 {
+            font-size: 24px;
+            color: #333; /* dark text */
+            margin-bottom: 15px;
+        }
+
+        #monthSection label {
+            font-size: 16px;
+            color: #6a6a6a; /* dark gray text */
+            margin-right: 10px;
+        }
 
         #monthYearInput {
             padding: 8px;
@@ -345,7 +365,7 @@
             border-radius: 5px;
             border: 1px solid #ccc; /* light border */
             margin-bottom: 20px;
-            width: 200px;
+            width: 100%;
         }
 
             #monthYearInput:focus {
@@ -452,11 +472,13 @@
 
 
 
+
         /*Main CSS Style*/
 
 
         /* Style for the header */
-        header {
+        /* Style for navigation inside the header */
+/*        header {
             background-color: white;
             color: white;
             padding: 10px;
@@ -465,8 +487,8 @@
             align-items: center;
             height: 80px;
         }
+*/
 
-        /* Style for navigation inside the header */
         nav {
             display: flex;
             width: 100%;
@@ -517,13 +539,14 @@
 
             /* Buttons inside the dropdown */
             .dropdown-content button {
-                background-color: white;
-                color: black;
+                background-color: #333; /* Default background for buttons */
+                color: white; /* Default text color for buttons */
                 padding: 12px 16px;
                 border: none;
                 cursor: pointer;
                 width: 100%;
                 text-align: left;
+                transition: background-color 0.3s ease, color 0.3s ease;
             }
 
         /* Show the dropdown content when hovering over the dropdown */
@@ -533,7 +556,8 @@
 
         /* Hover effect for buttons in the dropdown */
         .dropdown-content button:hover {
-            background-color: #ddd;
+            background-color: white; /* Change background to white on hover */
+            color: #333; /* Change text color to dark on hover */
         }
 
         /* Authentication buttons on the right */
@@ -560,6 +584,7 @@
             .auth-buttons span {
                 color: white;
             }
+
 
 
 
@@ -683,7 +708,7 @@
 
     <!--Month Wise Data Table-->
     <div class="container hidden" id="monthSection">
-        <div>
+        <div id="fetchContainer">
             <h2>Fetch Month-wise NFC Tracking Data</h2>
 
             <label for="monthYearInput">Select Month and Year: </label>
@@ -695,22 +720,24 @@
             <p id="message"></p>
         </div>
 
-        <table id="monthWiseTable" class="hidden">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Tag ID</th>
-                    <th>Timestamp</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Duration</th>
-                    <th>In/Out</th>
-                </tr>
-            </thead>
-            <tbody id="monthWiseTableBody">
-                <!--Data will be inserted here dynamically-->
-            </tbody>
-        </table>
+        <div id="tableContainer">
+            <table id="monthWiseTable" class="hidden">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Tag ID</th>
+                        <th>Timestamp</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Duration</th>
+                        <th>In/Out</th>
+                    </tr>
+                </thead>
+                <tbody id="monthWiseTableBody">
+                    <!--Data will be inserted here dynamically-->
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
