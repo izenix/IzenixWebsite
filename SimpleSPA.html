@@ -319,120 +319,120 @@
 
         /*Month Section CSS*/
         /* Container Styling for Month-wise Data Section */
+        /* General container styling */
         #monthSection {
-            background-color: #fff; /* white background */
+            background-color: #fff;
             padding: 20px;
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
-            flex-direction: column; /* Column layout for smaller screens */
-            gap: 20px; /* Gap between sections */
+            flex-direction: column;
+            gap: 20px;
         }
 
-        #fetchContainer, #tableContainer {
-            width: 100%; /* Take full width */
+        /* Form container styling */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Aligns content to the left */
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* Arrange form and table in two columns on wider screens */
-        @media (min-width: 1024px) {
-            #monthSection {
-                flex-direction: row; /* Row layout on larger screens */
-                justify-content: space-between;
-                align-items: flex-start;
+            .form-container h2 {
+                font-size: 24px;
+                color: #333;
+                margin-bottom: 15px;
             }
 
-            #fetchContainer, #tableContainer {
-                width: 48%; /* Adjust width for two-column layout */
-            }
-        }
-
-        #monthSection h2 {
-            font-size: 24px;
-            color: #333; /* dark text */
-            margin-bottom: 15px;
-        }
-
-        #monthSection label {
-            font-size: 16px;
-            color: #6a6a6a; /* dark gray text */
-            margin-right: 10px;
-        }
-
-        #monthYearInput {
-            padding: 8px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc; /* light border */
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-            #monthYearInput:focus {
-                border-color: #C8A165; /* tan border on focus */
-                outline: none;
+            .form-container label {
+                font-size: 16px;
+                color: #6a6a6a;
+                margin-right: 10px;
             }
 
-        #monthSection button {
-            background-color: #C8A165; /* tan color */
-            color: white;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-            #monthSection button:hover {
-                background-color: #C8A165; /* same tan on hover */
-                transform: translateY(-2px);
+            .form-container input {
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                width: 200px;
             }
 
-        #monthSection #message {
+                .form-container input:focus {
+                    border-color: #C8A165;
+                    outline: none;
+                }
+
+            .form-container button {
+                background-color: #C8A165;
+                color: white;
+                padding: 12px 20px;
+                font-size: 16px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin: 5px 0;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+                .form-container button:hover {
+                    background-color: #B58B4C;
+                }
+
+        #message {
             margin-top: 10px;
-            color: #4CAF50; /* green message */
+            color: #4CAF50;
             font-weight: bold;
         }
 
-        #monthSection table {
+        /* Table container styling */
+        .table-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Styling for the table */
+        #monthWiseTable {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
             border: 1px solid #ddd;
         }
 
-            #monthSection table caption {
-                font-size: 20px;
-                font-weight: bold;
-                margin-bottom: 10px;
+            #monthWiseTable th, #monthWiseTable td {
+                padding: 12px;
                 text-align: left;
+                border-bottom: 1px solid #ddd;
             }
 
-        #monthSection th, #monthSection td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+            #monthWiseTable th {
+                background-color: #f2f2f2;
+                font-size: 16px;
+                color: #555;
+            }
 
-        #monthSection th {
-            background-color: #f2f2f2; /* light background for header */
-            font-size: 16px;
-            color: #555; /* dark text for header */
-        }
+            #monthWiseTable tr:hover {
+                background-color: #f5f5f5;
+            }
 
-        #monthSection tr:hover {
-            background-color: #f5f5f5; /* light gray on hover */
-        }
+            #monthWiseTable td {
+                font-size: 14px;
+                color: #333;
+            }
 
-        #monthSection td {
-            font-size: 14px;
-            color: #333; /* dark text for table data */
-        }
-
-        #monthSection .hidden {
+        /* Hide the table initially */
+        .hidden {
             display: none;
         }
 
@@ -442,19 +442,20 @@
                 padding: 15px;
             }
 
-            #monthYearInput {
+            .form-container input {
                 width: 100%;
                 max-width: 250px;
             }
 
-            #monthSection button {
+            .form-container button {
                 width: 100%;
             }
 
-            #monthSection table {
+            #monthWiseTable {
                 font-size: 14px;
             }
         }
+
 
 
 
@@ -706,9 +707,11 @@
         </div>
     </div>
 
-    <!--Month Wise Data Table-->
-    <div class="container hidden" id="monthSection">
-        <div id="fetchContainer">
+    <!-- Month Wise Data Table -->
+    <div class="container" id="monthSection">
+
+        <!-- First Column: Form for selecting month and fetching data -->
+        <div class="form-container">
             <h2>Fetch Month-wise NFC Tracking Data</h2>
 
             <label for="monthYearInput">Select Month and Year: </label>
@@ -720,7 +723,8 @@
             <p id="message"></p>
         </div>
 
-        <div id="tableContainer">
+        <!-- Second Column: Table displaying the data -->
+        <div class="table-container">
             <table id="monthWiseTable" class="hidden">
                 <thead>
                     <tr>
@@ -734,11 +738,13 @@
                     </tr>
                 </thead>
                 <tbody id="monthWiseTableBody">
-                    <!--Data will be inserted here dynamically-->
+                    <!-- Data will be inserted here dynamically -->
                 </tbody>
             </table>
         </div>
+
     </div>
+
 
 
     <script type="text/javascript">
@@ -793,7 +799,7 @@
         });
 
 
-   
+
 
 
 
@@ -1039,7 +1045,7 @@
                 tagIdButton.style.fontSize = "12px"; // Smaller font size
                 tagIdButton.style.padding = "5px 10px"; // Less padding
                 tagIdButton.style.borderRadius = "4px"; // Rounded corners
-                tagIdButton.style.backgroundColor = "#C8A165"; // Background color  
+                tagIdButton.style.backgroundColor = "#C8A165"; // Background color
                 tagIdButton.style.color = "white"; // White text
                 tagIdButton.style.border = "none"; // No border
                 tagIdButton.style.cursor = "pointer"; // Pointer cursor on hover
