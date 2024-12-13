@@ -538,7 +538,7 @@
         <input type="month" id="monthYearInput" required>
         <br><br>
 
-        <button onclick="fetchData()">Get Data</button>
+        <button id="monthDataButton">Get Data</button>
 
         <p id="message"></p>
 
@@ -613,7 +613,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
         var pageUrl = "https://www.izenix.com/SimpleSPA.html";                 // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, getUsersButton, getNFCTrackingDataButton;
+        var authContext, user, loginButton, logoutButton, getUsersButton, getNFCTrackingDataButton, getMonthButton, searchBar, usersTable, nfctrackingsTable, monthTable;
 
         window.config = {
             tenant: tenant,
@@ -638,11 +638,17 @@
                 getUsersButton = document.getElementById("getUsers");
                 usersTable = document.getElementById("usersTable");
 
+                getMonthButton = document.getElementById("monthDataButton");
+                monthTable = document.getElementById("monthwisetable");
+
+
                 loginButton.addEventListener("click", login);
                 logoutButton.addEventListener("click", logout);
                 getUsersButton.addEventListener("click", getUsers);
                 getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
                 searchBar.addEventListener("input", searchByTagID);
+                getMonthButton.addEventListener("click", monthDataButton);
+
 
             }
         };
@@ -1044,8 +1050,123 @@
             }
         }
 
-    </script>
 
+
+        // Existing NFC Tracking Data code goes here
+        var authContext, user, loginButton, logoutButton, getUsersButton, getNFCTrackingDataButton, getMonthButton, searchBar, usersTable, nfctrackingsTable, monthTable, monthwisetableBody;
+
+        var endpoints = { orgUri: organizationURI };
+
+        window.config = {
+            tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage',
+        };
+
+
+        function login() {
+            authContext.login();
+        }
+
+        function logout() {
+            authContext.logOut();
+            monthwisetableBody.innerHTML = "";
+            monthTable.style.display = "none";
+            toggleLoggedInState(false);
+        }
+
+        function monthDataButton() {
+            getMonthButton.disabled = false;
+            message.textContent = "Retrieving NFC tracking data...";
+            authContext.acquireToken(organizationURI, retrieveMonthData);
+        }
+
+        function retrieveMonthData(error, token) {
+            if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                return;
+            }
+
+            var month = document.getElementById("monthInput").value;
+            var year = document.getElementById("yearInput").value;
+
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);
+            var req = new XMLHttpRequest();
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            req.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        var monthdata = JSON.parse(this.response).value;
+                        renderMonthData(monthdata);
+                    } else {
+                        errorMessage.textContent = JSON.parse(this.response).error.message;
+                    }
+                }
+            };
+            req.send();
+        }
+
+        // Helper function to format date (YYYY-MM-DD)
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
+        }
+
+        // Helper function to format time (HH:MM:SS)
+        function formatTime(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
+        }
+
+        function renderMonthData(monthdata) {
+            monthwisetableBody.innerHTML = "";
+            monthdata.forEach(function (tracking) {
+                var row = document.createElement("tr");
+
+                var nameCell = document.createElement("td");
+                nameCell.textContent = tracking.izx_name;
+
+                var tagIdCell = document.createElement("td");
+                tagIdCell.textContent = tracking.izx_tagid;
+                tagIdCell.classList.add("tag-id");
+
+                var timestampCell = document.createElement("td");
+                timestampCell.textContent = formatDate(tracking.izx_timestamp);
+
+                var timeInCell = document.createElement("td");
+                timeInCell.textContent = formatTime(tracking.izx_timein);
+
+                var timeOutCell = document.createElement("td");
+                timeOutCell.textContent = formatTime(tracking.izx_timeout);
+
+                var durationCell = document.createElement("td");
+                durationCell.textContent = tracking.izx_duration;
+
+                var inoutCell = document.createElement("td");
+                inoutCell.textContent = tracking.izx_in_out;
+
+                row.appendChild(nameCell);
+                row.appendChild(tagIdCell);
+                row.appendChild(timestampCell);
+                row.appendChild(timeInCell);
+                row.appendChild(timeOutCell);
+                row.appendChild(durationCell);
+                row.appendChild(inoutCell);
+
+                monthwisetableBody.appendChild(row);
+            });
+
+            message.textContent = "Month Wise data loaded successfully.";
+            monthTable.classList.remove("hidden");
+        }
+
+        
+    </script>
     
 
 </body>
