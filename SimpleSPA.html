@@ -315,6 +315,110 @@
                     max-width: 300px;
                 }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*Main CSS Style*/
+        /* Style for the header */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Style for navigation inside the header */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown button */
+        .dropbtn {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+            /* Buttons inside the dropdown */
+            .dropdown-content button {
+                background-color: white;
+                color: black;
+                padding: 12px 16px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                text-align: left;
+            }
+
+        /* Show the dropdown content when hovering over the dropdown */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hover effect for buttons in the dropdown */
+        .dropdown-content button:hover {
+            background-color: #ddd;
+        }
+
+        /* Authentication buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .auth-buttons button {
+                padding: 10px;
+                background-color: #333;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+                .auth-buttons button.hidden {
+                    display: none;
+                }
+
+            .auth-buttons span {
+                color: white;
+            }
+
+
+
+
+
+
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -324,20 +428,50 @@
 <body>
 
     <!-- Buttons to toggle between NFC Tracking Data and Get Users -->
-    <div class="container">
+    <!--<div class="container">
         <div class="nfc-users-buttons">
             <button id="showNFCButton">Show NFC Tracking Data</button>
             <button id="showUsersButton">Show Users</button>
             <button id="showMonthWiseDataNutton">Month Wise Data</button>
-        </div>
-
-        <!-- Authentication buttons -->
-        <div class="auth-buttons">
+        </div>-->
+    <!-- Authentication buttons -->
+    <!--<div class="auth-buttons">
             <button id="login">Login</button>
             <button id="logout" class="hidden">Logout</button>
             <span id="greetingMessage"></span>
         </div>
-    </div>
+    </div>-->
+    <!-- Header section -->
+    
+    
+    <header>
+        <nav>
+            <!-- NFC dropdown menu -->
+            <div class="dropdown">
+                <button class="dropbtn">NFC</button>
+                <div class="dropdown-content">
+                    <button id="showNFCButton">Show NFC Tracking Data</button>
+                    <button id="showUsersButton">Show Users</button>
+                    <button id="showMonthWiseDataButton">Month Wise Data</button>
+                </div>
+            </div>
+
+            <!-- Authentication buttons -->
+            <div class="auth-buttons">
+                <button id="login">Login</button>
+                <button id="logout" class="hidden">Logout</button>
+                <span id="greetingMessage"></span>
+            </div>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
 
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection">
@@ -538,7 +672,7 @@
                 //Month Related elements
                 getMonthButton = document.getElementById("getMonthData");
                 monthTable = document.getElementById("monthWiseTable");
-                monthTableBody = document.getElementById("monthWiseTableBody"); 
+                monthTableBody = document.getElementById("monthWiseTableBody");
 
 
                 // Add event listeners for NFC login/logout
