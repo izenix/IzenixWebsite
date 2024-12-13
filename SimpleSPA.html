@@ -2146,6 +2146,7 @@
             align-items: center;
             padding: 10px 20px;
             border-bottom: 2px solid #ccc;
+            position: relative;
         }
 
         .logo {
@@ -2159,7 +2160,9 @@
 
         /* Dropdown menu styles for NFC */
         .dropdown {
-            position: relative;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .menu-button {
@@ -2180,13 +2183,12 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
             min-width: 160px;
             z-index: 1;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* Show the dropdown menu when hover over the menu button */
+        /* Show the dropdown menu when hovering over the menu button */
         .dropdown:hover .dropdown-content {
             display: block;
         }
@@ -2201,13 +2203,33 @@
             width: 100%;
             text-align: left;
             color: #666;
-            background-color: #fff;
+            background-color: transparent; /* No background color */
             transition: background-color 0.3s;
         }
 
             .dropdown-content button:hover {
-                background-color: #ddd;
+                background-color: transparent; /* No background color on hover */
             }
+
+        /* Style for the main navigation links */
+        .main-menu > nav > ul > li > a {
+            background: transparent none repeat scroll 0 0; /* No background */
+            color: #666; /* Text color */
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 45px;
+            padding: 0 0 0 70px; /* Adjust padding as needed */
+            position: relative;
+            text-transform: uppercase; /* Uppercase text */
+            z-index: 1;
+        }
+
+            .main-menu > nav > ul > li > a:hover {
+                color: #333; /* Change color on hover */
+                background: transparent; /* Ensure no background on hover */
+            }
+
 
         /* Authentication section on the right */
         .auth-section {
@@ -2425,7 +2447,7 @@
                 nfcTrackingSection.classList.add('hidden');
             }
         }
-
+        debugger;
         document.getElementById('login').addEventListener('click', function () {
             document.getElementById('login').classList.add('hidden');
             document.getElementById('logout').classList.remove('hidden');
@@ -2560,7 +2582,7 @@
                 errorMessage.textContent = "Authentication initialization failed.";
             }
         }
-
+        debugger;
         // Login function
         function login() {
             try {
@@ -2927,6 +2949,148 @@
                 }
             }
         }
+
+
+
+
+        // Month Data
+        // Existing NFC Tracking Data code goes here
+        var user, authContext, message, errorMessage, loginButton, logoutButton, getMonthDataButton, monthwisetable, monthwisetableBody;
+
+        var endpoints = { orgUri: organizationURI };
+
+        window.config = {
+            tenant: tenant,
+            clientId: clientId,
+            postLogoutRedirectUri: pageUrl,
+            endpoints: endpoints,
+            cacheLocation: 'localStorage',
+        };
+
+        function toggleLoggedInState(isLoggedIn) {
+            if (isLoggedIn) {
+                loginButton.classList.add("hidden");
+                logoutButton.classList.remove("hidden");
+                getMonthDataButton.style.display = "block";
+               
+                
+            } else {
+                loginButton.classList.remove("hidden");
+                logoutButton.classList.add("hidden");
+
+                getMonthDataButton.style.display = "none";
+                monthwisetable.classList.add("hidden");
+
+                                
+            }
+        }
+
+        function login() {
+            authContext.login();
+        }
+
+        function logout() {
+            authContext.logOut();
+            monthwisetableBody.innerHTML = "";
+            monthwisetable.style.display = "none";
+            toggleLoggedInState(false);
+        }
+
+        function monthData() {
+            getMonthDataButton.disabled = false;
+            message.textContent = "Retrieving NFC tracking data...";
+            authContext.acquireToken(organizationURI, retrieveMothWiseData);
+        }
+
+        function retrieveMothWiseData(error, token) {
+            if (error || !token) {
+                errorMessage.textContent = 'ADAL error occurred: ' + error;
+                return;
+            }
+
+
+            var month = document.getElementById("monthInput").value;
+            var year = document.getElementById("yearInput").value;
+
+           
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            req.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        var monthtrackings = JSON.parse(this.response).value;
+                        renderMonthTrackingData(monthtrackings);
+                    } else {
+                        errorMessage.textContent = JSON.parse(this.response).error.message;
+                    }
+                }
+            };
+            req.send();
+        }
+
+        // Helper function to format date (YYYY-MM-DD)
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[0]; // Returns 'YYYY-MM-DD'
+        }
+
+        // Helper function to format time (HH:MM:SS)
+        function formatTime(dateString) {
+            var date = new Date(dateString);
+            return date.toISOString().split('T')[1].split('Z')[0]; // Returns 'HH:MM:SS'
+        }
+
+        function renderMonthTrackingData(monthtrackings) {
+            nfctrackingsTableBody.innerHTML = "";
+            nfctrackings.forEach(function (tracking) {
+                var row = document.createElement("tr");
+
+                var nameCell = document.createElement("td");
+                nameCell.textContent = tracking.izx_name;
+
+                var tagIdCell = document.createElement("td");
+                tagIdCell.textContent = tracking.izx_tagid;
+                tagIdCell.classList.add("tag-id");
+
+                var timestampCell = document.createElement("td");
+                timestampCell.textContent = formatDate(tracking.izx_timestamp);
+
+                var timeInCell = document.createElement("td");
+                timeInCell.textContent = formatTime(tracking.izx_timein);
+
+                var timeOutCell = document.createElement("td");
+                timeOutCell.textContent = formatTime(tracking.izx_timeout);
+
+                var durationCell = document.createElement("td");
+                durationCell.textContent = tracking.izx_duration;
+
+                var inoutCell = document.createElement("td");
+                inoutCell.textContent = tracking.izx_in_out;
+
+                row.appendChild(nameCell);
+                row.appendChild(tagIdCell);
+                row.appendChild(timestampCell);
+                row.appendChild(timeInCell);
+                row.appendChild(timeOutCell);
+                row.appendChild(durationCell);
+                row.appendChild(inoutCell);
+
+                nfctrackingsTableBody.appendChild(row);
+            });
+
+            message.textContent = "NFC tracking data loaded successfully.";
+            nfctrackingsTable.classList.remove("hidden");
+        }
+
+        
+            }
+        }
+
+
     </script>
 
 </body>
