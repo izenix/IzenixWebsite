@@ -1034,9 +1034,14 @@
                 // Split the value into year and month
                 var [year, month] = monthYear.split('-');
 
+                // Calculate the start and end of the selected month
+                var startDate = new Date(year, month - 1, 1).toISOString(); // First day of the month
+                var endDate = new Date(year, month, 1).toISOString(); // First day of the next month
+
+
                 var req = new XMLHttpRequest();
 
-                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=month(izx_timestamp) eq " + month + " and year(izx_timestamp) eq " + year), true);        
+                req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=izx_timestamp ge ${startDate} and izx_timestamp lt ${endDate}`), true);
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
