@@ -7,6 +7,7 @@
 
     <style>
         /* Header Style */
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -21,15 +22,15 @@
         }
 
         header {
-            background-color: #ffffff;
-            border-bottom: 2px solid #e0e0e0;
+            background-color: #ffffff; /* Clean white background */
+            border-bottom: 2px solid #e0e0e0; /* Thin border for subtle separation */
             padding: 15px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
             position: fixed;
             z-index: 1000;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100%; /* Ensure it spans the full width */
             transition: top 0.3s ease-in-out;
         }
 
@@ -51,8 +52,8 @@
 
         /* Button Styling */
         .dropbtn {
-            background-color: #fff;
-            color: #6a6a6a;
+            background-color: #fff; /* Initial background color */
+            color: #6a6a6a; /* Initial text color */
             font-size: 18px;
             font-weight: 500;
             padding: 10px 20px;
@@ -62,6 +63,7 @@
             transition: all 0.3s ease-in-out;
             text-decoration: none;
         }
+
             /* Underline with color #C8A165 */
             .dropbtn::after {
                 content: "";
@@ -70,21 +72,20 @@
                 left: 0;
                 right: 0;
                 height: 2px;
-                background-color: #C8A165;
+                background-color: #C8A165; /* Underline color */
                 transition: opacity 0.3s ease-in-out;
-                opacity: 1;
+                opacity: 1; /* Initially visible */
             }
 
             /* On hover - change text color, background and hide underline */
             .dropbtn:hover {
-                background-color: #C8A165;
-                color: #fff;
+                background-color: #C8A165; /* Background color on hover */
+                color: #fff; /* Text color on hover */
             }
 
                 .dropbtn:hover::after {
-                    opacity: 0;
+                    opacity: 0; /* Hide the underline on hover */
                 }
-
 
         /* NFC Dropdown Menu */
         .dropdown {
@@ -124,14 +125,14 @@
                 text-align: left;
                 width: 100%;
                 font-size: 16px;
-                color: #6a6a6a;
+                color: #6a6a6a; /* Initial text color */
                 cursor: pointer;
                 transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
             }
 
                 /* Change only text color on hover */
                 .dropdown-content button:hover {
-                    color: #C8A165;
+                    color: #C8A165; /* Change text color to #C8A165 on hover */
                 }
 
         .dropdown:hover .dropdown-content {
@@ -148,13 +149,13 @@
 
             .auth-buttons span {
                 font-size: 16px;
-                color: #999;
+                color: #999; /* Text color for the greeting message */
                 margin-right: 20px;
             }
 
             .auth-buttons button {
-                background-color: #fff;
-                border: 2px solid #C8A165;
+                background-color: #fff; /* Button background color */
+                border: 2px solid #C8A165; /* Border color */
                 color: #C8A165; /* Text color */
                 padding: 10px 20px;
                 font-size: 16px;
@@ -165,9 +166,9 @@
             }
 
                 .auth-buttons button:hover {
-                    background-color: #C8A165;
-                    color: #fff;
-                    border-color: #C8A165;
+                    background-color: #C8A165; /* Background color on hover */
+                    color: #fff; /* Text color on hover */
+                    border-color: #C8A165; /* Keeps the border color the same */
                 }
 
             /* Hide logout button by default */
@@ -196,20 +197,27 @@
             }
         }
 
+
+
+
+
+
+
+
         /* NFC Tracking Container Styling */
         #nfcTrackingSection {
             padding: 15px;
-            background-color: #f4f4f9;
+            background-color: #f4f4f9; /* Soft background color */
             border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             margin-bottom: 40px;
             margin-top: 20px;
         }
 
         #nfcTrackingContainer {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            flex-direction: column; /* Stack h1 on top and button/input in the next row */
+            gap: 20px; /* Space between the heading and button/input row */
             margin-top: 20px;
         }
 
@@ -219,20 +227,20 @@
                 font-weight: 600;
                 color: #333;
                 margin-bottom: 0;
-                border-bottom: 2px solid #C8A165;
+                border-bottom: 2px solid #C8A165; /* Decorative underline */
                 padding-bottom: 10px;
             }
 
             /* Button and Input Row Styling */
             #nfcTrackingContainer .button-input-row {
                 display: flex;
-                justify-content: space-between;
-                width: 100%;
+                justify-content: space-between; /* Button left, input right */
+                width: 100%; /* Ensures they take up full width of container */
             }
 
             /* Button Styling */
             #nfcTrackingContainer button {
-                background-color: #C8A165;
+                background-color: #C8A165; /* Button color */
                 color: #fff;
                 border: none;
                 border-radius: 8px;
@@ -244,8 +252,8 @@
             }
 
                 #nfcTrackingContainer button:hover {
-                    background-color: #a57b45;
-                    transform: translateY(-2px);
+                    background-color: #a57b45; /* Hover effect for button */
+                    transform: translateY(-2px); /* Slight lift effect */
                 }
 
             /* Input Field Styling */
@@ -259,20 +267,20 @@
             }
 
                 #nfcTrackingContainer input[type="text"]:focus {
-                    border-color: #C8A165;
+                    border-color: #C8A165; /* Border color changes on focus */
                     outline: none;
                 }
 
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             #nfcTrackingContainer .button-input-row {
-                flex-direction: column;
+                flex-direction: column; /* Stack button and input vertically on smaller screens */
                 gap: 10px;
             }
 
             #nfcTrackingContainer button,
             #nfcTrackingContainer input[type="text"] {
-                width: 100%;
+                width: 100%; /* Full-width button and input on mobile */
             }
         }
 
@@ -280,9 +288,9 @@
         /* User Section Container Styling */
         #usersSection {
             padding: 15px;
-            background-color: #f4f4f9;
+            background-color: #f4f4f9; /* Soft background color */
             border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             margin-bottom: 40px;
             margin-top: 20px;
         }
@@ -290,11 +298,20 @@
 
         #userContainer {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            flex-direction: column; /*Stack the h1 and button/input in separate rows */
+            gap: 20px; /*Space between the heading and button row*/
             margin-top: 20px;
-            align-items: flex-start;
+            align-items: center; /*Align all items to the left*/
+            justify-content: space-between;
+            width: 100%;
         }
+
+            /*#userContainer {
+            display: flex;*/ /* Enable flexbox for the container */
+            /*justify-content: space-between;*/ /* Distribute space between elements */
+            /*align-items: center;*/ /* Vertically center the content */
+            /*width: 100%;*/ /* Ensure the container takes full width */
+            /*}*/
 
             /* Header Styling */
             #userContainer h1 {
@@ -302,15 +319,15 @@
                 font-weight: 600;
                 color: #333;
                 margin-bottom: 0;
-                border-bottom: 2px solid #C8A165;
+                border-bottom: 2px solid #C8A165; /* Decorative underline */
                 padding-bottom: 10px;
-                width: 100%;
-                box-sizing: border-box;
+                width: 100%; /* Ensure it spans the full width */
+                box-sizing: border-box; /* Include padding in the width calculation */
             }
 
             /* Button Styling */
             #userContainer button {
-                background-color: #C8A165;
+                background-color: #C8A165; /* Button color */
                 color: #fff;
                 border: none;
                 border-radius: 8px;
@@ -319,12 +336,12 @@
                 font-weight: 500;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                align-self: flex-start;
+                align-self: flex-start; /* Align the button to the left */
             }
 
                 #userContainer button:hover {
-                    background-color: #a57b45;
-                    transform: translateY(-2px);
+                    background-color: #a57b45; /* Hover effect for button */
+                    transform: translateY(-2px); /* Slight lift effect */
                 }
 
             /* Table Styling */
@@ -351,7 +368,6 @@
                     color: #fff;
                     padding: 12px;
                     text-align: left;
-                    font-weight: 600;
                 }
 
                 /* Table Row Styling */
@@ -363,9 +379,7 @@
 
                 /* Table Row Hover Effect */
                 #userContainer table tr:hover {
-                    background-color: #f9f3e5;
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
+                    background-color: #f5f5f5;
                 }
 
         /* Error Message Styling */
@@ -378,35 +392,65 @@
         /* Responsive adjustments */
         @media screen and (max-width: 768px) {
             #userContainer {
-                gap: 15px;
+                gap: 15px; /* Reduced space on smaller screens */
             }
 
                 #userContainer button {
-                    width: 100%;
+                    width: 100%; /* Full-width button on mobile */
                 }
 
                 #userContainer table {
-                    font-size: 14px;
+                    font-size: 14px; /* Adjust font size for smaller screens */
                 }
 
                     #userContainer table th,
                     #userContainer table td {
-                        padding: 10px;
+                        padding: 10px; /* Adjust padding for mobile view */
                     }
         }
+
+        /* Styling for the container */
+        #userButtons {
+            display: flex;
+            justify-content: space-between; /* Align buttons to the left and right */
+            align-items: center; /* Center items vertically */
+            width: 100%; /* Full width of the container */
+
+            box-sizing: border-box;
+        }
+
+            /* Button Styling */
+            #userButtons button {
+                background-color: #C8A165; /* Button color */
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 12px 30px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+                #userButtons button:hover {
+                    background-color: #a57b45; /* Hover effect for button */
+                    transform: translateY(-2px); /* Slight lift effect */
+                }
+
+
 
 
         /* User Modal Styling */
         #tagDetailsModal {
-            display: none;
+            display: none; /* Initially hidden */
             position: fixed;
-            z-index: 1;
+            z-index: 1; /* Make sure it appears above other elements */
             left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            overflow: auto;
+            width: 100%; /* Full-width */
+            height: 100%; /* Full-height */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            overflow: auto; /* Allow scrolling if content exceeds the screen */
             padding-top: 60px;
             transition: all 0.3s ease-in-out;
         }
@@ -418,7 +462,7 @@
             padding: 20px;
             border: 2px solid #C8A165;
             border-radius: 10px;
-            width: 80%;
+            width: 80%; /* Make modal take 80% of the screen width */
             box-sizing: border-box;
             transition: transform 0.3s ease-in-out;
         }
@@ -436,7 +480,7 @@
             }
 
                 .modal-content .close:hover {
-                    color: #C8A165;
+                    color: #C8A165; /* Color changes on hover */
                 }
 
             /* Heading Styling inside Modal */
@@ -465,29 +509,31 @@
             }
 
             .modal-content th {
-                background-color: #C8A165;
+                background-color: #F5F5F5;
                 font-weight: 600;
             }
 
             .modal-content tbody tr:hover {
-                background-color: #f9f3e5;
+                background-color: #f0f0f0; /* Highlight row on hover */
             }
 
         /* Responsive Styling for Modal */
         @media screen and (max-width: 768px) {
             .modal-content {
-                width: 90%;
+                width: 90%; /* Reduce the width on smaller screens */
             }
         }
+
+
 
 
         /* Month Section Styling */
         #monthSection {
             margin-top: 20px;
             padding: 30px;
-            background-color: #f4f4f9;
+            background-color: #f4f4f9; /* Soft background color */
             border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             margin-bottom: 40px;
         }
 
@@ -497,7 +543,7 @@
                 font-weight: 600;
                 color: #333;
                 margin-bottom: 10px;
-                border-bottom: 2px solid #C8A165;
+                border-bottom: 2px solid #C8A165; /* Decorative underline */
                 padding-bottom: 10px;
                 width: 100%;
                 box-sizing: border-box;
@@ -507,7 +553,7 @@
             #monthSection div {
                 display: flex;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: space-between; /* flex-start*/
             }
 
             /* Label Styling */
@@ -551,6 +597,56 @@
                     background-color: #a57b45;
                     transform: translateY(-2px);
                 }
+
+
+        /* Container styling for the buttons and inputs */
+        #monthButtons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Left section styling (label, input, and button without gap) */
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+            /* Remove any gap between the label, input, and button */
+            .left-section label,
+            .left-section input,
+            .left-section button {
+                margin-right: 0;
+            }
+
+        /* Download button styling on the right */
+        .right-section {
+            margin-left: auto;
+        }
+
+        #downloadExcel {
+            background-color: #C8A165;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            #downloadExcel:hover {
+                background-color: #a57b45;
+                transform: translateY(-2px);
+            }
+
+
+
+
+
 
 
         /* Table Styling */
@@ -618,9 +714,11 @@
             }
         }
 
-        .hidden {
-            display: none;
-        }
+
+
+
+
+
 
 
 
@@ -683,6 +781,13 @@
         }
 
 
+
+
+
+        .hidden {
+            display: none;
+        }
+
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -692,33 +797,6 @@
 
 </head>
 <body>
-
-    <!--<header class="bg-white">
-        <nav>-->
-            <!-- Logo on the left -->
-            <!--<div class="nav-left">
-                <img src="assets/images/logo7.png" alt="Logo" class="logo">
-            </div>-->
-
-            <!-- NFC Dropdown menu in the center -->
-            <!--<div class="dropdown">
-                <button class="dropbtn text-light-black">NFC</button>
-                <div class="dropdown-content bg-white">
-                    <button id="showNFCButton" class="text-black">NFC Tracking Data</button>
-                    <button id="showUsersButton" class="text-black">Users</button>
-                    <button id="showMonthWiseDataButton" class="text-black">Month Wise Data</button>
-                </div>
-            </div>-->
-
-            <!-- Authentication buttons on the right -->
-            <!--<div class="auth-buttons">
-                <span id="greetingMessage" class="text-gray"></span>
-                <button id="login" class="text-tan">Login</button>
-                <button id="logout" class="hidden">Logout</button>
-            </div>
-        </nav>
-    </header>-->
-
 
     <!-- Buttons to toggle between NFC Tracking Data and Get Users -->
     <header class="bg-white">
@@ -746,17 +824,15 @@
     </header>
 
 
-
-
-
     <!-- NFC Tracking Data Section -->
     <div id="nfcTrackingSection" class="hidden">
         <div id="nfcTrackingContainer">
             <h1>NFC Tracking Data</h1>
+
             <div class="button-input-row">
                 <button id="getNFCTrackingData">NFC Tracking Data</button>
                 <input type="text" id="searchBar" placeholder="Search by Tag ID...">
-                <button id="downloadExcel">Excel</button> <!-- Added download button -->
+                <button id="downloadExcel">Download as Excel</button> <!-- Added download button -->
             </div>
         </div>
         <div id="message"></div>
@@ -781,8 +857,10 @@
     <div id="usersSection" class="hidden">
         <div id="userContainer">
             <h1>Get Users from Dynamics 365</h1>
-            <button id="getUsers">Get Users</button>
-            <button id="downloadExcel">Excel</button> <!-- Added download button -->
+            <div id="userButtons">
+                <button id="getUsers">Get Users</button>
+                <button id="downloadExcel">Download as Excel</button> <!-- Added download button -->
+            </div>
         </div>
         <div id="message"></div>
         <table id="usersTable">
@@ -825,11 +903,15 @@
     <!--Month Wise Data Table-->
     <div class="container hidden" id="monthSection">
         <h1>Month-wise NFC Tracking Data</h1>
-        <div>
-            <label for="monthYearInput">Select Month and Year: </label>
-            <input type="month" id="monthYearInput" required>
-            <button id="getMonthData">Get Data</button>
-            <button id="downloadExcel">Excel</button> <!-- Added download button -->
+        <div id="monthButtons">
+            <div class="left-section">
+                <label for="monthYearInput">Select Month and Year: </label>
+                <input type="month" id="monthYearInput" required>
+                <button id="getMonthData">Get Data</button>
+            </div>
+            <div class="right-section">
+                <button id="downloadExcel">Download as Excel</button>
+            </div>
         </div>
         <div id="message"></div>
         <table id="monthWiseTable">
@@ -848,6 +930,7 @@
             </tbody>
         </table>
     </div>
+
 
     <script type="text/javascript">
         "use strict";
@@ -922,18 +1005,35 @@
             cacheLocation: 'localStorage' // Store tokens in localStorage
         };
 
-        // Add Excel Download functionality
-        document.getElementById('downloadExcel').addEventListener('click', function () {
-            exportTableToExcel();
-        });
-
         function exportTableToExcel() {
-            var table = document.getElementById('usersTable');
-            var ws = XLSX.utils.table_to_sheet(table);  // Convert HTML table to worksheet
-            var wb = XLSX.utils.book_new();             // Create a new workbook
-            XLSX.utils.book_append_sheet(wb, ws, "User Data");  // Append worksheet to workbook
-            XLSX.writeFile(wb, 'Users_Data.xlsx');  // Download the Excel file
+            var tableBody = document.getElementById('usersTableBody');
+            var rows = tableBody.getElementsByTagName('tr');
+            var data = [];
+
+            // Add header row (optional, if needed)
+            data.push(["Tag ID", "Name", "Email", "Mobile", "NFC Counter"]);  // Modify the headers as per your table
+
+            // Loop through the rows and collect data
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var rowArray = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowArray.push(cells[j].textContent);
+                }
+                data.push(rowArray);
+            }
+
+            // Create new workbook and worksheet using SheetJS
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.aoa_to_sheet(data);
+
+            // Append worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, "User Data");
+
+            // Export workbook as Excel file
+            XLSX.writeFile(wb, 'Users_Data.xlsx');
         }
+
 
         document.onreadystatechange = function () {
             if (document.readyState === "complete") {
@@ -1337,18 +1437,36 @@
             cacheLocation: 'localStorage',
         };
 
-        // Add Excel Download functionality
-        document.getElementById('downloadExcel').addEventListener('click', function () {
-            exportTableToExcel();
-        });
-
         function exportTableToExcel() {
-            var table = document.getElementById('nfctrackingsTable');
-            var ws = XLSX.utils.table_to_sheet(table);  // Convert HTML table to worksheet
-            var wb = XLSX.utils.book_new();             // Create a new workbook
-            XLSX.utils.book_append_sheet(wb, ws, "NFC Tracking Data");  // Append worksheet to workbook
-            XLSX.writeFile(wb, 'NFC_Tracking_Data.xlsx');  // Download the Excel file
+            var tableBody = document.getElementById('nfctrackingsTableBody'); // Target table body
+            var rows = tableBody.getElementsByTagName('tr'); // Get all rows within the table body
+            var data = [];
+
+            // Add header row (adjust according to your table's header content)
+            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]); // Modify as needed
+
+            // Loop through the rows and collect data
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td'); // Get all cells in the row
+                var rowArray = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowArray.push(cells[j].textContent); // Push cell text content to rowArray
+                }
+                data.push(rowArray); // Push the rowArray to the data array
+            }
+
+            // Create new workbook and worksheet using SheetJS
+            var wb = XLSX.utils.book_new(); // Create a new workbook
+            var ws = XLSX.utils.aoa_to_sheet(data); // Convert data array to worksheet
+
+            // Append worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, "NFC Tracking Data");
+
+            // Export workbook as Excel file
+            XLSX.writeFile(wb, 'NFC_Tracking_Data.xlsx'); // Download the Excel file
         }
+
+
 
         function toggleLoggedInState(isLoggedIn) {
             if (isLoggedIn) {
@@ -1511,18 +1629,35 @@
             cacheLocation: 'localStorage',
         };
 
-        // Add Excel Download functionality
-        document.getElementById('downloadExcel').addEventListener('click', function () {
-            exportTableToExcel();
-        });
-
         function exportTableToExcel() {
-            var table = document.getElementById('monthWiseTable');
-            var ws = XLSX.utils.table_to_sheet(table);  // Convert HTML table to worksheet
-            var wb = XLSX.utils.book_new();             // Create a new workbook
-            XLSX.utils.book_append_sheet(wb, ws, "Month Wise Data");  // Append worksheet to workbook
-            XLSX.writeFile(wb, 'Month_Wise_Data.xlsx');  // Download the Excel file
+            var tableBody = document.getElementById('monthWiseTable'); // Target the table body
+            var rows = tableBody.getElementsByTagName('tr'); // Get all rows within the table body
+            var data = [];
+
+            // Add header row (adjust according to your table's header content)
+            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]); // Modify as needed for your columns
+
+            // Loop through the rows and collect data
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td'); // Get all cells in the row
+                var rowArray = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowArray.push(cells[j].textContent); // Push cell text content to rowArray
+                }
+                data.push(rowArray); // Push the rowArray to the data array
+            }
+
+            // Create new workbook and worksheet using SheetJS
+            var wb = XLSX.utils.book_new(); // Create a new workbook
+            var ws = XLSX.utils.aoa_to_sheet(data); // Convert data array to worksheet
+
+            // Append worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, "Month Wise Data");
+
+            // Export workbook as Excel file
+            XLSX.writeFile(wb, 'Month_Wise_Data.xlsx'); // Download the Excel file
         }
+
 
         // Function to toggle visibility of elements based on login state
         function toggleLoggedInState(isLoggedIn) {
