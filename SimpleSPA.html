@@ -832,7 +832,7 @@
             <div class="button-input-row">
                 <button id="getNFCTrackingData">NFC Tracking Data</button>
                 <input type="text" id="searchBar" placeholder="Search by Tag ID...">
-                <button id="downloadExcelButton">Download as Excel</button> <!-- Added download button -->
+                <button id="nfcdownloadExcelButton">Download as Excel</button> <!-- Added download button -->
             </div>
         </div>
         <div id="message"></div>
@@ -859,7 +859,7 @@
             <h1>Get Users from Dynamics 365</h1>
             <div id="userButtons">
                 <button id="getUsers">Get Users</button>
-                <button id="downloadExcelButton">Download as Excel</button> <!-- Added download button -->
+                <button id="userdownloadExcelButton">Download as Excel</button> <!-- Added download button -->
             </div>
         </div>
         <div id="message"></div>
@@ -910,7 +910,7 @@
                 <button id="getMonthData">Get Data</button>
             </div>
             <div class="right-section">
-                <button id="downloadExcelButton">Download as Excel</button>
+                <button id="monthdownloadExcelButton">Download as Excel</button>
             </div>
         </div>
         <div id="message"></div>
@@ -1230,8 +1230,8 @@
             getUsersButton.disabled = false;
             message.textContent = '';
         }
-        // Excel download functionality using SheetJS
-        document.getElementById('downloadExcelButton').addEventListener('click', function () {
+        // Excel download functionality using SheetJS User Tracking Data
+        document.getElementById('userdownloadExcelButton').addEventListener('click', function () {
             var tableBody = document.getElementById('usersTableBody');
             var rows = tableBody.getElementsByTagName('tr');
             var data = [];
@@ -1590,7 +1590,7 @@
         }
                 
         // Excel download functionality using SheetJS NFC Tracking
-        document.getElementById('downloadExcelButton').addEventListener('click', function () {
+        document.getElementById('nfcdownloadExcelButton').addEventListener('click', function () {
             var tableBody = document.getElementById('nfctrackingsTableBody');
             var rows = tableBody.getElementsByTagName('tr');
             var data = [];
@@ -1780,7 +1780,7 @@
             monthTable.classList.remove("hidden");
         }
         // Excel download functionality using SheetJS Month Wise Tracking Data
-        document.getElementById('downloadExcelButton').addEventListener('click', function () {
+        document.getElementById('monthdownloadExcelButton').addEventListener('click', function () {
             var tableBody = document.getElementById('monthWiseTableBody');
             var rows = tableBody.getElementsByTagName('tr');
             var data = [];
