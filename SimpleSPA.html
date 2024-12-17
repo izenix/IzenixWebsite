@@ -832,7 +832,7 @@
             <div class="button-input-row">
                 <button id="getNFCTrackingData">NFC Tracking Data</button>
                 <input type="text" id="searchBar" placeholder="Search by Tag ID...">
-                <button id="downloadExcel">Download as Excel</button> <!-- Added download button -->
+                <button id="downloadExcelButton">Download as Excel</button> <!-- Added download button -->
             </div>
         </div>
         <div id="message"></div>
@@ -859,7 +859,7 @@
             <h1>Get Users from Dynamics 365</h1>
             <div id="userButtons">
                 <button id="getUsers">Get Users</button>
-                <button id="downloadExcel">Download as Excel</button> <!-- Added download button -->
+                <button id="downloadExcelButton">Download as Excel</button> <!-- Added download button -->
             </div>
         </div>
         <div id="message"></div>
@@ -910,7 +910,7 @@
                 <button id="getMonthData">Get Data</button>
             </div>
             <div class="right-section">
-                <button id="downloadExcel">Download as Excel</button>
+                <button id="downloadExcelButton">Download as Excel</button>
             </div>
         </div>
         <div id="message"></div>
@@ -1005,37 +1005,7 @@
             cacheLocation: 'localStorage' // Store tokens in localStorage
         };
 
-        function exportTableToExcel() {
-            var tableBody = document.getElementById('usersTableBody');
-            var rows = tableBody.getElementsByTagName('tr');
-            var data = [];
-
-            // Add header row (optional, if needed)
-            data.push(["Tag ID", "Name", "Email", "Mobile", "NFC Counter"]);  // Modify the headers as per your table
-
-            // Loop through the rows and collect data
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName('td');
-                var rowArray = [];
-                for (var j = 0; j < cells.length; j++) {
-                    rowArray.push(cells[j].textContent);
-                }
-                data.push(rowArray);
-            }
-
-            // Create new workbook and worksheet using SheetJS
-            var wb = XLSX.utils.book_new();
-            var ws = XLSX.utils.aoa_to_sheet(data);
-
-            // Append worksheet to workbook
-            XLSX.utils.book_append_sheet(wb, ws, "User Data");
-
-            // Export workbook as Excel file
-            XLSX.writeFile(wb, 'Users_Data.xlsx');
-        }
-
-
-        document.onreadystatechange = function () {
+       document.onreadystatechange = function () {
             if (document.readyState === "complete") {
                 // Get references to the necessary DOM elements
                 message = document.getElementById("message");
@@ -1260,6 +1230,39 @@
             getUsersButton.disabled = false;
             message.textContent = '';
         }
+        // Excel download functionality using SheetJS
+        document.getElementById('downloadExcelButton').addEventListener('click', function () {
+            var tableBody = document.getElementById('usersTableBody');
+            var rows = tableBody.getElementsByTagName('tr');
+            var data = [];
+
+            // Add header row
+            data.push(["Tag ID", "Name", "Email", "Mobile", "NFC Counter"]);
+
+            // Loop through the rows and collect data
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var rowArray = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowArray.push(cells[j].textContent);
+                }
+                data.push(rowArray);
+            }
+
+            // Create new workbook and worksheet using SheetJS
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.aoa_to_sheet(data);
+
+            // Append worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, "Users Details");
+
+            // Export workbook as Excel file
+            XLSX.writeFile(wb, "user_data.xlsx");
+        });
+
+
+
+
 
         function showTagIdData(tagId) {
             debugger;
@@ -1402,10 +1405,10 @@
             var ws = XLSX.utils.aoa_to_sheet(data);
 
             // Append worksheet to workbook
-            XLSX.utils.book_append_sheet(wb, ws, "Tag Details");
+            XLSX.utils.book_append_sheet(wb, ws, "User Tracking Details");
 
             // Export workbook as Excel file
-            XLSX.writeFile(wb, "nfc_tracking_data.xlsx");
+            XLSX.writeFile(wb, "user_nfc_tracking_data.xlsx");
         });
 
         // When the user clicks on the close button, close the modal
@@ -1424,6 +1427,7 @@
         };
 
 
+
         // Existing NFC Tracking Data code goes here
         var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
@@ -1437,37 +1441,7 @@
             cacheLocation: 'localStorage',
         };
 
-        function exportTableToExcel() {
-            var tableBody = document.getElementById('nfctrackingsTableBody'); // Target table body
-            var rows = tableBody.getElementsByTagName('tr'); // Get all rows within the table body
-            var data = [];
-
-            // Add header row (adjust according to your table's header content)
-            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]); // Modify as needed
-
-            // Loop through the rows and collect data
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName('td'); // Get all cells in the row
-                var rowArray = [];
-                for (var j = 0; j < cells.length; j++) {
-                    rowArray.push(cells[j].textContent); // Push cell text content to rowArray
-                }
-                data.push(rowArray); // Push the rowArray to the data array
-            }
-
-            // Create new workbook and worksheet using SheetJS
-            var wb = XLSX.utils.book_new(); // Create a new workbook
-            var ws = XLSX.utils.aoa_to_sheet(data); // Convert data array to worksheet
-
-            // Append worksheet to workbook
-            XLSX.utils.book_append_sheet(wb, ws, "NFC Tracking Data");
-
-            // Export workbook as Excel file
-            XLSX.writeFile(wb, 'NFC_Tracking_Data.xlsx'); // Download the Excel file
-        }
-
-
-
+        
         function toggleLoggedInState(isLoggedIn) {
             if (isLoggedIn) {
                 loginButton.classList.add("hidden");
@@ -1614,6 +1588,42 @@
                 }
             }
         }
+                
+        // Excel download functionality using SheetJS NFC Tracking
+        document.getElementById('downloadExcelButton').addEventListener('click', function () {
+            var tableBody = document.getElementById('nfctrackingsTableBody');
+            var rows = tableBody.getElementsByTagName('tr');
+            var data = [];
+
+            // Add header row
+            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]);
+
+            // Loop through the rows and collect data
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var rowArray = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowArray.push(cells[j].textContent);
+                }
+                data.push(rowArray);
+            }
+
+            // Create new workbook and worksheet using SheetJS
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.aoa_to_sheet(data);
+
+            // Append worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, "NFC Tracking Details");
+
+            // Export workbook as Excel file
+            XLSX.writeFile(wb, "nfc_tracking_data.xlsx");
+        });
+
+
+
+
+
+
 
 
         // Existing Month Wise Data code goes here
@@ -1629,37 +1639,7 @@
             cacheLocation: 'localStorage',
         };
 
-        function exportTableToExcel() {
-            var tableBody = document.getElementById('monthWiseTable'); // Target the table body
-            var rows = tableBody.getElementsByTagName('tr'); // Get all rows within the table body
-            var data = [];
-
-            // Add header row (adjust according to your table's header content)
-            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]); // Modify as needed for your columns
-
-            // Loop through the rows and collect data
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName('td'); // Get all cells in the row
-                var rowArray = [];
-                for (var j = 0; j < cells.length; j++) {
-                    rowArray.push(cells[j].textContent); // Push cell text content to rowArray
-                }
-                data.push(rowArray); // Push the rowArray to the data array
-            }
-
-            // Create new workbook and worksheet using SheetJS
-            var wb = XLSX.utils.book_new(); // Create a new workbook
-            var ws = XLSX.utils.aoa_to_sheet(data); // Convert data array to worksheet
-
-            // Append worksheet to workbook
-            XLSX.utils.book_append_sheet(wb, ws, "Month Wise Data");
-
-            // Export workbook as Excel file
-            XLSX.writeFile(wb, 'Month_Wise_Data.xlsx'); // Download the Excel file
-        }
-
-
-        // Function to toggle visibility of elements based on login state
+       // Function to toggle visibility of elements based on login state
         function toggleLoggedInState(isLoggedIn) {
             if (isLoggedIn) {
                 loginButton.classList.add("hidden");
@@ -1799,6 +1779,36 @@
             message.textContent = "Month Wise data loaded successfully.";
             monthTable.classList.remove("hidden");
         }
+        // Excel download functionality using SheetJS Month Wise Tracking Data
+        document.getElementById('downloadExcelButton').addEventListener('click', function () {
+            var tableBody = document.getElementById('monthWiseTableBody');
+            var rows = tableBody.getElementsByTagName('tr');
+            var data = [];
+
+            // Add header row
+            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]);
+
+            // Loop through the rows and collect data
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var rowArray = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowArray.push(cells[j].textContent);
+                }
+                data.push(rowArray);
+            }
+
+            // Create new workbook and worksheet using SheetJS
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.aoa_to_sheet(data);
+
+            // Append worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, "Month Wise Tracking Details");
+
+            // Export workbook as Excel file
+            XLSX.writeFile(wb, "month_wise_nfc_tracking_data.xlsx");
+        });
+
 
     </script>
 </body>
