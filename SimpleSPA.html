@@ -509,12 +509,12 @@
             }
 
             .modal-content th {
-                background-color: #F5F5F5;
+                background-color: #C8A165;
                 font-weight: 600;
             }
 
             .modal-content tbody tr:hover {
-                background-color: #f0f0f0; /* Highlight row on hover */
+                background-color: #f9f3e5; /* Highlight row on hover */
             }
 
         /* Responsive Styling for Modal */
@@ -755,16 +755,19 @@
 
         /* Style the buttons */
         button {
+            color: #C8A165;
             padding: 10px 20px;
             font-size: 14px;
             cursor: pointer;
-            border: 1px solid #ccc;
+            border: 1px solid #C8A165;
             background-color: white;
+            /*border-radius: 6px;*/
         }
 
 
             button:hover {
                 background-color: #C8A165; /*#f0f0f0*/
+                color: #ffffff;
             }
 
         /* Right-side authentication buttons */
@@ -871,7 +874,7 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>NFC Counter</th>
-                    <th>-</th>
+                    <th>NFC</th>
                 </tr>
             </thead>
             <tbody id="usersTableBody"></tbody>
@@ -908,6 +911,7 @@
                 <label for="monthYearInput">Select Month and Year: </label>
                 <input type="month" id="monthYearInput" required>
                 <button id="getMonthData">Get Data</button>
+                <input type="text" id="searchBarMonth" placeholder="Search by Tag ID...">
             </div>
             <div class="right-section">
                 <button id="monthdownloadExcelButton">Download as Excel</button>
@@ -988,7 +992,7 @@
         var organizationURI = "https://izenixlearn.api.crm.dynamics.com";      // CRM URL
         var tenant = "izenixlearn.onmicrosoft.com";                            // Azure AD tenant
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
-        var pageUrl = "https://www.izenix.com/SimpleSPA.html";                 // Redirect URL
+        var pageUrl = "https://www.izenix.com/SimpleSPA.html";                // Redirect URL
 
         var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
@@ -1030,6 +1034,7 @@
                 getMonthButton = document.getElementById("getMonthData");
                 monthTable = document.getElementById("monthWiseTable");
                 monthTableBody = document.getElementById("monthWiseTableBody");
+                searchBarMonth = document.getElementById("searchBarMonth")
 
 
                 // Add event listeners for NFC login/logout
@@ -1043,6 +1048,7 @@
 
                 // Add event listener for search functionality
                 searchBar.addEventListener("input", searchByTagID);
+                searchBarMonth.addEventListener("input", searchByTagIDMonth);
 
 
                 authenticate();
@@ -1779,6 +1785,21 @@
             message.textContent = "Month Wise data loaded successfully.";
             monthTable.classList.remove("hidden");
         }
+        function searchByTagIDMonth() {
+            var filterValue = searchBarMonth.value.toUpperCase();
+            var rows = nfctrackingsTableBody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
+                if (tagIdCell) {
+                    var tagId = tagIdCell.textContent.toUpperCase();
+                    rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
+                }
+            }
+        }
+
+
+
         // Excel download functionality using SheetJS Month Wise Tracking Data
         document.getElementById('monthdownloadExcelButton').addEventListener('click', function () {
             var tableBody = document.getElementById('monthWiseTableBody');
