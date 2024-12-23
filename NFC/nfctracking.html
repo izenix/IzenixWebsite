@@ -776,6 +776,71 @@
         .hidden {
             display: none;
         }
+
+
+
+
+        /*Contact or Tag ID Selection Dropdown*/
+        /* Container for left-aligned elements */
+        /* Import Google Fonts for Roboto and Raleway */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+        /* Container for left-aligned elements */
+        .leftSectionSelect {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 10px;
+            margin-left: 20px;
+            font-family: "Roboto", sans-serif, "Raleway"; /* Font family updated */
+        }
+
+            /* Label styling */
+            .leftSectionSelect label {
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #333;
+                font-family: "Raleway", sans-serif; /* Use Raleway for labels */
+            }
+
+            /* Dropdown (select) styling with background color #C8A165 */
+            .leftSectionSelect select {
+                width: 100%; /* Full width */
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #C8A165; /* Background color */
+                color: #333;
+                font-family: "Roboto", sans-serif; /* Use Roboto for the dropdown */
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+                transition: border-color 0.2s ease-in-out;
+                appearance: none; /* Removes default dropdown arrow */
+
+            }
+
+                /* Hover and focus effect */
+                .leftSectionSelect select:hover, .leftSectionSelect select:focus {
+                    border-color: #007bff;
+                    outline: none;
+                }
+
+                /* Focus effect */
+                .leftSectionSelect select:focus {
+                    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+                }
+
+            /* Pointer cursor for dropdown */
+            .leftSectionSelect select {
+                cursor: pointer;
+            }
+
+
+
+
+
+
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -893,12 +958,14 @@
         <h1>Month-wise NFC Tracking Data</h1>
 
         <!-- Contact Selection Dropdown -->
-        <div class="left-section">
-            <label for="contactSelect">Select Contact: </label>
+        <div class="leftSectionSelect">
+            <label for="contactSelect">Select TagID: </label>
             <select id="contactSelect" onchange="onContactChange()">
-                <option value="">Select Contact</option>
+                <option value="">Select TagID</option>
                 <!-- Dynamically populated with contact data from CRM -->
+
             </select>
+
         </div>
 
         <div id="monthButtons">
@@ -906,7 +973,7 @@
                 <label for="monthYearInput">Select Month and Year: </label>
                 <input type="month" id="monthYearInput" required>
                 <button id="getMonthData" onclick="getMonthData()">Get Data</button>
-                <input type="text" id="searchBarMonth" placeholder="Search by Tag ID...">
+                <!--<input type="text" id="searchBarMonth" placeholder="Search by Tag ID...">-->
             </div>
             <div class="right-section">
                 <button id="monthdownloadExcelButton">Download as Excel</button>
@@ -1681,17 +1748,17 @@
 
         // Add the contact's tag ID when selecting a contact
         function onContactChange() {
-            var selectedContact = document.getElementById("contactSelect").value;
-            if (selectedContact) {
+            var selectedTagID = document.getElementById("contactSelect").value;
+            if (selectedTagID) {
                 // Update searchBarMonth or store the selected Tag ID
-                document.getElementById("searchBarMonth").value = selectedContact;
+                document.getElementById("searchBarMonth").value = selectedTagID;
             }
         }
 
         // Function to fetch contacts from CRM and populate the dropdown
         function populateContactDropdown(token) {
             var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,contactid,izx_tagid"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
 
@@ -1700,17 +1767,34 @@
                     var contacts = JSON.parse(this.response).value;
                     var contactSelect = document.getElementById("contactSelect");
 
+                    // Clear existing options
+                    contactSelect.innerHTML = '<option value="">Select Contact</option>';
+
                     // Populate the contact dropdown
                     contacts.forEach(function (contact) {
+                        if (contact.izx_tagid) { 
                         var option = document.createElement("option");
-                        option.value = contact.contactid;  // You can use contactid or Tag ID if it's stored in contact
-                        option.text = contact.fullname;
-                        contactSelect.appendChild(option);
+                            option.value = contact.izx_tagid;  // You can use contactid or Tag ID if it's stored in contact
+                            option.text = contact.izx_tagid;
+                            contactSelect.appendChild(option);
+                        }
                     });
                 }
             };
             req.send();
         }
+        // Call this function after you acquire the token
+        window.onload = function () {
+            // Assuming you have a function to acquire token and call populateContactDropdown
+            authContext.acquireToken(organizationURI, function (error, token) {
+                if (!error && token) {
+                    populateContactDropdown(token);
+                } else {
+                    console.error("Error acquiring token:", error);
+                }
+            });
+        };
+
 
         function getMonthData() {
             message.textContent = "Retrieving NFC tracking data...";
@@ -1811,18 +1895,18 @@
             message.textContent = "Month Wise data loaded successfully.";
             monthTable.classList.remove("hidden");
         }
-        function searchByTagIDMonth() {
-            var filterValue = searchBarMonth.value.toUpperCase();
-            var rows = monthWiseTableBody.getElementsByTagName("tr");
+        //function searchByTagIDMonth() {
+        //    var filterValue = searchBarMonth.value.toUpperCase();
+        //    var rows = monthWiseTableBody.getElementsByTagName("tr");
 
-            for (var i = 0; i < rows.length; i++) {
-                var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
-                if (tagIdCell) {
-                    var tagId = tagIdCell.textContent.toUpperCase();
-                    rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
-                }
-            }
-        }
+        //    for (var i = 0; i < rows.length; i++) {
+        //        var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
+        //        if (tagIdCell) {
+        //            var tagId = tagIdCell.textContent.toUpperCase();
+        //            rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
+        //        }
+        //    }
+        //}
 
 
 
