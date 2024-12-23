@@ -1096,7 +1096,7 @@
                 getMonthButton = document.getElementById("getMonthData");
                 monthTable = document.getElementById("monthWiseTable");
                 monthTableBody = document.getElementById("monthWiseTableBody");
-                searchBarMonth = document.getElementById("searchBarMonth")
+                /*searchBarMonth = document.getElementById("searchBarMonth")*/
 
 
                 // Add event listeners for NFC login/logout
@@ -1110,7 +1110,7 @@
 
                 // Add event listener for search functionality
                 searchBar.addEventListener("input", searchByTagID);
-                searchBarMonth.addEventListener("input", searchByTagIDMonth);
+                /*searchBarMonth.addEventListener("input", searchByTagIDMonth);*/
 
 
                 authenticate();
@@ -1783,18 +1783,7 @@
             };
             req.send();
         }
-        // Call this function after you acquire the token
-        window.onload = function () {
-            // Assuming you have a function to acquire token and call populateContactDropdown
-            authContext.acquireToken(organizationURI, function (error, token) {
-                if (!error && token) {
-                    populateContactDropdown(token);
-                } else {
-                    console.error("Error acquiring token:", error);
-                }
-            });
-        };
-
+ 
 
         function getMonthData() {
             message.textContent = "Retrieving NFC tracking data...";
@@ -1828,19 +1817,18 @@
 
                 req.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
-                       
-                            var monthdata = JSON.parse(this.response).value;
-                            renderMonthData(monthdata);
-                        } else {
-                            errorMessage.textContent = JSON.parse(this.response).error.message;
-                        }
-                    
+                        var monthdata = JSON.parse(this.response).value;
+                        renderMonthData(monthdata);
+                    } else {
+                        errorMessage.textContent = JSON.parse(this.response).error.message;
+                    }
                 };
                 req.send();
             } else {
                 errorMessage.textContent = "Please select a contact and month.";
             }
         }
+        
 
         // Helper function to format date (YYYY-MM-DD)
         function formatDate(dateString) {
