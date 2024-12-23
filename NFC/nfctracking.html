@@ -891,11 +891,21 @@
     <!--Month Wise Data Table-->
     <div class="container hidden" id="monthSection">
         <h1>Month-wise NFC Tracking Data</h1>
+
+        <!-- Contact Selection Dropdown -->
+        <div class="left-section">
+            <label for="contactSelect">Select Contact: </label>
+            <select id="contactSelect" onchange="onContactChange()">
+                <option value="">Select Contact</option>
+                <!-- Dynamically populated with contact data from CRM -->
+            </select>
+        </div>
+
         <div id="monthButtons">
             <div class="left-section">
                 <label for="monthYearInput">Select Month and Year: </label>
                 <input type="month" id="monthYearInput" required>
-                <button id="getMonthData">Get Data</button>
+                <button id="getMonthData" onclick="getMonthData()">Get Data</button>
                 <input type="text" id="searchBarMonth" placeholder="Search by Tag ID...">
             </div>
             <div class="right-section">
@@ -1669,6 +1679,39 @@
         }
 
 
+        // Add the contact's tag ID when selecting a contact
+        function onContactChange() {
+            var selectedContact = document.getElementById("contactSelect").value;
+            if (selectedContact) {
+                // Update searchBarMonth or store the selected Tag ID
+                document.getElementById("searchBarMonth").value = selectedContact;
+            }
+        }
+
+        // Function to fetch contacts from CRM and populate the dropdown
+        function populateContactDropdown(token) {
+            var req = new XMLHttpRequest();
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,contactid,izx_tagid"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
+            req.setRequestHeader("Authorization", "Bearer " + token);
+            req.setRequestHeader("Accept", "application/json");
+
+            req.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    var contacts = JSON.parse(this.response).value;
+                    var contactSelect = document.getElementById("contactSelect");
+
+                    // Populate the contact dropdown
+                    contacts.forEach(function (contact) {
+                        var option = document.createElement("option");
+                        option.value = contact.contactid;  // You can use contactid or Tag ID if it's stored in contact
+                        option.text = contact.fullname;
+                        contactSelect.appendChild(option);
+                    });
+                }
+            };
+            req.send();
+        }
+
         function getMonthData() {
             message.textContent = "Retrieving NFC tracking data...";
             authContext.acquireToken(organizationURI, retrieveMonthData);
@@ -1681,8 +1724,9 @@
             }
 
             var monthYear = document.getElementById("monthYearInput").value;
+            var selectedTagID = document.getElementById("contactSelect").value;
 
-            if (monthYear) {
+            if (monthYear && selectedTagID) {
                 // Split the value into year and month
                 var [year, month] = monthYear.split('-');
 
@@ -1709,6 +1753,8 @@
                     }
                 };
                 req.send();
+            } else {
+                errorMessage.textContent = "Please select a contact and month.";
             }
         }
 
