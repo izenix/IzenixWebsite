@@ -1126,7 +1126,7 @@
                     // Show the NFC tracking data button and search bar by removing "none" class
                     getNFCTrackingDataButton.style.display = "block";
                     searchBar.style.display = "block";
-                    searchBarMonth.style.display = "block";
+                    //searchBarMonth.style.display = "block";
 
                     getMonthButton.style.display = "block";
 
@@ -1150,7 +1150,7 @@
                     // Hide the NFC tracking data button, search bar, and table by adding "none" class
                     getNFCTrackingDataButton.style.display = "none";
                     searchBar.style.display = "none";
-                    searchBarMonth.style.display = "none";
+                   /* searchBarMonth.style.display = "none";*/
                     getMonthButton.style.display = "none";
                 }
             }
@@ -1496,7 +1496,7 @@
 
 
         // Existing NFC Tracking Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1688,7 +1688,7 @@
 
 
         // Existing Month Wise Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1708,14 +1708,14 @@
                 getNFCTrackingDataButton.style.display = "block";
                 getMonthButton.style.display = "block"; // Show "Get Month Data" button
                 searchBar.style.display = "block";
-                searchBarMonth.style.display = "block";
+                /*searchBarMonth.style.display = "block";*/
             } else {
                 loginButton.classList.remove("hidden");
                 logoutButton.classList.add("hidden");
                 getNFCTrackingDataButton.style.display = "none";
                 getMonthButton.style.display = "none"; // Hide "Get Month Data" button
                 searchBar.style.display = "none";
-                searchBarMonth.style.display = "none";
+                /*searchBarMonth.style.display = "none";*/
                 nfctrackingsTable.classList.add("hidden");
                 monthTable.classList.add("hidden");
             }
@@ -1750,8 +1750,8 @@
         function onContactChange() {
             var selectedTagID = document.getElementById("contactSelect").value;
             if (selectedTagID) {
-                // Update searchBarMonth or store the selected Tag ID
-                document.getElementById("searchBarMonth").value = selectedTagID;
+                // Update monthYearInput or store the selected Tag ID
+                document.getElementById("monthYearInput").value = selectedTagID;
             }
         }
 
