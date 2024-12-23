@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC Tracking and Users</title>
 
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap');
+    </style>
+
     <style>
         /* Header Style */
         /* General Reset */
@@ -781,66 +786,56 @@
 
 
         /*Contact or Tag ID Selection Dropdown*/
-        /* Container for left-aligned elements */
-        /* Import Google Fonts for Roboto and Raleway */
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
-        /* Container for left-aligned elements */
+
+
         .leftSectionSelect {
-            display: flex;
-            flex-direction: row;
+            /* Vertically center items */
+            padding-bottom: 20px;
+            /*margin-left: 20px;*/
+            font-family: "Roboto", sans-serif, "Raleway"; /* Font family */
+            position: relative;
+            display: block;
+            flex-direction: row; /* Align elements in a row (side by side) */
             align-items: flex-start;
-            padding: 10px;
-            margin-left: 20px;
-            font-family: "Roboto", sans-serif, "Raleway"; /* Font family updated */
         }
 
-            /* Label styling */
             .leftSectionSelect label {
+                margin-right: 15px; /* Add spacing between label and select */
                 font-size: 16px;
                 font-weight: bold;
-                margin-bottom: 10px;
                 color: #333;
-                font-family: "Raleway", sans-serif; /* Use Raleway for labels */
             }
 
-            /* Dropdown (select) styling with background color #C8A165 */
             .leftSectionSelect select {
-                width: 100%; /* Full width */
                 padding: 10px;
                 font-size: 16px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
-                background-color: #C8A165; /* Background color */
+                background-color: white; /* Background color */
                 color: #333;
-                font-family: "Roboto", sans-serif; /* Use Roboto for the dropdown */
                 box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
                 transition: border-color 0.2s ease-in-out;
-                appearance: none; /* Removes default dropdown arrow */
-
+                cursor: pointer;
+                appearance: none; /* Removes default browser styling of the dropdown */
+                background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4z"/></svg>');
+                background-repeat: no-repeat;
+                background-position: right 10px center;
+                background-size: 12px;
+                width: 200px; /* Optional: set a width for the select dropdown */
             }
 
-                /* Hover and focus effect */
-                .leftSectionSelect select:hover, .leftSectionSelect select:focus {
-                    border-color: #007bff;
+
+
+                .leftSectionSelect select:hover,
+                .leftSectionSelect select:focus {
+                    border-color: #C8A165; /*#007bff*/
                     outline: none;
                 }
 
-                /* Focus effect */
-                .leftSectionSelect select:focus {
-                    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-                }
-
-            /* Pointer cursor for dropdown */
-            .leftSectionSelect select {
-                cursor: pointer;
-            }
-
-
-
-
-
-
+        .left {
+            align-items: flex-start
+        }
     </style>
 
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
@@ -959,13 +954,14 @@
 
         <!-- Contact Selection Dropdown -->
         <div class="leftSectionSelect">
-            <label for="contactSelect">Select TagID: </label>
-            <select id="contactSelect" onchange="onContactChange()">
-                <option value="">Select TagID</option>
-                <!-- Dynamically populated with contact data from CRM -->
+            <div>
+                <label for="contactSelect">Select TagID: </label>
+                <select id="contactSelect" onchange="onContactChange()">
+                    <option value="">Select TagID</option>
+                    <!-- Dynamically populated with contact data from CRM -->
 
-            </select>
-
+                </select>
+            </div>
         </div>
 
         <div id="monthButtons">
@@ -984,12 +980,16 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Tag ID</th>
+                    <th>Contact</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+
+                    <!--<th>Tag ID</th>
                     <th>Timestamp</th>
                     <th>Time In</th>
                     <th>Time Out</th>
                     <th>Duration</th>
-                    <th>In/Out</th>
+                    <th>In/Out</th>-->
                 </tr>
             </thead>
             <tbody id="monthWiseTableBody">
@@ -1688,7 +1688,7 @@
 
 
         // Existing Month Wise Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, contactSelect, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1774,7 +1774,7 @@
                     contacts.forEach(function (contact) {
                         if (contact.izx_tagid) { 
                         var option = document.createElement("option");
-                            option.value = contact.izx_tagid;  // You can use contactid or Tag ID if it's stored in contact
+                            option.value = contact.izx_tagid;  
                             option.text = contact.izx_tagid;
                             contactSelect.appendChild(option);
                         }
@@ -1821,20 +1821,20 @@
 
                 var req = new XMLHttpRequest();
 
-                req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out&$filter=izx_timestamp ge ${startDate} and izx_timestamp lt ${endDate}`), true);
+                req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendance?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${startDate} and izx_date lt ${endDate}`), true);
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 
                 req.onreadystatechange = function () {
-                    if (this.readyState === 4) {
-                        if (this.status === 200) {
+                    if (this.readyState === 4 && this.status === 200) {
+                       
                             var monthdata = JSON.parse(this.response).value;
                             renderMonthData(monthdata);
                         } else {
                             errorMessage.textContent = JSON.parse(this.response).error.message;
                         }
-                    }
+                    
                 };
                 req.send();
             } else {
@@ -1862,32 +1862,23 @@
                 var nameCell = document.createElement("td");
                 nameCell.textContent = tracking.izx_name;
 
+                var contactCell = document.createElement("td");
+                contactCell.textContent = tracking.izx_contact;
+
                 var tagIdCell = document.createElement("td");
                 tagIdCell.textContent = tracking.izx_tagid;
-                tagIdCell.classList.add("tag-id");
 
-                var timestampCell = document.createElement("td");
-                timestampCell.textContent = formatDate(tracking.izx_timestamp);
-
-                var timeInCell = document.createElement("td");
-                timeInCell.textContent = formatTime(tracking.izx_timein);
-
-                var timeOutCell = document.createElement("td");
-                timeOutCell.textContent = formatTime(tracking.izx_timeout);
+                var dateCell = document.createElement("td");
+                dateCell.textContent = formatDate(tracking.izx_date);
 
                 var durationCell = document.createElement("td");
                 durationCell.textContent = tracking.izx_duration;
 
-                var inoutCell = document.createElement("td");
-                inoutCell.textContent = (tracking.izx_in_out === 1) ? "In" : (tracking.izx_in_out === 2 ? "Out" : "Unknown");
-
                 row.appendChild(nameCell);
+                row.appendChild(contactCell);
                 row.appendChild(tagIdCell);
-                row.appendChild(timestampCell);
-                row.appendChild(timeInCell);
-                row.appendChild(timeOutCell);
+                row.appendChild(dateCell);
                 row.appendChild(durationCell);
-                row.appendChild(inoutCell);
 
                 monthWiseTableBody.appendChild(row);
             });
