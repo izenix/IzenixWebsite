@@ -976,6 +976,7 @@
             </div>
         </div>
         <div id="message"></div>
+        <div id="errorMessage" style="color:red;"></div>
         <table id="monthWiseTable">
             <thead>
                 <tr>
@@ -985,11 +986,11 @@
                     <th>Duration</th>
 
                     <!--<th>Tag ID</th>
-                    <th>Timestamp</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Duration</th>
-                    <th>In/Out</th>-->
+                <th>Timestamp</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Duration</th>
+                <th>In/Out</th>-->
                 </tr>
             </thead>
             <tbody id="monthWiseTableBody">
@@ -1776,7 +1777,7 @@
                     // Populate the contact dropdown
                     contacts.forEach(function (contact) {
                         if (contact.izx_tagid) { 
-                        var option = document.createElement("option");
+                            var option = document.createElement("option");
                             option.value = contact.izx_tagid;  
                             option.text = contact.izx_tagid;
                             contactSelect.appendChild(option);
@@ -1789,11 +1790,20 @@
  
 
         function getMonthData() {
+            var message = document.getElementById("message");
+            var errorMessage = document.getElementById("errorMessage");
+
             message.textContent = "Retrieving NFC tracking data...";
+            errorMessage.textContent = "";
+
             authContext.acquireToken(organizationURI, retrieveMonthData);
         }
 
         function retrieveMonthData(error, token) {
+            var errorMessage = document.getElementById("errorMessage");
+            var message = document.getElementById("message");
+
+
             if (error || !token) {
                 errorMessage.textContent = 'ADAL error occurred: ' + error;
                 return;
@@ -1848,7 +1858,12 @@
         }
 
         function renderMonthData(monthdata) {
-            monthWiseTableBody.innerHTML = "";
+            var monthWiseTableBody = document.getElementById("monthWiseTableBody");
+            var message = document.getElementById("message");
+            var monthTable = document.getElementById("monthWiseTable");
+
+            monthWiseTableBody.innerHTML = "";                 // Clear old data
+
             monthdata.forEach(function (tracking) {
                 var row = document.createElement("tr");
 
