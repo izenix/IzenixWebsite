@@ -1057,7 +1057,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
         var pageUrl = "https://izenix.com/NFC/nfctracking.html";                // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, onContactChange, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -1124,7 +1124,7 @@
                     logoutButton.style.display = "block";
 
                     // Show the Get Users button
-                    getUsersButton.style.display = "block";
+                    getUsersButton.style.display = "block";                    
 
                     // Show the NFC tracking data button and search bar by removing "none" class
                     getNFCTrackingDataButton.style.display = "block";
@@ -1132,6 +1132,7 @@
                     //searchBarMonth.style.display = "block";
 
                     getMonthButton.style.display = "block";
+                    onContactChange.style.disabled = "block";
 
                     // Display greeting message to the logged-in user
                     var greetingContainer = document.getElementById("greetingMessage");
@@ -1155,6 +1156,7 @@
                     searchBar.style.display = "none";
                    /* searchBarMonth.style.display = "none";*/
                     getMonthButton.style.display = "none";
+                    onContactChange.style.disabled = "none";
                 }
             }
         };
@@ -1499,7 +1501,7 @@
 
 
         // Existing NFC Tracking Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, onContactChange, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1691,7 +1693,7 @@
 
 
         // Existing Month Wise Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, onContactChange, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1711,6 +1713,7 @@
                 getNFCTrackingDataButton.style.display = "block";
                 getMonthButton.style.display = "block"; // Show "Get Month Data" button
                 searchBar.style.display = "block";
+                onContactChange,.style.display = "block";
                 /*searchBarMonth.style.display = "block";*/
             } else {
                 loginButton.classList.remove("hidden");
@@ -1721,6 +1724,7 @@
                 /*searchBarMonth.style.display = "none";*/
                 nfctrackingsTable.classList.add("hidden");
                 monthTable.classList.add("hidden");
+                onContactChange,.classList.add("hidden");
             }
         }
 
