@@ -1244,10 +1244,10 @@
                         errorMessage.textContent = error.message;
                     }
                 }
-            };
-            req.send();
-        }
-
+                };
+                req.send();
+            }
+        
         // Function to render users into the table
         function renderUsers(users) {
             usersTableBody.innerHTML = ''; // Clear previous results
@@ -1758,9 +1758,12 @@
         // Function to fetch contacts from CRM and populate the dropdown
         function populateContactDropdown(token) {
             var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
+            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
             req.setRequestHeader("Authorization", "Bearer " + token);
             req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
 
             req.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
@@ -1768,7 +1771,7 @@
                     var contactSelect = document.getElementById("contactSelect");
 
                     // Clear existing options
-                    contactSelect.innerHTML = '<option value="">Select Contact</option>';
+                    contactSelect.innerHTML = '<option value="">Select TagID</option>';
 
                     // Populate the contact dropdown
                     contacts.forEach(function (contact) {
@@ -1814,6 +1817,8 @@
                 req.setRequestHeader("Authorization", "Bearer " + token);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                req.setRequestHeader("OData-MaxVersion", "4.0");
+                req.setRequestHeader("OData-Version", "4.0");
 
                 req.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
@@ -1874,20 +1879,6 @@
             message.textContent = "Month Wise data loaded successfully.";
             monthTable.classList.remove("hidden");
         }
-        //function searchByTagIDMonth() {
-        //    var filterValue = searchBarMonth.value.toUpperCase();
-        //    var rows = monthWiseTableBody.getElementsByTagName("tr");
-
-        //    for (var i = 0; i < rows.length; i++) {
-        //        var tagIdCell = rows[i].getElementsByClassName("tag-id")[0];
-        //        if (tagIdCell) {
-        //            var tagId = tagIdCell.textContent.toUpperCase();
-        //            rows[i].style.display = tagId.indexOf(filterValue) > -1 ? "" : "none";
-        //        }
-        //    }
-        //}
-
-
 
         // Excel download functionality using SheetJS Month Wise Tracking Data
         document.getElementById('monthdownloadExcelButton').addEventListener('click', function () {
