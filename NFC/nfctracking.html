@@ -1226,7 +1226,7 @@
             const url = "https://prod-75.westus.logic.azure.com/workflows/e836ee072bf44696ae8b1d1bff733f2e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bqy3dANGhz_PGKGcdB6Edr6acWE6KFMLGhoI-qzl7bM";
             let responseData;
             var token;
-            fetch(url, {
+            return fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -1239,47 +1239,52 @@
                     return response.json(); // Parse the response as JSON
                 })
                 .then(data => {
-                    // Store the response in a variable
-                    responseData = data;
-                   /* return token = data.token;*/
-                    token = data.token;
-                    console.log(token)
+                    const token = data.token;
+                    console.log("Token retrieved:", token);
                     return token;
+
+                    // Store the response in a variable
+                   // responseData = data;
+                   ///* return token = data.token;*/
+                   // token = data.token;
+                   // console.log(token)
+                   // return token;
 
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
-                    document.getElementById("responseContainer").innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+                    return null;
+                    /*document.getElementById("responseContainer").innerHTML = `<p>Error fetching data: ${error.message}</p>`;*/
                 });
 
         }
 
         // Function to retrieve users
-        function retrieveUsers(token) {
+        //function retrieveUsers(token) {
 
-            var token1 = getTokenFromPowerAutomate();
+        //    var token1 = getTokenFromPowerAutomate();
 
 
-            if (error || !token) {
-                console.error("Token error:", error);
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
+        //    if (error || !token) {
+        //        console.error("Token error:", error);
+        //        errorMessage.textContent = 'ADAL error occurred: ' + error;
+        //        return;
+        //    }
 
         /* Function to retrieve users after obtaining the token*/
-        //async function retrieveUsers() {
-        //    try {
-        //        const token = await getTokenFromPowerAutomate();  // Wait for the token asynchronously
+        async function retrieveUsers() {
+            try {
+                const token1 = await getTokenFromPowerAutomate();  // Wait for the token asynchronously
 
-        //        if (!token) {
-        //            console.error("Token error: null");
-        //            errorMessage.textContent = "Token retrieval failed!";
-        //            return;
-        //        }
+                if (!token1) {
+                    console.error("Token error: null");
+                    errorMessage.textContent = "Token retrieval failed!";
+                    return;
+                }
 
                 var req = new XMLHttpRequest();
                 req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid,izx_nfccounter&$filter=izx_tagid ne null"), true);
-                req.setRequestHeader("Authorization", "Bearer " + token);
+                req.setRequestHeader("Authorization", "Bearer " + token1);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
                 req.setRequestHeader("OData-MaxVersion", "4.0");
@@ -1299,6 +1304,9 @@
                     }
                 };
                 req.send();
+            } catch (error) {
+                console.error("Error in retrieveUsers:", error);
+                errorMessage.textContent = "An unexpected error occurred!";
             }
             
         
