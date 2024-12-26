@@ -1801,10 +1801,17 @@
             }
         }
 
-        token = getTokenFromPowerAutomate();
-
+        
         // Function to fetch contacts from CRM and populate the dropdown
-        function populateContactDropdown(token) {
+        async function populateContactDropdown() {
+            try {
+                // Get the token from Power Automate asynchronously
+                const token = await getTokenFromPowerAutomate();
+
+                if (!token) {
+                    console.error("Token not available.");
+                    return; // If no token, stop execution
+            }
             var req = new XMLHttpRequest();
             req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
             req.setRequestHeader("Authorization", "Bearer " + token);
@@ -1833,8 +1840,13 @@
                 }
             };
             req.send();
+            }
+            catch (error) {
+                console.error("Error retrieving contacts:", error);
+            }
         }
  
+        populateContactDropdown();
 
         function getMonthData() {
             var message = document.getElementById("message");
