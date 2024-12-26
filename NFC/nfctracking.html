@@ -1653,41 +1653,44 @@
                 // Retrieve the token from Power Automate
                 const token1 = await getTokenFromPowerAutomate();
 
+                var errorMessage = document.getElementById("errorMessage");
+
                 if (!token1) {
                     console.error("Token error: null or undefined");
                     errorMessage.textContent = 'Token retrieval failed!';
                     return;
                 }
 
-
-                //function retrieveNFCTrackingData(error, token) {
-
-                //    /*token = getTokenFromPowerAutomate();*/
-
-                //    if (error || !token) {
-                //        errorMessage.textContent = 'ADAL error occurred: ' + error;
-                //        return;
-                //    }
-
                 var req = new XMLHttpRequest();
                 req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out"), true);
                 req.setRequestHeader("Authorization", "Bearer " + token1);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                req.setRequestHeader("OData-MaxVersion", "4.0");
+                req.setRequestHeader("OData-Version", "4.0");
 
                 req.onreadystatechange = function () {
                     if (this.readyState === 4) {
                         if (this.status === 200) {
+                            // Parse the NFC tracking data
                             var nfctrackings = JSON.parse(this.response).value;
                             renderNFCTrackingData(nfctrackings);
-                        } else {
-                            errorMessage.textContent = JSON.parse(this.response).error.message;
+                        } else if (this.status >= 400) {
+                            // Handle error response from the server
+                            var errorResponse = JSON.parse(this.response);
+                            errorMessage.textContent = errorResponse.error.message;
+                            console.error("Error fetching NFC tracking data:", errorResponse);
                         }
                     }
                 };
                 req.send();
+            } catch (error) {
+                console.error("Error in retrieveNFCTrackingData:", error);
+                var errorMessage = document.getElementById("errorMessage");
+                errorMessage.textContent = 'An unexpected error occurred while retrieving NFC tracking data.';
             }
         }
+
 
         // Helper function to format date (YYYY-MM-DD)
         function formatDate(dateString) {
