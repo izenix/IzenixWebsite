@@ -1887,6 +1887,7 @@
                 req.onreadystatechange = function () {
                     if (this.readyState === 4) {
                         if (this.status === 200) {
+                            debugger;
                             var contacts = JSON.parse(this.response).value;
                             var contactSelect = document.getElementById("contactSelect");
 
