@@ -1607,7 +1607,7 @@
 
         function retrieveNFCTrackingData(error, token) {
 
-            token = getTokenFromPowerAutomate();
+            /*token = getTokenFromPowerAutomate();*/
 
             if (error || !token) {
                 errorMessage.textContent = 'ADAL error occurred: ' + error;
@@ -1803,15 +1803,10 @@
 
         
         // Function to fetch contacts from CRM and populate the dropdown
-        async function populateContactDropdown() {
-            try {
-                // Get the token from Power Automate asynchronously
-                const token = await getTokenFromPowerAutomate();
+        function populateContactDropdown(token) {
 
-                if (!token) {
-                    console.error("Token not available.");
-                    return; // If no token, stop execution
-            }
+            /*token = getTokenFromPowerAutomate();*/
+
             var req = new XMLHttpRequest();
             req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
             req.setRequestHeader("Authorization", "Bearer " + token);
@@ -1830,9 +1825,9 @@
 
                     // Populate the contact dropdown
                     contacts.forEach(function (contact) {
-                        if (contact.izx_tagid) { 
+                        if (contact.izx_tagid) {
                             var option = document.createElement("option");
-                            option.value = contact.izx_tagid;  
+                            option.value = contact.izx_tagid;
                             option.text = contact.izx_tagid;
                             contactSelect.appendChild(option);
                         }
@@ -1840,14 +1835,9 @@
                 }
             };
             req.send();
-            }
-            catch (error) {
-                console.error("Error retrieving contacts:", error);
-            }
-        }
- 
-        populateContactDropdown();
-
+        }     
+        
+        
         function getMonthData() {
             var message = document.getElementById("message");
             var errorMessage = document.getElementById("errorMessage");
@@ -1862,7 +1852,7 @@
             var errorMessage = document.getElementById("errorMessage");
             var message = document.getElementById("message");
 
-            token = getTokenFromPowerAutomate();
+            /*token = getTokenFromPowerAutomate();*/
 
             if (error || !token) {
                 errorMessage.textContent = 'ADAL error occurred: ' + error;
