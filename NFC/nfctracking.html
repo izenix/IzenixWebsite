@@ -1255,9 +1255,10 @@
         }
 
         // Function to retrieve users
-        function retrieveUsers(error, token) {
+        function retrieveUsers() {
 
-            token = getTokenFromPowerAutomate();
+            token = getTokenFromPowerAutomate(token);
+
 
             if (error || !token) {
                 console.error("Token error:", error);
@@ -1386,9 +1387,9 @@
 
         function showTagIdData(tagId) {
             debugger;
-            authContext.acquireToken(organizationURI, function (error, token) {
+            authContext.acquireToken(organizationURI, function () {
 
-                token = getTokenFromPowerAutomate();
+                token = getTokenFromPowerAutomate(token);
 
                 if (error || !token) {
                     console.error("Token error:", error);
