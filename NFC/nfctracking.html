@@ -1394,17 +1394,28 @@
         });
 
 
-        function showTagIdData(tagId) {
-            debugger;
-            authContext.acquireToken(organizationURI, function (token) {
+        async function showTagIdData(tagId) {
+            try {
+                // Retrieve the token from Power Automate
+                const token1 = await getTokenFromPowerAutomate();
 
-                token = getTokenFromPowerAutomate();
-
-                if (error || !token) {
-                    console.error("Token error:", error);
-                    errorMessage.textContent = 'ADAL error occurred: ' + error;
+                if (!token1) {
+                    console.error("Token error: null or undefined");
+                    errorMessage.textContent = 'Token retrieval failed!';
                     return;
                 }
+
+                //function showTagIdData(tagId) {
+                //    debugger;
+                //    authContext.acquireToken(organizationURI, function (token) {
+
+                //        token = getTokenFromPowerAutomate();
+
+                //        if (error || !token) {
+                //            console.error("Token error:", error);
+                //            errorMessage.textContent = 'ADAL error occurred: ' + error;
+                //            return;
+                //        }
 
                 var req = new XMLHttpRequest();
                 // Ensure proper concatenation of $select and $filter
@@ -1412,7 +1423,7 @@
                 var selectQuery = `$select=izx_tagid,izx_timein,izx_timeout,izx_duration,izx_in_out,izx_timestamp`;
                 var apiUrl = encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?" + selectQuery + "&" + filterQuery);
                 req.open("GET", apiUrl, true);
-                req.setRequestHeader("Authorization", "Bearer " + token);
+                req.setRequestHeader("Authorization", "Bearer " + token1);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
                 req.setRequestHeader("OData-MaxVersion", "4.0");
@@ -1510,8 +1521,11 @@
                     }
                 };
                 req.send();
-            });
+            } catch (error) {
+                console.error("Error fetching tag data:", error);
+                errorMessage.textContent = "An unexpected error occurred!";
             }
+        }
    
 
 
@@ -1559,6 +1573,8 @@
                 modal.style.display = "none";
             }
         };
+
+
 
 
 
@@ -1631,32 +1647,46 @@
             authContext.acquireToken(organizationURI, retrieveNFCTrackingData);
         }
 
-        function retrieveNFCTrackingData(error, token) {
 
-            /*token = getTokenFromPowerAutomate();*/
+        async function retrieveNFCTrackingData() {
+            try {
+                // Retrieve the token from Power Automate
+                const token1 = await getTokenFromPowerAutomate();
 
-            if (error || !token) {
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
-
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out"), true);
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        var nfctrackings = JSON.parse(this.response).value;
-                        renderNFCTrackingData(nfctrackings);
-                    } else {
-                        errorMessage.textContent = JSON.parse(this.response).error.message;
-                    }
+                if (!token1) {
+                    console.error("Token error: null or undefined");
+                    errorMessage.textContent = 'Token retrieval failed!';
+                    return;
                 }
-            };
-            req.send();
+
+
+                //function retrieveNFCTrackingData(error, token) {
+
+                //    /*token = getTokenFromPowerAutomate();*/
+
+                //    if (error || !token) {
+                //        errorMessage.textContent = 'ADAL error occurred: ' + error;
+                //        return;
+                //    }
+
+                var req = new XMLHttpRequest();
+                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/izx_nfctrackings?$select=izx_name,izx_tagid,izx_status,izx_timestamp,izx_timein,izx_timeout,izx_duration,izx_in_out"), true);
+                req.setRequestHeader("Authorization", "Bearer " + token1);
+                req.setRequestHeader("Accept", "application/json");
+                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var nfctrackings = JSON.parse(this.response).value;
+                            renderNFCTrackingData(nfctrackings);
+                        } else {
+                            errorMessage.textContent = JSON.parse(this.response).error.message;
+                        }
+                    }
+                };
+                req.send();
+            }
         }
 
         // Helper function to format date (YYYY-MM-DD)
@@ -1827,41 +1857,71 @@
             }
         }
 
-        
-        // Function to fetch contacts from CRM and populate the dropdown
-        function populateContactDropdown(token) {
 
-            /*token = getTokenFromPowerAutomate();*/
 
-            var req = new XMLHttpRequest();
-            req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);    //contacts?$select=fullname,emailaddress1,mobilephone,izx_tagid
-            req.setRequestHeader("Authorization", "Bearer " + token);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
 
-            req.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    var contacts = JSON.parse(this.response).value;
-                    var contactSelect = document.getElementById("contactSelect");
+        async function populateContactDropdown() {
+            try {
+                // Retrieve the token from Power Automate
+                const token1 = await getTokenFromPowerAutomate();
 
-                    // Clear existing options
-                    contactSelect.innerHTML = '<option value="">Select TagID</option>';
+                var errorMessage = document.getElementById("errorMessage");
 
-                    // Populate the contact dropdown
-                    contacts.forEach(function (contact) {
-                        if (contact.izx_tagid) {
-                            var option = document.createElement("option");
-                            option.value = contact.izx_tagid;
-                            option.text = contact.izx_tagid;
-                            contactSelect.appendChild(option);
-                        }
-                    });
+                if (!token1) {
+                    console.error("Token error: null or undefined");
+                    errorMessage.textContent = 'Token retrieval failed!';
+                    return;
                 }
-            };
-            req.send();
-        }     
+
+                var req = new XMLHttpRequest();
+                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);
+                req.setRequestHeader("Authorization", "Bearer " + token1);
+                req.setRequestHeader("Accept", "application/json");
+                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                req.setRequestHeader("OData-MaxVersion", "4.0");
+                req.setRequestHeader("OData-Version", "4.0");
+
+                req.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.status === 200) {
+                            var contacts = JSON.parse(this.response).value;
+                            var contactSelect = document.getElementById("contactSelect");
+
+                            // Clear existing options in the dropdown
+                            contactSelect.innerHTML = '<option value="">Select TagID</option>';
+
+                            // Check if contacts are returned and have TagIDs
+                            if (contacts.length > 0) {
+                                contacts.forEach(function (contact) {
+                                    if (contact.izx_tagid) {
+                                        var option = document.createElement("option");
+                                        option.value = contact.izx_tagid;
+                                        option.text = contact.izx_tagid;
+                                        contactSelect.appendChild(option);
+                                    }
+                                });
+                            } else {
+                                // If no TagIDs were returned, display a default message
+                                var option = document.createElement("option");
+                                option.value = "";
+                                option.text = "No TagIDs found";
+                                contactSelect.appendChild(option);
+                            }
+                        } else {
+                            // Handle error responses
+                            errorMessage.textContent = `Error retrieving TagIDs: ${this.statusText}`;
+                            console.error("Error:", this.status, this.statusText);
+                        }
+                    }
+                };
+                req.send();
+            } catch (error) {
+                console.error("Error in populateContactDropdown:", error);
+                var errorMessage = document.getElementById("errorMessage");
+                errorMessage.textContent = 'An error occurred while fetching contacts.';
+            }
+        }
+
         
         
         function getMonthData() {
@@ -1874,51 +1934,72 @@
             authContext.acquireToken(organizationURI, retrieveMonthData);
         }
 
-        function retrieveMonthData(error, token) {
-            var errorMessage = document.getElementById("errorMessage");
-            var message = document.getElementById("message");
 
-            /*token = getTokenFromPowerAutomate();*/
+        
+        async function retrieveMonthData() {
+            try {
+                // Retrieve the token from Power Automate
+                const token1 = await getTokenFromPowerAutomate();
 
-            if (error || !token) {
-                errorMessage.textContent = 'ADAL error occurred: ' + error;
-                return;
-            }
+                var errorMessage = document.getElementById("errorMessage");
+                var message = document.getElementById("message");
 
-            var monthYear = document.getElementById("monthYearInput").value;
-            var selectedTagID = document.getElementById("contactSelect").value;
+                if (!token1) {
+                    console.error("Token error: null or undefined");
+                    errorMessage.textContent = 'Token retrieval failed!';
+                    return;
+                }
 
-            if (monthYear && selectedTagID) {
-                // Split the value into year and month
-                var [year, month] = monthYear.split('-');
+                //function retrieveMonthData(error, token) {
+                //    var errorMessage = document.getElementById("errorMessage");
+                //    var message = document.getElementById("message");
 
-                // Calculate the start and end of the selected month
-                var startDate = new Date(year, month - 1, 1).toISOString(); // First day of the month
-                var endDate = new Date(year, month, 1).toISOString(); // First day of the next month
+                //    /*token = getTokenFromPowerAutomate();*/
+
+                //    if (error || !token) {
+                //        errorMessage.textContent = 'ADAL error occurred: ' + error;
+                //        return;
+                //    }
+
+                var monthYear = document.getElementById("monthYearInput").value;
+                var selectedTagID = document.getElementById("contactSelect").value;
+
+                if (monthYear && selectedTagID) {
+                    // Split the value into year and month
+                    var [year, month] = monthYear.split('-');
+
+                    // Calculate the start and end of the selected month
+                    var startDate = new Date(year, month - 1, 1).toISOString(); // First day of the month
+                    var endDate = new Date(year, month, 1).toISOString(); // First day of the next month
 
 
-                var req = new XMLHttpRequest();
+                    var req = new XMLHttpRequest();
 
-                req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendance?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${startDate} and izx_date lt ${endDate}`), true);
-                req.setRequestHeader("Authorization", "Bearer " + token);
-                req.setRequestHeader("Accept", "application/json");
-                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                req.setRequestHeader("OData-MaxVersion", "4.0");
-                req.setRequestHeader("OData-Version", "4.0");
+                    req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendance?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${startDate} and izx_date lt ${endDate}`), true);
+                    req.setRequestHeader("Authorization", "Bearer " + token1);
+                    req.setRequestHeader("Accept", "application/json");
+                    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                    req.setRequestHeader("OData-MaxVersion", "4.0");
+                    req.setRequestHeader("OData-Version", "4.0");
 
-                req.onreadystatechange = function () {
-                    if (this.readyState === 4 && this.status === 200) {
-                        var monthdata = JSON.parse(this.response).value;
-                        renderMonthData(monthdata);
-                    } else {
-                        errorMessage.textContent = JSON.parse(this.response).error.message;
-                    }
-                };
-                req.send();
-            } else {
-                errorMessage.textContent = "Please select a contact and month.";
+                    req.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            var monthdata = JSON.parse(this.response).value;
+                            renderMonthData(monthdata);
+                        } else {
+                            errorMessage.textContent = JSON.parse(this.response).error.message;
+                        }
+                    };
+                    req.send();
+                } else {
+                    errorMessage.textContent = "Please select a contact and month.";
+                }
+            } catch (error) {
+                console.error("Error retrieving month data:", error);
+                errorMessage.textContent = "An unexpected error occurred!";
             }
         }
+        
         
 
         // Helper function to format date (YYYY-MM-DD)
