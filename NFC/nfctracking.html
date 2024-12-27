@@ -961,7 +961,7 @@
         <div class="leftSectionSelect">
             <div id="dropDownSelect">
                 <label for="contactSelect">Select TagID: </label>
-                <select id="contactSelect" onchange="contactSelect()">
+                <select id="contactSelectDropdown" onchange="handleContactSelect()">
                     <option value="">Select TagID</option>
                     <!-- Dynamically populated with contact data from CRM -->
 
@@ -1055,7 +1055,7 @@
         var clientId = "78d9abf2-52c4-4f68-a69d-dfab8a564eab";                 // Client ID from Azure app registration
         var pageUrl = "https://izenix.com/NFC/nfctracking.html";                // Redirect URL
 
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, contactSelect, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, contactSelectDropdown, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, searchBarMonth, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         // ADAL configuration
         var endpoints = {
@@ -1095,7 +1095,7 @@
                 getMonthButton = document.getElementById("getMonthData");
                 monthTable = document.getElementById("monthWiseTable");
                 monthTableBody = document.getElementById("monthWiseTableBody");
-                contactSelect = document.getElementById("contactSelect");
+                contactSelectDropdown = document.getElementById("contactSelectDropdown");
                 /*searchBarMonth = document.getElementById("searchBarMonth")*/
 
 
@@ -1107,7 +1107,7 @@
                 getNFCTrackingDataButton.addEventListener("click", getNFCTrackingData);
                 getUsersButton.addEventListener("click", getUsers);
                 getMonthButton.addEventListener("click", getMonthData);
-                contactSelect.addEventListener("click", contactSelect);
+                contactSelectDropdown.addEventListener("click", contactSelectDropdown);
 
                 // Add event listener for search functionality
                 searchBar.addEventListener("input", searchByTagID);
@@ -1130,7 +1130,7 @@
                     //searchBarMonth.style.display = "block";
 
                     getMonthButton.style.display = "block";
-                    contactSelect.style.disabled = "block";
+                    contactSelectDropdown.style.disabled = "block";
 
                     // Display greeting message to the logged-in user
                     var greetingContainer = document.getElementById("greetingMessage");
@@ -1163,7 +1163,7 @@
                     searchBar.style.display = "none";
                     /* searchBarMonth.style.display = "none";*/
                     getMonthButton.style.display = "none";
-                    contactSelect.style.disabled = "none";
+                    contactSelectDropdown.style.disabled = "none";
 
                     userdownloadExcelButton.style.display = "none";
                     nfcdownloadExcelButton.style.display = "none";
@@ -1594,7 +1594,7 @@
 
 
         // Existing NFC Tracking Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, contactSelect, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, contactSelectDropdown, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1806,7 +1806,7 @@
 
 
         // Existing Month Wise Data code goes here
-        var authContext, user, loginButton, logoutButton, getMonthButton, contactSelect, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
+        var authContext, user, loginButton, logoutButton, getMonthButton, contactSelectDropdown, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
 
@@ -1867,8 +1867,8 @@
 
 
         // Add the contact's tag ID when selecting a contact
-        function contactSelect() {
-            var selectedTagID = document.getElementById("contactSelect").value;
+        function handleContactSelect() {
+            var selectedTagID = document.getElementById("contactSelectDropdown").value;
             if (selectedTagID) {
                 // Update monthYearInput or store the selected Tag ID
                 document.getElementById("monthYearInput").value = selectedTagID;
@@ -2006,11 +2006,26 @@
                     req.setRequestHeader("OData-Version", "4.0");
 
                     req.onreadystatechange = function () {
-                        if (this.readyState === 4 && this.status === 200) {
-                            var monthdata = JSON.parse(this.response).value;
-                            renderMonthData(monthdata);
-                        } else {
-                            errorMessage.textContent = JSON.parse(this.response).error.message;
+                        if (this.readyState === 4) {
+                            if (this.status === 200 && this.responseText && this.responseText.trim() !== "") {
+                                try {
+                                    var monthdata = JSON.parse(this.response).value;
+                                    renderMonthData(monthdata);
+                                } catch (parseError) {
+                                    console.error("Error parsing the response:", parseError);
+                                    errorMessage.textContent = "Error parsing response data!";
+                                }
+                            } else if (this.responseText && this.responseText.trim() !== "") {
+                                try {
+                                    var errorResponse = JSON.parse(this.response);
+                                    errorMessage.textContent = errorResponse.error.message;
+                                } catch (parseError) {
+                                    console.error("Error parsing error response:", parseError);
+                                    errorMessage.textContent = "Error retrieving data!";
+                                }
+                            } else {
+                                errorMessage.textContent = "No response received from the server.";
+                            }
                         }
                     };
                     req.send();
