@@ -1905,33 +1905,34 @@
                 req.onreadystatechange = function () {
                     if (this.readyState === 4) {
                         if (this.status === 200) {
-                            debugger;
                             var contacts = JSON.parse(this.response).value;
-                            var contactSelect = document.getElementById("contactSelect");
+                            var contactSelect = document.getElementById("contactSelectDropdown");
 
-                            // Clear existing options in the dropdown
-                            contactSelect.innerHTML = '<option value="">Select TagID</option>';
+                            if (contactSelect) {  // Check if the dropdown exists
+                                // Clear existing options in the dropdown
+                                contactSelect.innerHTML = '<option value="">Select TagID</option>';
 
-                            // Check if contacts are returned and have TagIDs
-                            if (contacts.length > 0) {
-                                for (var i = 0; i < contacts.length; i++) {
-                                    var contact = contacts[i];
-                                    if (contact.izx_tagid) {
-                                        var option = document.createElement("option");
-                                        option.value = contact.izx_tagid;
-                                        option.text = contact.izx_tagid;
-                                        contactSelect.appendChild(option);
+                                // Populate the dropdown with TagIDs
+                                if (contacts.length > 0) {
+                                    for (var i = 0; i < contacts.length; i++) {
+                                        var contact = contacts[i];
+                                        if (contact.izx_tagid) {
+                                            var option = document.createElement("option");
+                                            option.value = contact.izx_tagid;
+                                            option.text = contact.izx_tagid;
+                                            contactSelect.appendChild(option);
+                                        }
                                     }
-                                };
+                                } else {
+                                    var option = document.createElement("option");
+                                    option.value = "";
+                                    option.text = "No TagIDs found";
+                                    contactSelect.appendChild(option);
+                                }
                             } else {
-                                // If no TagIDs were returned, display a default message
-                                var option = document.createElement("option");
-                                option.value = "";
-                                option.text = "No TagIDs found";
-                                contactSelect.appendChild(option);
+                                console.error("Contact dropdown with ID 'contactSelectDropdown' not found.");
                             }
                         } else {
-                            // Handle error responses
                             errorMessage.textContent = `Error retrieving TagIDs: ${this.statusText}`;
                             console.error("Error:", this.status, this.statusText);
                         }
@@ -1944,6 +1945,7 @@
                 errorMessage.textContent = 'An error occurred while fetching contacts.';
             }
         }
+
 
 
 
@@ -1973,19 +1975,8 @@
                     return;
                 }
 
-                //function retrieveMonthData(error, token) {
-                //    var errorMessage = document.getElementById("errorMessage");
-                //    var message = document.getElementById("message");
-
-                //    /*token = getTokenFromPowerAutomate();*/
-
-                //    if (error || !token) {
-                //        errorMessage.textContent = 'ADAL error occurred: ' + error;
-                //        return;
-                //    }
-
                 var monthYear = document.getElementById("monthYearInput").value;
-                var selectedTagID = document.getElementById("contactSelect").value;
+                var selectedTagID = document.getElementById("contactSelectDropdown").value;
 
                 if (monthYear && selectedTagID) {
                     // Split the value into year and month
