@@ -857,8 +857,8 @@
 
             <!-- Buttons in the center side by side -->
             <div class="button-container">
-                <button id="showNFCButton" class="text-black">NFC Tracking Data</button>
                 <button id="showUsersButton" class="text-black">Users</button>
+                <button id="showNFCButton" class="text-black">NFC Tracking Data</button>
                 <button id="showMonthWiseDataButton" class="text-black">Month Wise Data</button>
             </div>
 
@@ -872,34 +872,6 @@
     </header>
 
 
-    <!-- NFC Tracking Data Section -->
-    <div id="nfcTrackingSection" class="hidden">
-        <div id="nfcTrackingContainer">
-            <h1>NFC Tracking Data</h1>
-
-            <div class="button-input-row">
-                <button id="getNFCTrackingData">NFC Tracking Data</button>
-                <input type="text" id="searchBar" placeholder="Search by Tag ID...">
-                <button id="nfcdownloadExcelButton">Download as Excel</button>
-            </div>
-        </div>
-        <div id="message"></div>
-        <table id="nfctrackingsTable">
-            <!--<caption></caption>-->
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Tag ID</th>
-                    <th>Timestamp</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Time Duration</th>
-                    <th>Time In Out</th>
-                </tr>
-            </thead>
-            <tbody id="nfctrackingsTableBody"></tbody>
-        </table>
-    </div>
 
     <!-- Get Users Section -->
     <div id="usersSection" class="hidden">
@@ -948,13 +920,46 @@
         </div>
     </div>
 
+
+
+    <!-- NFC Tracking Data Section -->
+    <div id="nfcTrackingSection" class="hidden">
+        <div id="nfcTrackingContainer">
+            <h1>NFC Tracking Data</h1>
+
+            <div class="button-input-row">
+                <button id="getNFCTrackingData">NFC Tracking Data</button>
+                <input type="text" id="searchBar" placeholder="Search by Tag ID...">
+                <button id="nfcdownloadExcelButton">Download as Excel</button>
+            </div>
+        </div>
+        <div id="message"></div>
+        <table id="nfctrackingsTable">
+            <!--<caption></caption>-->
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Tag ID</th>
+                    <th>Timestamp</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                    <th>Time Duration</th>
+                    <th>Time In Out</th>
+                </tr>
+            </thead>
+            <tbody id="nfctrackingsTableBody"></tbody>
+        </table>
+    </div>
+
+
+
     <!--Month Wise Data Table-->
     <div class="container hidden" id="monthSection">
         <h1>Month-wise NFC Tracking Data</h1>
 
         <!-- Contact Selection Dropdown -->
         <div class="leftSectionSelect">
-            <div>
+            <div id="dropDownSelect">
                 <label for="contactSelect">Select TagID: </label>
                 <select id="contactSelect" onchange="contactSelect()">
                     <option value="">Select TagID</option>
@@ -965,7 +970,7 @@
         </div>
 
         <div id="monthButtons">
-            <div class="left-section">
+            <div class="left-section" id="monthYearDataSection">
                 <label for="monthYearInput">Select Month and Year: </label>
                 <input type="month" id="monthYearInput" required>
                 <button id="getMonthData" onclick="getMonthData()">Get Data</button>
@@ -984,13 +989,6 @@
                     <th>Contact</th>
                     <th>Date</th>
                     <th>Duration</th>
-
-                    <!--<th>Tag ID</th>
-                <th>Timestamp</th>
-                <th>Time In</th>
-                <th>Time Out</th>
-                <th>Duration</th>
-                <th>In/Out</th>-->
                 </tr>
             </thead>
             <tbody id="monthWiseTableBody">
@@ -1124,7 +1122,7 @@
                     logoutButton.style.display = "block";
 
                     // Show the Get Users button
-                    getUsersButton.style.display = "block";                    
+                    getUsersButton.style.display = "block";
 
                     // Show the NFC tracking data button and search bar by removing "none" class
                     getNFCTrackingDataButton.style.display = "block";
@@ -1143,6 +1141,15 @@
                     // Optionally, style the message if needed
                     helloMessage.style.marginLeft = "10px";
                     helloMessage.style.fontWeight = "bold";
+
+                    userdownloadExcelButton.style.display = "block";
+                    nfcdownloadExcelButton.style.display = "block";
+                    monthdownloadExcelButton.style.display = "block";
+
+                    dropDownSelect.style.display = "block";
+                   /* monthYearInput.style.display = "block";*/
+                    monthYearDataSection.style.display = "block";
+
                 } else {
                     // Show login button and hide logout button when the user is logged out
                     loginButton.style.display = "block";
@@ -1154,9 +1161,17 @@
                     // Hide the NFC tracking data button, search bar, and table by adding "none" class
                     getNFCTrackingDataButton.style.display = "none";
                     searchBar.style.display = "none";
-                   /* searchBarMonth.style.display = "none";*/
+                    /* searchBarMonth.style.display = "none";*/
                     getMonthButton.style.display = "none";
                     contactSelect.style.disabled = "none";
+
+                    userdownloadExcelButton.style.display = "none";
+                    nfcdownloadExcelButton.style.display = "none";
+                    monthdownloadExcelButton.style.display = "none";
+
+                    dropDownSelect.style.display = "none";
+                    /*monthYearInput.style.display = "none";*/
+                    monthYearDataSection.style.display = "none";
                 }
             }
         };
@@ -1244,11 +1259,11 @@
                     return token;
 
                     // Store the response in a variable
-                   // responseData = data;
-                   ///* return token = data.token;*/
-                   // token = data.token;
-                   // console.log(token)
-                   // return token;
+                    // responseData = data;
+                    ///* return token = data.token;*/
+                    // token = data.token;
+                    // console.log(token)
+                    // return token;
 
                 })
                 .catch(error => {
@@ -1309,8 +1324,8 @@
                 errorMessage.textContent = "An unexpected error occurred!";
             }
         }
-            
-        
+
+
         // Function to render users into the table
         function renderUsers(users) {
             usersTableBody.innerHTML = ''; // Clear previous results
@@ -1526,7 +1541,7 @@
                 errorMessage.textContent = "An unexpected error occurred!";
             }
         }
-   
+
 
 
         // Excel download functionality using SheetJS
@@ -1899,14 +1914,15 @@
 
                             // Check if contacts are returned and have TagIDs
                             if (contacts.length > 0) {
-                                contacts.forEach(function (contact) {
+                                for (var i = 0; i < contact.length; i++) {
+                                    var contact = contacts[i];
                                     if (contact.izx_tagid) {
                                         var option = document.createElement("option");
                                         option.value = contact.izx_tagid;
                                         option.text = contact.izx_tagid;
                                         contactSelect.appendChild(option);
                                     }
-                                });
+                                };
                             } else {
                                 // If no TagIDs were returned, display a default message
                                 var option = document.createElement("option");
@@ -1929,8 +1945,8 @@
             }
         }
 
-        
-        
+
+
         function getMonthData() {
             var message = document.getElementById("message");
             var errorMessage = document.getElementById("errorMessage");
@@ -1942,7 +1958,7 @@
         }
 
 
-        
+
         async function retrieveMonthData() {
             try {
                 // Retrieve the token from Power Automate
@@ -2006,8 +2022,8 @@
                 errorMessage.textContent = "An unexpected error occurred!";
             }
         }
-        
-        
+
+
 
         // Helper function to format date (YYYY-MM-DD)
         function formatDate(dateString) {
