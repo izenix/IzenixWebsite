@@ -54,7 +54,7 @@
 						<div class="row">
 							<div class="col-md-4 offset-md-4 col-7">
 								<div class="logo text-md-center">
-									<a href="index.html"><img src="img/logo/logo.png" alt="" /></a>
+									<a href="index.html"><img src="img/logo/logo.png" alt="" />NFC Logo</a>
 								</div>
 							</div>
 							<div class="col-md-4 col-5">
@@ -209,8 +209,7 @@
 							<div class="shopping-cart">
 								<!-- Nav tabs -->
 								<ul class="cart-page-menu nav row clearfix mb-30">
-									<li><a class="active" href="#shopping-cart" data-bs-toggle="tab">shopping cart</a></li>
-									<li><a href="#wishlist" data-bs-toggle="tab">wishlist</a></li>
+									<li><a class="active" href="#shopping-cart" data-bs-toggle="tab">shopping cart11</a></li>
 									<li><a href="#check-out" data-bs-toggle="tab">check out</a></li>
 									<li><a href="#order-complete" data-bs-toggle="tab">order complete</a></li>
 								</ul>
@@ -889,5 +888,25 @@
 		<script src="js/plugins.js"></script>
 		<!-- main js -->
 		<script src="js/main.min.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+    // Select all remove icons in the shopping cart
+    const removeIcons = document.querySelectorAll('.product-remove a');
+
+    // Loop through each remove icon and add a click event listener
+    removeIcons.forEach(function(removeIcon) {
+        removeIcon.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Find the closest <tr> element that contains the clicked remove icon
+            const row = removeIcon.closest('tr');
+
+            // Remove the entire row from the table
+            row.remove();
+        });
+    });
+});
+
+		</script>
 	</body>
  </html>
