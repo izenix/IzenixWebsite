@@ -818,8 +818,8 @@
                 transition: border-color 0.2s ease-in-out;
                 cursor: pointer;
                 appearance: none; /* Removes default browser styling of the dropdown */
-                background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4z"/></svg>');
-                background-repeat: no-repeat;
+                /*background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4z"/></svg>');
+*/                background-repeat: no-repeat;
                 background-position: right 10px center;
                 background-size: 12px;
                 width: 200px; /* Optional: set a width for the select dropdown */
@@ -972,8 +972,8 @@
         <div id="monthButtons">
             <div class="left-section" id="monthYearDataSection">
                 <label for="monthYearInput">Select Date Month and Year: </label>
-                <!--<input type="month" id="monthYearInput" required>-->                <!--date-->
-                <input type="date" id="monthYearInput" required>
+                <input type="month" id="monthYearInput" required>                <!--date-->
+                <!--<input type="date" id="monthYearInput" required>-->
                 <button id="getMonthData" onclick="getMonthData()">Get Data</button>
                 <!--<input type="text" id="searchBarMonth" placeholder="Search by Tag ID...">-->
             </div>
@@ -1993,7 +1993,7 @@
 
                     var req = new XMLHttpRequest();
 
-                    req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendance?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${formattedStartDate} and izx_date lt ${formattedEndDate}`), true);
+                    req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendances?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${formattedStartDate} and izx_date lt ${formattedEndDate}`), true);
                     req.setRequestHeader("Authorization", "Bearer " + token1);
                     req.setRequestHeader("Accept", "application/json");
                     req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
