@@ -1983,13 +1983,17 @@
                     var [year, month] = monthYear.split('-');
 
                     // Calculate the start and end of the selected month
-                    var startDate = new Date(year, month - 1, 1).toISOString(); // First day of the month
-                    var endDate = new Date(year, month, 1).toISOString(); // First day of the next month
+                    var startDate = new Date(year, month - 1, 1); // First day of the month
+                    var endDate = new Date(year, month, 1); // First day of the next month
+
+                    // Get the formatted date without time
+                    var formattedStartDate = formatDate(startDate);
+                    var formattedEndDate = formatDate(endDate);
 
 
                     var req = new XMLHttpRequest();
 
-                    req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendance?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${startDate} and izx_date lt ${endDate}`), true);
+                    req.open("GET", encodeURI(organizationURI + `/api/data/v9.2/izx_nfcdailyattendance?$select=izx_name,izx_contact,izx_tagid,izx_date,izx_duration&$filter=izx_tagid eq '${selectedTagID}' and izx_date ge ${formattedStartDate} and izx_date lt ${formattedEndDate}`), true);
                     req.setRequestHeader("Authorization", "Bearer " + token1);
                     req.setRequestHeader("Accept", "application/json");
                     req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
