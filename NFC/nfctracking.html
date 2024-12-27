@@ -1860,7 +1860,10 @@
             }
         }
 
-
+        // Automatically populate the contact dropdown on page load
+        window.onload = function () {
+            populateContactDropdown();
+        };
 
 
         async function populateContactDropdown() {
