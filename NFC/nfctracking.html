@@ -964,7 +964,6 @@
                 <select id="contactSelectDropdown" onchange="handleContactSelect()">
                     <option value="">Select TagID</option>
                     <!-- Dynamically populated with contact data from CRM -->
-
                 </select>
             </div>
         </div>
@@ -972,8 +971,7 @@
         <div id="monthButtons">
             <div class="left-section" id="monthYearDataSection">
                 <label for="monthYearInput">Select Date Month and Year: </label>
-                <input type="month" id="monthYearInput" required>                <!--date-->
-                <!--<input type="date" id="monthYearInput" required>-->
+                <input type="month" id="monthYearInput" required>     
                 <button id="getMonthData" onclick="getMonthData()">Get Data</button>
                 <!--<input type="text" id="searchBarMonth" placeholder="Search by Tag ID...">-->
             </div>
@@ -987,7 +985,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Contact</th>
+                    <th>TagID</th>
                     <th>Date</th>
                     <th>Duration</th>
                 </tr>
@@ -1256,16 +1254,8 @@
                 })
                 .then(data => {
                     const token = data.token;
-                    console.log("Token retrieved:", token);
+                    /*console.log("Token retrieved:", token);*/
                     return token;
-
-                    // Store the response in a variable
-                    // responseData = data;
-                    ///* return token = data.token;*/
-                    // token = data.token;
-                    // console.log(token)
-                    // return token;
-
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -1275,19 +1265,7 @@
 
         }
 
-        // Function to retrieve users
-        //function retrieveUsers(token) {
-
-        //    var token1 = getTokenFromPowerAutomate();
-
-
-        //    if (error || !token) {
-        //        console.error("Token error:", error);
-        //        errorMessage.textContent = 'ADAL error occurred: ' + error;
-        //        return;
-        //    }
-
-        /* Function to retrieve users after obtaining the token*/
+        /* 1 - Function to retrieve users after obtaining the token*/
         async function retrieveUsers() {
             try {
                 const token1 = await getTokenFromPowerAutomate();  // Wait for the token asynchronously
@@ -1421,18 +1399,6 @@
                     return;
                 }
 
-                //function showTagIdData(tagId) {
-                //    debugger;
-                //    authContext.acquireToken(organizationURI, function (token) {
-
-                //        token = getTokenFromPowerAutomate();
-
-                //        if (error || !token) {
-                //            console.error("Token error:", error);
-                //            errorMessage.textContent = 'ADAL error occurred: ' + error;
-                //            return;
-                //        }
-
                 var req = new XMLHttpRequest();
                 // Ensure proper concatenation of $select and $filter
                 var filterQuery = `$filter=izx_tagid eq '${tagId}'`;
@@ -1526,8 +1492,6 @@
 
                             } else {
                                 alert("No records found for the provided tag ID.");
-                                //console.error("No records found for the provided tag ID.");
-                                //errorMessage.textContent = 'No records found for the provided tag ID.';
                             }
                         } else {
                             var error = JSON.parse(this.response).error;
@@ -1542,8 +1506,6 @@
                 errorMessage.textContent = "An unexpected error occurred!";
             }
         }
-
-
 
         // Excel download functionality using SheetJS
         document.getElementById('downloadExcelButton').addEventListener('click', function () {
@@ -1592,9 +1554,9 @@
 
 
 
+        // 2 - Existing NFC Tracking Data code goes here
 
 
-        // Existing NFC Tracking Data code goes here
         var authContext, user, loginButton, logoutButton, getMonthButton, monthTable, monthTableBody, contactSelectDropdown, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
@@ -1806,7 +1768,11 @@
         });
 
 
-        // Existing Month Wise Data code goes here
+
+
+        // 3 - Existing Month Wise Data code goes here
+
+
         var authContext, user, loginButton, logoutButton, getMonthButton, contactSelectDropdown, monthTable, monthTableBody, userLoginButton, userLogoutButton, getUsersButton, usersTable, getNFCTrackingDataButton, searchBar, nfctrackingsTable, nfctrackingsTableBody, usersTableBody, message, errorMessage;
 
         var endpoints = { orgUri: organizationURI };
@@ -1946,9 +1912,6 @@
             }
         }
 
-
-
-
         function getMonthData() {
             var message = document.getElementById("message");
             var errorMessage = document.getElementById("errorMessage");
@@ -1958,8 +1921,6 @@
 
             authContext.acquireToken(organizationURI, retrieveMonthData);
         }
-
-
 
         async function retrieveMonthData() {
             try {
@@ -2033,8 +1994,6 @@
             }
         }
 
-
-
         // Helper function to format date (YYYY-MM-DD)
         function formatDate(dateString) {
             var date = new Date(dateString);
@@ -2060,8 +2019,8 @@
                 var nameCell = document.createElement("td");
                 nameCell.textContent = tracking.izx_name;
 
-                var contactCell = document.createElement("td");
-                contactCell.textContent = tracking.izx_contact;
+                //var contactCell = document.createElement("td");
+                //contactCell.textContent = tracking.izx_contact;
 
                 var tagIdCell = document.createElement("td");
                 tagIdCell.textContent = tracking.izx_tagid;
@@ -2073,7 +2032,7 @@
                 durationCell.textContent = tracking.izx_duration;
 
                 row.appendChild(nameCell);
-                row.appendChild(contactCell);
+                /*row.appendChild(contactCell);*/
                 row.appendChild(tagIdCell);
                 row.appendChild(dateCell);
                 row.appendChild(durationCell);
@@ -2092,7 +2051,7 @@
             var data = [];
 
             // Add header row
-            data.push(["Name", "Tag ID", "Timestamp", "Time IN", "Time Out", "Duration", "In/Out"]);
+            data.push(["Name", "Tag ID", "Date", "Duration"]);
 
             // Loop through the rows and collect data
             for (var i = 0; i < rows.length; i++) {
