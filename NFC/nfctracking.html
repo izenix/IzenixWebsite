@@ -1867,13 +1867,32 @@
 
 
         // Add the contact's tag ID when selecting a contact
+        //function handleContactSelect() {
+        //    var selectedTagID = document.getElementById("contactSelectDropdown").value;
+        //    if (selectedTagID) {
+        //        // Update monthYearInput or store the selected Tag ID
+        //        document.getElementById("monthYearInput").value = selectedTagID;
+        //    }
+        //}
+
         function handleContactSelect() {
             var selectedTagID = document.getElementById("contactSelectDropdown").value;
             if (selectedTagID) {
-                // Update monthYearInput or store the selected Tag ID
-                document.getElementById("monthYearInput").value = selectedTagID;
+                // Regular expression to check the yyyy-MM format
+                const dateRegex = /^\d{4}-\d{2}$/;
+
+                if (dateRegex.test(selectedTagID)) {
+                    // If the format is valid, set it to the monthYearInput field
+                    document.getElementById("monthYearInput").value = selectedTagID;
+                } else {
+                    // If the format is invalid, show an error message or reset the input field
+                    alert("Invalid date format. Please select a valid date from the dropdown.");
+                    // Or set a default value
+                    document.getElementById("monthYearInput").value = "";
+                }
             }
         }
+
 
         // Automatically populate the contact dropdown on page load
         window.onload = function () {
@@ -1881,11 +1900,24 @@
         };
 
 
+        // Helper function to format the date correctly
+        function formatDateForDropdown(dateString) {
+            try {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');  // Month is 0-indexed
+                return `${year}-${month}`;
+            } catch (e) {
+                console.error("Invalid date format:", dateString, e);
+                return "";  // Return an empty string or a default value in case of an invalid date
+            }
+        }
+
+
+        // Modify your populateContactDropdown function
         async function populateContactDropdown() {
             try {
-                // Retrieve the token from Power Automate
                 const token1 = await getTokenFromPowerAutomate();
-
                 var errorMessage = document.getElementById("errorMessage");
 
                 if (!token1) {
@@ -1895,7 +1927,7 @@
                 }
 
                 var req = new XMLHttpRequest();
-                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);
+                req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid, izx_date&$filter=izx_tagid ne null"), true);
                 req.setRequestHeader("Authorization", "Bearer " + token1);
                 req.setRequestHeader("Accept", "application/json");
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -1908,29 +1940,24 @@
                             var contacts = JSON.parse(this.response).value;
                             var contactSelect = document.getElementById("contactSelectDropdown");
 
-                            if (contactSelect) {  // Check if the dropdown exists
-                                // Clear existing options in the dropdown
-                                contactSelect.innerHTML = '<option value="">Select TagID</option>';
+                            // Clear existing options in the dropdown
+                            contactSelect.innerHTML = '<option value="">Select TagID</option>';
 
-                                // Populate the dropdown with TagIDs
-                                if (contacts.length > 0) {
-                                    for (var i = 0; i < contacts.length; i++) {
-                                        var contact = contacts[i];
-                                        if (contact.izx_tagid) {
-                                            var option = document.createElement("option");
-                                            option.value = contact.izx_tagid;
-                                            option.text = contact.izx_tagid;
-                                            contactSelect.appendChild(option);
-                                        }
+                            if (contacts.length > 0) {
+                                contacts.forEach(function (contact) {
+                                    if (contact.izx_tagid && contact.izx_date) {
+                                        var formattedDate = formatDateForDropdown(contact.izx_date);  // Format the date
+                                        var option = document.createElement("option");
+                                        option.value = formattedDate;
+                                        option.text = contact.izx_tagid + " (" + formattedDate + ")";
+                                        contactSelect.appendChild(option);
                                     }
-                                } else {
-                                    var option = document.createElement("option");
-                                    option.value = "";
-                                    option.text = "No TagIDs found";
-                                    contactSelect.appendChild(option);
-                                }
+                                });
                             } else {
-                                console.error("Contact dropdown with ID 'contactSelectDropdown' not found.");
+                                var option = document.createElement("option");
+                                option.value = "";
+                                option.text = "No TagIDs found";
+                                contactSelect.appendChild(option);
                             }
                         } else {
                             errorMessage.textContent = `Error retrieving TagIDs: ${this.statusText}`;
@@ -1945,6 +1972,76 @@
                 errorMessage.textContent = 'An error occurred while fetching contacts.';
             }
         }
+
+
+
+
+
+
+        //async function populateContactDropdown() {
+        //    try {
+        //        // Retrieve the token from Power Automate
+        //        const token1 = await getTokenFromPowerAutomate();
+
+        //        var errorMessage = document.getElementById("errorMessage");
+
+        //        if (!token1) {
+        //            console.error("Token error: null or undefined");
+        //            errorMessage.textContent = 'Token retrieval failed!';
+        //            return;
+        //        }
+
+        //        var req = new XMLHttpRequest();
+        //        req.open("GET", encodeURI(organizationURI + "/api/data/v9.2/contacts?$select=izx_tagid&$filter=izx_tagid ne null"), true);
+        //        req.setRequestHeader("Authorization", "Bearer " + token1);
+        //        req.setRequestHeader("Accept", "application/json");
+        //        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        //        req.setRequestHeader("OData-MaxVersion", "4.0");
+        //        req.setRequestHeader("OData-Version", "4.0");
+
+        //        req.onreadystatechange = function () {
+        //            if (this.readyState === 4) {
+        //                if (this.status === 200) {
+        //                    var contacts = JSON.parse(this.response).value;
+        //                    var contactSelect = document.getElementById("contactSelectDropdown");
+
+        //                    if (contactSelect) {  // Check if the dropdown exists
+        //                        // Clear existing options in the dropdown
+        //                        contactSelect.innerHTML = '<option value="">Select TagID</option>';
+
+        //                        // Populate the dropdown with TagIDs
+        //                        if (contacts.length > 0) {
+        //                            for (var i = 0; i < contacts.length; i++) {
+        //                                var contact = contacts[i];
+        //                                if (contact.izx_tagid) {
+        //                                    var option = document.createElement("option");
+        //                                    option.value = contact.izx_tagid;
+        //                                    option.text = contact.izx_tagid;
+        //                                    contactSelect.appendChild(option);
+        //                                }
+        //                            }
+        //                        } else {
+        //                            var option = document.createElement("option");
+        //                            option.value = "";
+        //                            option.text = "No TagIDs found";
+        //                            contactSelect.appendChild(option);
+        //                        }
+        //                    } else {
+        //                        console.error("Contact dropdown with ID 'contactSelectDropdown' not found.");
+        //                    }
+        //                } else {
+        //                    errorMessage.textContent = `Error retrieving TagIDs: ${this.statusText}`;
+        //                    console.error("Error:", this.status, this.statusText);
+        //                }
+        //            }
+        //        };
+        //        req.send();
+        //    } catch (error) {
+        //        console.error("Error in populateContactDropdown:", error);
+        //        var errorMessage = document.getElementById("errorMessage");
+        //        errorMessage.textContent = 'An error occurred while fetching contacts.';
+        //    }
+        //}
 
 
 
