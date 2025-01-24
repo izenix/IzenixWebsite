@@ -36,7 +36,7 @@
 /*  01. Template default CSS
 /*----------------------------------------*/
 /*@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap");
 */
 
 
@@ -144,7 +144,7 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 15px;
   color: #a3a1a9;
   background-color: #ffffff;
@@ -1001,7 +1001,7 @@ hr {
 }
 .header-right_call .call-meta_number {
   font-size: 18px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   color: #54545f;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (max-width: 767px) {
@@ -3347,7 +3347,7 @@ hr {
   }
 }
 .about-three-content .text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   color: #54545f;
   line-height: 1.66;
@@ -3402,7 +3402,7 @@ hr {
   margin-bottom: 16px;
 }
 .about-three-list li {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   color: #54545f;
   line-height: 1.66;
@@ -4191,7 +4191,7 @@ hr {
   font-size: 18px;
   color: #54545f;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.5;
 }
 @media only screen and (max-width: 575px) {
@@ -4402,7 +4402,7 @@ hr {
   }
 }
 .service-two-single-text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   color: #54545f;
   line-height: 1.5;
@@ -4504,7 +4504,7 @@ hr {
 .pricing-head .text {
   color: #8d8e99;
   font-size: 20px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   margin-bottom: 0;
@@ -4524,7 +4524,7 @@ hr {
   font-size: 18px;
   color: #54545f;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.5;
   margin-bottom: 0px;
 }
@@ -5008,7 +5008,7 @@ hr {
   font-size: 18px;
 }
 .portfolio-details-type li .type {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 20px;
   color: #8d8e99;
   font-weight: 400;
@@ -5077,7 +5077,7 @@ hr {
   font-size: 21px;
   color: #8d8e99;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.5;
   margin-bottom: 30px;
 }
@@ -5085,7 +5085,7 @@ hr {
   font-size: 18px;
   color: #54545f;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.5;
   margin-bottom: 0px;
 }
@@ -5125,7 +5125,7 @@ hr {
   font-size: 18px;
   color: #54545f;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.5;
   margin-bottom: 0px;
 }
@@ -6159,7 +6159,7 @@ hr {
   font-size: 30px;
   font-style: italic;
   color: #ffffff;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   line-height: 1.6;
   font-weight: 300;
   margin-bottom: 40px;
@@ -6190,7 +6190,7 @@ hr {
 .testimonial-single-content .client-info .name .designation {
   font-size: 18px;
   font-weight: 300;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 .testimonialone .swiper-slide {
@@ -6357,7 +6357,7 @@ hr {
   text-align: center;
 }
 .testimonialtwo-text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 20px;
   font-style: italic;
   line-height: 1.5;
@@ -6402,7 +6402,7 @@ hr {
   }
 }
 .testimonialtwo-info .designation {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   color: #a3a1a9;
   font-size: 16px;
   margin-top: 5px;
@@ -6671,7 +6671,7 @@ hr {
   text-align: center;
 }
 .testimonialthree-text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 30px;
   font-style: italic;
   line-height: 1.6;
@@ -6736,7 +6736,7 @@ hr {
   }
 }
 .testimonialthree-info .designation {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   color: #a3a1a9;
   font-size: 16px;
   margin-top: 5px;
@@ -6874,7 +6874,7 @@ hr {
 }
 .blog-info .meta li:last-child {
   color: #a3a1a9;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 16px;
 }
 @media only screen and (max-width: 767px) {
@@ -6982,7 +6982,7 @@ hr {
   }
 }
 .blog-three-content .text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   color: #54545f;
   margin: 15px 0 22px;
@@ -7078,7 +7078,7 @@ hr {
 .single-blog-meta li p {
   margin-bottom: 0px;
   color: #a3a1a9;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 16px;
 }
 .single-blog-meta li span {
@@ -7265,7 +7265,7 @@ hr {
 }
 .single-blog-two-content .title {
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 24px;
   font-weight: 400;
   margin-top: 6px;
@@ -7315,7 +7315,7 @@ hr {
   color: #7153d9;
 }
 .single-subblog .date {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 16px;
   color: #a3a1a9;
   margin-top: 73px;
@@ -7354,7 +7354,7 @@ hr {
   }
 }
 .blockquote .content p {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 24px;
   font-style: italic;
   color: #8d8e99;
@@ -7386,7 +7386,7 @@ hr {
   font-weight: 500;
 }
 .blockquote .blockquote-footer .designation {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 16px;
   color: #a3a1a9;
   font-weight: 300;
@@ -8405,7 +8405,7 @@ hr {
   margin-bottom: 10px;
 }
 .contact-info-content .text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   color: #54545f;
   font-size: 18px;
 }
@@ -8517,7 +8517,7 @@ hr {
   font-weight: 500;
 }
 .single-plan-text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   color: #54545f;
   line-height: 1.5;
@@ -8758,7 +8758,7 @@ hr {
 }
 .footer-widget .footer-text {
   color: #54545f;
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   margin-top: 40px;
 }
@@ -9282,7 +9282,7 @@ hr {
   }
 }
 .solution-content .text {
-  font-family: "Roboto", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: 18px;
   color: #54545f;
   line-height: 1.666;
@@ -9624,7 +9624,7 @@ hr {
     transition: all .2s ease;
 }
 /*****************top header****/
-.header-top {font-family: "Roboto", sans-serif;
+.header-top {font-family: "Jost", sans-serif;
     font-size: 16px;  margin-bottom: 0px; margin-top:-20px;
     color: #54545f;}
 .header-top ul {
