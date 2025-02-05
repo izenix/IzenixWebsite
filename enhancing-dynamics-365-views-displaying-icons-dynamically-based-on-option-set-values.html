@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Discover Cutting-Edge IT Trends | IZENIX Insights </title>
+    <title>Enhancing Dynamics 365 Views: Displaying Icons Dynamically Based on Option Set Values | IZENIX Blog </title>
 
     <meta name="description" content="Stay ahead with the IZENIX Blog. Explore tech trends, industry insights, and expert advice on cybersecurity, cloud computing, and more. Subscribe now!">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,26 +26,27 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
+</head>
+<style>
         /*background: #fff;
-            height: 53px;
-            margin-bottom: 10px;*/
+        height: 53px;
+        margin-bottom: 10px;*/
 
         /* .iframe-content {
-                display: block;
-                height: 500px;
-                width: 350px;
-            }
-            div.open
-                .iframe-content {
-                      display:none;
-                      height: 0px;
-                  }
-            div.closed
+            display: block;
+            height: 500px;
+            width: 350px;
+        }
+        div.open
             .iframe-content {
-                display: none;
-                height: 0px;
-            }*/
+                  display:none;
+                  height: 0px;
+              }
+        div.closed
+        .iframe-content {
+            display: none;
+            height: 0px;
+        }*/
         .iframe-content {
             display: none;
             height: 0px;
@@ -75,7 +76,7 @@
             cursor: pointer;
             border-radius: 60%;
             /*        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
-        */ overflow: hidden;
+    */ overflow: hidden;
             padding: 0;
             border: none;
             background-clip: padding-box;
@@ -88,9 +89,25 @@
             stroke: inherit;
             line-height: 0;
         }
-    </style>
-</head>
+    ol, ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
 
+    .code-block {
+        background: #333;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #0275d8;
+    }
+</style>
 <body>
 
     <header class="header-wrapper">
@@ -255,7 +272,7 @@
             <!-- Header Logo Start -->
             <div class="logo">
                 <a href="index.html">
-                    <img src="assets/images/logo4.png" alt="Izenix Solutions Blogs page" loading="lazy">
+                    <img src="assets/images/logo4.png" alt="Izenix Solutions Blog Page" loading="lazy">
                 </a>
             </div>
             <!-- Header Logo End -->
@@ -340,211 +357,302 @@
         </div>
     </div>
     <!-----------Blogs--->
-    <div class="mt-5 pt-5">
+    <div class="section-padding">
         <div class="container">
-            <div class="row">
-                <div class="col-12 wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!-- Section Title Start -->
-                    <div class="section-title-center section-head text-center">
-                        <span class="subtitle">Our Blog</span>
-                        <h2 class="title">Our Latest Updates</h2>
+            <div class="row mb-n30">
+                <div class="col-lg-8 mb-30 standard-blog">
+                    <!-- Single Blog Start -->
+                    <div class="single-blog">
+                        <!-- Blog Thumbnail Start -->
+                        <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <img src="assets/images/blog/blog-1-1.png" alt="Blog-Image">
+                        </div>
+                        <!-- Blog Thumbnail End -->
+                        <!-- Blog Meta Start -->
+                        <ul class="single-blog-meta wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <li>
+                                <span><i class="fas fa-folder-open"></i></span>
+                                <a href="blog.html">Microsoft Dynamics 365</a>
+                            </li>
+                            <li>
+                                <span><i class="fas fa-user"></i></span>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Eekshith Pavan Kumar Mandhara</a>
+                            </li>
+                            <li>
+                                <span><i class="fas fa-clock"></i></span>
+                                <p>Feb 06,2025</p>
+                            </li>
+                            <!--li>
+                                <span><i class="fas fa-comments"></i></span>
+                                <p>50 comments</p>
+                            </li-->
+                        </ul>
+                        <!-- Blog Meta End -->
+                        <!-- Blog Content Start -->
+                        <div class="single-blog-content wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <h2 class="title" id="Dynamics365"><a href="enhancing-dynamics-365-views-displaying-icons-dynamically-based-on-option-set-values.html">Enhancing Dynamics 365 Views: Displaying Icons Dynamically Based on Option Set Values </a> </h2>
+                            <p class="text">In this Blog, we will walk through the complete process of displaying icons in a Dynamics 365 view based on the value of an Option Set field. This involves creating a web resource, writing JavaScript, and configuring the view to use the custom column renderer.</p>
+                            <div class="step text">
+                                <h2>Step 1: Create an Option Set Field in Dynamics 365</h2>                          
+                                <ol class="text">
+                                    <li>1. Navigate to <a href="https://make.powerapps.com" target="_blank">Power Apps</a>.</li>
+                                    <li>2. Select the <span class="highlight">Dataverse</span> environment.</li>
+                                    <li>3. Go to <span class="highlight">Tables</span> and choose the table where you want to add icons (e.g., "Attendance").</li>
+                                    <li>4. Click <strong>+ Add Column</strong> and create an Option Set field:</li>
+                                    <ul>
+                                        For Example:
+                                        <li><strong>Name:</strong> <span class="highlight">izx_in_out</span></li>
+                                        <li>
+                                            <strong>Options:</strong>
+                                            <ul>
+                                                <li><strong>In</strong> → Value: <span class="highlight">1</span></li>
+                                                <li><strong>Out</strong> → Value: <span class="highlight">2</span></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <li>Click <strong>Save & Close</strong>.</li>
+                                </ol>
+                            </div>
+
+                            <div class="step text">
+                                <h2>Step 2: Prepare the Icons</h2>
+                                <p class="text">We need icons for different statuses.</p>
+                                <ol class="text">
+                                    <li>1. Prepare the icon images (<strong>.png</strong> format):</li>
+                                    <ul>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>izx_green_in.png</strong> → Green icon for "In"</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>izx_red_out.png</strong> → Red icon for "Out"</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>new_default_icon.png</strong> → Default icon for unknown statuses</li>
+                                    </ul>
+                                    <li>2. Upload the images as <span class="highlight">Web Resources</span>:</li>
+                                    <ul>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;Navigate to <span class="highlight">Power Apps → Solutions</span>.</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;Select your solution and click <strong>+ Add → Web Resource</strong>.</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;Upload each icon, set the type as <strong>Image (PNG)</strong>, and name them:</li>
+                                        <ul>
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">izx_green_in</span></li>
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">izx_red_out</span></li>
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">new_default_icon</span></li>
+                                        </ul>
+                                        <li>Click <strong>Save and Publish</strong>.</li>
+                                    </ul>
+                                </ol>
+                            </div>
+
+
+                            <div class="step text">
+                                <h2>Step 3: Create a JavaScript Web Resource</h2>
+                                <p class="text">Now, we create a JavaScript function to dynamically assign icons in the view.</p>
+                                <ol text">
+                                    <li>1. Navigate to <span class="highlight">Power Apps → Solutions</span>.</li>
+                                    <li>2. Select your solution and click <strong>+ Add → Web Resource</strong>.</li>
+                                    <li>3. Set the type to <strong>JavaScript (JS)</strong>.</li>
+                                    <li>4. Name the web resource: <span class="highlight">izx_SetIconToView.js</span>.</li>
+                                    <li>5. Copy and paste the following script:</li>
+                                </ol>
+
+                                <div class="code-block ">
+                                    <pre>
+// Function to dynamically set icons based on Option Set values
+function customColumnRenderer(rowData, userLCID) {
+    debugger;
+    var record = JSON.parse(rowData);
+    var columnValue = record["izx_in_out"]; // Replace with your field schema name
+    var iconUrl = "";
+    var tooltipText = "";
+
+    console.log("Column Value:", columnValue); // Debugging
+
+    switch (columnValue) {
+        case "In": // If value is 'In'
+            iconUrl = "izx_green_in.png"; // Web resource reference
+            tooltipText = "Green Icon - In";
+            break;
+        case "Out": // If value is 'Out'
+            iconUrl = "izx_red_out.png";
+            tooltipText = "Red Icon - Out";
+            break;
+        default:
+            iconUrl = "new_default_icon.png";
+            tooltipText = "Unknown Status";
+    }
+
+    console.log("Selected Icon URL:", iconUrl); // Debugging
+
+    return [iconUrl, tooltipText];
+}
+   </pre>
+                                </div>
+
+                                <p class="text">Save and Publish the script in Power Apps.</p>
+                            </div>
+
+
+                            <div class="step text">
+                                <h2>Step 4: Configure the View to Use the JavaScript Renderer</h2>
+                                <p class="text">Now, we apply the JavaScript function to the view.</p>
+                                <ol class="text">
+                                    <li>1. Navigate to <span class="highlight">Power Apps → Tables</span> and select your table.</li>
+                                    <li>2. Go to the <strong>Views</strong> tab.</li>
+                                    <li>3. Select the view where you want to show icons (e.g., <span class="highlight">"Active Attendance Records"</span>).</li>
+                                    <li>4. Click <strong>Edit Columns</strong>.</li>
+                                    <li>5. Add a new <strong>text column</strong> (if not already present):</li>
+                                    <ul>
+                                        <li><strong>Name:</strong> <span class="highlight">izx_icon</span></li>
+                                        <li><strong>Data Type:</strong> <span class="highlight">Image URL</span></li>
+                                    </ul>
+                                    <li>6. Click on <strong>Advanced Settings</strong> → <strong>Customize the System</strong>.</li>
+                                    <li>7. Open the view in the classic designer and select the column to be modified.</li>
+                                    <li>8. Click <strong>Change Properties</strong> → <strong>Add Custom JavaScript Renderer</strong>.</li>
+                                    <li>9. Set the web resource as <span class="highlight">izx_SetIconToView.js</span> and the function name as <span class="highlight">customColumnRenderer</span>.</li>
+                                    <li>10. Click <strong>OK</strong>, then <strong>Save</strong> and <strong>Publish</strong> the view.</li>
+                                </ol>
+                            </div>
+
+
+
+
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\D365\demo.png" alt="PowerApps Image">
+                            </div>
+
+
+                            <div class="step">
+                                <h2>Step 5: Test the Custom Icons in the View</h2>
+                                <p class="text">Follow these steps to verify that the custom icons are displayed correctly.</p>
+                                <ol class="text">
+                                    <li>Open <strong>Dynamics 365</strong> and navigate to the entity where you applied the changes.</li>
+                                    <li>Open the view you modified.</li>
+                                    <li>Check whether the correct icons appear based on the <span class="highlight">izx_in_out</span> field values.</li>
+                                </ol>
+
+                                <h3>Final Outcome</h3>
+                                <ul class="text">
+                                    <li>When <strong>izx_in_out = In</strong> → <span class="highlight">Green icon</span> appears. ✅</li>
+                                    <li>When <strong>izx_in_out = Out</strong> → <span class="highlight">Red icon</span> appears. ❌</li>
+                                    <li>If value is <strong>unknown</strong> → <span class="highlight">Default icon</span> appears. ⚠️</li>
+                                </ul>
+                            </div>
+
+                            <div class="single-thumb wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <img src="assets\images\blog\blogs\D365\Output.png" alt="PowerApps Image">
+                            </div>
+                            <p class="text">This approach enhances data visualization, making it easier for users to interpret records at a glance.</p>
+                            <blockquote class="blockquote mt-5 mb-5">
+                                <div class="thumb">
+                                    <img src="assets/images/quote/quote-3.png" alt="quote-image">
+                                </div>
+                                <div class="content">
+                                    <p>Enhancing Dynamics 365 Views: Displaying Icons Dynamically Based on Option Set Values </p>
+                                    <footer class="blockquote-footer">
+                                        <span class="name">Eekshith Pavan Kumar,</span>
+                                        <span class="designation">Dynamics CRM Developer</span>
+                                    </footer>
+                                </div>
+                            </blockquote>
+                            <!--<p class="text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>-->
+                        </div>
+                        <!-- Blog Content End -->
+                        <!-- Blog Share and Tags Section Start -->
+                        <div class="single-blog-share-tag wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1s; animation-delay: 0.1s; animation-name: none;">
+
+                            <div class="share">
+                                <span class="label">Share</span>
+                                <ul class="sidebar-social d-flex flex-start">
+                                    <li>
+                                        <a href="https://www.facebook.com/" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.linkedin.com/in/eekshith-pavan-kumar-mandhara/" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- Section Title End  -->
+                    <!-- Single Blog Start -->
+                </div>
+                <div class="col-lg-4 mb-30">
+                    <div class="sidebar-wrap">
+                        <!--Sidebar Search Start>
+                        <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <h4 class="sidebar-title">Search</h4>
+                            <form class="sidebar-search" action="#">
+                                <input class="sidebar-input" placeholder="Search you keywords" type="text">
+                                <button class="sidebar-search-btn"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                        <!--Sidebar Search End-->
+                        <!--Sidebar Post Start-->
+                        <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <h4 class="sidebar-title">recent post</h4>
+                            <ul class="sidebar-blog">
+                                <li>
+                                    <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html" class="image"><img src="assets/images/blog/blog-post-1.png" alt="Blog Post"></a>
+                                    <div class="content">
+                                        <span class="subtitle">Power Apps</span>
+                                        <a class="title" href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
+                                        <span class="date">09 Dec 2022</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html" class="image"><img src="assets/images/blog/blog-post-2.png" alt="Blog Post"></a>
+                                    <div class="content">
+                                        <span class="subtitle">Power Automate</span>
+                                        <a class="title" href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
+                                        <span class="date">08 Dec 2022</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image"><img src="assets/images/blog/blog-post-3.png" alt="Blog Post"></a>
+                                    <div class="content">
+                                        <span class="subtitle">Power Automate</span>
+                                        <a class="title" href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
+                                        <span class="date">07 Dec 2022</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Sidebar Post End-->
+                        <!--Sidebar Category Start-->
+                        <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: none;">
+                            <h4 class="sidebar-title">Categories</h4>
+                            <ul class="sidebar-category">
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Web Development <span>(32)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Business Management <span>(07)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Dynamics 365 <span>(09)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Power Apps <span>(04)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Report and Management <span>(10)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html#powerautomate">Power Automate <span>(01)</span></a></li>
+                                <li><a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Software Development <span>(19)</span></a></li>
+                            </ul>
+                        </div>
+                        <!--Sidebar Category End-->
+                        <!--Sidebar Tags Start>
+                        <div class="sidebar wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: hidden; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: none;">
+                            <h4 class="sidebar-title">tags</h4>
+                            <div class="sidebar-tags">
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="active">Website</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Development</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Marketing</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Application</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Design</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Web</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Template</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">WordPress</a>
+                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Themeforest</a>
+                            </div>
+                        </div-->
+
+                    </div>
                 </div>
             </div>
-            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mb-n25">
-
-
-
-                <div class="col mb-30 wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!-- Single Blog Start -->
-                    <div class="blog">
-                        <div class="blog-thumbnail">
-                            <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image">
-                                <img src="assets/images/blog/blog-1.png" alt="Blog Image">
-                            </a>
-                        </div>
-                        <div class="blog-info">
-                            <ul class="meta">
-                                <li>PowerAutomate</li>
-                                <li>Dec 07, 2022</li>
-                            </ul>
-                            <h3 class="title">
-                                <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Move attachments from D365 to SharePoint & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
-                            </h3>
-                        </div>
-                    </div>
-                    <!-- Single Blog End -->
-                </div>
-                <div class="col mb-30 wow fadeIn" data-wow-duration="1.3s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!-- Single Blog Start -->
-                    <div class="blog">
-                        <div class="blog-thumbnail">
-                            <a href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html" class="image">
-                                <img src="assets/images/blog/blog-2.png" alt="Blog Image" loading="lazy">
-                            </a>
-                        </div>
-                        <div class="blog-info">
-                            <ul class="meta">
-                                <li>Power Automate</li>
-                                <li>Dec 08, 2022</li>
-                            </ul>
-                            <h3 class="title">
-                                <a href="how-to-move-attachments-from-dynamics365-to-azure-blob-storage.html">Move attachments from D365 to Azure Blob Storage & provide convenient link on Email and Delete Attachments in CRM by using Power Automate</a>
-                            </h3>
-                        </div>
-                    </div>
-                    <!-- Single Blog End -->
-                </div>
-                <div class="col mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!-- Single Blog Start -->
-                    <div class="blog">
-                        <div class="blog-thumbnail">
-                            <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html" class="image">
-                                <img src="assets/images/blog/blog-3.png" alt="Blog Image" loading="lazy">
-                            </a>
-                        </div>
-                        <div class="blog-info">
-                            <ul class="meta">
-                                <li>Power Apps</li>
-                                <li>Dec 09, 2022</li>
-                            </ul>
-                            <h3 class="title">
-                                <a href="how-to-create-ssrs-report-for-dynamics365-powerapps-record.html">Create SSRS Report for Dynamics365 PowerApps Record with a Custom Ribbon Button </a>
-                            </h3>
-                        </div>
-                    </div>
-                    <!-- Single Blog End -->
-                </div>
-            </div>
-            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mb-n25 mt-60">
-                <div class="col mb-30 wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!--Single Blog Start-->
-                    <div class="blog">
-                        <div class="blog-thumbnail">
-                            <a href="how-to-create-a-filtered-data-in-document-template-using-powerautomate.html" class="image">
-                                <img src="assets/images/blog/blog-1.png" alt="Blog Image">
-                            </a>
-                        </div>
-                        <div class="blog-info">
-                            <ul class="meta">
-                                <li>Power Automate</li>
-                                <li>Dec 16, 2022</li>
-                            </ul>
-                            <h3 class="title">
-                                <a href="how-to-create-a-filtered-data-in-document-template-using-powerautomate.html">How to Create a Filtered Data in Document Template using Power Automate </a>
-                            </h3>
-                        </div>
-                    </div>
-                    <!--Single Blog End-->
-
-                </div>
-                <div class="col mb-30 wow fadeIn" data-wow-duration="1.3s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!--Single Blog Start-->
-                    <div class="blog">
-                        <div class="blog-thumbnail">
-                            <a href="how_to_auto_populate_address_in_dynamics365.html" class="image">
-                                <img src="assets\images\about\about-2-4.png" alt="Blog Image">
-                            </a>
-                        </div>
-                        <div class="blog-info">
-                            <ul class="meta">
-                                <li>Auto-Populate Address</li>
-                                <li>March 01, 2024</li>
-                            </ul>
-                            <h3 class="title">
-                                <a href="how_to_auto_populate_address_in_dynamics365.html">Streamlining Address Entry in Dynamics 365: Auto-Population with Bing Maps Integration</a>
-                            </h3>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col mb-30 wow fadeIn" data-wow-duration="1.3s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <!--Single Blog Start-->
-                    <div class="blog">
-                        <div class="blog-thumbnail">
-                            <a href="enhancing-dynamics-365-views-displaying-icons-dynamically-based-on-option-set-values.html" class="image">
-                                <img src="assets\images\blog\blog-1.png" alt="Blog Image">
-                            </a>
-                        </div>
-                        <div class="blog-info">
-                            <ul class="meta">
-                                <li>Microsoft Dynamics 365</li>
-                                <li>Feburary 06, 2025</li>
-                            </ul>
-                            <h3 class="title">
-                                <a href="enhancing-dynamics-365-views-displaying-icons-dynamically-based-on-option-set-values.html">Enhancing Dynamics 365 Views: Displaying Icons Dynamically Based on Option Set Values</a>
-                            </h3>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!--<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mb-n25 mt-60">
-            <div class="col mb-30 wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeIn;">
-                 Single Blog Start
-                <div class="blog">
-                    <div class="blog-thumbnail">
-                        <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image">
-                            <img src="assets/images/blog/blog-1.png" alt="Blog Image">
-                        </a>
-                    </div>
-                    <div class="blog-info">
-                        <ul class="meta">
-                            <li>Web Development</li>
-                            <li>Apr 06, 2022</li>
-                        </ul>
-                        <h3 class="title">
-                            <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">Jim Morisson says when the musics over turn off the light</a>
-                        </h3>
-                    </div>
-                </div>-->
-            <!--Single Blog End-->
-            <!--</div>
-            <div class="col mb-30 wow fadeIn" data-wow-duration="1.3s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.1s; animation-name: fadeIn;">
-                 Single Blog Start
-                <div class="blog">
-                    <div class="blog-thumbnail">
-                        <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image">
-                            <img src="assets/images/blog/blog-2.png" alt="Blog Image">
-                        </a>
-                    </div>
-                    <div class="blog-info">
-                        <ul class="meta">
-                            <li>Web Design</li>
-                            <li>Feb 22, 2022</li>
-                        </ul>
-                        <h3 class="title">
-                            <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">The Seven Secrets That You Shouldn't Know About Web</a>
-                        </h3>
-                    </div>
-                </div>-->
-            <!--Single Blog End-->
-            <!--</div>
-            <div class="col mb-30 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.1s; animation-name: fadeIn;">
-                 Single Blog Start
-                <div class="blog">
-                    <div class="blog-thumbnail">
-                        <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html" class="image">
-                            <img src="assets/images/blog/blog-3.png" alt="Blog Image">
-                        </a>
-                    </div>
-                    <div class="blog-info">
-                        <ul class="meta">
-                            <li>Photography</li>
-                            <li>July 04, 2022</li>
-                        </ul>
-                        <h3 class="title">
-                            <a href="how-to-move-attachments-from-dynamics365-to-sharepoint.html">You Will Never Believe These Bizarre Truth Of Web Design.</a>
-                        </h3>
-                    </div>
-                </div>-->
-            <!--Single Blog End-->
-            <!--</div>
-            </div>-->
         </div>
     </div>
-    <div class="progress-section section-padding mt-60">
+    <div class="progress-section section-padding">
         <div class="container">
             <div class="row align-items-center mb-n30">
                 <div class="col-lg-6 mb-30 wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
@@ -564,7 +672,7 @@
                         <div class="progress">
                             <div class="progress-bar single-progress wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".1s" role="progressbar" style="width: 100%;" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100">
                             </div>
-                            <span class="progress-number">99%</span>
+                            <span class="progress-number">100%</span>
                         </div>
                         <h5 class="progress-title">Training</h5>
                         <div class="progress">
@@ -826,7 +934,7 @@
                         <!-- Section Title Start -->
                         <div class="section-title-center section-head text-start mb-0">
                             <span class="subtitle">We Are Here For You</span>
-                            <h2 class="title">Let’s Get Back to Work</h2>
+                            <h2 class="title">Let's Get Back to Work</h2>
                             <p class="text mb-0">Getting a better understanding of Izenix's specialized services and solutions</p>
                         </div>
                         <!-- Section Title End  -->
@@ -874,7 +982,7 @@
                     <div class="footer-widget negative-margin">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="assets/images/logo4.png" class="f-logo" alt="Izenix Solutions Blogs page" loading="lazy">
+                                <img src="assets/images/logo4.png" class="f-logo" alt="Izenix Solutions Blog page" loading="lazy">
                             </a>
                         </div>
                         <ul class="footer-widget-list-icon">
@@ -990,6 +1098,10 @@
         <i class="arrow-top fas fa-angle-double-up"></i>
         <i class="arrow-bottom fas fa-angle-double-up"></i>
     </a>
+
+
+
+
     <!-- Scroll Top End -->
     <!--Terms and condition and Privacy Policy Start-->
     <!-- Dialog box structure -->
@@ -1055,7 +1167,6 @@
         gtag('js', new Date());
         gtag('config', 'G-MM8FK0FD9P');
     </script>
-
     <div id="chatbox" style="position: fixed; bottom: 4em; right: 1em; z-index: 99; background-color: transparent;   ">
         <button class="bpw-floating-button" aria-label="Toggle Chatbox">
             <!--<img src="assets/images/chatbot1.png" />-->
