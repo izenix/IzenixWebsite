@@ -86,6 +86,37 @@
             stroke: inherit;
             line-height: 0;
         }
+
+    .contact-sections {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .contact-section {
+        flex: 1;
+        min-width: 250px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        text-align: left;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .contact-section .icon {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+    .contact-info-content {
+        font-size: 16px;
+    }
+
+        .contact-info-content h3 {
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
 </style>
 <body>
 
@@ -349,48 +380,110 @@
                     <div class="section-title-center section-head contact-head text-start mb-5 wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                         <span class="subtitle">Contact Us</span>
                         <h2 class="title">We Want to Here From You</h2>
-                      </div>
+                    </div>
                     <!-- Section Title End  -->
                     <!-- Contact Information Start -->
-                    <ul class="contact-info wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
-                        <li>
-                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <div class="contact-info-content">
-                                <h3 class="title">USA</h3>
-                                <span class="text">7759 Horizon St, Chino, CA 91708</span>
-                            </div> 
-							 
-                        </li>
-						<li>
-                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                           <div class="contact-info-content">
-                                <h3 class="title">India</h3>
-                                <span class="text"># 40/321-A-S-21, 2nd Floor, Skanda Business Park, 
-								<br>Abdullah Khan Estate Ln, Kurnool, 
-								<br>Andhra Pradesh 518001.
+                    <!--<ul class="contact-info wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+        <li>
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-info-content">
+                <h3 class="title">USA</h3>
+                <span class="text">7759 Horizon St, Chino, CA 91708</span>
+            </div>
 
-</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon"><i class="fas fa-phone-alt"></i></div>
+        </li>
+        <li>
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+           <div class="contact-info-content">
+                <h3 class="title">India</h3>
+                <span class="text"># 40/321-A-S-21, 2nd Floor, Skanda Business Park,
+                <br>Abdullah Khan Estate Ln, Kurnool,
+                <br>Andhra Pradesh 518001.
+               </span>
+            </div>
+        </li>
+        <li>
+            <div class="icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="contact-info-content">
+                <h3 class="title">Phone</h3>
+                <span class="text tex2"><strong>USA : </strong> <a href="tel:+123456789"> +1 530 500 5786</a></span><br>
+                <span class="text text2"><strong>INDIA : </strong> <a href="tel:+918008102442 "> +91 ( 80081 02442 ) , </a>
+                <a href="tel:+919701273471"> +91 ( 97012 73471 ) </a>
+                </span>
+            </div>
+        </li>
+        <li>
+            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-info-content">
+                <h3 class="title">Email</h3>
+                <span class="text"><a href="mailto:contact@izenix.com">contact@izenix.com</a></span>
+            </div>
+        </li>
+    </ul>-->
+                    <!-- Contact Information End -->
+                    <!-- Contact Information Start -->
+                    <div class="contact-sections">
+                        <!-- USA Address Section -->
+                        <section class="contact-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+                            <!--<div class="icon"><i class="fas fa-map-marker-alt"></i></div>-->
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i> <span style="font-weight: bold;">USA</span></div>
+
                             <div class="contact-info-content">
-                                <h3 class="title">Phone</h3>
-                                <span class="text tex2"><strong>USA : </strong> <a href="tel:+123456789"> +1 530 500 5786</a></span><br>
-                                <span class="text text2"><strong>INDIA : </strong> <a href="tel:+918008102442 "> +91 ( 80081 02442 ) , </a> 
-								<a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
-								</span>
+                                <!--<h3 class="title">USA</h3>-->
+                                <span class="text">7759 Horizon St, Chino, CA 91708</span>
+                                <span class="text"><strong>Phone:</strong> <a href="tel:+15305005786">+1 530 500 5786</a></span><br>
+
                             </div>
-                        </li>
-                        <li>
-                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        </section>
+
+                        <!-- India Address Section -->
+                        <section class="contact-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".2s">
+                            <!--<div class="icon"><i class="fas fa-map-marker-alt"></i></div>-->
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i> <span style="font-weight: bold;">India - Kurnool</span></div>
+
                             <div class="contact-info-content">
-                                <h3 class="title">Email</h3>
+                                <!--<h3 class="title">India - Kurnool</h3>-->
+                                <span class="text">
+                                    #40/321-A-S-21, 2nd Floor, Skanda Business Park, <br>
+                                    Abdullah Khan Estate Ln, Kurnool, <br>
+                                    Andhra Pradesh 518001.
+                                </span> <br />
+                                <span class="text"><strong>Phone:</strong> <a href="tel:+918008102442">+91 80081 02442</a></span><br>
+
+                            </div>
+                        </section>
+                        <!-- India Address Section -->
+                        <section class="contact-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".2s">
+                            <!--<div class="icon"><i class="fas fa-map-marker-alt"></i></div>-->
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i> <span style="font-weight: bold;">India - Hyderabad</span></div>
+
+                            <div class="contact-info-content">
+                                <!--<h3 class="title">India - Hyderabad</h3>-->
+                                <span class="text">
+                                    Plot no 140 & 141, KPHB 6th Phase Rd, <br>
+                                    Kukatpally, Hyderabad, <br>
+                                    Telangana 500072
+                                </span> <br />
+                                <span class="text"><strong>Phone:</strong> <a href="tel:+919701273471">+91 97012 73471</a></span><br>
+
+                            </div>
+                        </section>
+                       
+                        <!-- Email Section -->
+                        <section class="contact-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".4s">
+                            <!--<div class="icon"><i class="fas fa-envelope"></i></div>-->
+                            <div class="icon"><i class="fas fa-envelope"></i> <span style="font-weight: bold;">Email</span></div>
+
+                            <div class="contact-info-content">
+                                <!--<h3 class="title">Email</h3>-->
                                 <span class="text"><a href="mailto:contact@izenix.com">contact@izenix.com</a></span>
                             </div>
-                        </li>
-                    </ul>
+                        </section>
+                    </div>
                     <!-- Contact Information End -->
+
+                    
+
                 </div>
                 <div class="col-lg-6 mb-30">
                     <form id="contactform" class="comment-form-inner contact-form wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s" action="#">
@@ -427,7 +520,7 @@
     <div class="">
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <div class="contact-map-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
                         <!-- Google Map Area Start -->
                         <div class="google-map-area w-100">
@@ -441,7 +534,7 @@
                         <!-- Google Map Area Start -->
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <div class="contact-map-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
 
                         <!-- Google Map Area Start -->
@@ -451,6 +544,21 @@
                             </div>
                             <div class="map-inner" style="width: 100%">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3838.502414528087!2d78.03723551502792!3d15.830169889029047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb5e7752b8acacb%3A0x11c3c42fbe4800f1!2sIzenix%20Solutions!5e0!3m2!1sen!2sus!4v1670140447048!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            <!-- Google Map Area Start -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="contact-map-section wow fadeIn" data-wow-duration="1.5s" data-wow-delay=".1s">
+
+                        <!-- Google Map Area Start -->
+                        <div class="google-map-area w-100">
+                            <div class="icon">
+                                <img src="assets/images/favicon.png" alt="Map-Icon">
+                            </div>
+                            <div class="map-inner" style="width: 100%">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4255148198536!2d78.38278797516722!3d17.487189583417162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9163d190659d%3A0x5ee35552b1d8a775!2sEminent%20Software%20Solutions%20Private%20Limited!5e0!3m2!1sen!2sin!4v1739262583333!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                             <!-- Google Map Area Start -->
                         </div>
@@ -534,7 +642,7 @@
                                     <i class="fas fa-phone"></i>
                                     <span class="text text2">
                                         <a href="tel:+918008102442 "> +91 ( 80081 02442 ) </a> <br>
-                                        <a href="tel:+918019980966"> +91 ( 80199 80966 ) </a>
+                                        <a href="tel:+919701273471"> +91 ( 97012 73471 ) </a>
 
                                     </span>
                                 </li>
