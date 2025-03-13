@@ -93,6 +93,11 @@
   <priority>0.80</priority>
 </url>
 <url>
+	<loc>https://www.izenix.com/digitalmarketing.html</loc>
+	<lastmod>2023-07-15T02:49:01+00:00</lastmod>
+	<priority>0.80</priority>
+</url>
+<url>
   <loc>https://www.izenix.com/how-to-move-attachments-from-dynamics365-to-sharepoint.html</loc>
   <lastmod>2023-07-15T02:49:01+00:00</lastmod>
   <priority>0.80</priority>
@@ -108,7 +113,7 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.izenix.com/how-to-create-a-filtered-data-in-document-template-using-power-automate.html</loc>
+  <loc>https://www.izenix.com/how-to-create-a-filtered-data-in-document-template-using-powerautomate.html</loc>
   <lastmod>2023-07-15T02:49:01+00:00</lastmod>
   <priority>0.64</priority>
 </url>
@@ -126,5 +131,10 @@
 		<loc>https://www.izenix.com/ourteam.html</loc>
 		<lastmod>2023-07-15T02:49:01+00:00</lastmod>
 		<priority>0.65</priority>
+	</url>
+	<url>
+		<loc>https://www.izenix.com/enhancing-dynamics-365-views-displaying-icons-dynamically-based-on-option-set-values.html</loc>
+		<lastmod>2025-02-02T02:49:01+00:00</lastmod>
+		<priority>0.64</priority>
 	</url>
 </urlset>
