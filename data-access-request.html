@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Subject Access Request Form Izenix Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+       
+    <style>
+        
+        body {
+            
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            
+        }
+
+        .container {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        #formcontainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            background-color: white;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px; /* Responsive width */
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 97%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus {
+                outline: none;
+                border-color: #007BFF;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+        select {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            appearance: none;
+            background-color: #f9f9f9;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='gray'%3E%3Cpath fill-rule='evenodd' d='M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 9.586l3.293-3.293a1 1 0 011.414 1.414l-4 4A1 1 0 0110 12z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+            select:focus {
+                border-color: #007BFF;
+                box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+            }
+
+        textarea {
+            width: 98%;
+            height: 120px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+            textarea:focus {
+                border-color: #007BFF;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            button[type="submit"]:focus {
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+            }
+
+            button[type="submit"]:active {
+                background-color: #004099;
+                transform: translateY(0);
+            }
+
+        /* Responsive styling for smaller screens */
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            select,
+            textarea {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+
+        .website{
+            margin-top: 10px;
+        }
+
+        .optionsetrequest {
+            margin-top: 10px;
+        }
+
+        #headersectuion {
+            text-align: center;
+            position: relative;
+            top: 100%;
+            transform: translateY(-0%);
+            margin: 0 auto;
+            width: 100%;
+            
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1em;
+        }
+
+
+        legend {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+
+        #powered {
+            text-align: center;
+            
+            bottom: 20px; /* Adjust this value based on your preference */
+            width: 100%;
+        }
+
+            #powered footer p {
+                font-size: 1em;
+                color: #555; /* Optional: adjust color as needed */
+            }
+
+    </style>
+
+   
+</head>
+<body>
+
+    <div id="container">
+        <div id="headersectuion">
+            <h1>Data Subject Access Request Form</h1>
+            <p>Please fill in the information below. The website administrator or data protection officer will be notified of your request within 24 hours, and will need an appropriate amount of time to respond.</p>
+        </div>
+
+        <div id="formcontainer" style="padding:10px; margin: 10px;">
+            <form id="contactform">
+                <div style="padding: 7px; margin-top: 7px;">
+                    <label for="website">Website</label>
+                    <input type="text" id="website" name="website" value="IZENIX SOLUTIONS">
+                </div>
+
+                <div style="padding: 7px; margin-top: 7px;">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+
+                <div style="padding: 7px; margin-top: 7px;">
+                    <label for="email">What email address do you use to access the above website / app?</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address">
+                </div>
+
+                <div id="request"  style="padding:10px; margin-top: 10px;">
+                    <fieldset>
+                        <legend>You are submitting this request as</legend>
+                        <label>
+                            <input type="radio" name="request-type" value="self" checked>
+                            The person, or the parent / guardian of the person, whose name appears above.
+                        </label>
+                        <label>
+                            <input type="radio" name="request-type" value="agent">
+                            An agent authorized by the consumer to make this request on their behalf.
+                        </label>
+                    </fieldset>
+                </div>
+
+                <div id="optionsetrequest" style="padding:10px; margin-top: 10px;">
+                    <label for="rights">Under the rights of which law are you making this request?</label>
+                    <select id="rights" name="rights">
+                        <option value="GDPR">GDPR</option>
+                        <option value="CCPA">CCPA</option>
+                        <option value="CPA">CPA</option>
+                        <option value="CTDPA">CTDPA</option>
+                        <option value="UCPA">UCPA</option>
+                        <option value="VCDPA">VCDPA</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
+
+                <div id="submittingrequest"  style="padding:10px; margin-top: 10px;">
+                    <fieldset>
+                        <legend>I am submitting a request to ________</legend>
+                        <label><input type="radio" name="request" value="info-collected" checked> Know what information is being collected from me</label>
+                        <label><input type="radio" name="request" value="delete-info"> Have my information deleted</label>
+                        <label><input type="radio" name="request" value="opt-out-sale"> Opt out of having my data sold to third parties</label>
+                        <label><input type="radio" name="request" value="opt-in-sale"> Opt in to the sale of my personal data</label>
+                        <label><input type="radio" name="request" value="access-info"> Access my personal information</label>
+                        <label><input type="radio" name="request" value="fix-info"> Fix inaccurate information</label>
+                        <label><input type="radio" name="request" value="receive-copy"> Receive a copy of my personal information</label>
+                        <label><input type="radio" name="request" value="opt-out-advertising"> Opt out of having my data shared for cross-context behavioral advertising</label>
+                        <label><input type="radio" name="request" value="limit-use"> Limit the use and disclosure of my sensitive personal information</label>
+                        <label><input type="radio" name="request" value="other"> Other (please specify in the comment box below)</label>
+                    </fieldset>
+                </div>
+
+                <div id="question"  style="padding:10px; margin-top: 10px;">
+                    <label for="details">Please leave details regarding your action request or question.</label>
+                    <textarea id="details" name="details" placeholder="Please leave details regarding your action request or question."></textarea>
+                </div>
+
+                <div id="confirm"  style="padding:10px; margin-top: 10px;">
+                    <fieldset>
+                        <legend>I confirm that</legend>
+                        <label><input type="checkbox" name="confirm1"> Under penalty of perjury, I declare all the above information to be true and accurate.</label>
+                        <label><input type="checkbox" name="confirm2"> I understand that the deletion or restriction of my personal data is irreversible and may result in the termination of services with Izenix Solutions.</label>
+                        <label><input type="checkbox" name="confirm3"> I understand that I will be required to validate my request by email, and I may be contacted in order to complete the request.</label>
+                    </fieldset>
+                </div>
+
+                <div id="submitbutton">
+                    <button type="submit">Submit</button>
+                </div>
+
+            </form> 
+        </div>
+
+        <div id="powered">
+            <footer>
+                <p>Powered by Izenix</p>
+            </footer>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById("contactform").addEventListener("submit", function (event) {
+            debugger; // Debugger statement to pause execution for debugging
+            event.preventDefault();
+
+            // Collect field values
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var website = document.getElementById("website").value;
+
+            var requestType = document.querySelector('input[name="request-type"]:checked')?.value || "";
+            var rights = document.getElementById("rights").value;
+            var requestAction = document.querySelector('input[name="request"]:checked')?.value || "";
+            var details = document.getElementById("details").value;
+
+            var confirm1 = document.querySelector('input[name="confirm1"]').checked;
+            var confirm2 = document.querySelector('input[name="confirm2"]').checked;
+            var confirm3 = document.querySelector('input[name="confirm3"]').checked;
+
+            var company = "Izenix Solutions";
+
+            var formData = {
+                website,
+                name,
+                email,
+                requestType,
+                rights,
+                requestAction,
+                details,
+                confirm1,
+                confirm2,
+                confirm3,
+                company
+            };
+
+            console.log("Sending JSON:", JSON.stringify(formData)); // for debug
+
+            if (name && email && website) {
+                submitTrigger(JSON.stringify(formData));
+            } else {
+                alert("Please fill in all the required form details and check confirmations.");
+            }
+
+            function submitTrigger(inputData) {
+                var flowUrl = "https://prod-34.westus.logic.azure.com:443/workflows/df898e121c8e47a596a2653bfacd025b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P5YQf7w7moDyhNEKHQaEB7wxC_WaNC4WY9SKDHnVOGk";
+
+                var req = new XMLHttpRequest();
+                req.open("POST", flowUrl, true);
+                req.setRequestHeader('Content-Type', 'application/json');
+
+                req.onload = function () {
+                    if (req.status >= 200 && req.status < 300) {
+                        alert("Your information has been submitted successfully. Our team will get back to you in 1–2 business days.");
+                        document.getElementById("contactform").reset();
+                    } else {
+                        alert("There was an error submitting your form. Please try again later.");
+                    }
+                };
+
+                req.onerror = function () {
+                    alert("Network error. Please check your internet connection.");
+                };
+
+                req.send(inputData);
+            }
+        });
+
+
+    </script>
+</body>
+</html>
+
+
