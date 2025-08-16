@@ -53,7 +53,7 @@ document.getElementById("contactform").addEventListener("submit", function (even
     var cityLatLong = "";
     var browserVersion = "";
 
-    VisitorAPI("5Myl8uBF8lRCKvEZkNnP", function (data) {
+    VisitorAPI("T0jHpm9hDdwxbwrH1H7i", function (data) {
         debugger;
         ipAddress = data.ipAddress;
         city = data.city;
@@ -108,7 +108,7 @@ var VisitorAPI = function (t, e, a) {
 };
 
 function submitTrigger(inputData) {
-    var flowUrl = "https://prod-191.westus.logic.azure.com:443/workflows/ac778d7c8ab344d48eed4ead5759714c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=mG0UNau7YfS3BrUEQ-IkcJBSXuvZ2Ux0sX2zkxET0vM";
+    var flowUrl = "https://ed75bb8bd10eef028d01de84c1e83c.d6.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/527ef50e283548c68cd0f5dd5a2b46d2/triggers/manual/paths/invoke/?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=tUI-wN7lCWYHmcTBmUR778-ZqjngCGSvPwNkymVwU_Y";
 
     var req = new XMLHttpRequest();
     req.open("POST", flowUrl, true);
